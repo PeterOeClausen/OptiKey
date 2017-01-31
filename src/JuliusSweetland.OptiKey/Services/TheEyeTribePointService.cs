@@ -16,12 +16,20 @@ namespace JuliusSweetland.OptiKey.Services
 
         private event EventHandler<Timestamped<Point>> pointEvent;
 
+        /// <summary>
+        /// CSV log service
+        /// </summary>
+        private CSVLogService csvLogService;
+
         #endregion
 
         #region Ctor
 
         public TheEyeTribePointService()
         {
+            //Creating csvLogService:
+            csvLogService = new CSVLogService();
+
             //Disconnect (deactivate) from the TET server on shutdown - otherwise the process can hang
             Application.Current.Exit += (sender, args) =>
             {
@@ -128,6 +136,9 @@ namespace JuliusSweetland.OptiKey.Services
                 pointEvent(this, new Timestamped<Point>(
                     new Point(data.SmoothedCoordinates.X, data.SmoothedCoordinates.Y),
                     new DateTimeOffset(DateTime.Parse(data.TimeStampString)).ToUniversalTime()));
+
+                //Logging GazeData:
+                csvLogService.logGazedata(data);
             }
         }
 
