@@ -35,6 +35,7 @@ namespace JuliusSweetland.OptiKey.Services
         private bool keyboardIsShiftAware;
         private bool shiftStateSetAutomatically;
 
+        private CSVLogService csvLogService;
         #endregion
 
         #region Ctor
@@ -46,6 +47,8 @@ namespace JuliusSweetland.OptiKey.Services
             IDictionaryService dictionaryService,
             Action<KeyValue> fireKeySelectionEvent)
         {
+            this.csvLogService = CSVLogService.Instance;
+
             this.keyStateService = keyStateService;
             this.suggestionService = suggestionService;
             this.publishService = publishService;
@@ -66,8 +69,10 @@ namespace JuliusSweetland.OptiKey.Services
 
         public string Text
         {
-            get { return text; }
-            private set { SetProperty(ref text, value); }
+            get {return text;}
+            private set {
+                csvLogService.logScratchPadText(value);
+                SetProperty(ref text, value); }
         }
 
         public bool KeyboardIsShiftAware //Not on interface as only accessed via databinding

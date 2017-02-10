@@ -30,6 +30,6 @@ namespace JuliusSweetland.OptiKey.UI.Controls
         {
             get { return (int) GetValue(ScratchpadWidthInKeysProperty); }
             set { SetValue(ScratchpadWidthInKeysProperty, value); }
-        }
+        }        
     }
 }
