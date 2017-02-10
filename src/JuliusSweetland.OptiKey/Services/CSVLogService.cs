@@ -30,10 +30,7 @@ namespace JuliusSweetland.OptiKey.Services
             {
                 if (instance == null)
                 {
-                    if (instance == null)
-                    {
-                        instance = new CSVLogService();
-                    }
+                    instance = new CSVLogService();
                 }
                 return instance;
             }
