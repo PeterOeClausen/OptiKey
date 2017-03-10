@@ -15,13 +15,13 @@ namespace JuliusSweetland.OptiKey.Services
     /// </summary>
     public class CSVLogService
     {
-        private string gazeLogFilePath;
-        private string scratchPadLogFilePath;
+        private string gazeLogFilePath;         //File path for GazeLog-YYMMDDHHMMSS.csv
+        private string scratchPadLogFilePath;   //File path for ScratchPadLog-YYMMDDHHMMSS.csv
 
         private readonly bool doLogGazeData = false; //Change to true to log GazeData
         private readonly bool doLogScratchPadText = false; //Change to true to log ScratchPadText
 
-        #region Singleton
+        #region Singleton pattern
         private static CSVLogService instance;
 
         public static CSVLogService Instance
@@ -56,7 +56,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             DateTime now = DateTime.Now;
             string fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-            gazeLogFilePath = @"C:\Users\PeterOeC\Desktop\loginhere\GazeLog-" + fileFriendlyDate + ".csv";
+            gazeLogFilePath = @"C:\Users\PeterOeC\Desktop\GazeLog-" + fileFriendlyDate + ".csv";
             var file = File.Create(gazeLogFilePath);
             file.Close();
 
@@ -73,7 +73,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             DateTime now = DateTime.Now;
             string fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-            scratchPadLogFilePath = @"C:\Users\PeterOeC\Desktop\loginhere\ScratchPadLog-" + fileFriendlyDate + ".csv";
+            scratchPadLogFilePath = @"C:\Users\PeterOeC\Desktop\ScratchPadLog-" + fileFriendlyDate + ".csv";
             var file = File.Create(scratchPadLogFilePath);
             file.Close();
 
@@ -137,8 +137,7 @@ namespace JuliusSweetland.OptiKey.Services
         {
             if(doLogScratchPadText)
             { 
-                var newLine = string.Format("{0},{1}\n",
-                    DateTime.Now.ToString(), value);
+                var newLine = string.Format("{0},{1}\n", DateTime.Now.ToString(), value);
                 File.AppendAllText(scratchPadLogFilePath, newLine);
             }
         }
