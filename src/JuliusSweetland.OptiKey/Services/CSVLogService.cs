@@ -1,10 +1,6 @@
 ﻿using JuliusSweetland.OptiKey.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TETCSharpClient.Data;
 
@@ -17,9 +13,11 @@ namespace JuliusSweetland.OptiKey.Services
     {
         private string gazeLogFilePath;         //File path for GazeLog-YYMMDDHHMMSS.csv
         private string scratchPadLogFilePath;   //File path for ScratchPadLog-YYMMDDHHMMSS.csv
+        private string keyStrokesLogFilePath;   //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
 
-        private readonly bool doLogGazeData = false; //Change to true to log GazeData
-        private readonly bool doLogScratchPadText = false; //Change to true to log ScratchPadText
+        private readonly bool doLogGazeData = false;        //Change to true to log GazeData
+        private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
+        private readonly bool doLogKeyStrokes = false;      //Change to true to log every key selection
 
         #region Singleton pattern
         private static CSVLogService instance;
@@ -48,9 +46,14 @@ namespace JuliusSweetland.OptiKey.Services
             {
                 createScratchPadLog();
             }
+            if(doLogKeyStrokes)
+            {
+                createKeyStrokeLog();
+            }
         }
         #endregion
 
+        #region Create log files methods:
         private void createGazeLog()
         {
             //Create log file:
@@ -83,8 +86,24 @@ namespace JuliusSweetland.OptiKey.Services
             File.AppendAllText(scratchPadLogFilePath, firstLine);
         }
 
+        public void createKeyStrokeLog()
+        {
+            //Create log file:
+            DateTime now = DateTime.Now;
+            string fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
+            keyStrokesLogFilePath = @"C:\Users\PeterOeC\Desktop\KeyStrokesLog-" + fileFriendlyDate + ".csv";
+            var file = File.Create(keyStrokesLogFilePath);
+            file.Close();
+
+            //Writing first line:
+            var firstLine = string.Format("{0},{1}\n","systemTimeStamp", "keyStroke");
+            File.AppendAllText(keyStrokesLogFilePath, firstLine);
+        }
+        #endregion
+
+        #region Logging methods:
         /// <summary>
-        /// Logs GazeData from TheEyeTribePointService
+        /// Logs GazeData from Services/TheEyeTribePointService.cs
         /// </summary>
         /// <param name="data"></param>
         public void logGazedata(GazeData data)
@@ -130,7 +149,7 @@ namespace JuliusSweetland.OptiKey.Services
         }
 
         /// <summary>
-        /// Logs value to scratchPadLog.
+        /// Logs value to scratchPadLog from Services/KeyboardOutputService.cs
         /// </summary>
         /// <param name="value"></param>
         public void logScratchPadText(string value)
@@ -143,7 +162,23 @@ namespace JuliusSweetland.OptiKey.Services
         }
 
         /// <summary>
-        /// Logs the current position óf EyeTracker or mouse position.
+        /// Logs the keystrokes from Models/KeyValue.cs.
+        /// Note: Does not work with MULTI-KEY function turned on.
+        /// </summary>
+        /// <param name="key"></param>
+        public void logKeyStroke(string key)
+        {
+            if (doLogKeyStrokes)
+            {
+                var newLine = string.Format("{0},{1}\n", DateTime.Now.ToString(), key);
+                File.AppendAllText(keyStrokesLogFilePath, newLine);
+            }
+        }
+        #endregion
+
+        #region Not currently in use:
+        /// <summary>
+        /// Logs the current position of EyeTracker or mouse position. (Not currently in use)
         /// </summary>
         /// <param name="o"></param>
         /// <param name="pointKeyValuePair"></param>
@@ -155,7 +190,7 @@ namespace JuliusSweetland.OptiKey.Services
         }
 
         /// <summary>
-        /// Logs the selected key.
+        /// Logs the selected key. (Not currently in use)
         /// </summary>
         /// <param name="o"></param>
         /// <param name="pakv"></param>
@@ -168,5 +203,6 @@ namespace JuliusSweetland.OptiKey.Services
                 File.AppendAllText(gazeLogFilePath, newLine);
             }
         }
+        #endregion
     }
 }
