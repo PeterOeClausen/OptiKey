@@ -9,6 +9,7 @@ using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
+using System.Diagnostics;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -55,6 +56,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     else if (SelectionMode == SelectionModes.Point)
                     {
                         PointSelectionProgress = new Tuple<Point, double>(progress.Item1.Value.Point, progress.Item2);
+                    }
+                    else if (SelectionMode == SelectionModes.ScratchPad)
+                    {
+                        Trace.WriteLine("Progress ScratchPad Triggered!");
                     }
                 }
             };

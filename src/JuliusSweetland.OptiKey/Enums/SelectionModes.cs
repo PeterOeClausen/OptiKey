@@ -3,6 +3,7 @@
     public enum SelectionModes
     {
         Key,
-        Point
+        Point,
+        ScratchPad
     }
 }

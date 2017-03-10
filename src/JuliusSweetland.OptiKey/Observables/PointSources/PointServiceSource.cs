@@ -48,12 +48,13 @@ namespace JuliusSweetland.OptiKey.Observables.PointSources
                     sequence = Observable.FromEventPattern<Timestamped<Point>>(
                             eh => pointGeneratingService.Point += eh,
                             eh => pointGeneratingService.Point -= eh)
-                        .Where(_ => State == RunningStates.Running)
-                        .Select(ep => ep.EventArgs)
-                        .PublishLivePointsOnly(pointTtl)
-                        .Select(tp => new Timestamped<PointAndKeyValue?>(tp.Value.ToPointAndKeyValue(PointToKeyValueMap), tp.Timestamp))
-                        .Replay(1) //Buffer one value for every subscriber so there is always a 'most recent' point available
-                        .RefCount();
+                        .Where(_ => State == RunningStates.Running) //Filters the elements of an observable sequence based on a predicate.
+                        .Select(ep => ep.EventArgs) //Projects each element of an observable sequence into a new form with the specified source and selector.
+                        .PublishLivePointsOnly(pointTtl) //	Returns a connectable observable sequence that shares a single subscription to the underlying sequence.
+                        .Select(tp => new Timestamped<PointAndKeyValue?>(tp.Value.ToPointAndKeyValue(PointToKeyValueMap), tp.Timestamp)) //Projects each element of an observable sequence into a new form with the specified source and selector.
+                        .Replay(1) //Buffer one value for every subscriber so there is always a 'most recent' point available 
+                        // Returns a connectable observable sequence that shares a single subscription to the underlying sequence replaying all notifications.
+                        .RefCount(); //	Returns an observable sequence that stays connected to the source as long as there is at least one subscription to the observable sequence.
                 }
 
                 return sequence;
