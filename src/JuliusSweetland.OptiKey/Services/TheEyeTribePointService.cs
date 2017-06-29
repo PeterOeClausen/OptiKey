@@ -27,8 +27,11 @@ namespace JuliusSweetland.OptiKey.Services
 
         public TheEyeTribePointService()
         {
+
+            KalmanFilterSupported = true;
+
             //Creating csvLogService:
-            //csvLogService = new CSVLogService();
+            csvLogService = CSVLogService.Instance;
 
             //Disconnect (deactivate) from the TET server on shutdown - otherwise the process can hang
             Application.Current.Exit += (sender, args) =>
@@ -40,6 +43,12 @@ namespace JuliusSweetland.OptiKey.Services
                 }
             };
         }
+
+        #endregion
+
+        #region Properties
+
+        public bool KalmanFilterSupported { get; private set; }
 
         #endregion
 
@@ -138,7 +147,7 @@ namespace JuliusSweetland.OptiKey.Services
                     new DateTimeOffset(DateTime.Parse(data.TimeStampString)).ToUniversalTime()));
 
                 //Logging GazeData:
-                //csvLogService.logGazedata(data);
+                csvLogService.logGazedata(data);
             }
         }
 

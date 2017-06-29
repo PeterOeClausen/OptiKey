@@ -92,6 +92,13 @@ namespace JuliusSweetland.OptiKey.Models
                     return false;
                 }
 
+                //Key is Shift and ForceCapsLock setting is true
+                if (keyValue == KeyValues.LeftShiftKey
+                    && Settings.Default.ForceCapsLock)
+                {
+                    return false;
+                }
+
                 //Key is Calibrate, but not calibrate service available
                 if (keyValue == KeyValues.CalibrateKey
                     && calibrationService == null)
@@ -344,6 +351,38 @@ namespace JuliusSweetland.OptiKey.Models
                         return keyValue == KeyValues.CombiningCedillaKey //Allow the cedilla to be manually released
                             || keyValue == new KeyValue("c")
                             || keyValue == KeyValues.LeftShiftKey; //Allow shift to be toggled on/off
+                    }
+                }
+
+                //Czech specific rules
+                if (Settings.Default.KeyboardAndDictionaryLanguage == Languages.CzechCzechRepublic)
+                {
+                    //Acute accent: áÁ éÉ íÍ óÓ úÚ ýÝ
+                    if (keyStateService.KeyDownStates[KeyValues.CombiningAcuteAccentKey].Value.IsDownOrLockedDown())
+                    {
+                        return keyValue == KeyValues.CombiningAcuteAccentKey //Allow the acute accent to be manually released
+                               || keyValue == new KeyValue("a")
+                               || keyValue == new KeyValue("e")
+                               || keyValue == new KeyValue("i")
+                               || keyValue == new KeyValue("o")
+                               || keyValue == new KeyValue("u")
+                               || keyValue == new KeyValue("y")
+                               || keyValue == KeyValues.LeftShiftKey; //Allow shift to be toggled on/off
+                    }
+
+                    //Caron: čČ ďĎ ěĚ ňŇ řŘ šŠ ťŤ žŽ
+                    if (keyStateService.KeyDownStates[KeyValues.CombiningCaronOrHacekKey].Value.IsDownOrLockedDown())
+                    {
+                        return keyValue == KeyValues.CombiningCaronOrHacekKey //Allow the caron to be manually released
+                        || keyValue == new KeyValue("c")
+                        || keyValue == new KeyValue("d")
+                        || keyValue == new KeyValue("e")
+                        || keyValue == new KeyValue("n")
+                        || keyValue == new KeyValue("r")
+                        || keyValue == new KeyValue("s")
+                        || keyValue == new KeyValue("t")
+                        || keyValue == new KeyValue("z")
+                        || keyValue == KeyValues.LeftShiftKey; //Allow shift to be toggled on/off
                     }
                 }
 
