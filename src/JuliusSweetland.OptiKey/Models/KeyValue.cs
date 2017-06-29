@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using JuliusSweetland.OptiKey.Enums;
 using JuliusSweetland.OptiKey.Extensions;
+using JuliusSweetland.OptiKey.Services;
 
 namespace JuliusSweetland.OptiKey.Models
 {
@@ -103,6 +104,9 @@ namespace JuliusSweetland.OptiKey.Models
                 stringBuilder.Append(String.ToPrintableString());
             }
             
+            //Log KeyStroke
+            CSVLogService.Instance.logKeyStroke(stringBuilder.ToString());
+
             return stringBuilder.ToString();
         }
     }
