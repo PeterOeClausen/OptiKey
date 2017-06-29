@@ -13,5 +13,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             get { return (string) GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+
+        //Trigger event
     }
 }

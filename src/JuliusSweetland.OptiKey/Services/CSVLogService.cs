@@ -110,7 +110,10 @@ namespace JuliusSweetland.OptiKey.Services
         {
             if (doLogGazeData)
             {
-                //data data
+                //Getting system datetime:
+                DateTime systemTimeStamp = DateTime.Now;
+
+                //data data:
                 string dataTimeStamp = data.TimeStampString;
                 bool dataIsFixated = data.IsFixated;
                 int dataState = data.State;
@@ -138,8 +141,8 @@ namespace JuliusSweetland.OptiKey.Services
                 double rightSmoothedCoordinateY = data.RightEye.SmoothedCoordinates.Y;
 
                 //Creating new line:
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},\n",
-                    dataTimeStamp, dataIsFixated, dataState, dataSmoothedCoordinateX, dataSmoothedCoordinateY, dataRawCoordiateX, dataRawCoordiateY,
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}\n",
+                    systemTimeStamp, dataTimeStamp, dataIsFixated, dataState, dataSmoothedCoordinateX, dataSmoothedCoordinateY, dataRawCoordiateX, dataRawCoordiateY,
                     leftPupilCenterCoordinateX, leftPupilCenterCoordinateY, leftPupilSize, leftRawCoordinateX, leftRawCoordinateY, leftSmoothedCoordinateX, leftSmoothedCoordinateY,
                     rightPupilCenterCoordinateX, rightPupilCenterCoordinateY, rightPupilSize, rightRawCoordinateX, rightRawCoordinateY, rightSmoothedCoordinateX, rightSmoothedCoordinateY);
 
