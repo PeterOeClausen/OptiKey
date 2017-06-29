@@ -765,6 +765,27 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Czech (Czech Rep.) / Čeština (Česko).
+        /// </summary>
+        public static string CZECH_CZECH_REPUBLIC {
+            get {
+                return ResourceManager.GetString("CZECH_CZECH_REPUBLIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czech
+        ///(Czech Rep.) /
+        ///Čeština
+        ///(Česko).
+        /// </summary>
+        public static string CZECH_CZECH_REPUBLIC_SPLIT_WITH_NEWLINE {
+            get {
+                return ResourceManager.GetString("CZECH_CZECH_REPUBLIC_SPLIT_WITH_NEWLINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Danish (Denmark) / Dansk (Danmark).
         /// </summary>
         public static string DANISH_DENMARK {
@@ -1487,6 +1508,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Force caps lock:.
+        /// </summary>
+        public static string FORCE_CAPS_LOCK {
+            get {
+                return ResourceManager.GetString("FORCE_CAPS_LOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to French (France) / Française (France).
         /// </summary>
         public static string FRENCH_FRANCE {
@@ -1859,6 +1889,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kalman Filter:.
+        /// </summary>
+        public static string KALMAN_FILTER_ENABLED {
+            get {
+                return ResourceManager.GetString("KALMAN_FILTER_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key text transformation:.
         /// </summary>
         public static string KEY_CASE_LABEL {
@@ -2161,7 +2200,7 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Management Console.
+        ///   Looks up a localized string similar to Management Console (Settings).
         /// </summary>
         public static string MANAGEMENT_CONSOLE {
             get {
@@ -2184,6 +2223,33 @@ namespace JuliusSweetland.OptiKey.Properties {
         public static string MANAGEMENT_CONSOLE_TITLE {
             get {
                 return ResourceManager.GetString("MANAGEMENT_CONSOLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input mode changed.
+        /// </summary>
+        public static string MANUAL_MODE_CHANGED {
+            get {
+                return ResourceManager.GetString("MANUAL_MODE_CHANGED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual (mouse) mode disabled!.
+        /// </summary>
+        public static string MANUAL_MODE_DISABLED {
+            get {
+                return ResourceManager.GetString("MANUAL_MODE_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual (mouse) mode enabled!.
+        /// </summary>
+        public static string MANUAL_MODE_ENABLED {
+            get {
+                return ResourceManager.GetString("MANUAL_MODE_ENABLED", resourceCulture);
             }
         }
         
@@ -4393,6 +4459,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Toggle Manual Mode.
+        /// </summary>
+        public static string TOGGLE_MANUAL_MODE {
+            get {
+                return ResourceManager.GetString("TOGGLE_MANUAL_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tone 1.
         /// </summary>
         public static string TONE_SOUND_1 {
@@ -4574,6 +4649,15 @@ namespace JuliusSweetland.OptiKey.Properties {
         public static string URL_DOWNLOAD_PROMPT {
             get {
                 return ResourceManager.GetString("URL_DOWNLOAD_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use alphabetical keyboard layout:.
+        /// </summary>
+        public static string USE_ALPHABETICAL_KEYBOARD_LAYOUT {
+            get {
+                return ResourceManager.GetString("USE_ALPHABETICAL_KEYBOARD_LAYOUT", resourceCulture);
             }
         }
         

@@ -38,6 +38,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 {
                     new KeyValuePair<string, Languages>(Resources.CATALAN_SPAIN, Enums.Languages.CatalanSpain),
                     new KeyValuePair<string, Languages>(Resources.CROATIAN_CROATIA, Enums.Languages.CroatianCroatia),
+                    new KeyValuePair<string, Languages>(Resources.CZECH_CZECH_REPUBLIC, Enums.Languages.CzechCzechRepublic),
                     new KeyValuePair<string, Languages>(Resources.DANISH_DENMARK, Enums.Languages.DanishDenmark),
                     new KeyValuePair<string, Languages>(Resources.DUTCH_BELGIUM, Enums.Languages.DutchBelgium),
                     new KeyValuePair<string, Languages>(Resources.DUTCH_NETHERLANDS, Enums.Languages.DutchNetherlands),
@@ -62,7 +63,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         public Languages KeyboardAndDictionaryLanguage
         {
             get { return keyboardAndDictionaryLanguage; }
-            set { SetProperty(ref this.keyboardAndDictionaryLanguage, value); }
+            set
+            {
+                SetProperty(ref this.keyboardAndDictionaryLanguage, value);
+                OnPropertyChanged(() => UseAlphabeticalKeyboardLayoutIsVisible);
+            }
         }
 
         private Languages uiLanguage;
@@ -71,7 +76,31 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             get { return uiLanguage; }
             set { SetProperty(ref this.uiLanguage, value); }
         }
-        
+
+        private bool useAlphabeticalKeyboardLayout;
+        public bool UseAlphabeticalKeyboardLayout
+        {
+            get { return useAlphabeticalKeyboardLayout; }
+            set { SetProperty(ref useAlphabeticalKeyboardLayout, value); }
+        }
+
+        public bool UseAlphabeticalKeyboardLayoutIsVisible
+        {
+            get
+            {
+                return KeyboardAndDictionaryLanguage == Enums.Languages.EnglishCanada
+                    || KeyboardAndDictionaryLanguage == Enums.Languages.EnglishUK
+                    || KeyboardAndDictionaryLanguage == Enums.Languages.EnglishUS;
+            }
+        }
+
+        private bool forceCapsLock;
+        public bool ForceCapsLock
+        {
+            get { return forceCapsLock; }
+            set { SetProperty(ref forceCapsLock, value); }
+        }
+
         private bool autoAddSpace;
         public bool AutoAddSpace
         {
@@ -116,7 +145,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
 
         public bool ChangesRequireRestart
         {
-            get { return false; }
+            get { return ForceCapsLock != Settings.Default.ForceCapsLock; }
         }
         
         #endregion
@@ -127,6 +156,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         {
             KeyboardAndDictionaryLanguage = Settings.Default.KeyboardAndDictionaryLanguage;
             UiLanguage = Settings.Default.UiLanguage;
+            UseAlphabeticalKeyboardLayout = Settings.Default.UseAlphabeticalKeyboardLayout;
+            ForceCapsLock = Settings.Default.ForceCapsLock;
             AutoAddSpace = Settings.Default.AutoAddSpace;
             AutoCapitalise = Settings.Default.AutoCapitalise;
             SuppressAutoCapitaliseIntelligently = Settings.Default.SuppressAutoCapitaliseIntelligently;
@@ -141,6 +172,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
 
             Settings.Default.KeyboardAndDictionaryLanguage = KeyboardAndDictionaryLanguage;
             Settings.Default.UiLanguage = UiLanguage;
+            Settings.Default.UseAlphabeticalKeyboardLayout = UseAlphabeticalKeyboardLayout;
+            Settings.Default.ForceCapsLock = ForceCapsLock;
             Settings.Default.AutoAddSpace = AutoAddSpace;
             Settings.Default.AutoCapitalise = AutoCapitalise;
             Settings.Default.SuppressAutoCapitaliseIntelligently = SuppressAutoCapitaliseIntelligently;

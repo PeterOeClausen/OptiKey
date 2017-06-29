@@ -166,7 +166,11 @@ namespace JuliusSweetland.OptiKey
                 mainWindow.MainView.DataContext = mainViewModel;
 
                 //Setup actions to take once main view is loaded (i.e. the view is ready, so hook up the services which kicks everything off)
-                Action postMainViewLoaded = mainViewModel.AttachServiceEventHandlers;
+                Action postMainViewLoaded = () =>
+                {
+                    mainViewModel.AttachErrorNotifyingServiceHandlers();
+                    mainViewModel.AttachInputServiceEventHandlers();
+                };
                 if(mainWindow.MainView.IsLoaded)
                 {
                     postMainViewLoaded();
@@ -550,19 +554,19 @@ namespace JuliusSweetland.OptiKey
                         ? Settings.Default.KeySelectionTriggerFixationCompleteTimesByKeyValues
                         : null, 
                        Settings.Default.KeySelectionTriggerIncompleteFixationTtl,
-                       pointSource.Sequence);
+                       pointSource);
                     break;
 
                 case TriggerSources.KeyboardKeyDownsUps:
                     keySelectionTriggerSource = new KeyboardKeyDownUpSource(
                         Settings.Default.KeySelectionTriggerKeyboardKeyDownUpKey,
-                        pointSource.Sequence);
+                        pointSource);
                     break;
 
                 case TriggerSources.MouseButtonDownUps:
                     keySelectionTriggerSource = new MouseButtonDownUpSource(
                         Settings.Default.KeySelectionTriggerMouseDownUpButton,
-                        pointSource.Sequence);
+                        pointSource);
                     break;
 
                 default:
@@ -580,19 +584,19 @@ namespace JuliusSweetland.OptiKey
                         Settings.Default.PointSelectionTriggerFixationCompleteTime,
                         Settings.Default.PointSelectionTriggerLockOnRadiusInPixels,
                         Settings.Default.PointSelectionTriggerFixationRadiusInPixels,
-                        pointSource.Sequence);
+                        pointSource);
                     break;
 
                 case TriggerSources.KeyboardKeyDownsUps:
                     pointSelectionTriggerSource = new KeyboardKeyDownUpSource(
                         Settings.Default.PointSelectionTriggerKeyboardKeyDownUpKey,
-                        pointSource.Sequence);
+                        pointSource);
                     break;
 
                 case TriggerSources.MouseButtonDownUps:
                     pointSelectionTriggerSource = new MouseButtonDownUpSource(
                         Settings.Default.PointSelectionTriggerMouseDownUpButton,
-                        pointSource.Sequence);
+                        pointSource);
                     break;
 
                 default:
@@ -749,7 +753,11 @@ namespace JuliusSweetland.OptiKey
                                 mainViewModel.RaiseToastNotification(OptiKey.Properties.Resources.UPDATE_AVAILABLE,
                                     string.Format(OptiKey.Properties.Resources.URL_DOWNLOAD_PROMPT, latestRelease.TagName),
                                     NotificationTypes.Normal,
-                                    () => taskCompletionSource.SetResult(true));
+                                     () =>
+                                     {
+                                         inputService.RequestResume();
+                                         taskCompletionSource.SetResult(true);
+                                     });
                             }
                             else
                             {
