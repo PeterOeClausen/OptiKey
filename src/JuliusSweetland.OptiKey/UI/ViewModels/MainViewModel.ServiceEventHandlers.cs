@@ -14,18 +14,25 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
     public partial class MainViewModel
     {
-        public void AttachServiceEventHandlers()
+        public void AttachErrorNotifyingServiceHandlers()
         {
-            Log.Info("AttachServiceEventHandlers called.");
+            Log.Info("AttachErrorNotifyingServiceHandlers called.");
 
             if (errorNotifyingServices != null)
             {
                 errorNotifyingServices.ForEach(s => s.Error += HandleServiceError);
             }
 
-            inputService.PointsPerSecond += (o, value) => { PointsPerSecond = value; };
+            Log.Info("AttachErrorNotifyingServiceHandlers complete.");
+        }
 
-            inputService.CurrentPosition += (o, tuple) =>
+        private void SetupInputServiceEventHandlers()
+        {
+            Log.Info("SetupInputServiceEventHandlers called.");
+
+            inputServicePointsPerSecondHandler = (o, value) => { PointsPerSecond = value; };
+
+            inputServiceCurrentPositionHandler = (o, tuple) =>
             {
                 CurrentPositionPoint = tuple.Item1;
                 CurrentPositionKey = tuple.Item2;
@@ -37,7 +44,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
-            inputService.SelectionProgress += (o, progress) =>
+            inputServiceSelectionProgressHandler = (o, progress) =>
             {
                 if (progress.Item1 == null
                     && progress.Item2 == 0)
@@ -59,7 +66,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
-            inputService.Selection += (o, value) =>
+            inputServiceSelectionHandler = (o, value) =>
             {
                 Log.Info("Selection event received from InputService.");
 
@@ -94,13 +101,13 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
-            inputService.SelectionResult += (o, tuple) =>
+            inputServiceSelectionResultHandler = (o, tuple) =>
             {
                 Log.Info("SelectionResult event received from InputService.");
 
                 var points = tuple.Item1;
                 var singleKeyValue = tuple.Item2 != null || tuple.Item3 != null
-                    ? new KeyValue (tuple.Item2, tuple.Item3 )
+                    ? new KeyValue(tuple.Item2, tuple.Item3)
                     : (KeyValue?)null;
                 var multiKeySelection = tuple.Item4;
 
@@ -117,10 +124,38 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
+            Log.Info("SetupInputServiceEventHandlers complete.");
+        }
+
+        public void AttachInputServiceEventHandlers()
+        {
+            Log.Info("AttachInputServiceEventHandlers called.");
+            
+            inputService.PointsPerSecond += inputServicePointsPerSecondHandler;
+            inputService.CurrentPosition += inputServiceCurrentPositionHandler;
+            inputService.SelectionProgress += inputServiceSelectionProgressHandler;
+            inputService.Selection += inputServiceSelectionHandler;
+            inputService.SelectionResult += inputServiceSelectionResultHandler;
+
             inputService.PointToKeyValueMap = pointToKeyValueMap;
             inputService.SelectionMode = SelectionMode;
+
+            Log.Info("AttachInputServiceEventHandlers complete.");
         }
-        
+
+        public void DetachInputServiceEventHandlers()
+        {
+            Log.Info("DetachInputServiceEventHandlers called.");
+            
+            inputService.PointsPerSecond -= inputServicePointsPerSecondHandler;
+            inputService.CurrentPosition -= inputServiceCurrentPositionHandler;
+            inputService.SelectionProgress -= inputServiceSelectionProgressHandler;
+            inputService.Selection -= inputServiceSelectionHandler;
+            inputService.SelectionResult -= inputServiceSelectionResultHandler;
+
+            Log.Info("DetachInputServiceEventHandlers complete.");
+        }
+
         private void KeySelectionResult(KeyValue? singleKeyValue, List<string> multiKeySelection)
         {
             //Single key
@@ -195,7 +230,6 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             () =>
                             {
                                 inputService.RequestSuspend();
-                                Keyboard = currentKeyboard;
                                 CalibrateRequest.Raise(new NotificationWithCalibrationResult(), calibrationResult =>
                                 {
                                     if (calibrationResult.Success)
@@ -213,6 +247,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                                             () => inputService.RequestResume());
                                     }
                                 });
+                                Keyboard = currentKeyboard;
                             },
                             () =>
                             {
@@ -300,6 +335,15 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Keyboard = new Currencies2();
                     break;
 
+                case FunctionKeys.CzechCzechRepublic:
+                    Log.Info("Changing keyboard language to CzechCzechRepublic.");
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    Settings.Default.KeyboardAndDictionaryLanguage = Languages.CzechCzechRepublic;
+                    InputService.RequestResume();
+                    Log.Info("Changing keyboard to Menu.");
+                    Keyboard = new Menu(() => Keyboard = currentKeyboard);
+                    break;
+
                 case FunctionKeys.DanishDenmark:
                     Log.Info("Changing keyboard language to DanishDenmark.");
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.DanishDenmark;
@@ -329,45 +373,45 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.DutchBelgium:
                     Log.Info("Changing keyboard language to DutchBelgium.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.DutchBelgium;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
                 case FunctionKeys.DutchNetherlands:
                     Log.Info("Changing keyboard language to DutchNetherlands.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.DutchNetherlands;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
                 case FunctionKeys.EnglishCanada:
                     Log.Info("Changing keyboard language to EnglishCanada.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.EnglishCanada;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
                 case FunctionKeys.EnglishUK:
                     Log.Info("Changing keyboard language to EnglishUK.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.EnglishUK;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
                 case FunctionKeys.EnglishUS:
                     Log.Info("Changing keyboard language to EnglishUS.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.EnglishUS;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
@@ -423,18 +467,18 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.FrenchFrance:
                     Log.Info("Changing keyboard language to FrenchFrance.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.FrenchFrance;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
                 case FunctionKeys.GermanGermany:
                     Log.Info("Changing keyboard language to GermanGermany.");
-                        InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.GermanGermany;
-                        InputService.RequestResume();
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;

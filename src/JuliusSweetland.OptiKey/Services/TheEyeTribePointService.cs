@@ -27,6 +27,9 @@ namespace JuliusSweetland.OptiKey.Services
 
         public TheEyeTribePointService()
         {
+
+            KalmanFilterSupported = true;
+
             //Creating csvLogService:
             csvLogService = CSVLogService.Instance;
 
@@ -40,6 +43,12 @@ namespace JuliusSweetland.OptiKey.Services
                 }
             };
         }
+
+        #endregion
+
+        #region Properties
+
+        public bool KalmanFilterSupported { get; private set; }
 
         #endregion
 

@@ -36,13 +36,19 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private readonly List<INotifyErrors> errorNotifyingServices; 
 
         private readonly InteractionRequest<NotificationWithCalibrationResult> calibrateRequest;
-        
+
+        private EventHandler<int> inputServicePointsPerSecondHandler;
+        private EventHandler<Tuple<Point, KeyValue?>> inputServiceCurrentPositionHandler;
+        private EventHandler<Tuple<PointAndKeyValue?, double>> inputServiceSelectionProgressHandler;
+        private EventHandler<PointAndKeyValue> inputServiceSelectionHandler;
+        private EventHandler<Tuple<List<Point>, FunctionKeys?, string, List<string>>> inputServiceSelectionResultHandler;
         private SelectionModes selectionMode;
         private Point currentPositionPoint;
         private KeyValue? currentPositionKey;
         private Tuple<Point, double> pointSelectionProgress;
         private Dictionary<Rect, KeyValue> pointToKeyValueMap;
         private bool showCursor;
+        private bool manualModeEnabled;
         private Action<Point> nextPointSelectionAction;
         private Point? magnifyAtPoint;
         private Action<Point?> magnifiedPointSelectionAction;
@@ -80,7 +86,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
             calibrateRequest = new InteractionRequest<NotificationWithCalibrationResult>();
             SelectionMode = SelectionModes.Key;
-            
+
+            SetupInputServiceEventHandlers();
             InitialiseKeyboard(mainWindowManipulationService);
             AttachScratchpadEnabledListener();
             AttachKeyboardSupportsCollapsedDockListener(mainWindowManipulationService);
@@ -162,6 +169,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     }
                 }
             }
+        }
+
+        public bool ManualModeEnabled
+        {
+            get { return manualModeEnabled; }
+            set { SetProperty(ref manualModeEnabled, value); }
         }
 
         public bool ShowCursor
@@ -448,10 +461,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     {
                         dictionaryService.AddNewEntryToDictionary(candidate);
                         inputService.RequestSuspend();
-                        nextAction();
 
                         RaiseToastNotification(Resources.ADDED, string.Format(Resources.ENTRY_ADDED_TO_DICTIONARY, candidate),
                             NotificationTypes.Normal, () => { inputService.RequestResume(); });
+
+                        nextAction();
                     },
                     () => nextAction());
             }
