@@ -18,15 +18,18 @@ namespace JuliusSweetland.OptiKey.Services
 
         private readonly bool doLogGazeData = false;        //Change to true to log GazeData
         private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
+        private readonly bool doLogKeySelection = false;      //Change to true to log every key selection
         private readonly bool doLog_userLooksAtKey = false;  //Change to true to log when user looks in ScratchPad.
+        private readonly bool doLog_multiKeySelection = true;
 
         private string logDirectoryForThisRun;
         private string fileFriendlyDate;
+
         private string gazeLogFilePath;             //File path for GazeLog-YYMMDDHHMMSS.csv
         private string scratchPadLogFilePath;       //File path for ScratchPadLog-YYMMDDHHMMSS.csv
         private string keySelectionLog_FilePath;       //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
         private string userLooksAtKey_LogFilePath;  //File path for UserLooksInScratchpadLog-YYMMDDHHMMSS.csv
+        private string multiKeySelection_LogFilePath;
 
         #region Singleton pattern
         private static CSVLogService instance;
@@ -89,6 +92,10 @@ namespace JuliusSweetland.OptiKey.Services
                 {
                     create_userLooksAtKey_Log();
                 }
+                if (doLog_multiKeySelection)
+                {
+                    create_multiKeySelection_Log();
+                }
             }
         }
         #endregion
@@ -144,6 +151,18 @@ namespace JuliusSweetland.OptiKey.Services
             //Writing first line:
             var firstLine = string.Format("{0},{1},{2}\n", "systemTimeStamp", "key", "progressInPercent");
             File.AppendAllText(userLooksAtKey_LogFilePath, firstLine);
+        }
+
+        private void create_multiKeySelection_Log()
+        {
+            //Create log file:
+            multiKeySelection_LogFilePath = logDirectoryForThisRun + @"\multiKeySelectionLog-" + fileFriendlyDate + ".csv";
+            var file = File.Create(multiKeySelection_LogFilePath);
+            file.Close();
+
+            //Writing first line:
+            var firstLine = string.Format("{0},{1}\n", "systemTimeStamp", "key(s)");
+            File.AppendAllText(multiKeySelection_LogFilePath, firstLine);
         }
 
         #endregion
@@ -251,6 +270,16 @@ namespace JuliusSweetland.OptiKey.Services
                 var newLine = string.Format("{0},{1},{2}\n", getNowAsString(), key, progress);
                 //Log data:
                 File.AppendAllText(userLooksAtKey_LogFilePath, newLine);
+            }
+        }
+
+        public void Log_MultiKeySelection(string keySelection)
+        {
+            if(doLog_multiKeySelection)
+            {
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
+                //Log data:
+                File.AppendAllText(multiKeySelection_LogFilePath, newLine);
             }
         }
         #endregion

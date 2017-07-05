@@ -181,6 +181,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             {
                 Log.Info("SelectionResult event received from InputService.");
 
+                //Touple.item2 is the name of functionkey.
+                if (tuple.Item2 != null)
+                {
+                    CSVLogService.Instance.Log_MultiKeySelection(tuple.Item2?.ToString());
+                }
+
                 var points = tuple.Item1;
                 var singleKeyValue = tuple.Item2 != null || tuple.Item3 != null
                     ? new KeyValue(tuple.Item2, tuple.Item3)
