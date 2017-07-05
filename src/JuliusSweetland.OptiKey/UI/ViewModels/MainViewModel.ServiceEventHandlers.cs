@@ -47,6 +47,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
+            //When progress update on a key. progress contains key and progression in percent.
             inputServiceSelectionProgressHandler = (o, progress) =>
             {
                 if (progress.Item1 == null
@@ -85,7 +86,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                                 break;
                         }
                     }
-                    else if(progress.Item1.Value.KeyValue.Value.FunctionKey != null) //hope it is a function key:
+                    else if(progress.Item1?.KeyValue?.FunctionKey != null) //hope it is a function key:
                     {
                         string functionKey = progress.Item1?.KeyValue?.FunctionKey?.ToString();
                         //Console.WriteLine("Key is being looked at: " + functionKey);
@@ -105,10 +106,46 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
+            //When key is selected:
             inputServiceSelectionHandler = (o, value) =>
             {
                 Log.Info("Selection event received from InputService.");
 
+                //Log key selection:
+                string keyString = value.String;
+                //Key is character:
+                if (keyString != null)
+                {
+                    switch (keyString)
+                    {
+                        case "\t":
+                            //Console.WriteLine("Key selected: " + "Tab");
+                            CSVLogService.Instance.Log_KeySelection("Tab");
+                            break;
+                        case "\n":
+                            //Console.WriteLine("Key selected: " + "Enter");
+                            CSVLogService.Instance.Log_KeySelection("Enter");
+                            break;
+                        case " ":
+                            //Console.WriteLine("Key selected: " + "SpaceBar");
+                            CSVLogService.Instance.Log_KeySelection("SpaceBar");
+                            break;
+                        case ",":
+                            //Console.WriteLine("Key selected: " + "Comma");
+                            CSVLogService.Instance.Log_KeySelection("Comma");
+                            break;
+                        default:
+                            //Console.WriteLine("Key selected: " + keyString);
+                            CSVLogService.Instance.Log_KeySelection(keyString);
+                            break;
+                    }
+                }
+                else if(value.KeyValue?.FunctionKey != null) //Key is FunctionKey:
+                {
+                    var functionKey = value.KeyValue?.FunctionKey?.ToString();
+                    CSVLogService.Instance.Log_KeySelection(functionKey);
+                }
+                
                 SelectionResultPoints = null; //Clear captured points from previous SelectionResult event
 
                 if (SelectionMode == SelectionModes.Key

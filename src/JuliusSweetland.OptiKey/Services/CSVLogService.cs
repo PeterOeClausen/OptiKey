@@ -18,14 +18,14 @@ namespace JuliusSweetland.OptiKey.Services
 
         private readonly bool doLogGazeData = false;        //Change to true to log GazeData
         private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeyStrokes = false;      //Change to true to log every key selection
-        private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
+        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
+        private readonly bool doLog_userLooksAtKey = false;  //Change to true to log when user looks in ScratchPad.
 
         private string logDirectoryForThisRun;
         private string fileFriendlyDate;
         private string gazeLogFilePath;             //File path for GazeLog-YYMMDDHHMMSS.csv
         private string scratchPadLogFilePath;       //File path for ScratchPadLog-YYMMDDHHMMSS.csv
-        private string keyStrokesLogFilePath;       //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
+        private string keySelectionLog_FilePath;       //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
         private string userLooksAtKey_LogFilePath;  //File path for UserLooksInScratchpadLog-YYMMDDHHMMSS.csv
 
         #region Singleton pattern
@@ -81,9 +81,9 @@ namespace JuliusSweetland.OptiKey.Services
                 {
                     create_ScratchPadLog();
                 }
-                if (doLogKeyStrokes)
+                if (doLogKeySelection)
                 {
-                    create_KeyStrokeLog();
+                    create_KeySelectionLog();
                 }
                 if (doLog_userLooksAtKey)
                 {
@@ -122,16 +122,16 @@ namespace JuliusSweetland.OptiKey.Services
             File.AppendAllText(scratchPadLogFilePath, firstLine);
         }
 
-        private void create_KeyStrokeLog()
+        private void create_KeySelectionLog()
         {
             //Create log file:
-            keyStrokesLogFilePath = logDirectoryForThisRun + @"\KeyStrokesLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(keyStrokesLogFilePath);
+            keySelectionLog_FilePath = logDirectoryForThisRun + @"\KeySelectionLog-" + fileFriendlyDate + ".csv";
+            var file = File.Create(keySelectionLog_FilePath);
             file.Close();
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}\n","systemTimeStamp", "keyStroke");
-            File.AppendAllText(keyStrokesLogFilePath, firstLine);
+            var firstLine = string.Format("{0},{1}\n","systemTimeStamp", "keySelected");
+            File.AppendAllText(keySelectionLog_FilePath, firstLine);
         }
 
         private void create_userLooksAtKey_Log()
@@ -212,16 +212,15 @@ namespace JuliusSweetland.OptiKey.Services
         }
 
         /// <summary>
-        /// Logs the keystrokes from Models/KeyValue.cs.
-        /// Note: Does not work with MULTI-KEY function turned on.
+        /// Logs key selections from UI/ViewModels/MainViewModel.ServiceEventHandlers
         /// </summary>
-        /// <param name="key"></param>
-        public void Log_KeyStroke(string key)
+        /// <param name="keySelection"></param>
+        public void Log_KeySelection(string keySelection)
         {
-            if (doLogKeyStrokes)
+            if (doLogKeySelection)
             {
-                var newLine = string.Format("{0},{1}\n", getNowAsString(), key);
-                File.AppendAllText(keyStrokesLogFilePath, newLine);
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
+                File.AppendAllText(keySelectionLog_FilePath, newLine);
             }
         }
         #endregion
@@ -240,20 +239,11 @@ namespace JuliusSweetland.OptiKey.Services
         }
 
         /// <summary>
-        /// Logs the selected key. (Not currently in use)
+        /// Logs key progression (When user looks at a key, and the progression counts up).
+        /// Called from UI/ViewModels/MainViewModel.ServiceEventHandlers.
         /// </summary>
-        /// <param name="o"></param>
-        /// <param name="pakv"></param>
-        public void Log_Selection(object o, PointAndKeyValue pakv)
-        {
-            if (pakv.KeyValue.HasValue)
-            {
-                var newLine = string.Format("{0},{1},{2}\n", getNowAsString(), pakv.String, pakv.KeyValue.Value.FunctionKey);
-                //Log data:
-                File.AppendAllText(gazeLogFilePath, newLine);
-            }
-        }
-
+        /// <param name="key"></param>
+        /// <param name="progress"></param>
         public void Log_KeyProgression(string key, double progress)
         {
             if(doLog_userLooksAtKey)
