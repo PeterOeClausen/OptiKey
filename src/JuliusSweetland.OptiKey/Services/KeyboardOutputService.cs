@@ -72,7 +72,7 @@ namespace JuliusSweetland.OptiKey.Services
             get {return text;}
             private set {
                 //Log everytime the scratchpad text changes:
-                csvLogService.logScratchPadText(value);
+                csvLogService.Log_ScratchPadText(value);
                 SetProperty(ref text, value); }
         }
 

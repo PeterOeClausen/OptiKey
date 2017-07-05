@@ -105,7 +105,7 @@ namespace JuliusSweetland.OptiKey.Models
             }
             
             //Log KeyStroke
-            CSVLogService.Instance.logKeyStroke(stringBuilder.ToString());
+            //CSVLogService.Instance.Log_KeyStroke(stringBuilder.ToString());
 
             return stringBuilder.ToString();
         }
