@@ -75,6 +75,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                                 //Console.WriteLine("Key is being looked at: " + "SpaceBar");
                                 CSVLogService.Instance.Log_KeyProgression("SpaceBar", progress.Item2);
                                 break;
+                            case ",":
+                                //Console.WriteLine("Key is being looked at: " + "Comma");
+                                CSVLogService.Instance.Log_KeyProgression("Comma", progress.Item2);
+                                break;
                             default:
                                 //Console.WriteLine("Key is being looked at: " + keyString);
                                 CSVLogService.Instance.Log_KeyProgression(keyString, progress.Item2);
