@@ -10,6 +10,8 @@ using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 using System.Diagnostics;
+using JuliusSweetland.OptiKey.Services;
+using JuliusSweetland.OptiKey.UI.Controls;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -38,6 +40,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 CurrentPositionPoint = tuple.Item1;
                 CurrentPositionKey = tuple.Item2;
 
+                if(CurrentPositionKey != null)
+                {
+                    //We are able to log current position point AND current position key right here.
+                    Console.WriteLine("CurrentPrositionKey");
+                }
+
                 if (keyStateService.KeyDownStates[KeyValues.MouseMagneticCursorKey].Value.IsDownOrLockedDown()
                     && !keyStateService.KeyDownStates[KeyValues.SleepKey].Value.IsDownOrLockedDown())
                 {
@@ -45,6 +53,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
+            //When progress update happens on a key. progress contains key and progression in percent.
             inputServiceSelectionProgressHandler = (o, progress) =>
             {
                 if (progress.Item1 == null
@@ -54,6 +63,42 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
                 else if (progress.Item1 != null)
                 {
+
+                    //Log easily readable key progression:
+                    string keyString = progress.Item1.Value.String;
+                    if(keyString != null)
+                    { 
+                        switch(keyString)
+                        {
+                            case "\t":
+                                //Console.WriteLine("Key is being looked at: " + "Tab");
+                                CSVLogService.Instance.Log_KeyProgression("Tab", progress.Item2);
+                                break;
+                            case "\n":
+                                //Console.WriteLine("Key is being looked at: " + "Enter");
+                                CSVLogService.Instance.Log_KeyProgression("Enter", progress.Item2);
+                                break;
+                            case " ":
+                                //Console.WriteLine("Key is being looked at: " + "SpaceBar");
+                                CSVLogService.Instance.Log_KeyProgression("SpaceBar", progress.Item2);
+                                break;
+                            case ",":
+                                //Console.WriteLine("Key is being looked at: " + "Comma");
+                                CSVLogService.Instance.Log_KeyProgression("Comma", progress.Item2);
+                                break;
+                            default:
+                                //Console.WriteLine("Key is being looked at: " + keyString);
+                                CSVLogService.Instance.Log_KeyProgression(keyString, progress.Item2);
+                                break;
+                        }
+                    }
+                    else if(progress.Item1?.KeyValue?.FunctionKey != null) //hope it is a function key:
+                    {
+                        string functionKey = progress.Item1?.KeyValue?.FunctionKey?.ToString();
+                        //Console.WriteLine("Key is being looked at: " + functionKey);
+                        CSVLogService.Instance.Log_KeyProgression(functionKey, progress.Item2);
+                    }
+                    
                     if (SelectionMode == SelectionModes.Key
                         && progress.Item1.Value.KeyValue != null)
                     {
@@ -64,17 +109,49 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     {
                         PointSelectionProgress = new Tuple<Point, double>(progress.Item1.Value.Point, progress.Item2);
                     }
-                    else if (SelectionMode == SelectionModes.ScratchPad)
-                    {
-                        Trace.WriteLine("Progress ScratchPad Triggered!");
-                    }
                 }
             };
 
+            //When key is selected:
             inputServiceSelectionHandler = (o, value) =>
             {
                 Log.Info("Selection event received from InputService.");
 
+                //Log key selection:
+                string keyString = value.String;
+                //Key is character:
+                if (keyString != null)
+                {
+                    switch (keyString)
+                    {
+                        case "\t":
+                            //Console.WriteLine("Key selected: " + "Tab");
+                            CSVLogService.Instance.Log_KeySelection("Tab");
+                            break;
+                        case "\n":
+                            //Console.WriteLine("Key selected: " + "Enter");
+                            CSVLogService.Instance.Log_KeySelection("Enter");
+                            break;
+                        case " ":
+                            //Console.WriteLine("Key selected: " + "SpaceBar");
+                            CSVLogService.Instance.Log_KeySelection("SpaceBar");
+                            break;
+                        case ",":
+                            //Console.WriteLine("Key selected: " + "Comma");
+                            CSVLogService.Instance.Log_KeySelection("Comma");
+                            break;
+                        default:
+                            //Console.WriteLine("Key selected: " + keyString);
+                            CSVLogService.Instance.Log_KeySelection(keyString);
+                            break;
+                    }
+                }
+                else if(value.KeyValue?.FunctionKey != null) //Key is FunctionKey:
+                {
+                    var functionKey = value.KeyValue?.FunctionKey?.ToString();
+                    CSVLogService.Instance.Log_KeySelection(functionKey);
+                }
+                
                 SelectionResultPoints = null; //Clear captured points from previous SelectionResult event
 
                 if (SelectionMode == SelectionModes.Key
@@ -109,6 +186,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             inputServiceSelectionResultHandler = (o, tuple) =>
             {
                 Log.Info("SelectionResult event received from InputService.");
+
+                //Touple.item2 is the name of functionkey.
+                if (tuple.Item2 != null)
+                {
+                    CSVLogService.Instance.Log_MultiKeySelection(tuple.Item2?.ToString());
+                }
 
                 var points = tuple.Item1;
                 var singleKeyValue = tuple.Item2 != null || tuple.Item3 != null
@@ -1406,6 +1489,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
+                    break;
+
+                case FunctionKeys.ScratchPad:
+                    //ScratchPad is invoked
                     break;
 
                 case FunctionKeys.ShrinkFromBottom:
