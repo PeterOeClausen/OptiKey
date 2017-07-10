@@ -40,6 +40,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 CurrentPositionPoint = tuple.Item1;
                 CurrentPositionKey = tuple.Item2;
 
+                if(CurrentPositionKey != null)
+                {
+                    //We are able to log current position point AND current position key right here.
+                    Console.WriteLine("CurrentPrositionKey");
+                }
+
                 if (keyStateService.KeyDownStates[KeyValues.MouseMagneticCursorKey].Value.IsDownOrLockedDown()
                     && !keyStateService.KeyDownStates[KeyValues.SleepKey].Value.IsDownOrLockedDown())
                 {
@@ -47,7 +53,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
-            //When progress update on a key. progress contains key and progression in percent.
+            //When progress update happens on a key. progress contains key and progression in percent.
             inputServiceSelectionProgressHandler = (o, progress) =>
             {
                 if (progress.Item1 == null

@@ -16,10 +16,10 @@ namespace JuliusSweetland.OptiKey.Services
 
         private readonly bool doLog = true;                 //Change to true to log
 
-        private readonly bool doLogGazeData = false;        //Change to true to log GazeData
-        private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeySelection = false;      //Change to true to log every key selection
-        private readonly bool doLog_userLooksAtKey = false;  //Change to true to log when user looks in ScratchPad.
+        private readonly bool doLogGazeData = true;        //Change to true to log GazeData
+        private readonly bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
+        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
+        private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
         private readonly bool doLog_multiKeySelection = true;
 
         private string logDirectoryForThisRun;
@@ -242,24 +242,10 @@ namespace JuliusSweetland.OptiKey.Services
                 File.AppendAllText(keySelectionLog_FilePath, newLine);
             }
         }
-        #endregion
-
-        #region Not currently in use:
-        /// <summary>
-        /// Logs the current position of EyeTracker or mouse position. (Not currently in use)
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="pointKeyValuePair"></param>
-        public void Log_CurrentPosition(object o, Tuple<Point, KeyValue?> pointKeyValuePair)
-        {
-            var newLine = string.Format("{0},,,{1},{2},{3}\n", getNowAsString(), pointKeyValuePair.Item1.X, pointKeyValuePair.Item1.Y, pointKeyValuePair.Item2.ToString());
-            //Log data:
-            File.AppendAllText(gazeLogFilePath, newLine);
-        }
 
         /// <summary>
         /// Logs key progression (When user looks at a key, and the progression counts up).
-        /// Called from UI/ViewModels/MainViewModel.ServiceEventHandlers.
+        /// Called from UI/ViewModels/MainViewModel.ServiceEventHandlers.cs
         /// </summary>
         /// <param name="key"></param>
         /// <param name="progress"></param>
@@ -273,12 +259,17 @@ namespace JuliusSweetland.OptiKey.Services
             }
         }
 
+        /// <summary>
+        /// Logs MultiKey selections.
+        /// Called from UI/ViewModels/MainViewModel.ServiceEventHandlers.cs and Services/KeyboardOutputService.cs
+        /// </summary>
+        /// <param name="keySelection"></param>
         public void Log_MultiKeySelection(string keySelection)
         {
             if(doLog_multiKeySelection)
             {
-                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
                 //Log data:
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
                 File.AppendAllText(multiKeySelection_LogFilePath, newLine);
             }
         }
