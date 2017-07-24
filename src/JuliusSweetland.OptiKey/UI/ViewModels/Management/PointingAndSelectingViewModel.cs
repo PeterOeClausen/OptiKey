@@ -7,6 +7,8 @@ using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Properties;
 using log4net;
 using Prism.Mvvm;
+using System.ComponentModel;
+using JuliusSweetland.OptiKey.Services;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
 {
@@ -23,7 +25,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         public PointingAndSelectingViewModel()
         {
             Load();
-            
+
+            //Subscribe to listen to changes in dwellTime.
+            Settings.Default.PropertyChanged += new PropertyChangedEventHandler(dwellTimeChanged);
+
             //Set up property defaulting logic
             this.OnPropertyChanges(vm => vm.KeySelectionTriggerSource).Subscribe(ts => 
             {
@@ -222,7 +227,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         public double KeySelectionTriggerFixationDefaultCompleteTimeInMs
         {
             get { return keySelectionTriggerFixationDefaultCompleteTimeInMs; }
-            set { SetProperty(ref keySelectionTriggerFixationDefaultCompleteTimeInMs, value); }
+            set {
+                SetProperty(ref keySelectionTriggerFixationDefaultCompleteTimeInMs, value);
+            }
         }
 
         private bool keySelectionTriggerFixationCompleteTimesByIndividualKey;
@@ -378,6 +385,19 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         #endregion
         
         #region Methods
+
+        private void dwellTimeChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Console.WriteLine("dwellTimeChanged!");
+            KeySelectionTriggerFixationDefaultCompleteTimeInMs = Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime.TotalMilliseconds;
+            InstanceGetter.Instance.triggerSource.defaultTimeToCompleteTrigger = Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime;
+            
+            //Some keys were not affected, therefore I need to do this as well:
+            foreach(var kv in InstanceGetter.Instance.triggerSource.timeToCompleteTriggerByKey.ToList())
+            {
+                InstanceGetter.Instance.triggerSource.timeToCompleteTriggerByKey[kv.Key] = Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime;
+            }
+        }
 
         private void Load()
         {

@@ -15,14 +15,14 @@ namespace JuliusSweetland.OptiKey.Observables.TriggerSources
     /// Aggregates fixations on keys, allowing you to move away and return to complete a key fixation.
     /// Point fixations have to be completed in one go, i.e. if you move away from a point fixation it is lost.
     /// </summary>
-    public class KeyFixationSource : ITriggerSource, IFixationTriggerSource
+    public class KeyFixationSource : ITriggerSource, IFixationTriggerSource, ITriggerSourceWithTimeToCompleteTrigger
     {
         #region Fields
 
         private readonly TimeSpan lockOnTime;
         private readonly bool resumeRequiresLockOn;
-        private readonly TimeSpan defaultTimeToCompleteTrigger;
-        private readonly IDictionary<KeyValue, TimeSpan> timeToCompleteTriggerByKey;
+        public TimeSpan defaultTimeToCompleteTrigger { get; set; }
+        public IDictionary<KeyValue, TimeSpan> timeToCompleteTriggerByKey { get; set; }
         private readonly TimeSpan incompleteFixationTtl;
         private readonly ConcurrentDictionary<KeyValue, long> incompleteFixationProgress;
         private readonly ConcurrentDictionary<KeyValue, IDisposable> incompleteFixationTimeouts;

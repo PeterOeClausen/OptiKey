@@ -260,6 +260,7 @@
     <Compile Include="Observables\PointSources\IPointSource.cs" />
     <Compile Include="Observables\PointSources\MousePositionSource.cs" />
     <Compile Include="Observables\PointSources\PointServiceSource.cs" />
+    <Compile Include="Observables\TriggerSources\ITriggerSourceWithDefaultTimeToCompleteTrigger.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -273,6 +274,7 @@
     <Compile Include="Services\ICalibrationService.cs" />
     <Compile Include="Services\IMouseOutputService.cs" />
     <Compile Include="Services\INotifyErrors.cs" />
+    <Compile Include="Services\InstanceGetter.cs" />
     <Compile Include="Services\IPointService.cs" />
     <Compile Include="Services\IWindowManipulationService.cs" />
     <Compile Include="Services\KeyStateService.cs" />
@@ -751,6 +753,9 @@
     <None Include="Resources\Icons\SVG Source Files\Language.svg" />
     <Resource Include="Resources\Icons\Quit.ico" />
     <Resource Include="Resources\Icons\ManualMode.ico" />
+    <None Include="Resources\Icons\SVG Source Files\Minus.svg" />
+    <None Include="Resources\Icons\SVG Source Files\Plus.svg" />
+    <Content Include="Resources\Icons\SVG Source Files\Minus2.svg" />
     <Content Include="Resources\Sounds\Click2.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

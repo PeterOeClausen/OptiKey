@@ -574,6 +574,8 @@ namespace JuliusSweetland.OptiKey
                         "'KeySelectionTriggerSource' setting is missing or not recognised! Please correct and restart OptiKey.");
             }
 
+            InstanceGetter.Instance.triggerSource = (ITriggerSourceWithTimeToCompleteTrigger) keySelectionTriggerSource;
+
             //Instantiate point trigger source
             ITriggerSource pointSelectionTriggerSource;
             switch (Settings.Default.PointSelectionTriggerSource)

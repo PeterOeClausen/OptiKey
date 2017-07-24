@@ -1781,4 +1781,7 @@ Slovenčina
   <data name="MANUAL_MODE_ENABLED" xml:space="preserve">
     <value>Manual (mouse) mode enabled!</value>
   </data>
+  <data name="MINUS" xml:space="preserve">
+    <value />
+  </data>
 </root>
