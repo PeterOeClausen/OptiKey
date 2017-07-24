@@ -753,9 +753,6 @@
     <None Include="Resources\Icons\SVG Source Files\Language.svg" />
     <Resource Include="Resources\Icons\Quit.ico" />
     <Resource Include="Resources\Icons\ManualMode.ico" />
-    <None Include="Resources\Icons\SVG Source Files\Minus.svg" />
-    <None Include="Resources\Icons\SVG Source Files\Plus.svg" />
-    <Content Include="Resources\Icons\SVG Source Files\Minus2.svg" />
     <Content Include="Resources\Sounds\Click2.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
