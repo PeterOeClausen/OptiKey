@@ -139,7 +139,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     new KeyValuePair<string, Enums.Keyboards>(Resources.NUMBERS_SYMBOLS_LAYOUT_2, Enums.Keyboards.NumericAndSymbols2),
                     new KeyValuePair<string, Enums.Keyboards>(Resources.NUMBERS_SYMBOLS_LAYOUT_3, Enums.Keyboards.NumericAndSymbols3),
                     new KeyValuePair<string, Enums.Keyboards>(Resources.PHYSICAL_KEYS_LAYOUT, Enums.Keyboards.PhysicalKeys),
-                    new KeyValuePair<string, Enums.Keyboards>(Resources.SIZE_POSITION_LAYOUT, Enums.Keyboards.SizeAndPosition)
+                    new KeyValuePair<string, Enums.Keyboards>(Resources.SIZE_POSITION_LAYOUT, Enums.Keyboards.SizeAndPosition),
+                    new KeyValuePair<string, Enums.Keyboards>(Resources.WEB_BROWSING_LAYOUT, Enums.Keyboards.WebBrowsing)
                 };
             }
         }
@@ -279,6 +280,20 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             set { SetProperty(ref conversationOnlyMode, value); }
         }
 
+        private bool conversationconfirmEnable;
+        public bool ConversationConfirmEnable
+        {
+            get { return conversationconfirmEnable; }
+            set { SetProperty(ref conversationconfirmEnable, value); }
+        }
+
+        private bool conversationconfirmOnlyMode;
+        public bool ConversationConfirmOnlyMode
+        {
+            get { return conversationconfirmOnlyMode; }
+            set { SetProperty(ref conversationconfirmOnlyMode, value); }
+        }
+
         private Enums.Keyboards startupKeyboard;
         public Enums.Keyboards StartupKeyboard
         {
@@ -316,11 +331,30 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
 
         public bool ChangesRequireRestart
         {
-            get { return Settings.Default.ConversationOnlyMode != ConversationOnlyMode; }
+            get
+            {
+                return Settings.Default.ConversationOnlyMode != ConversationOnlyMode
+                    || Settings.Default.ConversationConfirmEnable != ConversationConfirmEnable
+                    || Settings.Default.ConversationConfirmOnlyMode != ConversationConfirmOnlyMode;
+            }
         }
-        
+
+        private string simplifiedKeyboardCurrentContext;
+        public string SimplifiedKeyboardCurrentContext
+        {
+            get { return simplifiedKeyboardCurrentContext; }
+            set { SetProperty(ref simplifiedKeyboardCurrentContext, value); }
+        }
+
+        private bool enableQuitKeys;
+        public bool EnableQuitKeys
+        {
+            get { return enableQuitKeys; }
+            set { SetProperty(ref enableQuitKeys, value); }
+        }
+
         #endregion
-        
+
         #region Methods
 
         private void Load()
@@ -338,12 +372,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             MagnifySourcePercentageOfScreen = Settings.Default.MagnifySourcePercentageOfScreen;
             MagnifyDestinationPercentageOfScreen = Settings.Default.MagnifyDestinationPercentageOfScreen;
             ConversationOnlyMode = Settings.Default.ConversationOnlyMode;
+            ConversationConfirmEnable = Settings.Default.ConversationConfirmEnable;
+            ConversationConfirmOnlyMode = Settings.Default.ConversationConfirmOnlyMode;
             StartupKeyboard = Settings.Default.StartupKeyboard;
             MinimisedPosition = Settings.Default.MainWindowMinimisedPosition;
             KeyCase = Settings.Default.KeyCase;
             MainWindowFullDockThicknessAsPercentageOfScreen = Settings.Default.MainWindowFullDockThicknessAsPercentageOfScreen;
             MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness = Settings.Default.MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness;
             ConversationBorderThickness = Settings.Default.ConversationBorderThickness;
+            SimplifiedKeyboardCurrentContext = Settings.Default.SimplifiedKeyboardCurrentContext;
+            EnableQuitKeys = Settings.Default.EnableQuitKeys;
         }
 
         public void ApplyChanges()
@@ -361,12 +399,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             Settings.Default.MagnifySourcePercentageOfScreen = MagnifySourcePercentageOfScreen;
             Settings.Default.MagnifyDestinationPercentageOfScreen = MagnifyDestinationPercentageOfScreen;
             Settings.Default.ConversationOnlyMode = ConversationOnlyMode;
+            Settings.Default.ConversationConfirmEnable = ConversationConfirmEnable;
+            Settings.Default.ConversationConfirmOnlyMode = ConversationConfirmOnlyMode;
             Settings.Default.StartupKeyboard = StartupKeyboard;
             Settings.Default.MainWindowMinimisedPosition = MinimisedPosition;
             Settings.Default.KeyCase = KeyCase;
             Settings.Default.MainWindowFullDockThicknessAsPercentageOfScreen = MainWindowFullDockThicknessAsPercentageOfScreen;
             Settings.Default.MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness = MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness;
             Settings.Default.ConversationBorderThickness = ConversationBorderThickness;
+            Settings.Default.SimplifiedKeyboardCurrentContext = SimplifiedKeyboardCurrentContext;
+            Settings.Default.EnableQuitKeys = EnableQuitKeys;
         }
 
         #endregion

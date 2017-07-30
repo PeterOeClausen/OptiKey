@@ -8,7 +8,6 @@ using JuliusSweetland.OptiKey.Enums;
 using JuliusSweetland.OptiKey.Extensions;
 using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Native;
-using JuliusSweetland.OptiKey.Native.Common;
 using JuliusSweetland.OptiKey.Properties;
 using log4net;
 using Prism.Mvvm;
@@ -193,6 +192,94 @@ namespace JuliusSweetland.OptiKey.Services
                     suppressNextAutoSpace = true;
                     break;
 
+                case FunctionKeys.ConversationConfirmYes:
+                    Text = null;
+                    StoreLastTextChange(null);
+                    ClearSuggestions();
+                    AutoPressShiftIfAppropriate();
+                    Log.Debug("Suppressing next auto space.");
+                    suppressNextAutoSpace = true;
+                    Text = Resources.YES;
+                    break;
+
+                case FunctionKeys.ConversationConfirmNo:
+                    Text = null;
+                    StoreLastTextChange(null);
+                    ClearSuggestions();
+                    AutoPressShiftIfAppropriate();
+                    Log.Debug("Suppressing next auto space.");
+                    suppressNextAutoSpace = true;
+                    Text = Resources.NO;
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaClear:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaABCDEFGHI:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "ABCDEFGHI";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaJKLMNOPQR:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "JKLMNOPQR";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaSTUVWXYZ:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "STUVWXYZ";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaABC:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "ABC";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaDEF:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "DEF";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaGHI:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "GHI";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaJKL:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "JKL";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaMNO:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "MNO";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaPQR:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "PQR";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaSTU:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "STU";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaVWX:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "VWX";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaYZ:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "YZ";
+                    break;
+
+                case FunctionKeys.SimplifiedAlphaNum:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "Num";
+                    break;
+
+                case FunctionKeys.SimplifiedAlpha123:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "123";
+                    break;
+
+                case FunctionKeys.SimplifiedAlpha456:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "456";
+                    break;
+
+                case FunctionKeys.SimplifiedAlpha789:
+                    Settings.Default.SimplifiedKeyboardCurrentContext = "789";
+                    break;
+
                 case FunctionKeys.Suggestion1:
                     SwapLastTextChangeForSuggestion(0);
                     lastTextChangeWasSuggestion = true;
@@ -260,6 +347,26 @@ namespace JuliusSweetland.OptiKey.Services
             var capturedTextAfterComposition = ComposeDiacritics(capturedText);
             ProcessText(capturedTextAfterComposition, true);
             lastTextChangeWasSuggestion = false;
+
+            if (Settings.Default.UseSimplifiedKeyboardLayout)
+            {
+                char last = capturedText.LastOrDefault();
+                if (last != null)
+                {
+                    if (char.IsLetter(last))
+                    {
+                        Settings.Default.SimplifiedKeyboardCurrentContext = "";
+                    }
+                    else if (char.IsNumber(last))
+                    {
+                        Settings.Default.SimplifiedKeyboardCurrentContext = "Num";
+                    }
+                    else if (char.IsPunctuation(last))
+                    {
+                        Settings.Default.SimplifiedKeyboardCurrentContext = "";
+                    }
+                }
+            }
         }
 
         private string ComposeDiacritics(string input)
@@ -585,7 +692,7 @@ namespace JuliusSweetland.OptiKey.Services
         {
             if (lastTextChange == null || lastTextChange.Length == 1) //Don't generate auto complete words if the last input was a multi key capture
             {
-                if (Settings.Default.AutoCompleteWords)
+                if (Settings.Default.SuggestWords)
                 {
                     var inProgressWord = Text == null ? null : Text.InProgressWord(Text.Length);
 

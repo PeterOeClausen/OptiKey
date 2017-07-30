@@ -4,6 +4,7 @@
     {
         Alpha,
         ConversationAlpha,
+        ConversationConfirm,
         ConversationNumericAndSymbols,
         Currencies1,
         Currencies2,
@@ -17,6 +18,7 @@
         NumericAndSymbols2,
         NumericAndSymbols3,
         PhysicalKeys,
-        SizeAndPosition
+        SizeAndPosition,
+        WebBrowsing
     }
 }

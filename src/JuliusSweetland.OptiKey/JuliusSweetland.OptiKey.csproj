@@ -348,8 +348,12 @@
     <Compile Include="UI\ValueConverters\WidthGreaterThanHeight.cs" />
     <Compile Include="UI\ValueConverters\LengthDividedBySpan.cs" />
     <Compile Include="UI\ValueConverters\SuggestionsPaged.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\WebBrowsing.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\SimplifiedConversationAlpha.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\SimplifiedAlpha.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Base\BackActionKeyboard.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Base\IConversationKeyboard.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ConversationConfirm.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ConversationNumericAndSymbols.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ConversationAlpha.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Base\IBackAction.cs" />
@@ -386,6 +390,9 @@
     <Compile Include="UI\Views\Keyboards\Catalan\ConversationAlpha.xaml.cs">
       <DependentUpon>ConversationAlpha.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\ConversationConfirm.xaml.cs">
+      <DependentUpon>ConversationConfirm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\Keyboards\Common\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
     </Compile>
@@ -394,6 +401,9 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\Mouse.xaml.cs">
       <DependentUpon>Mouse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\WebBrowsing.xaml.cs">
+      <DependentUpon>WebBrowsing.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\SizeAndPosition.xaml.cs">
       <DependentUpon>SizeAndPosition.xaml</DependentUpon>
@@ -433,6 +443,12 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalConversationAlpha.xaml.cs">
       <DependentUpon>AlphabeticalConversationAlpha.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\English\SimplifiedConversationAlpha.xaml.cs">
+      <DependentUpon>SimplifiedConversationAlpha.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\English\SimplifiedAlpha.xaml.cs">
+      <DependentUpon>SimplifiedAlpha.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Portuguese\Alpha.xaml.cs">
       <DependentUpon>Alpha.xaml</DependentUpon>
@@ -944,6 +960,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI\Views\Keyboards\Common\ConversationConfirm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Views\Keyboards\Common\Language.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -953,6 +973,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\Keyboards\Common\Mouse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\Common\WebBrowsing.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1005,6 +1029,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\Keyboards\English\AlphabeticalConversationAlpha.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\English\SimplifiedConversationAlpha.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\English\SimplifiedAlpha.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
