@@ -267,6 +267,7 @@ namespace JuliusSweetland.OptiKey.Properties {
             }
             set {
                 this["KeySelectionTriggerFixationDefaultCompleteTime"] = value;
+                OnPropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("KeySelectionTriggerFixationDefaultCompleteTime"));
             }
         }
         

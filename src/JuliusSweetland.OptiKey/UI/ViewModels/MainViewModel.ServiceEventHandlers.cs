@@ -12,6 +12,7 @@ using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 using System.Diagnostics;
 using JuliusSweetland.OptiKey.Services;
 using JuliusSweetland.OptiKey.UI.Controls;
+using JuliusSweetland.OptiKey.UI.ViewModels.Management;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -43,7 +44,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 if(CurrentPositionKey != null)
                 {
                     //We are able to log current position point AND current position key right here.
-                    Console.WriteLine("CurrentPrositionKey");
+                    //Console.WriteLine("CurrentPrositionKey");
                 }
 
                 if (keyStateService.KeyDownStates[KeyValues.MouseMagneticCursorKey].Value.IsDownOrLockedDown()
@@ -276,7 +277,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
+        public void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
         {
             var currentKeyboard = Keyboard;
 
@@ -467,6 +468,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
+                case FunctionKeys.DecreaseDwellTime:
+                    Log.Info("Decreasing DwellTime.");
+                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime -= TimeSpan.FromMilliseconds(100); //Decrease Dwelltime
+                    break;
+
                 case FunctionKeys.DecreaseOpacity:
                     Log.Info("Decreasing opacity.");
                     mainWindowManipulationService.IncrementOrDecrementOpacity(false);
@@ -604,6 +610,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.GreekGreece;
                     Log.Info("Changing keyboard to Menu");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
+                    break;
+
+                case FunctionKeys.IncreaseDwellTime:
+                    Log.Info("Increasing DwellTime.");
+                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime += TimeSpan.FromMilliseconds(100); //Increase Dwelltime
                     break;
 
                 case FunctionKeys.IncreaseOpacity:

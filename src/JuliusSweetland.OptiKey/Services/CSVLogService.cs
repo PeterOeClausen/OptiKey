@@ -14,13 +14,13 @@ namespace JuliusSweetland.OptiKey.Services
         private readonly string desktop_directory = @"C:\Users\PeterOeC\Desktop";   //Change to fit own Desktop directory
         private readonly string directory_for_all_logs = @"\OptiKeyLogs";           //Change if you want different name
 
-        private readonly bool doLog = true;                 //Change to true to log
+        private readonly bool doLog = false;                 //Change to true to log
 
-        private readonly bool doLogGazeData = true;        //Change to true to log GazeData
-        private readonly bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
-        private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
-        private readonly bool doLog_multiKeySelection = true;
+        private readonly bool doLogGazeData = false;        //Change to true to log GazeData
+        private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
+        private readonly bool doLogKeySelection = false;      //Change to true to log every key selection
+        private readonly bool doLog_userLooksAtKey = false;  //Change to true to log when user looks in ScratchPad.
+        private readonly bool doLog_multiKeySelection = false;
 
         private string logDirectoryForThisRun;
         private string fileFriendlyDate;

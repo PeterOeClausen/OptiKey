@@ -260,6 +260,7 @@
     <Compile Include="Observables\PointSources\IPointSource.cs" />
     <Compile Include="Observables\PointSources\MousePositionSource.cs" />
     <Compile Include="Observables\PointSources\PointServiceSource.cs" />
+    <Compile Include="Observables\TriggerSources\ITriggerSourceWithDefaultTimeToCompleteTrigger.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -273,6 +274,7 @@
     <Compile Include="Services\ICalibrationService.cs" />
     <Compile Include="Services\IMouseOutputService.cs" />
     <Compile Include="Services\INotifyErrors.cs" />
+    <Compile Include="Services\InstanceGetter.cs" />
     <Compile Include="Services\IPointService.cs" />
     <Compile Include="Services\IWindowManipulationService.cs" />
     <Compile Include="Services\KeyStateService.cs" />
@@ -348,6 +350,7 @@
     <Compile Include="UI\ValueConverters\WidthGreaterThanHeight.cs" />
     <Compile Include="UI\ValueConverters\LengthDividedBySpan.cs" />
     <Compile Include="UI\ValueConverters\SuggestionsPaged.cs" />
+    <Compile Include="UI\ViewModels\ExperimentMenuViewModel.cs" />
     <Compile Include="UI\ViewModels\Keyboards\WebBrowsing.cs" />
     <Compile Include="UI\ViewModels\Keyboards\SimplifiedConversationAlpha.cs" />
     <Compile Include="UI\ViewModels\Keyboards\SimplifiedAlpha.cs" />
@@ -586,6 +589,9 @@
     </Compile>
     <Compile Include="UI\Windows\ConfirmationWindow.xaml.cs">
       <DependentUpon>ConfirmationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Windows\ExperimentMenu.xaml.cs">
+      <DependentUpon>ExperimentMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Windows\ManagementWindow.xaml.cs">
       <DependentUpon>ManagementWindow.xaml</DependentUpon>
@@ -1217,6 +1223,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Windows\ConfirmationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\ExperimentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
