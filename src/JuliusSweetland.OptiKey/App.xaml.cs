@@ -189,6 +189,10 @@ namespace JuliusSweetland.OptiKey
                 //Show the main window
                 mainWindow.Show();
 
+                //Show ExperimentMenu window:
+                ExperimentMenu experimentMenu = new ExperimentMenu();
+                experimentMenu.Show();
+
                 //Display splash screen and check for updates (and display message) after the window has been sized and positioned for the 1st time
                 EventHandler sizeAndPositionInitialised = null;
                 sizeAndPositionInitialised = async (_, __) =>

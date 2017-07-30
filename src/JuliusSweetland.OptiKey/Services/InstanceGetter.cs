@@ -1,4 +1,5 @@
 ﻿using JuliusSweetland.OptiKey.Observables.TriggerSources;
+using JuliusSweetland.OptiKey.UI.ViewModels;
 using JuliusSweetland.OptiKey.UI.Windows;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace JuliusSweetland.OptiKey.Services
     public class InstanceGetter
     {
         public ITriggerSourceWithTimeToCompleteTrigger triggerSource { get; set; }
+        public MainViewModel MainViewModel { get; set; }
 
         private static InstanceGetter instance;
 

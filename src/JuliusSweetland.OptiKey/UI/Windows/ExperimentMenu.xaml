@@ -1,0 +1,20 @@
+﻿<Window x:Class="JuliusSweetland.OptiKey.UI.Windows.ExperimentMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JuliusSweetland.OptiKey.UI.Windows"
+        xmlns:vm="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels"
+        mc:Ignorable="d"
+        Title="ExperimentMenu" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Enter amount of sentences to type: "/>
+            <TextBox Text="{Binding AmountOfSentencesToType}"/>
+            <CheckBox Content="Enable Suggestions and MultiKey feature?"
+                      IsChecked="{Binding EnableSuggestionsAndMultikeyFeature}"/>
+            <Button Content="Start experiment"
+                    Click="Start_Experiment_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

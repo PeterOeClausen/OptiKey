@@ -277,7 +277,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
+        public void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
         {
             var currentKeyboard = Keyboard;
 
