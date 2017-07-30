@@ -31,6 +31,7 @@ using SlovenianViews = JuliusSweetland.OptiKey.UI.Views.Keyboards.Slovenian;
 using SpanishViews = JuliusSweetland.OptiKey.UI.Views.Keyboards.Spanish;
 using TurkishViews = JuliusSweetland.OptiKey.UI.Views.Keyboards.Turkish;
 using ViewModelKeyboards = JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
+using System.Diagnostics;
 
 namespace JuliusSweetland.OptiKey.UI.Controls
 {
@@ -50,7 +51,11 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             Settings.Default.OnPropertyChanges(s => s.UiLanguage).Subscribe(_ => GenerateContent());
             Settings.Default.OnPropertyChanges(s => s.MouseKeyboardDockSize).Subscribe(_ => GenerateContent());
             Settings.Default.OnPropertyChanges(s => s.ConversationOnlyMode).Subscribe(_ => GenerateContent());
+            Settings.Default.OnPropertyChanges(s => s.ConversationConfirmEnable).Subscribe(_ => GenerateContent());
+            Settings.Default.OnPropertyChanges(s => s.ConversationConfirmOnlyMode).Subscribe(_ => GenerateContent());
             Settings.Default.OnPropertyChanges(s => s.UseAlphabeticalKeyboardLayout).Subscribe(_ => GenerateContent());
+            Settings.Default.OnPropertyChanges(s => s.UseSimplifiedKeyboardLayout).Subscribe(_ => GenerateContent());
+            Settings.Default.OnPropertyChanges(s => s.SimplifiedKeyboardCurrentContext).Subscribe(_ => GenerateContent());
 
             Loaded += OnLoaded;
 
@@ -59,6 +64,8 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             {
                 contentDp.AddValueChanged(this, ContentChangedHandler);
             }
+
+            this.MouseEnter += this.OnMouseEnter;
         }
 
         #endregion
@@ -197,7 +204,9 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         newContent = new TurkishViews.Alpha { DataContext = Keyboard };
                         break;
                     default:
-                        newContent = Settings.Default.UseAlphabeticalKeyboardLayout 
+                        newContent = Settings.Default.UseSimplifiedKeyboardLayout
+                            ? (object)new EnglishViews.SimplifiedAlpha { DataContext = Keyboard }
+                            : Settings.Default.UseAlphabeticalKeyboardLayout 
                             ? (object)new EnglishViews.AlphabeticalAlpha { DataContext = Keyboard }
                             : new EnglishViews.Alpha { DataContext = Keyboard };
                         break;
@@ -256,11 +265,17 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         newContent = new TurkishViews.ConversationAlpha { DataContext = Keyboard };
                         break;
                     default:
-                        newContent = Settings.Default.UseAlphabeticalKeyboardLayout
+                        newContent = Settings.Default.UseSimplifiedKeyboardLayout
+                            ? (object)new EnglishViews.SimplifiedConversationAlpha { DataContext = Keyboard }
+                            : Settings.Default.UseAlphabeticalKeyboardLayout
                             ? (object)new EnglishViews.AlphabeticalConversationAlpha { DataContext = Keyboard }
                             : new EnglishViews.ConversationAlpha { DataContext = Keyboard };
                         break;
                 }
+            }
+            else if (Keyboard is ViewModelKeyboards.ConversationConfirm)
+            {
+                newContent = new CommonViews.ConversationConfirm { DataContext = Keyboard };
             }
             else if (Keyboard is ViewModelKeyboards.ConversationNumericAndSymbols)
             {
@@ -322,6 +337,10 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             {
                 newContent = new CommonViews.SizeAndPosition { DataContext = Keyboard };
             }
+            else if (Keyboard is ViewModelKeyboards.WebBrowsing)
+            {
+                newContent = new CommonViews.WebBrowsing { DataContext = Keyboard };
+            }
             else if (Keyboard is ViewModelKeyboards.YesNoQuestion)
             {
                 newContent = new CommonViews.YesNoQuestion { DataContext = Keyboard };
@@ -340,6 +359,19 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             if (keyboardHost != null)
             {
                 keyboardHost.BuildPointToKeyMap();
+            }
+        }
+
+        private void OnMouseEnter(object sender, System.EventArgs e)
+        {
+            if (Settings.Default.PointsSource == PointsSources.MousePosition &&
+                Settings.Default.PointsMousePositionHideCursor)
+            {
+                this.Cursor = System.Windows.Input.Cursors.None;
+            }
+            else
+            {
+                this.Cursor = System.Windows.Input.Cursors.Arrow;
             }
         }
         
@@ -398,7 +430,18 @@ namespace JuliusSweetland.OptiKey.UI.Controls
 
                     if (rect.Size.Width != 0 && rect.Size.Height != 0)
                     {
-                        pointToKeyValueMap.Add(rect, key.Value);
+                        if (pointToKeyValueMap.ContainsKey(rect))
+                        {
+                            // In Release, just log error
+                            KeyValue existingKeyValue = pointToKeyValueMap[rect];
+                            Log.ErrorFormat("Overlapping keys {0} and {1}, cannot add {1} to map", existingKeyValue, key.Value);
+
+                            Debug.Assert(!pointToKeyValueMap.ContainsKey(rect));
+                        }
+                        else
+                        {
+                            pointToKeyValueMap.Add(rect, key.Value);
+                        }
                     }
                 }
             }

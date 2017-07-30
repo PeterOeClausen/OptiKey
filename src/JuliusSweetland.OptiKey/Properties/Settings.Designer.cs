@@ -103,6 +103,19 @@ namespace JuliusSweetland.OptiKey.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool PointsMousePositionHideCursor {
+            get {
+                return ((bool)(this["PointsMousePositionHideCursor"]));
+            }
+            set {
+                this["PointsMousePositionHideCursor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("MousePosition")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::JuliusSweetland.OptiKey.Enums.PointsSources PointsSource {
@@ -782,12 +795,12 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool AutoCompleteWords {
+        public bool SuggestWords {
             get {
-                return ((bool)(this["AutoCompleteWords"]));
+                return ((bool)(this["SuggestWords"]));
             }
             set {
-                this["AutoCompleteWords"] = value;
+                this["SuggestWords"] = value;
             }
         }
         
@@ -1404,6 +1417,149 @@ namespace JuliusSweetland.OptiKey.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool UseAlphabeticalKeyboardLayout {
+            get {
+                return ((bool)(this["UseAlphabeticalKeyboardLayout"]));
+            }
+            set {
+                this["UseAlphabeticalKeyboardLayout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool ForceCapsLock {
+            get {
+                return ((bool)(this["ForceCapsLock"]));
+            }
+            set {
+                this["ForceCapsLock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool KalmanFilterEnabled {
+            get {
+                return ((bool)(this["KalmanFilterEnabled"]));
+            }
+            set {
+                this["KalmanFilterEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public double KalmanFilterInitialValue {
+            get {
+                return ((double)(this["KalmanFilterInitialValue"]));
+            }
+            set {
+                this["KalmanFilterInitialValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public double KalmanFilterConfidenceOfInitialValue {
+            get {
+                return ((double)(this["KalmanFilterConfidenceOfInitialValue"]));
+            }
+            set {
+                this["KalmanFilterConfidenceOfInitialValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public double KalmanFilterProcessNoise {
+            get {
+                return ((double)(this["KalmanFilterProcessNoise"]));
+            }
+            set {
+                this["KalmanFilterProcessNoise"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public double KalmanFilterMeasurementNoise {
+            get {
+                return ((double)(this["KalmanFilterMeasurementNoise"]));
+            }
+            set {
+                this["KalmanFilterMeasurementNoise"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool ConversationConfirmOnlyMode {
+            get {
+                return ((bool)(this["ConversationConfirmOnlyMode"]));
+            }
+            set {
+                this["ConversationConfirmOnlyMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool ConversationConfirmEnable {
+            get {
+                return ((bool)(this["ConversationConfirmEnable"]));
+            }
+            set {
+                this["ConversationConfirmEnable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string SimplifiedKeyboardCurrentContext {
+            get {
+                return ((string)(this["SimplifiedKeyboardCurrentContext"]));
+            }
+            set {
+                this["SimplifiedKeyboardCurrentContext"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool EnableQuitKeys {
+            get {
+                return ((bool)(this["EnableQuitKeys"]));
+            }
+            set {
+                this["EnableQuitKeys"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<dictionary>\r\n  <item>\r\n    <key>\r\n     " +
             " <keyValue>\r\n        <functionKey>AlphaKeyboard</functionKey>\r\n      </keyValue>" +
             "\r\n    </key>\r\n    <value>\r\n      <ticks>PT1.75S</ticks>\r\n    </value>\r\n  </item>" +
@@ -1563,12 +1719,12 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool UseAlphabeticalKeyboardLayout {
+        public bool UseSimplifiedKeyboardLayout {
             get {
-                return ((bool)(this["UseAlphabeticalKeyboardLayout"]));
+                return ((bool)(this["UseSimplifiedKeyboardLayout"]));
             }
             set {
-                this["UseAlphabeticalKeyboardLayout"] = value;
+                this["UseSimplifiedKeyboardLayout"] = value;
             }
         }
         
@@ -1576,77 +1732,38 @@ namespace JuliusSweetland.OptiKey.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool ForceCapsLock {
+        public bool MaryTTSEnabled {
             get {
-                return ((bool)(this["ForceCapsLock"]));
+                return ((bool)(this["MaryTTSEnabled"]));
             }
             set {
-                this["ForceCapsLock"] = value;
+                this["MaryTTSEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cmu-slt-hsmm en_US female hmm")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool KalmanFilterEnabled {
+        public string MaryTTSVoice {
             get {
-                return ((bool)(this["KalmanFilterEnabled"]));
+                return ((string)(this["MaryTTSVoice"]));
             }
             set {
-                this["KalmanFilterEnabled"] = value;
+                this["MaryTTSVoice"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterInitialValue {
+        public string MaryTTSLocation {
             get {
-                return ((double)(this["KalmanFilterInitialValue"]));
+                return ((string)(this["MaryTTSLocation"]));
             }
             set {
-                this["KalmanFilterInitialValue"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterConfidenceOfInitialValue {
-            get {
-                return ((double)(this["KalmanFilterConfidenceOfInitialValue"]));
-            }
-            set {
-                this["KalmanFilterConfidenceOfInitialValue"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterProcessNoise {
-            get {
-                return ((double)(this["KalmanFilterProcessNoise"]));
-            }
-            set {
-                this["KalmanFilterProcessNoise"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterMeasurementNoise {
-            get {
-                return ((double)(this["KalmanFilterMeasurementNoise"]));
-            }
-            set {
-                this["KalmanFilterMeasurementNoise"] = value;
+                this["MaryTTSLocation"] = value;
             }
         }
     }

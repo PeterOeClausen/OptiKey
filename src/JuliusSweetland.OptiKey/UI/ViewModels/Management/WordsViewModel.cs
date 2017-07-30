@@ -67,6 +67,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             {
                 SetProperty(ref this.keyboardAndDictionaryLanguage, value);
                 OnPropertyChanged(() => UseAlphabeticalKeyboardLayoutIsVisible);
+                OnPropertyChanged(() => UseSimplifiedKeyboardLayoutIsVisible);
             }
         }
 
@@ -85,6 +86,23 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         }
 
         public bool UseAlphabeticalKeyboardLayoutIsVisible
+        {
+            get
+            {
+                return KeyboardAndDictionaryLanguage == Enums.Languages.EnglishCanada
+                    || KeyboardAndDictionaryLanguage == Enums.Languages.EnglishUK
+                    || KeyboardAndDictionaryLanguage == Enums.Languages.EnglishUS;
+            }
+        }
+
+        private bool useSimplifiedKeyboardLayout;
+        public bool UseSimplifiedKeyboardLayout
+        {
+            get { return useSimplifiedKeyboardLayout; }
+            set { SetProperty(ref useSimplifiedKeyboardLayout, value); }
+        }
+
+        public bool UseSimplifiedKeyboardLayoutIsVisible
         {
             get
             {
@@ -121,12 +139,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             get { return suppressAutoCapitaliseIntelligently; }
             set { SetProperty(ref suppressAutoCapitaliseIntelligently, value); }
         }
-
-        private bool autoCompleteWords;
-        public bool AutoCompleteWords
+ 
+        private bool suggestWords;
+        public bool SuggestWords
         {
-            get {  return autoCompleteWords; }
-            set { SetProperty(ref autoCompleteWords, value); }
+            get {  return suggestWords; }
+            set { SetProperty(ref suggestWords, value); }
         }
 
         private bool multiKeySelectionEnabled;
@@ -157,11 +175,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             KeyboardAndDictionaryLanguage = Settings.Default.KeyboardAndDictionaryLanguage;
             UiLanguage = Settings.Default.UiLanguage;
             UseAlphabeticalKeyboardLayout = Settings.Default.UseAlphabeticalKeyboardLayout;
+            UseSimplifiedKeyboardLayout = Settings.Default.UseSimplifiedKeyboardLayout;
             ForceCapsLock = Settings.Default.ForceCapsLock;
             AutoAddSpace = Settings.Default.AutoAddSpace;
             AutoCapitalise = Settings.Default.AutoCapitalise;
             SuppressAutoCapitaliseIntelligently = Settings.Default.SuppressAutoCapitaliseIntelligently;
-            AutoCompleteWords = Settings.Default.AutoCompleteWords;
+            SuggestWords = Settings.Default.SuggestWords;
             MultiKeySelectionEnabled = Settings.Default.MultiKeySelectionEnabled;
             MultiKeySelectionMaxDictionaryMatches = Settings.Default.MaxDictionaryMatchesOrSuggestions;
         }
@@ -173,11 +192,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             Settings.Default.KeyboardAndDictionaryLanguage = KeyboardAndDictionaryLanguage;
             Settings.Default.UiLanguage = UiLanguage;
             Settings.Default.UseAlphabeticalKeyboardLayout = UseAlphabeticalKeyboardLayout;
+            Settings.Default.UseSimplifiedKeyboardLayout = UseSimplifiedKeyboardLayout;
             Settings.Default.ForceCapsLock = ForceCapsLock;
             Settings.Default.AutoAddSpace = AutoAddSpace;
             Settings.Default.AutoCapitalise = AutoCapitalise;
             Settings.Default.SuppressAutoCapitaliseIntelligently = SuppressAutoCapitaliseIntelligently;
-            Settings.Default.AutoCompleteWords = AutoCompleteWords;
+            Settings.Default.SuggestWords = SuggestWords;
             Settings.Default.MultiKeySelectionEnabled = MultiKeySelectionEnabled;
             Settings.Default.MaxDictionaryMatchesOrSuggestions = MultiKeySelectionMaxDictionaryMatches;
             
