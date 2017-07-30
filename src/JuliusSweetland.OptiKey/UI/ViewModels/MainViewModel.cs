@@ -146,6 +146,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     pointToKeyValueMap = value;
 
+                    //Printing out value of PointToKeyValueMap
+                    if (value != null)
+                    { 
+                        //Console.WriteLine("FDS: PointToKeyValueMap: " + value.ToString());
+                        //foreach(var keyValuePair in value)
+                        //{
+                        //    Console.WriteLine(keyValuePair.Key + ", " + keyValuePair.Value);
+                        //}
+                    }
+
                     inputService.PointToKeyValueMap = value;
                     SelectionResultPoints = null; //The last selection result points cannot be valid if this has changed (window has moved or resized)
                 }

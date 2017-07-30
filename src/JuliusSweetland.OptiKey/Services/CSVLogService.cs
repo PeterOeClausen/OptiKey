@@ -11,13 +11,25 @@ namespace JuliusSweetland.OptiKey.Services
     /// </summary>
     public class CSVLogService
     {
-        private string gazeLogFilePath;         //File path for GazeLog-YYMMDDHHMMSS.csv
-        private string scratchPadLogFilePath;   //File path for ScratchPadLog-YYMMDDHHMMSS.csv
-        private string keyStrokesLogFilePath;   //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
+        private readonly string desktop_directory = @"C:\Users\PeterOeC\Desktop";   //Change to fit own Desktop directory
+        private readonly string directory_for_all_logs = @"\OptiKeyLogs";           //Change if you want different name
 
-        private readonly bool doLogGazeData = false;        //Change to true to log GazeData
-        private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeyStrokes = false;      //Change to true to log every key selection
+        private readonly bool doLog = true;                 //Change to true to log
+
+        private readonly bool doLogGazeData = true;        //Change to true to log GazeData
+        private readonly bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
+        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
+        private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
+        private readonly bool doLog_multiKeySelection = true;
+
+        private string logDirectoryForThisRun;
+        private string fileFriendlyDate;
+
+        private string gazeLogFilePath;             //File path for GazeLog-YYMMDDHHMMSS.csv
+        private string scratchPadLogFilePath;       //File path for ScratchPadLog-YYMMDDHHMMSS.csv
+        private string keySelectionLog_FilePath;       //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
+        private string userLooksAtKey_LogFilePath;  //File path for UserLooksInScratchpadLog-YYMMDDHHMMSS.csv
+        private string multiKeySelection_LogFilePath;
 
         #region Singleton pattern
         private static CSVLogService instance;
@@ -38,28 +50,61 @@ namespace JuliusSweetland.OptiKey.Services
         #region Constructor
         private CSVLogService()  
         {
-            if(doLogGazeData)
+            //Checks if Desktop directory exists:
+            if(!Directory.Exists(desktop_directory))
             {
-                createGazeLog();
-            }       
-            if(doLogScratchPadText)
-            {
-                createScratchPadLog();
+                Console.WriteLine("'desktop_directory' does not exist, please configure this in CSVLogService.cs");
+                throw new Exception("The directory for 'desktop_directory' does not exist in CSVLogService.cs, please configure this");
             }
-            if(doLogKeyStrokes)
+            else //Checks if we have a directory for all logs:
             {
-                createKeyStrokeLog();
+                if (!Directory.Exists(desktop_directory + directory_for_all_logs))
+                {
+                    Console.WriteLine("'directory_for_all_logs' does not exist, creating directory...");
+                    Directory.CreateDirectory(desktop_directory + directory_for_all_logs);
+                }
+
+                if(doLog)
+                {
+                    //Creates a directory for all logs created this run:
+                    DateTime now = DateTime.Now;
+                    fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
+                    logDirectoryForThisRun = desktop_directory + directory_for_all_logs + @"\" + fileFriendlyDate;
+                    Directory.CreateDirectory(logDirectoryForThisRun);
+                }
+            }
+
+            if(doLog)
+            {
+                if (doLogGazeData)
+                {
+                    create_GazeLog();
+                }
+                if (doLogScratchPadText)
+                {
+                    create_ScratchPadLog();
+                }
+                if (doLogKeySelection)
+                {
+                    create_KeySelectionLog();
+                }
+                if (doLog_userLooksAtKey)
+                {
+                    create_userLooksAtKey_Log();
+                }
+                if (doLog_multiKeySelection)
+                {
+                    create_multiKeySelection_Log();
+                }
             }
         }
         #endregion
 
         #region Create log files methods:
-        private void createGazeLog()
+        private void create_GazeLog()
         {
             //Create log file:
-            DateTime now = DateTime.Now;
-            string fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-            gazeLogFilePath = @"C:\Users\PeterOeC\Desktop\GazeLog-" + fileFriendlyDate + ".csv";
+            gazeLogFilePath = logDirectoryForThisRun + @"\GazeLog-" + fileFriendlyDate + ".csv";
             var file = File.Create(gazeLogFilePath);
             file.Close();
 
@@ -71,12 +116,10 @@ namespace JuliusSweetland.OptiKey.Services
             File.AppendAllText(gazeLogFilePath, firstLine);
         }
 
-        private void createScratchPadLog()
+        private void create_ScratchPadLog()
         {
             //Create log file:
-            DateTime now = DateTime.Now;
-            string fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-            scratchPadLogFilePath = @"C:\Users\PeterOeC\Desktop\ScratchPadLog-" + fileFriendlyDate + ".csv";
+            scratchPadLogFilePath = logDirectoryForThisRun + @"\ScratchPadLog-" + fileFriendlyDate + ".csv";
             var file = File.Create(scratchPadLogFilePath);
             file.Close();
 
@@ -86,19 +129,42 @@ namespace JuliusSweetland.OptiKey.Services
             File.AppendAllText(scratchPadLogFilePath, firstLine);
         }
 
-        public void createKeyStrokeLog()
+        private void create_KeySelectionLog()
         {
             //Create log file:
-            DateTime now = DateTime.Now;
-            string fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-            keyStrokesLogFilePath = @"C:\Users\PeterOeC\Desktop\KeyStrokesLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(keyStrokesLogFilePath);
+            keySelectionLog_FilePath = logDirectoryForThisRun + @"\KeySelectionLog-" + fileFriendlyDate + ".csv";
+            var file = File.Create(keySelectionLog_FilePath);
             file.Close();
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}\n","systemTimeStamp", "keyStroke");
-            File.AppendAllText(keyStrokesLogFilePath, firstLine);
+            var firstLine = string.Format("{0},{1}\n","systemTimeStamp", "keySelected");
+            File.AppendAllText(keySelectionLog_FilePath, firstLine);
         }
+
+        private void create_userLooksAtKey_Log()
+        {
+            //Create log file:
+            userLooksAtKey_LogFilePath = logDirectoryForThisRun + @"\user_looks_at_key_log-" + fileFriendlyDate + ".csv";
+            var file = File.Create(userLooksAtKey_LogFilePath);
+            file.Close();
+
+            //Writing first line:
+            var firstLine = string.Format("{0},{1},{2}\n", "systemTimeStamp", "key", "progressInPercent");
+            File.AppendAllText(userLooksAtKey_LogFilePath, firstLine);
+        }
+
+        private void create_multiKeySelection_Log()
+        {
+            //Create log file:
+            multiKeySelection_LogFilePath = logDirectoryForThisRun + @"\multiKeySelectionLog-" + fileFriendlyDate + ".csv";
+            var file = File.Create(multiKeySelection_LogFilePath);
+            file.Close();
+
+            //Writing first line:
+            var firstLine = string.Format("{0},{1}\n", "systemTimeStamp", "key(s)");
+            File.AppendAllText(multiKeySelection_LogFilePath, firstLine);
+        }
+
         #endregion
 
         #region Logging methods:
@@ -106,11 +172,14 @@ namespace JuliusSweetland.OptiKey.Services
         /// Logs GazeData from Services/TheEyeTribePointService.cs
         /// </summary>
         /// <param name="data"></param>
-        public void logGazedata(GazeData data)
+        public void Log_Gazedata(GazeData data)
         {
             if (doLogGazeData)
             {
-                //data data
+                //Getting system datetime:
+                string systemTimeStamp = getNowAsString();
+
+                //data data:
                 string dataTimeStamp = data.TimeStampString;
                 bool dataIsFixated = data.IsFixated;
                 int dataState = data.State;
@@ -138,8 +207,8 @@ namespace JuliusSweetland.OptiKey.Services
                 double rightSmoothedCoordinateY = data.RightEye.SmoothedCoordinates.Y;
 
                 //Creating new line:
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},\n",
-                    dataTimeStamp, dataIsFixated, dataState, dataSmoothedCoordinateX, dataSmoothedCoordinateY, dataRawCoordiateX, dataRawCoordiateY,
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}\n",
+                    systemTimeStamp, dataTimeStamp, dataIsFixated, dataState, dataSmoothedCoordinateX, dataSmoothedCoordinateY, dataRawCoordiateX, dataRawCoordiateY,
                     leftPupilCenterCoordinateX, leftPupilCenterCoordinateY, leftPupilSize, leftRawCoordinateX, leftRawCoordinateY, leftSmoothedCoordinateX, leftSmoothedCoordinateY,
                     rightPupilCenterCoordinateX, rightPupilCenterCoordinateY, rightPupilSize, rightRawCoordinateX, rightRawCoordinateY, rightSmoothedCoordinateX, rightSmoothedCoordinateY);
 
@@ -152,57 +221,75 @@ namespace JuliusSweetland.OptiKey.Services
         /// Logs value to scratchPadLog from Services/KeyboardOutputService.cs
         /// </summary>
         /// <param name="value"></param>
-        public void logScratchPadText(string value)
+        public void Log_ScratchPadText(string value)
         {
             if(doLogScratchPadText)
             { 
-                var newLine = string.Format("{0},{1}\n", DateTime.Now.ToString(), value);
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
                 File.AppendAllText(scratchPadLogFilePath, newLine);
             }
         }
 
         /// <summary>
-        /// Logs the keystrokes from Models/KeyValue.cs.
-        /// Note: Does not work with MULTI-KEY function turned on.
+        /// Logs key selections from UI/ViewModels/MainViewModel.ServiceEventHandlers
+        /// </summary>
+        /// <param name="keySelection"></param>
+        public void Log_KeySelection(string keySelection)
+        {
+            if (doLogKeySelection)
+            {
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
+                File.AppendAllText(keySelectionLog_FilePath, newLine);
+            }
+        }
+
+        /// <summary>
+        /// Logs key progression (When user looks at a key, and the progression counts up).
+        /// Called from UI/ViewModels/MainViewModel.ServiceEventHandlers.cs
         /// </summary>
         /// <param name="key"></param>
-        public void logKeyStroke(string key)
+        /// <param name="progress"></param>
+        public void Log_KeyProgression(string key, double progress)
         {
-            if (doLogKeyStrokes)
+            if(doLog_userLooksAtKey)
             {
-                var newLine = string.Format("{0},{1}\n", DateTime.Now.ToString(), key);
-                File.AppendAllText(keyStrokesLogFilePath, newLine);
+                var newLine = string.Format("{0},{1},{2}\n", getNowAsString(), key, progress);
+                //Log data:
+                File.AppendAllText(userLooksAtKey_LogFilePath, newLine);
+            }
+        }
+
+        /// <summary>
+        /// Logs MultiKey selections.
+        /// Called from UI/ViewModels/MainViewModel.ServiceEventHandlers.cs and Services/KeyboardOutputService.cs
+        /// </summary>
+        /// <param name="keySelection"></param>
+        public void Log_MultiKeySelection(string keySelection)
+        {
+            if(doLog_multiKeySelection)
+            {
+                //Log data:
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
+                File.AppendAllText(multiKeySelection_LogFilePath, newLine);
             }
         }
         #endregion
 
-        #region Not currently in use:
-        /// <summary>
-        /// Logs the current position of EyeTracker or mouse position. (Not currently in use)
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="pointKeyValuePair"></param>
-        public void logCurrentPosition(object o, Tuple<Point, KeyValue?> pointKeyValuePair)
+        #region helperMethods
+
+        private string getNowAsString()
         {
-            var newLine = string.Format("{0},,,{1},{2},{3}\n", DateTime.Now.ToString(), pointKeyValuePair.Item1.X, pointKeyValuePair.Item1.Y, pointKeyValuePair.Item2.ToString());
-            //Log data:
-            File.AppendAllText(gazeLogFilePath, newLine);
+            DateTime now = DateTime.Now;
+            return "" +
+                now.Year + "-" +
+                now.Month + "-" +
+                now.Day + "-" +
+                now.Hour + "-" +
+                now.Minute + "-" +
+                now.Second + "-" +
+                now.Millisecond;
         }
 
-        /// <summary>
-        /// Logs the selected key. (Not currently in use)
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="pakv"></param>
-        public void logSelection(object o, PointAndKeyValue pakv)
-        {
-            if (pakv.KeyValue.HasValue)
-            {
-                var newLine = string.Format("{0},{1},{2}\n", DateTime.Now.ToString(), pakv.String, pakv.KeyValue.Value.FunctionKey);
-                //Log data:
-                File.AppendAllText(gazeLogFilePath, newLine);
-            }
-        }
         #endregion
     }
 }

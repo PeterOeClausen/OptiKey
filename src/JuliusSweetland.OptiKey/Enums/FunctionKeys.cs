@@ -156,6 +156,7 @@
         Quit,
         RepeatLastMouseAction,
         RussianRussia,
+        ScratchPad,
         ScrollLock,
         ShrinkFromBottom,
         ShrinkFromBottomAndLeft,

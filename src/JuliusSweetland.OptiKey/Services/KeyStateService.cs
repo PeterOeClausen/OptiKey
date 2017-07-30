@@ -68,6 +68,15 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void ProgressKeyDownState(KeyValue keyValue)
         {
+            if(keyValue != null)
+            {
+                if(keyValue.FunctionKey != null)
+                {
+                    //This was not the place where it fires a lot of events.
+                    //Console.WriteLine(keyValue.FunctionKey.Value);
+                }
+            }
+
             if (KeyValues.KeysWhichCanBePressedDown.Contains(keyValue)
                 && KeyDownStates[keyValue].Value == Enums.KeyDownStates.Up)
             {

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace JuliusSweetland.OptiKey.UI.Controls
@@ -13,5 +14,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             get { return (string) GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+        
+        //Trigger event
     }
 }

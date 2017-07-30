@@ -405,12 +405,17 @@ namespace JuliusSweetland.OptiKey.UI.Controls
 
         private void TraverseAllKeysAndBuildPointToKeyValueMap()
         {
+            //Get all keys view elements:
             var allKeys = VisualAndLogicalTreeHelper.FindVisualChildren<Key>(this).ToList();
-
+            //Getting scratchpad view.
+            var allScratchPads = VisualAndLogicalTreeHelper.FindVisualChildren<Scratchpad>(this).ToList();
+            
+            //Building pointToKeyValueMap:
             var pointToKeyValueMap = new Dictionary<Rect, KeyValue>();
 
             var topLeftPoint = new Point(0, 0);
 
+            //Filling in keys
             foreach (var key in allKeys)
             {
                 if (key.IsVisible
@@ -441,6 +446,27 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                 }
             }
 
+            //Adding ScratchPad if it is visibile in UI.
+            if(allScratchPads.Count > 0)
+            {
+                var scratchPadArea = allScratchPads.First();
+                if (scratchPadArea.IsVisible)
+                {
+                    var rect = new Rect
+                    {
+                        Location = scratchPadArea.PointToScreen(topLeftPoint),
+                        Size = (Size)scratchPadArea.GetTransformFromDevice().Transform((Vector)scratchPadArea.RenderSize)
+                    };
+
+                    if (rect.Size.Width != 0 && rect.Size.Height != 0)
+                    {
+                        //Add ScratchPad so that it can be involked:
+                        pointToKeyValueMap.Add(rect, new KeyValue(FunctionKeys.ScratchPad));
+                    }
+                }
+            }
+
+            //Set PointToKeyValueMap
             PointToKeyValueMap = pointToKeyValueMap;
         }
 
