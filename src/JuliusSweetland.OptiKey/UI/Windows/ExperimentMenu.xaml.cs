@@ -34,7 +34,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
 
         private void Start_Experiment_Click(object sender, RoutedEventArgs e)
         {
-            InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ConversationAlphaKeyboard));
+            InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
             this.Close();
         }
     }

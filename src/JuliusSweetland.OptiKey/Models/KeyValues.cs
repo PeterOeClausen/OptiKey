@@ -83,6 +83,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue ExpandToTopKey = new KeyValue(FunctionKeys.ExpandToTop);
         public static readonly KeyValue ExpandToTopAndLeftKey = new KeyValue(FunctionKeys.ExpandToTopAndLeft);
         public static readonly KeyValue ExpandToTopAndRightKey = new KeyValue(FunctionKeys.ExpandToTopAndRight);
+        public static readonly KeyValue ExperimentalKeyboardKey = new KeyValue(FunctionKeys.ExperimentalKeyboard);
         public static readonly KeyValue EscapeKey = new KeyValue(FunctionKeys.Escape);
         public static readonly KeyValue ExpandDockKey = new KeyValue(FunctionKeys.ExpandDock);
         public static readonly KeyValue F1Key = new KeyValue(FunctionKeys.F1);        

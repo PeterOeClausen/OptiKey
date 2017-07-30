@@ -351,6 +351,7 @@
     <Compile Include="UI\ValueConverters\LengthDividedBySpan.cs" />
     <Compile Include="UI\ValueConverters\SuggestionsPaged.cs" />
     <Compile Include="UI\ViewModels\ExperimentMenuViewModel.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\Experimental.cs" />
     <Compile Include="UI\ViewModels\Keyboards\WebBrowsing.cs" />
     <Compile Include="UI\ViewModels\Keyboards\SimplifiedConversationAlpha.cs" />
     <Compile Include="UI\ViewModels\Keyboards\SimplifiedAlpha.cs" />
@@ -446,6 +447,9 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalConversationAlpha.xaml.cs">
       <DependentUpon>AlphabeticalConversationAlpha.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml.cs">
+      <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\SimplifiedConversationAlpha.xaml.cs">
       <DependentUpon>SimplifiedConversationAlpha.xaml</DependentUpon>
@@ -612,20 +616,40 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Static\DiagnosticInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.ca-ES.resx" />
-    <EmbeddedResource Include="Properties\Resources.cs-CZ.resx" />
-    <EmbeddedResource Include="Properties\Resources.es-ES.resx" />
-    <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt-PT.resx" />
+    <EmbeddedResource Include="Properties\Resources.ca-ES.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.cs-CZ.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.es-ES.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.it-IT.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pt-PT.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx" />
-    <EmbeddedResource Include="Properties\Resources.de-DE.resx" />
-    <EmbeddedResource Include="Properties\Resources.fr-FR.resx" />
-    <EmbeddedResource Include="Properties\Resources.el-GR.resx" />
+    <EmbeddedResource Include="Properties\Resources.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr-FR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.el-GR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
     <EmbeddedResource Include="Properties\Resources.sl-SI.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
-    <EmbeddedResource Include="Properties\Resources.hr-HR.resx" />
-    <EmbeddedResource Include="Properties\Resources.da-DK.resx" />
+    <EmbeddedResource Include="Properties\Resources.hr-HR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.da-DK.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Resource Include="Resources\Icons\Management.ico" />
     <Resource Include="Resources\Icons\Main.ico" />
     <None Include="..\..\LICENSE.txt">
@@ -917,7 +941,9 @@
     </Content>
     <Resource Include="Resources\Fonts\Roboto-Light.ttf" />
     <Content Include="Resources\Fonts\Roboto Font - Apache License.txt" />
-    <EmbeddedResource Include="Properties\Resources.nl.resx" />
+    <EmbeddedResource Include="Properties\Resources.nl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1035,6 +1061,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\Keyboards\English\AlphabeticalConversationAlpha.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

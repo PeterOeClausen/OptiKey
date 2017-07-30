@@ -587,6 +587,29 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     mainWindowManipulationService.Expand(ExpandToDirections.TopRight, Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     break;
 
+                case FunctionKeys.ExperimentalKeyboard:
+                    Log.Info("Changing keyboard to ExperimentalKeyboard.");
+                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
+                    Action experimentalKeyboardBackAction =
+                        currentKeyboard is ConversationConfirm
+                        ? ((ConversationConfirm)currentKeyboard).BackAction
+                        : currentKeyboard is ConversationNumericAndSymbols
+                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                            : () =>
+                            {
+                                Log.Info("Restoring window size.");
+                                mainWindowManipulationService.Restore();
+                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
+                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
+                                Keyboard = currentKeyboard;
+                            };
+                    Keyboard = new Experimental(experimentalKeyboardBackAction);
+                    Log.Info("Maximising window.");
+                    mainWindowManipulationService.Maximise();
+                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
+                    mainWindowManipulationService.SetOpacity(1);
+                    break;
+
                 case FunctionKeys.FrenchFrance:
                     Log.Info("Changing keyboard language to FrenchFrance.");
                     InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
