@@ -140,14 +140,13 @@
         <controls:Key Grid.Row="3" Grid.Column="19" />
 
         <!--Move shift here!-->
-        <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+        <!--<controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource ShiftIcon}"
                       Text="{x:Static resx:Resources.SHIFT}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.LeftShiftKey}"/>
-        <controls:Key Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
-
-        <ContentControl Grid.Row="4" Grid.Column="0">
+                      Value="{x:Static models:KeyValues.LeftShiftKey}"/>-->
+        
+        <!--<ContentControl Grid.Row="4" Grid.Column="0">
             <ContentControl.Style>
                 <Style TargetType="{x:Type ContentControl}">
                     <Setter Property="Content">
@@ -168,9 +167,9 @@
                     </Style.Triggers>
                 </Style>
             </ContentControl.Style>
-        </ContentControl>
-  
-        <controls:Key Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+        </ContentControl>-->
+
+        <controls:Key Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
                       ShiftUpText="z" ShiftDownText="Z"
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="z"/>
