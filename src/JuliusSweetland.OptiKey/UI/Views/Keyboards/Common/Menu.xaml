@@ -30,6 +30,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -128,5 +129,10 @@
                       Text="{x:Static resx:Resources.BACK}"
                       SharedSizeGroup="KeyWithSymbolAndText"
                       Value="{x:Static models:KeyValues.BackFromKeyboardKey}"/>
+        <controls:Key Grid.Row="4" Grid.Column="0"
+                      SymbolGeometry="{StaticResource BrowserIcon}"
+                      Text="Experimental Keyboard"
+                      SharedSizeGroup="KeyWithSymbolAndText"
+                      Value="{x:Static models:KeyValues.ExperimentalKeyboardKey}"/>
     </Grid>
 </controls:KeyboardView>

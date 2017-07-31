@@ -327,6 +327,9 @@
     <Compile Include="UI\Behaviours\KeyBehaviours.cs" />
     <Compile Include="UI\Behaviours\ScrollViewerBehaviours.cs" />
     <Compile Include="UI\Controls\KeyboardView.cs" />
+    <Compile Include="UI\Controls\ExperimentalOutput.xaml.cs">
+      <DependentUpon>ExperimentalOutput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\ToastNotification.cs" />
     <Compile Include="UI\Controls\Cursor.cs" />
     <Compile Include="UI\Controls\ToastNotificationPopup.cs" />
@@ -983,6 +986,10 @@
     <Page Include="Resources\Themes\Colours\Android.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\ExperimentalOutput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Views\Keyboards\Catalan\Alpha.xaml">
       <Generator>MSBuild:Compile</Generator>

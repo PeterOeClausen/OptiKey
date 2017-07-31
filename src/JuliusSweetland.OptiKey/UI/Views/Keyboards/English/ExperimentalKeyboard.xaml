@@ -54,10 +54,10 @@
             <Binding Source="{StaticResource viewModel}"/>
         </Grid.DataContext>
 
-        <controls:Output Grid.Row="0" Grid.Column="0"
+        <controls:ExperimentalOutput Grid.Row="0" Grid.Column="0"
                          Grid.RowSpan="2" Grid.ColumnSpan="20" 
-                         ScratchpadWidthInKeys="6"
-                         NumberOfSuggestionsDisplayed="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" /> <!--N.B. This MUST be TwoWay to detect changes to the DataContext used in the binding path-->
+                         ScratchpadWidthInKeysExperimental="6"
+                         NumberOfSuggestionsDisplayedExperimental="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" /> <!--N.B. This MUST be TwoWay to detect changes to the DataContext used in the binding path-->
 
         <controls:Key Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                       ShiftUpText="q" ShiftDownText="Q"
@@ -140,11 +140,11 @@
         <controls:Key Grid.Row="3" Grid.Column="19" />
 
         <!--Move shift here!-->
-        <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                      SymbolGeometry="{StaticResource ShiftIcon}"
+        <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                  <!--SymbolGeometry="{StaticResource ShiftIcon}"
                       Text="{x:Static resx:Resources.SHIFT}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.LeftShiftKey}"/>
+                      Value="{x:Static models:KeyValues.LeftShiftKey}"/> -->
 
         <!--<ContentControl Grid.Row="4" Grid.Column="0">
             <ContentControl.Style>
@@ -202,11 +202,11 @@
                       Text="{x:Static resx:Resources.BACK_ONE_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackOneKey}"/>
-        <controls:Key Grid.Row="4" Grid.Column="18" Grid.ColumnSpan="2"
-                      SymbolGeometry="{StaticResource BackManyIcon}"
+        <controls:Key Grid.Row="4" Grid.Column="18" Grid.ColumnSpan="2"/>
+                  <!--SymbolGeometry="{StaticResource BackManyIcon}"
                       Text="{x:Static resx:Resources.BACK_WORD_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.BackManyKey}"/>
+                      Value="{x:Static models:KeyValues.BackManyKey}"/>-->
 
         <controls:Key Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" Case="None"
                       Text="+"
@@ -230,24 +230,27 @@
                       Text="-"
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="{x:Static models:KeyValues.DecreaseDwellTimeKey}"/>
-        <controls:Key Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Case="None"
+        <controls:Key Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2"/>
+                  <!--Case="None"
                       Text=","
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value=","/>
+                      Value=","/>-->
         <controls:Key Grid.Row="5" Grid.Column="8" Grid.ColumnSpan="4"
                       SymbolGeometry="{StaticResource SpaceIcon}"
                       Text="{x:Static resx:Resources.SPACE}"
                       WidthSpan="2" 
                       SharedSizeGroup="KeyWithSymbol"
                       Value=" "/>
-        <controls:Key Grid.Row="5" Grid.Column="12" Grid.ColumnSpan="2" Case="None"
+        <controls:Key Grid.Row="5" Grid.Column="12" Grid.ColumnSpan="2"/>
+                  <!--Case="None"
                       Text="."
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="."/>
-        <controls:Key Grid.Row="5" Grid.Column="14" Grid.ColumnSpan="2" Case="None"
+                      Value="."/>-->
+        <controls:Key Grid.Row="5" Grid.Column="14" Grid.ColumnSpan="2"/>
+                  <!--Case="None"
                       Text="'"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="'"/>
+                      Value="'"/>-->
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource MultiKeySelectionIcon}"
                       Text="{x:Static resx:Resources.MULTI_KEY_SELECTION_SPLIT_WITH_NEWLINE}"
