@@ -18,6 +18,7 @@
                 <ResourceDictionary>
                     <valueConverters:SuggestionsPaged x:Key="SuggestionsPaged" />
                     <valueConverters:ConvertToStarGridLength DefaultGridLength="8" x:Key="ConvertToStarGridLength" />
+                    <valueConverters:FontSizeToFitLinesExperimental x:Key="FontSizeToFitLinesExperimental" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -134,10 +135,24 @@
             </Grid.RowDefinitions>
 
             <!--Add textfield here-->
-            <controls:Key Grid.Row="0"
-                          Text="the quick brown fox"/>
-
-            <controls:Scratchpad Grid.Row="1" 
+            <TextBlock Grid.Row="0" 
+                       Text="the quick brown fox"
+                       Foreground="Cyan"
+                       FontFamily="{Binding Source={x:Static resx:Settings.Default}, Path=FontFamily}"
+                       FontWeight="{Binding Source={x:Static resx:Settings.Default}, Path=FontWeight}"
+                       FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}">
+                <TextBlock.FontSize>
+                    <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
+                        <MultiBinding.Bindings>
+                            <Binding Path="ScratchpadNumberOfLines" Source="{x:Static resx:Settings.Default}" />
+                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                            <Binding Path="FontFamily" RelativeSource="{RelativeSource Self}" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </TextBlock.FontSize>
+            </TextBlock>
+            
+            <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1" 
                                  Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}" />
         </Grid>
         
