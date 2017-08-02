@@ -147,8 +147,9 @@ namespace JuliusSweetland.OptiKey
                 IKeyboardOutputService keyboardOutputService = new KeyboardOutputService(keyStateService, suggestionService, publishService, dictionaryService, fireKeySelectionEvent);
                 IMouseOutputService mouseOutputService = new MouseOutputService(publishService);
                 //Create PhraseStateService:
+                var Random = new Random();
                 List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
-                IPhraseStateService phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = 0 };
+                IPhraseStateService phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = Random.Next(0, phraseList.Count), Random = Random };
 
                 errorNotifyingServices.Add(audioService);
                 errorNotifyingServices.Add(dictionaryService);

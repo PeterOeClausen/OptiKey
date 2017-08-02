@@ -17,5 +17,7 @@ namespace JuliusSweetland.OptiKey.Services
             get { return phraseNumber; }
             set { SetProperty(ref phraseNumber, value); }
         }
+
+        public Random Random { get; set; }
     }
 }

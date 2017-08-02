@@ -11,5 +11,6 @@ namespace JuliusSweetland.OptiKey.Services
     {
         List<string> Phrases { get; set; }
         int PhraseNumber { get; set; }
+        Random Random { get; set; }
     }
 }

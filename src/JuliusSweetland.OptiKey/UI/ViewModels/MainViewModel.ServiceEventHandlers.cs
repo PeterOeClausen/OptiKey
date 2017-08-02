@@ -93,7 +93,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                                 break;
                         }
                     }
-                    else if(progress.Item1?.KeyValue?.FunctionKey != null) //hope it is a function key:
+                    else if(progress.Item1?.KeyValue?.FunctionKey != null) //it's a function key:
                     {
                         string functionKey = progress.Item1?.KeyValue?.FunctionKey?.ToString();
                         //Console.WriteLine("Key is being looked at: " + functionKey);
@@ -1527,7 +1527,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                     if(phraseStateService.Phrases != null)
                     {
-                        phraseStateService.PhraseNumber++; //Should be incremented randomly
+                        phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
                     }
                     break;
 
