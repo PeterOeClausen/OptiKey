@@ -195,10 +195,10 @@ namespace JuliusSweetland.OptiKey
                 }
 
                 //Show the main window
-                mainWindow.Show();
+                //mainWindow.Show();
 
                 //Show ExperimentMenu window:
-                ExperimentMenu experimentMenu = new ExperimentMenu();
+                ExperimentMenu experimentMenu = new ExperimentMenu(mainWindow);
                 experimentMenu.Show();
 
                 //Display splash screen and check for updates (and display message) after the window has been sized and positioned for the 1st time
@@ -206,9 +206,9 @@ namespace JuliusSweetland.OptiKey
                 sizeAndPositionInitialised = async (_, __) =>
                 {
                     mainWindowManipulationService.SizeAndPositionInitialised -= sizeAndPositionInitialised; //Ensure this handler only triggers once
-                    await ShowSplashScreen(inputService, audioService, mainViewModel);
+                    //await ShowSplashScreen(inputService, audioService, mainViewModel);
                     inputService.RequestResume(); //Start the input service
-                    await CheckForUpdates(inputService, audioService, mainViewModel);
+                    //await CheckForUpdates(inputService, audioService, mainViewModel);
                 };
                 if (mainWindowManipulationService.SizeAndPositionIsInitialised)
                 {

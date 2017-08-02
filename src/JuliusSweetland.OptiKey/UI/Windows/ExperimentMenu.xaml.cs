@@ -25,9 +25,11 @@ namespace JuliusSweetland.OptiKey.UI.Windows
     public partial class ExperimentMenu : Window
     {
         private ExperimentMenuViewModel viewModel;
+        private MainWindow mainWindow;
 
-        public ExperimentMenu()
+        public ExperimentMenu(MainWindow mainWindow)
         {
+            this.mainWindow = mainWindow;
             InitializeComponent();
             viewModel = new ExperimentMenuViewModel();
             this.DataContext = viewModel;
@@ -35,6 +37,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
 
         private void Start_Experiment_Click(object sender, RoutedEventArgs e)
         {
+            mainWindow.Show();
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
             this.Close();
         }
@@ -44,7 +47,6 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             //Create PhraseStateService:
             List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
             var phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = 1 };
-            
         }
     }
 }

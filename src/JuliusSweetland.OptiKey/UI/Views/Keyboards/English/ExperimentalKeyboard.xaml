@@ -261,10 +261,14 @@
                 <Style TargetType="{x:Type ContentControl}">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <controls:Key SymbolGeometry="{StaticResource BackIcon}"
+                            <controls:Key SymbolGeometry="{StaticResource QuitIcon}"
+                                                  Text="{x:Static resx:Resources.QUIT}"
+                                                  SharedSizeGroup="KeyWithSymbol"
+                                                  Value="{x:Static models:KeyValues.QuitKey}"/>
+                            <!--<controls:Key SymbolGeometry="{StaticResource BackIcon}"
                                           Text="{x:Static resx:Resources.BACK}"
                                           SharedSizeGroup="KeyWithSymbol"
-                                          Value="{x:Static models:KeyValues.BackFromKeyboardKey}"/>
+                                          Value="{x:Static models:KeyValues.BackFromKeyboardKey}"/>-->
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>

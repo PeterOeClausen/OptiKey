@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:JuliusSweetland.OptiKey.UI.Windows"
         xmlns:vm="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="300" Width="300">
+        Title="ExperimentMenu" Height="300" Width="300"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
             <TextBlock Text="Enter amount of sentences to type: "/>
