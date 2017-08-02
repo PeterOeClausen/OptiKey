@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace JuliusSweetland.OptiKey.UI.Windows
 {
@@ -39,7 +40,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         {
             mainWindow.Show();
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
-            this.Close();
+            this.Hide();
         }
 
         private void Load_Phrases_File_Button_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,12 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             //Create PhraseStateService:
             List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
             var phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = 1 };
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            Application.Current.Shutdown();
         }
     }
 }
