@@ -167,6 +167,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue MoveToTopAndRightBoundariesKey = new KeyValue(FunctionKeys.MoveToTopAndRightBoundaries);
         public static readonly KeyValue MoveToTopBoundaryKey = new KeyValue(FunctionKeys.MoveToTopBoundary);
         public static readonly KeyValue MultiKeySelectionIsOnKey = new KeyValue(FunctionKeys.MultiKeySelectionIsOn);
+        public static readonly KeyValue NextPhraseKey = new KeyValue(FunctionKeys.NextPhrase);
         public static readonly KeyValue NextSuggestionsKey = new KeyValue(FunctionKeys.NextSuggestions);
         public static readonly KeyValue NoQuestionResultKey = new KeyValue(FunctionKeys.NoQuestionResult);
         public static readonly KeyValue NumberLockKey = new KeyValue(FunctionKeys.NumberLock);

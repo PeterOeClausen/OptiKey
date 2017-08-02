@@ -15,6 +15,9 @@
                       IsChecked="{Binding EnableSuggestionsAndMultikeyFeature}"/>
             <Button Content="Start experiment"
                     Click="Start_Experiment_Click"/>
+            <Button Content="Load phrases file"
+                    Visibility="Hidden"
+                    Click="Load_Phrases_File_Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

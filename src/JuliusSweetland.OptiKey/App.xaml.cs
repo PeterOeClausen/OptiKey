@@ -146,6 +146,10 @@ namespace JuliusSweetland.OptiKey
                 IInputService inputService = CreateInputService(keyStateService, dictionaryService, audioService, calibrationService, capturingStateManager, errorNotifyingServices);
                 IKeyboardOutputService keyboardOutputService = new KeyboardOutputService(keyStateService, suggestionService, publishService, dictionaryService, fireKeySelectionEvent);
                 IMouseOutputService mouseOutputService = new MouseOutputService(publishService);
+                //Create PhraseStateService:
+                List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
+                IPhraseStateService phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = 0 };
+
                 errorNotifyingServices.Add(audioService);
                 errorNotifyingServices.Add(dictionaryService);
                 errorNotifyingServices.Add(publishService);
@@ -160,9 +164,9 @@ namespace JuliusSweetland.OptiKey
                 IWindowManipulationService mainWindowManipulationService = CreateMainWindowManipulationService(mainWindow);
                 errorNotifyingServices.Add(mainWindowManipulationService);
                 mainWindow.WindowManipulationService = mainWindowManipulationService;
-
+                
                 mainViewModel = new MainViewModel(
-                    audioService, calibrationService, dictionaryService, keyStateService,
+                    audioService, calibrationService, dictionaryService, keyStateService, phraseStateService,
                     suggestionService, capturingStateManager, lastMouseActionStateManager,
                     inputService, keyboardOutputService, mouseOutputService, mainWindowManipulationService, errorNotifyingServices);
 

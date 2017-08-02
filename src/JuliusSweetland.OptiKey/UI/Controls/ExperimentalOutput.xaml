@@ -19,6 +19,7 @@
                     <valueConverters:SuggestionsPaged x:Key="SuggestionsPaged" />
                     <valueConverters:ConvertToStarGridLength DefaultGridLength="8" x:Key="ConvertToStarGridLength" />
                     <valueConverters:FontSizeToFitLinesExperimental x:Key="FontSizeToFitLinesExperimental" />
+                    <valueConverters:PhraseIndexed x:Key="PhraseIndexed"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -44,7 +45,7 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.PreviousSuggestionsKey}">
         </controls:Key>
-        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -134,33 +135,40 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--Add textfield here-->
-            <TextBlock Grid.Row="0" 
-                       Text="the quick brown fox"
+            <!--Sentence field-->
+            <Border BorderBrush="Gray" BorderThickness="0.8">
+                <TextBlock Grid.Row="0" 
                        Foreground="Cyan"
                        FontFamily="{Binding Source={x:Static resx:Settings.Default}, Path=FontFamily}"
                        FontWeight="{Binding Source={x:Static resx:Settings.Default}, Path=FontWeight}"
                        FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}">
-                <TextBlock.FontSize>
-                    <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
-                        <MultiBinding.Bindings>
-                            <Binding Path="ScratchpadNumberOfLines" Source="{x:Static resx:Settings.Default}" />
-                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
-                            <Binding Path="FontFamily" RelativeSource="{RelativeSource Self}" />
-                        </MultiBinding.Bindings>
-                    </MultiBinding>
-                </TextBlock.FontSize>
-            </TextBlock>
-            
+                    <TextBlock.FontSize>
+                        <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
+                            <MultiBinding.Bindings>
+                                <Binding Path="ScratchpadNumberOfLines" Source="{x:Static resx:Settings.Default}" />
+                                <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                                <Binding Path="FontFamily" RelativeSource="{RelativeSource Self}" />
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
+                    </TextBlock.FontSize>
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource PhraseIndexed}" Mode="OneWay">
+                            <Binding Path="DataContext.PhraseStateService.Phrases" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                            <Binding Path="DataContext.PhraseStateService.PhraseNumber" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Border>
+
             <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1" 
                                  Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}" />
         </Grid>
         
         <controls:Key Grid.Row="1" Grid.Column="3"
-                      SymbolGeometry="{StaticResource SpeakIcon}" 
-                      Text="{x:Static resx:Resources.SPEAK}"
+                      SymbolGeometry="{StaticResource RightArrowKeyIcon}" 
+                      Text="Next sentence"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.SpeakKey}"/>
+                      Value="{x:Static models:KeyValues.NextPhraseKey}"/>
         <controls:Key Grid.Row="1" Grid.Column="4"
                       SymbolGeometry="{StaticResource SleepIcon}"
                       Text="{x:Static resx:Resources.SLEEP}"

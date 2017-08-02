@@ -134,6 +134,7 @@
         MoveToTopAndRightBoundaries,
         MoveToTopBoundary,
         MultiKeySelectionIsOn,
+        NextPhrase,
         NextSuggestions,
         NoQuestionResult,
         NumberLock,

@@ -1521,7 +1521,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Log.Info("Moving to top boundary.");
                     mainWindowManipulationService.Move(MoveToDirections.Top, null);
                     break;
-                        
+
+                case FunctionKeys.NextPhrase:
+                    Log.Info("Incrementing phrase number.");
+
+                    if(phraseStateService.Phrases != null)
+                    {
+                        phraseStateService.PhraseNumber++; //Should be incremented randomly
+                    }
+                    break;
+
                 case FunctionKeys.NextSuggestions:
                     Log.Info("Incrementing suggestions page.");
 

@@ -4,6 +4,7 @@ using JuliusSweetland.OptiKey.Services;
 using JuliusSweetland.OptiKey.UI.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,14 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         {
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
             this.Close();
+        }
+
+        private void Load_Phrases_File_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Create PhraseStateService:
+            List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
+            var phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = 1 };
+            
         }
     }
 }

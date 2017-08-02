@@ -26,6 +26,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private readonly ICalibrationService calibrationService;
         private readonly IDictionaryService dictionaryService;
         private readonly IKeyStateService keyStateService;
+        private readonly IPhraseStateService phraseStateService;
         private readonly ISuggestionStateService suggestionService;
         private readonly ICapturingStateManager capturingStateManager;
         private readonly ILastMouseActionStateManager lastMouseActionStateManager;
@@ -62,6 +63,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             ICalibrationService calibrationService,
             IDictionaryService dictionaryService,
             IKeyStateService keyStateService,
+            IPhraseStateService phraseStateService,
             ISuggestionStateService suggestionService,
             ICapturingStateManager capturingStateManager,
             ILastMouseActionStateManager lastMouseActionStateManager,
@@ -75,6 +77,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             this.calibrationService = calibrationService;
             this.dictionaryService = dictionaryService;
             this.keyStateService = keyStateService;
+            this.phraseStateService = phraseStateService;
             this.suggestionService = suggestionService;
             this.capturingStateManager = capturingStateManager;
             this.lastMouseActionStateManager = lastMouseActionStateManager;
@@ -113,6 +116,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         public ICapturingStateManager CapturingStateManager { get { return capturingStateManager; } }
         public IKeyboardOutputService KeyboardOutputService { get { return keyboardOutputService; } }
         public IKeyStateService KeyStateService { get { return keyStateService; } }
+        public IPhraseStateService PhraseStateService { get { return phraseStateService; } }
         public ISuggestionStateService SuggestionService { get { return suggestionService; } }
         public ICalibrationService CalibrationService { get { return calibrationService; } }
 
