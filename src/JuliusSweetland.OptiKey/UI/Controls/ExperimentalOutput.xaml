@@ -20,6 +20,7 @@
                     <valueConverters:ConvertToStarGridLength DefaultGridLength="8" x:Key="ConvertToStarGridLength" />
                     <valueConverters:FontSizeToFitLinesExperimental x:Key="FontSizeToFitLinesExperimental" />
                     <valueConverters:PhraseIndexed x:Key="PhraseIndexed"/>
+                    <valueConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -40,12 +41,14 @@
         </Grid.ColumnDefinitions>
 
         <controls:Key Grid.Row="0" Grid.Column="0"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SuggestionLeftIcon}"
                       Text="{x:Static resx:Resources.PREV}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.PreviousSuggestionsKey}">
         </controls:Key>
-        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible">
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" 
+              Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -114,6 +117,7 @@
             </controls:Key>
         </Grid>
         <controls:Key Grid.Row="0" Grid.Column="4"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SuggestionRightIcon}"
                       Text="{x:Static resx:Resources.NEXT}"
                       SharedSizeGroup="KeyWithSymbol"
@@ -160,7 +164,7 @@
                 </TextBlock>
             </Border>
 
-            <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1" 
+            <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1"
                                  Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}" />
         </Grid>
         

@@ -11,8 +11,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private bool enableSuggestionsAndMultikeyFeature;
         public bool EnableSuggestionsAndMultikeyFeature {
             get {
+                Console.WriteLine("EnableSuggestionsAndMultikeyFeature get: " + enableSuggestionsAndMultikeyFeature);
                 return enableSuggestionsAndMultikeyFeature; }
             set{
+                Console.WriteLine("EnableSuggestionsAndMultikeyFeature Set: " + value);
                 enableSuggestionsAndMultikeyFeature = value;
             }
         }
@@ -20,6 +22,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private int amountOfSentencesToType;
         public int AmountOfSentencesToType {
             get {
+                Console.WriteLine("AmountOfSentencesToType Get: " + amountOfSentencesToType);
                 return amountOfSentencesToType; }
             set
             {

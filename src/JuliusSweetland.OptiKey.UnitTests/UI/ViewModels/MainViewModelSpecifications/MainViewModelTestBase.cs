@@ -25,6 +25,7 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
         protected List<INotifyErrors> ErrorNotifyingServices { get; private set; }
         protected bool IsKeySelectionEventHandlerCalled { get; private set; }
         protected bool IsPointSelectionEventHandlerCalled { get; private set; }
+        protected ExperimentMenuViewModel ExperimentMenuViewModel { get; set; }
 
         protected virtual bool ShouldConstruct { get { return true; } }
 
@@ -42,6 +43,7 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
             KeyStateService.Setup(s => s.KeySelectionProgress).Returns(new NotifyingConcurrentDictionary<KeyValue, double>());
 
             PhraseStateService = new Mock<IPhraseStateService>();
+            ExperimentMenuViewModel = new ExperimentMenuViewModel();
 
             LastMouseActionStateManager = new Mock<ILastMouseActionStateManager>();
             MainWindowManipulationService = new Mock<IWindowManipulationService>();
@@ -51,7 +53,7 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
 
             if(ShouldConstruct)
             {
-                MainViewModel = new MainViewModel(AudioService.Object, CalibrationService.Object, DictionaryService.Object,
+                MainViewModel = new MainViewModel(AudioService.Object, CalibrationService.Object, DictionaryService.Object, ExperimentMenuViewModel,
                     KeyStateService.Object, PhraseStateService.Object, SuggestionService.Object, CapturingStateManager.Object, LastMouseActionStateManager.Object,
                     InputService.Object, KeyboardOutputService.Object, MouseOutputService.Object, MainWindowManipulationService.Object,
                     ErrorNotifyingServices);

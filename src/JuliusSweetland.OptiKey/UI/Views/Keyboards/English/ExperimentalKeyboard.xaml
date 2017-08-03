@@ -8,6 +8,7 @@
                        xmlns:properties="clr-namespace:JuliusSweetland.OptiKey.Properties"
                        xmlns:resx="clr-namespace:JuliusSweetland.OptiKey.Properties"
                        xmlns:management="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels.Management"
+                       xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
                        mc:Ignorable="d" 
                        d:DesignHeight="300" d:DesignWidth="300">
 
@@ -49,6 +50,7 @@
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <management:PointingAndSelectingViewModel x:Key="viewModel"/>
+            <valueConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </Grid.Resources>
         <Grid.DataContext>
             <Binding Source="{StaticResource viewModel}"/>
@@ -252,6 +254,7 @@
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="'"/>-->
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource MultiKeySelectionIcon}"
                       Text="{x:Static resx:Resources.MULTI_KEY_SELECTION_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"

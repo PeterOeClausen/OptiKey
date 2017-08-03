@@ -25,14 +25,12 @@ namespace JuliusSweetland.OptiKey.UI.Windows
     /// </summary>
     public partial class ExperimentMenu : Window
     {
-        private ExperimentMenuViewModel viewModel;
         private MainWindow mainWindow;
 
-        public ExperimentMenu(MainWindow mainWindow)
+        public ExperimentMenu(MainWindow mainWindow, ExperimentMenuViewModel viewModel)
         {
-            this.mainWindow = mainWindow;
             InitializeComponent();
-            viewModel = new ExperimentMenuViewModel();
+            this.mainWindow = mainWindow;
             this.DataContext = viewModel;
         }
 

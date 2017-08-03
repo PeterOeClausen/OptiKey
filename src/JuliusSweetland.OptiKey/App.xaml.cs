@@ -150,6 +150,8 @@ namespace JuliusSweetland.OptiKey
                 var Random = new Random();
                 List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
                 IPhraseStateService phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = Random.Next(0, phraseList.Count), Random = Random };
+                //Create ExperimentMenuViewModel:
+                var experimentMenuViewModel = new ExperimentMenuViewModel();
 
                 errorNotifyingServices.Add(audioService);
                 errorNotifyingServices.Add(dictionaryService);
@@ -167,7 +169,7 @@ namespace JuliusSweetland.OptiKey
                 mainWindow.WindowManipulationService = mainWindowManipulationService;
                 
                 mainViewModel = new MainViewModel(
-                    audioService, calibrationService, dictionaryService, keyStateService, phraseStateService,
+                    audioService, calibrationService, dictionaryService, experimentMenuViewModel, keyStateService, phraseStateService,
                     suggestionService, capturingStateManager, lastMouseActionStateManager,
                     inputService, keyboardOutputService, mouseOutputService, mainWindowManipulationService, errorNotifyingServices);
 
@@ -198,7 +200,7 @@ namespace JuliusSweetland.OptiKey
                 //mainWindow.Show();
 
                 //Show ExperimentMenu window:
-                ExperimentMenu experimentMenu = new ExperimentMenu(mainWindow);
+                ExperimentMenu experimentMenu = new ExperimentMenu(mainWindow, experimentMenuViewModel);
                 experimentMenu.Show();
 
                 //Display splash screen and check for updates (and display message) after the window has been sized and positioned for the 1st time

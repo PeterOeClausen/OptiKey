@@ -19,7 +19,7 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
 
         protected override void Act()
         {
-            MainViewModel = new MainViewModel(AudioService.Object, CalibrationService.Object, DictionaryService.Object, 
+            MainViewModel = new MainViewModel(AudioService.Object, CalibrationService.Object, DictionaryService.Object, ExperimentMenuViewModel,
                 KeyStateService.Object, PhraseStateService.Object, SuggestionService.Object, CapturingStateManager.Object, LastMouseActionStateManager.Object, 
                 InputService.Object, KeyboardOutputService.Object, MouseOutputService.Object, MainWindowManipulationService.Object, 
                 ErrorNotifyingServices);
