@@ -11,7 +11,7 @@ namespace JuliusSweetland.OptiKey.Services
     /// </summary>
     public class CSVLogService
     {
-        private readonly string desktop_directory = @"C:\Users\peter\Desktop";   //Change to fit own Desktop directory
+        private readonly string desktop_directory = @"C:\Users\PeterOeC\Desktop";   //Change to fit own Desktop directory
         private readonly string directory_for_all_logs = @"\OptiKeyLogs";           //Change if you want different name
 
         private readonly bool doLog = false;                 //Change to true to log
