@@ -21,7 +21,7 @@ namespace JuliusSweetland.OptiKey.UI.ValueConverters
 
                 var lineHeight = height/noOfLines;
 
-                return (lineHeight / fontFamily.LineSpacing) / 2;
+                return (lineHeight / fontFamily.LineSpacing);
             }
 
             return DependencyProperty.UnsetValue;

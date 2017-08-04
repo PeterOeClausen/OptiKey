@@ -160,7 +160,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     if (!capturingStateManager.CapturingMultiKeySelection)
                     {
-                        audioService.PlaySound(Settings.Default.KeySelectionSoundFile, Settings.Default.KeySelectionSoundVolume);
+                        if (value.KeyValue.ToString() != "ScratchPad")
+                        { audioService.PlaySound(Settings.Default.KeySelectionSoundFile, Settings.Default.KeySelectionSoundVolume); }
                     }
 
                     if (KeySelection != null)
@@ -1529,6 +1530,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     {
                         phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
                     }
+                    HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
                     break;
 
                 case FunctionKeys.NextSuggestions:

@@ -173,7 +173,7 @@ namespace JuliusSweetland.OptiKey.Services
                     if (textChangedByBackOne
                         || string.IsNullOrEmpty(Text))
                     {
-                        AutoPressShiftIfAppropriate();
+                        //AutoPressShiftIfAppropriate(); //Not needed in experimentation mode
                     }
 
                     StoreLastTextChange(null);
@@ -187,7 +187,7 @@ namespace JuliusSweetland.OptiKey.Services
                     Text = null;
                     StoreLastTextChange(null);
                     ClearSuggestions();
-                    AutoPressShiftIfAppropriate();
+                    //AutoPressShiftIfAppropriate(); //No need to shift in experiment mode.
                     Log.Debug("Suppressing next auto space.");
                     suppressNextAutoSpace = true;
                     break;
