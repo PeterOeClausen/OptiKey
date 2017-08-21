@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace JuliusSweetland.OptiKey.UI.ValueConverters
@@ -9,7 +10,7 @@ namespace JuliusSweetland.OptiKey.UI.ValueConverters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null)
+            if (values != null && values[0] != DependencyProperty.UnsetValue)
             {
                 var phrases = values[0] as List<string>;
                 var phraseIndex = (int)values[1];

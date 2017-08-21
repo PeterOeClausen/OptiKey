@@ -41,14 +41,14 @@
         </Grid.ColumnDefinitions>
 
         <controls:Key Grid.Row="0" Grid.Column="0"
-                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SuggestionLeftIcon}"
                       Text="{x:Static resx:Resources.PREV}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.PreviousSuggestionsKey}">
         </controls:Key>
         <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" 
-              Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
+              Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -117,7 +117,7 @@
             </controls:Key>
         </Grid>
         <controls:Key Grid.Row="0" Grid.Column="4"
-                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SuggestionRightIcon}"
                       Text="{x:Static resx:Resources.NEXT}"
                       SharedSizeGroup="KeyWithSymbol"
@@ -178,6 +178,7 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.NextPhraseKey}"/>
         <controls:Key Grid.Row="1" Grid.Column="4"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowPauseKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SleepIcon}"
                       Text="{x:Static resx:Resources.SLEEP}"
                       SharedSizeGroup="KeyWithSymbol"

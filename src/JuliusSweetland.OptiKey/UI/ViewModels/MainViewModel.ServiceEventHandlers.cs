@@ -471,7 +471,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.DecreaseDwellTime:
                     Log.Info("Decreasing DwellTime.");
-                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime -= TimeSpan.FromMilliseconds(100); //Decrease Dwelltime
+                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime -= TimeSpan.FromMilliseconds(100); //Decrease Dwelltime //+ an int to Timespan converter?
                     break;
 
                 case FunctionKeys.DecreaseOpacity:
@@ -537,6 +537,13 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
+                    break;
+
+                case FunctionKeys.EscKeyPressed:
+                    Console.WriteLine("Chaning to Experiment menu");
+                    Log.Info("Chaning to Experiment menu");
+                    InstanceGetter.Instance.ExperimentMenuWindow.Show();
+                    HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.Minimise));
                     break;
 
                 case FunctionKeys.ExpandDock:

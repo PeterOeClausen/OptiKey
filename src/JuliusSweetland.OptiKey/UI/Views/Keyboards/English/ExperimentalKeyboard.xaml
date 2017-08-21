@@ -143,6 +143,7 @@
 
         <!--Move shift here!-->
         <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowShiftKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource ShiftIcon}"
                       Text="{x:Static resx:Resources.SHIFT}"
                       SharedSizeGroup="KeyWithSymbol"
@@ -200,6 +201,7 @@
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="m"/>
         <controls:Key Grid.Row="4" Grid.Column="16" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowBackspaceKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource BackOneIcon}"
                       Text="{x:Static resx:Resources.BACK_ONE_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
@@ -254,7 +256,7 @@
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="'"/>-->
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"
-                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsAndMultikeyFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableMultikeySwipeFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource MultiKeySelectionIcon}"
                       Text="{x:Static resx:Resources.MULTI_KEY_SELECTION_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
@@ -265,9 +267,10 @@
                     <Setter Property="Content">
                         <Setter.Value>
                             <controls:Key SymbolGeometry="{StaticResource QuitIcon}"
-                                                  Text="{x:Static resx:Resources.QUIT}"
-                                                  SharedSizeGroup="KeyWithSymbol"
-                                                  Value="{x:Static models:KeyValues.QuitKey}"/>
+                                          Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowQuitKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                                          Text="{x:Static resx:Resources.QUIT}"
+                                          SharedSizeGroup="KeyWithSymbol"
+                                          Value="{x:Static models:KeyValues.QuitKey}"/>
                             <!--<controls:Key SymbolGeometry="{StaticResource BackIcon}"
                                           Text="{x:Static resx:Resources.BACK}"
                                           SharedSizeGroup="KeyWithSymbol"

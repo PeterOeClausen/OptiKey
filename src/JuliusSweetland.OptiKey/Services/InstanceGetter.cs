@@ -13,6 +13,7 @@ namespace JuliusSweetland.OptiKey.Services
     {
         public ITriggerSourceWithTimeToCompleteTrigger triggerSource { get; set; }
         public MainViewModel MainViewModel { get; set; }
+        public ExperimentMenu ExperimentMenuWindow { get; set; }
 
         private static InstanceGetter instance;
 

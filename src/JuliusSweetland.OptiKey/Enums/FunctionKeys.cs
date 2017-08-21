@@ -42,6 +42,7 @@
         EnglishCanada,
         EnglishUK,
         EnglishUS,
+        EscKeyPressed,
         ExpandToBottom,
         ExpandToBottomAndLeft,
         ExpandToBottomAndRight,

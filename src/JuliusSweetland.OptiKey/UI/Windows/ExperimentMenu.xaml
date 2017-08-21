@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JuliusSweetland.OptiKey.UI.Windows"
         xmlns:vm="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels"
+        xmlns:management="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels.Management"
         mc:Ignorable="d"
         Title="ExperimentMenu" Height="300" Width="300"
         WindowStartupLocation="CenterScreen">
@@ -12,13 +13,35 @@
         <StackPanel>
             <TextBlock Text="Enter amount of sentences to type: "/>
             <TextBox Text="{Binding AmountOfSentencesToType}"/>
-            <CheckBox Content="Enable Suggestions and MultiKey feature?"
-                      IsChecked="{Binding EnableSuggestionsAndMultikeyFeature}"/>
+            <CheckBox Content="Enable Suggestions feature?"
+                      IsChecked="{Binding EnableSuggestionsFeature}"/>
+            <CheckBox Content="Enable MultiKey (Swipe) feature?"
+                      IsChecked="{Binding EnableMultikeySwipeFeature}"/>
+            <CheckBox Content="Show shift key?"
+                      IsChecked="{Binding ShowShiftKey}"/>
+            <CheckBox Content="Show backspace key?"
+                      IsChecked="{Binding ShowBackspaceKey}"/>
+            <CheckBox Content="Show pause key?"
+                      IsChecked="{Binding ShowPauseKey}"/>
+            <CheckBox Content="Show quit key?"
+                      IsChecked="{Binding ShowQuitKey}"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <management:PointingAndSelectingViewModel x:Key="viewModel"/>
+                </Grid.Resources>
+                <Grid.DataContext>
+                    <Binding Source="{StaticResource viewModel}"/>
+                </Grid.DataContext>
+                <TextBlock Grid.Row="0" Text="Change dwelltime here:"/>
+                <TextBox Grid.Row="1" Text="{Binding Path=KeySelectionTriggerFixationDefaultCompleteTimeInMs, Mode=TwoWay, FallbackValue=-1}"/>
+            </Grid>
             <Button Content="Start experiment"
                     Click="Start_Experiment_Click"/>
-            <Button Content="Load phrases file"
-                    Visibility="Hidden"
-                    Click="Load_Phrases_File_Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -201,6 +201,7 @@ namespace JuliusSweetland.OptiKey
 
                 //Show ExperimentMenu window:
                 ExperimentMenu experimentMenu = new ExperimentMenu(mainWindow, experimentMenuViewModel);
+                InstanceGetter.Instance.ExperimentMenuWindow = experimentMenu;
                 experimentMenu.Show();
 
                 //Display splash screen and check for updates (and display message) after the window has been sized and positioned for the 1st time
