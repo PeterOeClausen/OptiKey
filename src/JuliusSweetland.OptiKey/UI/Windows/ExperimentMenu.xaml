@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JuliusSweetland.OptiKey.UI.Windows"
-        xmlns:vm="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels"
-        xmlns:management="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels.Management"
+        xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
+        xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
         Title="ExperimentMenu" Height="300" Width="300"
         WindowStartupLocation="CenterScreen">
@@ -32,13 +31,16 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.Resources>
-                    <management:PointingAndSelectingViewModel x:Key="viewModel"/>
+                    <!--<services:InstanceGetter x:Key="viewModel"/>-->
+                    <settings:Settings x:Key="viewModel"/>
+                    <valueConverters:TimeSpanToMilisecondsConverter x:Key="TimeSpanToMilisecondsConverter"/>
+                    <!--<management:PointingAndSelectingViewModel x:Key="viewModel"/>-->
                 </Grid.Resources>
                 <Grid.DataContext>
                     <Binding Source="{StaticResource viewModel}"/>
                 </Grid.DataContext>
-                <TextBlock Grid.Row="0" Text="Change dwelltime here:"/>
-                <TextBox Grid.Row="1" Text="{Binding Path=KeySelectionTriggerFixationDefaultCompleteTimeInMs, Mode=TwoWay, FallbackValue=-1}"/>
+                <TextBlock Grid.Row="0" Text="Change dwelltime here (in miliseconds):"/>
+                <TextBox Grid.Row="1" Text="{Binding Path=Default.KeySelectionTriggerFixationDefaultCompleteTime, Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"/>
             </Grid>
             <Button Content="Start experiment"
                     Click="Start_Experiment_Click"/>

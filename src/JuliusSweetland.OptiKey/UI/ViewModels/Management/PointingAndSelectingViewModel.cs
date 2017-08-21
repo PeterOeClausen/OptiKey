@@ -234,7 +234,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         public double KeySelectionTriggerFixationDefaultCompleteTimeInMs
         {
             get { return keySelectionTriggerFixationDefaultCompleteTimeInMs; }
-            set { SetProperty(ref keySelectionTriggerFixationDefaultCompleteTimeInMs, value); }
+            set {
+                SetProperty(ref keySelectionTriggerFixationDefaultCompleteTimeInMs, value);
+            }
         }
 
         private bool keySelectionTriggerFixationCompleteTimesByIndividualKey;

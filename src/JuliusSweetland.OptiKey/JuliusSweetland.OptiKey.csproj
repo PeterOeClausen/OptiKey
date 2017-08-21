@@ -356,6 +356,7 @@
     <Compile Include="UI\ValueConverters\FontSizeToFitLines.cs" />
     <Compile Include="UI\ValueConverters\MinimiseAndDockPositionToSymbolOrientation.cs" />
     <Compile Include="UI\ValueConverters\PhraseIndexed.cs" />
+    <Compile Include="UI\ValueConverters\TimeSpanToMilisecondsConverter.cs" />
     <Compile Include="UI\ValueConverters\WidthGreaterThanHeight.cs" />
     <Compile Include="UI\ValueConverters\LengthDividedBySpan.cs" />
     <Compile Include="UI\ValueConverters\SuggestionsPaged.cs" />
