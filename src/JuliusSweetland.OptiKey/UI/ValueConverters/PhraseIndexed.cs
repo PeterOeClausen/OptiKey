@@ -14,7 +14,11 @@ namespace JuliusSweetland.OptiKey.UI.ValueConverters
             {
                 var phrases = values[0] as List<string>;
                 var phraseIndex = (int)values[1];
-                if (phrases != null)
+                if(phraseIndex == -42)
+                {
+                    return "THE EXPERIMENT IS NOW DONE";
+                }
+                else if (phrases != null)
                 {
                     if (phrases.Count > phraseIndex)
                     {

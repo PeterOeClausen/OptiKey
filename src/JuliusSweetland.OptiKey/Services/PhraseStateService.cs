@@ -6,6 +6,13 @@ namespace JuliusSweetland.OptiKey.Services
 {
     public class PhraseStateService : BindableBase, IPhraseStateService
     {
+        private int phrasesShown = 0;
+        public int PhrasesShown
+        {
+            get { return phrasesShown; }
+            set { SetProperty(ref phrasesShown, value); }
+        }
+
         private List<string> phrases;
         public List<string> Phrases {
             get { return phrases; }

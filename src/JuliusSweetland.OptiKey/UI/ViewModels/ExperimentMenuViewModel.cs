@@ -8,7 +8,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
     public class ExperimentMenuViewModel
     {
-        private int amountOfSentencesToType;
+        private int amountOfSentencesToType = 3;
         public int AmountOfSentencesToType
         {
             get

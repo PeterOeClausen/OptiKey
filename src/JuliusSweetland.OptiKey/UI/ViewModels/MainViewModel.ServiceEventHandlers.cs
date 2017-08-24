@@ -1535,7 +1535,15 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                     if(phraseStateService.Phrases != null)
                     {
-                        phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
+                        if(phraseStateService.PhrasesShown < (experimentMenuViewModel.AmountOfSentencesToType - 1))
+                        {
+                            phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
+                            phraseStateService.PhrasesShown++;
+                        }
+                        else
+                        {
+                            phraseStateService.PhraseNumber = -42; //Ugly way to signal experiment is over.
+                        }
                     }
                     HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
                     break;

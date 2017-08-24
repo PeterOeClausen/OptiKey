@@ -139,12 +139,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--Sentence field-->
+            <!--Phrase field-->
             <Border BorderBrush="Gray" BorderThickness="0.8">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <TextBlock Grid.Row="0" 
-                                   Foreground="Cyan"
                                    FontFamily="{Binding Source={x:Static resx:Settings.Default}, Path=FontFamily}"
                                    FontWeight="{Binding Source={x:Static resx:Settings.Default}, Path=FontWeight}"
                                    FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}">
@@ -163,6 +162,17 @@
                                     <Binding Path="DataContext.PhraseStateService.PhraseNumber" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
                                 </MultiBinding>
                             </TextBlock.Text>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Cyan"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="THE EXPERIMENT IS NOW DONE">
+                                            <Setter Property="Foreground" Value="Red" />
+                                            <Setter Property="TextDecorations" Value="Underline" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
                         </TextBlock>
                     </Grid>
                 </ScrollViewer>
@@ -171,12 +181,13 @@
             <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1"
                                  Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}" />
         </Grid>
-        
+
         <controls:Key Grid.Row="1" Grid.Column="3"
                       SymbolGeometry="{StaticResource RightArrowKeyIcon}" 
-                      Text="Next sentence"
+                      Text="Next phrase"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.NextPhraseKey}"/>
+
         <controls:Key Grid.Row="1" Grid.Column="4"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowPauseKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SleepIcon}"

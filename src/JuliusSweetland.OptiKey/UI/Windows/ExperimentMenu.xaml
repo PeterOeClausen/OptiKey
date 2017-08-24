@@ -31,16 +31,15 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.Resources>
-                    <!--<services:InstanceGetter x:Key="viewModel"/>-->
                     <settings:Settings x:Key="viewModel"/>
                     <valueConverters:TimeSpanToMilisecondsConverter x:Key="TimeSpanToMilisecondsConverter"/>
-                    <!--<management:PointingAndSelectingViewModel x:Key="viewModel"/>-->
                 </Grid.Resources>
                 <Grid.DataContext>
                     <Binding Source="{StaticResource viewModel}"/>
                 </Grid.DataContext>
                 <TextBlock Grid.Row="0" Text="Change dwelltime here (in miliseconds):"/>
-                <TextBox Grid.Row="1" Text="{Binding Path=Default.KeySelectionTriggerFixationDefaultCompleteTime, Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"/>
+                <TextBox Grid.Row="1" Text="{Binding Path=Default.KeySelectionTriggerFixationDefaultCompleteTime, 
+                    Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"/>
             </Grid>
             <Button Content="Start experiment"
                     Click="Start_Experiment_Click"/>
