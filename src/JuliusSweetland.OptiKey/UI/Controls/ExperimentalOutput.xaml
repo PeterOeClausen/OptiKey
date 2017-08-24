@@ -190,6 +190,25 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.NextPhraseKey}"/>
 
+        <!-- Does not work sadly... icon does not show up and QuitKey is not processed...
+        <controls:Key Grid.Row="1" Grid.Column="3"
+                      SharedSizeGroup="KeyWithSymbol">
+            <controls:Key.Style>
+                <Style TargetType="{x:Type controls:Key}">
+                    <Setter Property="SymbolGeometry" Value="{StaticResource RightArrowKeyIcon}"/>
+                    <Setter Property="Text" Value="Next phrase"/>
+                    <Setter Property="Value" Value="{x:Static models:KeyValues.NextPhraseKey}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PhraseField, Path=Text}" Value="THE EXPERIMENT IS NOW DONE">
+                            <Setter Property="SymbolGeometry" Value="{StaticResource QuitIcon}"/>
+                            <Setter Property="Text" Value="Quit experiment"/>
+                            <Setter Property="Value" Value="{x:Static models:KeyValues.QuitKey}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:Key.Style>
+        </controls:Key>-->
+
         <controls:Key Grid.Row="1" Grid.Column="4"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowPauseKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SleepIcon}"
