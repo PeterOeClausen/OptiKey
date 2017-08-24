@@ -140,13 +140,15 @@
             </Grid.RowDefinitions>
 
             <!--Phrase field-->
-            <Border BorderBrush="Gray" BorderThickness="0.8">
+            <Border BorderBrush="Gray" BorderThickness="1">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <TextBlock Grid.Row="0" 
                                    FontFamily="{Binding Source={x:Static resx:Settings.Default}, Path=FontFamily}"
                                    FontWeight="{Binding Source={x:Static resx:Settings.Default}, Path=FontWeight}"
-                                   FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}">
+                                   FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}"
+                                   Margin="1" 
+                                   Padding="1">
                             <TextBlock.FontSize>
                                 <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
                                     <MultiBinding.Bindings>
