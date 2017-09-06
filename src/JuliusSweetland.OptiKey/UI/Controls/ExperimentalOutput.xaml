@@ -143,13 +143,13 @@
             <Border BorderBrush="Gray" BorderThickness="1">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <Grid>
-                        <TextBlock Grid.Row="0" 
+                        <controls:PhraseTextBlock Grid.Row="0" 
                                    FontFamily="{Binding Source={x:Static resx:Settings.Default}, Path=FontFamily}"
                                    FontWeight="{Binding Source={x:Static resx:Settings.Default}, Path=FontWeight}"
                                    FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}"
                                    Margin="1" 
                                    Padding="1">
-                            <TextBlock.FontSize>
+                            <controls:PhraseTextBlock.FontSize>
                                 <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
                                     <MultiBinding.Bindings>
                                         <Binding Path="ScratchpadNumberOfLines" Source="{x:Static resx:Settings.Default}" />
@@ -157,14 +157,14 @@
                                         <Binding Path="FontFamily" RelativeSource="{RelativeSource Self}" />
                                     </MultiBinding.Bindings>
                                 </MultiBinding>
-                            </TextBlock.FontSize>
-                            <TextBlock.Text>
+                            </controls:PhraseTextBlock.FontSize>
+                            <controls:PhraseTextBlock.Text>
                                 <MultiBinding Converter="{StaticResource PhraseIndexed}" Mode="OneWay">
                                     <Binding Path="DataContext.PhraseStateService.Phrases" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
                                     <Binding Path="DataContext.PhraseStateService.PhraseNumber" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
                                 </MultiBinding>
-                            </TextBlock.Text>
-                            <TextBlock.Style>
+                            </controls:PhraseTextBlock.Text>
+                            <controls:PhraseTextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Foreground" Value="Cyan"/>
                                     <Style.Triggers>
@@ -174,8 +174,8 @@
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                            </controls:PhraseTextBlock.Style>
+                        </controls:PhraseTextBlock>
                     </Grid>
                 </ScrollViewer>
             </Border>

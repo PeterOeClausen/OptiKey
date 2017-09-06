@@ -332,6 +332,7 @@
     <Compile Include="UI\Controls\ExperimentalOutput.xaml.cs">
       <DependentUpon>ExperimentalOutput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\PhraseTextBlock.cs" />
     <Compile Include="UI\Controls\TextToWritePad.cs" />
     <Compile Include="UI\Controls\ToastNotification.cs" />
     <Compile Include="UI\Controls\Cursor.cs" />

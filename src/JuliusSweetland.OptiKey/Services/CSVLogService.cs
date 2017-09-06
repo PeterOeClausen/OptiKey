@@ -14,12 +14,13 @@ namespace JuliusSweetland.OptiKey.Services
         private readonly string desktop_directory = @"C:\Users\peter\Desktop";   //Change to fit own Desktop directory
         private readonly string directory_for_all_logs = @"\OptiKeyLogs";           //Change if you want different name
 
-        private readonly bool doLog = false;                 //Change to true to log
+        private readonly bool doLog = true;                 //Change to true to log
 
-        private readonly bool doLogGazeData = false;        //Change to true to log GazeData
-        private readonly bool doLogScratchPadText = false;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeySelection = false;      //Change to true to log every key selection
-        private readonly bool doLog_userLooksAtKey = false;  //Change to true to log when user looks in ScratchPad.
+        private readonly bool doLogGazeData = true;        //Change to true to log GazeData
+        private readonly bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
+        private readonly bool doLogPhraseText = true;  //Change to true to log ScratchPadText
+        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
+        private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
         private readonly bool doLog_multiKeySelection = false;
 
         private string logDirectoryForThisRun;
@@ -27,7 +28,8 @@ namespace JuliusSweetland.OptiKey.Services
 
         private string gazeLogFilePath;             //File path for GazeLog-YYMMDDHHMMSS.csv
         private string scratchPadLogFilePath;       //File path for ScratchPadLog-YYMMDDHHMMSS.csv
-        private string keySelectionLog_FilePath;       //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
+        private string phraseLogFilePath;           //File path for PhraseLog-YYMMDDHHMMSS.csv
+        private string keySelectionLog_FilePath;    //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
         private string userLooksAtKey_LogFilePath;  //File path for UserLooksInScratchpadLog-YYMMDDHHMMSS.csv
         private string multiKeySelection_LogFilePath;
 
@@ -84,6 +86,10 @@ namespace JuliusSweetland.OptiKey.Services
                 {
                     create_ScratchPadLog();
                 }
+                if (doLogPhraseText)
+                {
+                    create_PhraseLog();
+                }
                 if (doLogKeySelection)
                 {
                     create_KeySelectionLog();
@@ -127,6 +133,19 @@ namespace JuliusSweetland.OptiKey.Services
             var firstLine = string.Format("{0},{1}\n",
                 "systemTimeStamp", "scratchPadText");
             File.AppendAllText(scratchPadLogFilePath, firstLine);
+        }
+
+        private void create_PhraseLog()
+        {
+            //Create log file:
+            phraseLogFilePath = logDirectoryForThisRun + @"\PhraseLog-" + fileFriendlyDate + ".csv";
+            var file = File.Create(phraseLogFilePath);
+            file.Close();
+
+            //Writing first line:
+            var firstLine = string.Format("{0},{1}\n",
+                "systemTimeStamp", "phraseText");
+            File.AppendAllText(phraseLogFilePath, firstLine);
         }
 
         private void create_KeySelectionLog()
@@ -227,6 +246,19 @@ namespace JuliusSweetland.OptiKey.Services
             { 
                 var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
                 File.AppendAllText(scratchPadLogFilePath, newLine);
+            }
+        }
+
+        /// <summary>
+        /// Logs value to PhraseLog from ui/ValueConverters/PhreaseIndexed.cs
+        /// </summary>
+        /// <param name="value"></param>
+        public void Log_PhraseText(string value)
+        {
+            if (doLogPhraseText)
+            {
+                var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
+                File.AppendAllText(phraseLogFilePath, newLine);
             }
         }
 
