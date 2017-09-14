@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,20 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         {
             get { return showQuitKey; }
             set { showQuitKey = value; }
+        }
+        
+        private string optiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
+        public string OptiKeyLogPath
+        {
+            get { return optiKeyLogPath; }
+            set { optiKeyLogPath = value; } //Consider adding "OptiKeyLogs" folder to this.
+        }
+
+        private string phrasesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "phrases2.txt");
+        public string PhrasesFilePath
+        {
+            get { return phrasesFilePath; }
+            set { phrasesFilePath = value; }
         }
     }
 }

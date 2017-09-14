@@ -6,12 +6,27 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="300" Width="300"
+        Title="ExperimentMenu" Height="380" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Enter amount of sentences to type: "/>
-            <TextBox Text="{Binding AmountOfSentencesToType}"/>
+            <TextBlock Text="The .txt file from which phrases are used:"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding PhrasesFilePath}" 
+                           Background="#FFF7F7F7" 
+                           VerticalAlignment="Center" 
+                           Grid.Column="0"/>
+                <Button Content="Change file" 
+                        Grid.Column="1"/>
+            </Grid>
+            <TextBlock Text="Enter amount of phrases to type: "/>
+            <TextBox Text="{Binding AmountOfSentencesToType}" 
+                     Width="100" HorizontalAlignment="Left"/>
+            <TextBlock Text="Add or remove buttons from the keyboard:" Margin="0,5,0,0"/>
             <CheckBox Content="Enable Suggestions feature?"
                       IsChecked="{Binding EnableSuggestionsFeature}"/>
             <CheckBox Content="Enable MultiKey (Swipe) feature?"
@@ -24,7 +39,6 @@
                       IsChecked="{Binding ShowPauseKey}"/>
             <CheckBox Content="Show quit key?"
                       IsChecked="{Binding ShowQuitKey}"/>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -37,11 +51,25 @@
                 <Grid.DataContext>
                     <Binding Source="{StaticResource viewModel}"/>
                 </Grid.DataContext>
-                <TextBlock Grid.Row="0" Text="Change dwelltime here (in miliseconds):"/>
+                <TextBlock Grid.Row="0" Text="Change dwelltime here (in miliseconds):" Margin="0,5,0,0"/>
                 <TextBox Grid.Row="1" Text="{Binding Path=Default.KeySelectionTriggerFixationDefaultCompleteTime, 
-                    Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"/>
+                    Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"
+                    Width="100" HorizontalAlignment="Left"/>
             </Grid>
-            <Button Content="Start experiment"
+            <TextBlock Text="The OptiKey logs will be saved here:" Margin="0,5,0,0"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding OptiKeyLogPath}" 
+                           Background="#FFF7F7F7" 
+                           VerticalAlignment="Center" 
+                           Grid.Column="0"/>
+                <Button Content="Change folder" 
+                        Grid.Column="1"/>
+            </Grid>
+            <Button Content="Start experiment" Margin="0,5,0,0"
                     Click="Start_Experiment_Click"/>
         </StackPanel>
     </Grid>
