@@ -47,6 +47,8 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.PreviousSuggestionsKey}">
         </controls:Key>
+        
+        <!--Suggestions-->
         <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" 
               Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
@@ -139,7 +141,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--Phrase field-->
+            <!--Phrases-->
             <Border BorderBrush="Gray" BorderThickness="1">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <Grid>

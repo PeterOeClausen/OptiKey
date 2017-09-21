@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Prism.Mvvm;
+using System.IO;
+using System.Linq;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -26,5 +28,14 @@ namespace JuliusSweetland.OptiKey.Services
         }
 
         public Random Random { get; set; }
+
+        public void SetPhraseFile(string path)
+        {
+            Console.WriteLine("SetPhraseFile called in PhraseStateService with: " + path);
+            phrases = File.ReadAllLines(path).ToList();
+            phraseNumber = Random.Next(0, Phrases.Count);
+            OnPropertyChanged("phrases");
+            OnPropertyChanged("phraseNumber");
+        }
     }
 }

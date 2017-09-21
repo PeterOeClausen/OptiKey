@@ -3,20 +3,10 @@ using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Services;
 using JuliusSweetland.OptiKey.UI.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Windows.Controls;
+using System.IO;
 
 namespace JuliusSweetland.OptiKey.UI.Windows
 {
@@ -35,9 +25,44 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             this.DataContext = viewModel;
             this.viewModel = viewModel; //Just so I can get instance in this class.
         }
-
-        private void Start_Experiment_Click(object sender, RoutedEventArgs e)
+        
+        protected override void OnClosing(CancelEventArgs e)
         {
+            base.OnClosing(e);
+            Application.Current.Shutdown();
+        }
+
+        private void ChangePhraseFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".txt";
+            
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                
+                Console.WriteLine("File name chosen: " + filename);
+
+                //Update label:
+                viewModel.PhrasesFilePath = filename;
+
+                //Change PhraseStateService
+                InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);
+            }
+        }
+
+        private void StartExperimentButton_Click(object sender, RoutedEventArgs e)
+        {
+            CSVLogService.Instance.StartLogging();
+
             mainWindow.Show();
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
             if (this.viewModel.EnableMultikeySwipeFeature)
@@ -48,10 +73,21 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             this.Hide();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private void ChangeOptiKeyLogsFolder_Click(object sender, RoutedEventArgs e)
         {
-            base.OnClosing(e);
-            Application.Current.Shutdown();
+            // Create OpenFileDialog 
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+
+            fbd.Description = "The application will create a folder called 'OptiKeyLogs' inside the folder you choose here.\n";
+
+            if(fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string folderPath = Path.Combine(fbd.SelectedPath, "OptiKeyLogs");
+                //Update UI:
+                viewModel.OptiKeyLogPath = folderPath;
+                //Opdate CSVLogService:
+                CSVLogService.Instance.SetOptiKeyLogPath(folderPath);
+            }
         }
     }
 }

@@ -146,10 +146,13 @@ namespace JuliusSweetland.OptiKey
                 IInputService inputService = CreateInputService(keyStateService, dictionaryService, audioService, calibrationService, capturingStateManager, errorNotifyingServices);
                 IKeyboardOutputService keyboardOutputService = new KeyboardOutputService(keyStateService, suggestionService, publishService, dictionaryService, fireKeySelectionEvent);
                 IMouseOutputService mouseOutputService = new MouseOutputService(publishService);
+                
                 //Create PhraseStateService:
                 var Random = new Random();
                 List<string> phraseList = File.ReadAllLines(@"phrases2.txt").ToList();
                 IPhraseStateService phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = Random.Next(0, phraseList.Count), Random = Random };
+                InstanceGetter.Instance.PhraseStateService = phraseStateService;
+
                 //Create ExperimentMenuViewModel:
                 var experimentMenuViewModel = new ExperimentMenuViewModel();
 

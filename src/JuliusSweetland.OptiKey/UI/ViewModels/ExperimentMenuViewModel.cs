@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using JuliusSweetland.OptiKey.Services;
+using Prism.Mvvm;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
-    public class ExperimentMenuViewModel
+    public class ExperimentMenuViewModel : BindableBase
     {
         private int amountOfSentencesToType = 3;
         public int AmountOfSentencesToType
@@ -71,14 +69,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         public string OptiKeyLogPath
         {
             get { return optiKeyLogPath; }
-            set { optiKeyLogPath = value; } //Consider adding "OptiKeyLogs" folder to this.
+            set { SetProperty(ref optiKeyLogPath, value);} 
         }
 
         private string phrasesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "phrases2.txt");
         public string PhrasesFilePath
         {
             get { return phrasesFilePath; }
-            set { phrasesFilePath = value; }
+            set { SetProperty(ref phrasesFilePath, value); }
         }
     }
 }

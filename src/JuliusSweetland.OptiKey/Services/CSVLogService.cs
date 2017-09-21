@@ -11,10 +11,7 @@ namespace JuliusSweetland.OptiKey.Services
     /// </summary>
     public class CSVLogService
     {
-        private string desktop_directory = @"C:\Users\peter\Desktop";   //Change to fit own Desktop directory
-        private string directory_for_all_logs = @"\OptiKeyLogs";           //Change if you want different name
-
-        private readonly bool doLog = true;                 //Change to true to log
+        private bool doLog = false;                 //Change to true to log
 
         private readonly bool doLogGazeData = true;        //Change to true to log GazeData
         private readonly bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
@@ -23,6 +20,7 @@ namespace JuliusSweetland.OptiKey.Services
         private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
         private readonly bool doLog_multiKeySelection = false;
 
+        private string optiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
         private string logDirectoryForThisRun;
         private string fileFriendlyDate;
 
@@ -47,62 +45,61 @@ namespace JuliusSweetland.OptiKey.Services
                 return instance;
             }
         }
+
+        internal void SetOptiKeyLogPath(string path)
+        {
+            optiKeyLogPath = path;
+        }
+
+        public void StartLogging()
+        {
+            //Checks if Desktop directory exists:
+            if (!Directory.Exists(optiKeyLogPath))
+            {
+                Directory.CreateDirectory(optiKeyLogPath);
+                Console.WriteLine(optiKeyLogPath + " does not exists. Creating folder.");
+                
+            }
+            //Creates a directory for all logs created this run:
+            DateTime now = DateTime.Now;
+            fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
+            logDirectoryForThisRun = optiKeyLogPath + @"\" + fileFriendlyDate;
+            Directory.CreateDirectory(logDirectoryForThisRun);
+
+            if (doLogGazeData)
+            {
+                create_GazeLog();
+            }
+            if (doLogScratchPadText)
+            {
+                create_ScratchPadLog();
+            }
+            if (doLogPhraseText)
+            {
+                create_PhraseLog();
+            }
+            if (doLogKeySelection)
+            {
+                create_KeySelectionLog();
+            }
+            if (doLog_userLooksAtKey)
+            {
+                create_userLooksAtKey_Log();
+            }
+            if (doLog_multiKeySelection)
+            {
+                create_multiKeySelection_Log();
+            }
+
+            //Start logging:
+            doLog = true;
+        }
         #endregion
 
         #region Constructor
         private CSVLogService()  
         {
-            //Checks if Desktop directory exists:
-            if(!Directory.Exists(desktop_directory))
-            {
-                Console.WriteLine("'desktop_directory' does not exist, please configure this in CSVLogService.cs");
-                throw new Exception("The directory for 'desktop_directory' does not exist in CSVLogService.cs, please configure this");
-            }
-            else //Checks if we have a directory for all logs:
-            {
-                if (!Directory.Exists(desktop_directory + directory_for_all_logs))
-                {
-                    Console.WriteLine("'directory_for_all_logs' does not exist, creating directory...");
-                    Directory.CreateDirectory(desktop_directory + directory_for_all_logs);
-                }
 
-                if(doLog)
-                {
-                    //Creates a directory for all logs created this run:
-                    DateTime now = DateTime.Now;
-                    fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-                    logDirectoryForThisRun = desktop_directory + directory_for_all_logs + @"\" + fileFriendlyDate;
-                    Directory.CreateDirectory(logDirectoryForThisRun);
-                }
-            }
-
-            if(doLog)
-            {
-                if (doLogGazeData)
-                {
-                    create_GazeLog();
-                }
-                if (doLogScratchPadText)
-                {
-                    create_ScratchPadLog();
-                }
-                if (doLogPhraseText)
-                {
-                    create_PhraseLog();
-                }
-                if (doLogKeySelection)
-                {
-                    create_KeySelectionLog();
-                }
-                if (doLog_userLooksAtKey)
-                {
-                    create_userLooksAtKey_Log();
-                }
-                if (doLog_multiKeySelection)
-                {
-                    create_multiKeySelection_Log();
-                }
-            }
         }
         #endregion
 
@@ -193,7 +190,7 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="data"></param>
         public void Log_Gazedata(GazeData data)
         {
-            if (doLogGazeData)
+            if (doLog && doLogGazeData)
             {
                 //Getting system datetime:
                 string systemTimeStamp = getNowAsString();
@@ -242,8 +239,8 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="value"></param>
         public void Log_ScratchPadText(string value)
         {
-            if(doLogScratchPadText)
-            { 
+            if (doLog && doLogScratchPadText)
+            {
                 var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
                 File.AppendAllText(scratchPadLogFilePath, newLine);
             }
@@ -254,12 +251,12 @@ namespace JuliusSweetland.OptiKey.Services
         /// </summary>
         /// <param name="value"></param>
         public void Log_PhraseText(string value)
-        {
-            if (doLogPhraseText)
+        {   
+            if (doLog && doLogPhraseText)
             {
                 var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
                 File.AppendAllText(phraseLogFilePath, newLine);
-            }
+            }  
         }
 
         /// <summary>
@@ -268,11 +265,11 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="keySelection"></param>
         public void Log_KeySelection(string keySelection)
         {
-            if (doLogKeySelection)
+            if (doLog && doLogKeySelection)
             {
                 var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
                 File.AppendAllText(keySelectionLog_FilePath, newLine);
-            }
+            }   
         }
 
         /// <summary>
@@ -283,7 +280,7 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="progress"></param>
         public void Log_KeyProgression(string key, double progress)
         {
-            if(doLog_userLooksAtKey)
+            if(doLog && doLog_userLooksAtKey)
             {
                 var newLine = string.Format("{0},{1},{2}\n", getNowAsString(), key, progress);
                 //Log data:
@@ -298,7 +295,7 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="keySelection"></param>
         public void Log_MultiKeySelection(string keySelection)
         {
-            if(doLog_multiKeySelection)
+            if(doLog && doLog_multiKeySelection)
             {
                 //Log data:
                 var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);

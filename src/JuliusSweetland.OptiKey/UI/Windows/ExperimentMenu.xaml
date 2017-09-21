@@ -16,12 +16,13 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding PhrasesFilePath}" 
+                <TextBlock Text="{Binding PhrasesFilePath}"
                            Background="#FFF7F7F7" 
                            VerticalAlignment="Center" 
                            Grid.Column="0"/>
                 <Button Content="Change file" 
-                        Grid.Column="1"/>
+                        Grid.Column="1"
+                        Click="ChangePhraseFileButton_Click"/>
             </Grid>
             <TextBlock Text="Enter amount of phrases to type: "/>
             <TextBox Text="{Binding AmountOfSentencesToType}" 
@@ -39,6 +40,7 @@
                       IsChecked="{Binding ShowPauseKey}"/>
             <CheckBox Content="Show quit key?"
                       IsChecked="{Binding ShowQuitKey}"/>
+            <!--Change dwelltime here (in miliseconds)-->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -56,6 +58,7 @@
                     Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"
                     Width="100" HorizontalAlignment="Left"/>
             </Grid>
+            <!--The OptiKey logs will be saved here-->
             <TextBlock Text="The OptiKey logs will be saved here:" Margin="0,5,0,0"/>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -67,10 +70,12 @@
                            VerticalAlignment="Center" 
                            Grid.Column="0"/>
                 <Button Content="Change folder" 
-                        Grid.Column="1"/>
+                        Grid.Column="1"
+                        Click="ChangeOptiKeyLogsFolder_Click"/>
             </Grid>
+            <!--START EXPERIMENT-->
             <Button Content="Start experiment" Margin="0,5,0,0"
-                    Click="Start_Experiment_Click"/>
+                    Click="StartExperimentButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

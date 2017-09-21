@@ -14,6 +14,7 @@ namespace JuliusSweetland.OptiKey.Services
         public ITriggerSourceWithTimeToCompleteTrigger triggerSource { get; set; }
         public MainViewModel MainViewModel { get; set; }
         public ExperimentMenu ExperimentMenuWindow { get; set; }
+        public IPhraseStateService PhraseStateService { get; set; }
 
         private static InstanceGetter instance;
 
