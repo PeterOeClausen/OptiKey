@@ -540,10 +540,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     break;
 
                 case FunctionKeys.EscKeyPressed:
-                    Console.WriteLine("Chaning to Experiment menu");
-                    Log.Info("Chaning to Experiment menu");
-                    InstanceGetter.Instance.ExperimentMenuWindow.Show();
-                    HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.Minimise));
+                    //Console.WriteLine("Chaning to Experiment menu");
+                    //Log.Info("Chaning to Experiment menu");
+                    //InstanceGetter.Instance.ExperimentMenuWindow.Show();
+                    //HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.Minimise));
                     break;
 
                 case FunctionKeys.ExpandDock:

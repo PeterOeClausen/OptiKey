@@ -19,10 +19,12 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.English
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
+            /*
             if (e.Key == System.Windows.Input.Key.Escape)
             {
                 InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.EscKeyPressed));
             }
+            */
         }
     }
 }
