@@ -155,6 +155,7 @@
         PgDn,
         PgUp,
         PhysicalKeysKeyboard,
+        PhraseTextBlock,
         PortuguesePortugal,
         PreviousSuggestions,
         PrintScreen,

@@ -423,9 +423,11 @@ namespace JuliusSweetland.OptiKey.UI.Controls
         {
             //Get all keys view elements:
             var allKeys = VisualAndLogicalTreeHelper.FindVisualChildren<Key>(this).ToList();
-            //Getting scratchpad view.
+            //Getting scratchpad view:
             var allScratchPads = VisualAndLogicalTreeHelper.FindVisualChildren<Scratchpad>(this).ToList();
-            
+            //Getting phraseTextBlock view:
+            var allPhraseTextBlocks = VisualAndLogicalTreeHelper.FindVisualChildren<PhraseTextBlock>(this).ToList();
+
             //Building pointToKeyValueMap:
             var pointToKeyValueMap = new Dictionary<Rect, KeyValue>();
 
@@ -462,8 +464,8 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                 }
             }
 
-            //Adding ScratchPad if it is visibile in UI.
-            if(allScratchPads.Count > 0)
+            //Adding ScratchPad to the pointToKeyValueMap  if it is visibile in UI.
+            if (allScratchPads.Count > 0)
             {
                 var scratchPadArea = allScratchPads.First();
                 if (scratchPadArea.IsVisible)
@@ -478,6 +480,26 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                     {
                         //Add ScratchPad so that it can be involked:
                         pointToKeyValueMap.Add(rect, new KeyValue(FunctionKeys.ScratchPad));
+                    }
+                }
+            }
+
+            //Adding phraseTextBlock to the pointToKeyValueMap if it is visibile in UI.
+            if (allPhraseTextBlocks.Count > 0)
+            {
+                var phraseTextBlockArea = allPhraseTextBlocks.First();
+                if (phraseTextBlockArea.IsVisible)
+                {
+                    var rect = new Rect
+                    {
+                        Location = phraseTextBlockArea.PointToScreen(topLeftPoint),
+                        Size = (Size)phraseTextBlockArea.GetTransformFromDevice().Transform((Vector)phraseTextBlockArea.RenderSize)
+                    };
+
+                    if (rect.Size.Width != 0 && rect.Size.Height != 0)
+                    {
+                        //Add ScratchPad so that it can be involked:
+                        pointToKeyValueMap.Add(rect, new KeyValue(FunctionKeys.PhraseTextBlock));
                     }
                 }
             }

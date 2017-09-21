@@ -160,7 +160,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     if (!capturingStateManager.CapturingMultiKeySelection)
                     {
-                        if (value.KeyValue.ToString() != "ScratchPad")
+                        if (value.KeyValue.ToString() != "ScratchPad" && value.KeyValue.ToString() != "PhraseTextBlock")
                         { audioService.PlaySound(Settings.Default.KeySelectionSoundFile, Settings.Default.KeySelectionSoundVolume); }
                     }
 
