@@ -6,7 +6,7 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="500" Width="630"
+        Title="ExperimentMenu" Height="560" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
@@ -30,19 +30,17 @@
             <TextBox Text="{Binding AmountOfSentencesToType}" 
                      Width="100" HorizontalAlignment="Left"/>
             <!--Add or remove buttons from the keyboard-->
-            <TextBlock Text="Add or remove buttons from the keyboard:" Margin="0,5,0,0"/>
-            <CheckBox Content="Enable Suggestions feature?"
-                      IsChecked="{Binding EnableSuggestionsFeature}"/>
-            <CheckBox Content="Enable MultiKey (Swipe) feature?"
-                      IsChecked="{Binding EnableMultikeySwipeFeature}"/>
-            <CheckBox Content="Show shift key?"
-                      IsChecked="{Binding ShowShiftKey}"/>
-            <CheckBox Content="Show backspace key?"
-                      IsChecked="{Binding ShowBackspaceKey}"/>
-            <CheckBox Content="Show pause key?"
-                      IsChecked="{Binding ShowPauseKey}"/>
-            <CheckBox Content="Show quit key?"
-                      IsChecked="{Binding ShowQuitKey}"/>
+            <TextBlock Text="Add or remove buttons and features from the keyboard:" Margin="0,5,0,0"/>
+            <CheckBox Content="Enable Suggestions feature?"      IsChecked="{Binding EnableSuggestionsFeature}"/>
+            <CheckBox Content="Show clear ScratchPad key?"       IsChecked="{Binding ShowClearKey}"/>
+            <CheckBox Content="Show speak/pronounce key?"        IsChecked="{Binding ShowSpeakKey}"/>
+            <CheckBox Content="Show pause key?"                  IsChecked="{Binding ShowPauseKey}"/>
+            <CheckBox Content="Show shift key?"                  IsChecked="{Binding ShowShiftKey}"/>
+            <CheckBox Content="Show backspace key?"              IsChecked="{Binding ShowBackspaceKey}"/>
+            <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
+            <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>
+            <CheckBox Content="Enable MultiKey (Swipe) feature?" IsChecked="{Binding EnableMultikeySwipeFeature}"/>
+            
             <!--Change dwelltime here (in miliseconds)-->
             <Grid>
                 <Grid.RowDefinitions>
@@ -77,7 +75,7 @@
                         Click="ChangeOptiKeyLogsFolder_Click"/>
             </Grid>
             <!--Choose what to log:-->
-            <TextBlock Text="Choose what to log:"/>
+            <TextBlock Text="Choose what to log:" Margin="0,5,0,0"/>
             <StackPanel>
                 <CheckBox Content="Eye Tribe gaze data"
                       IsChecked="{Binding DoLogGazeData}"/>

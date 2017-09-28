@@ -37,6 +37,27 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             set {enableMultikeySwipeFeature = value;}
         }
 
+        private bool showPauseKey = true;
+        public bool ShowPauseKey
+        {
+            get { return showPauseKey; }
+            set { showPauseKey = value; }
+        }
+
+        private bool showClearKey = true;
+        public bool ShowClearKey
+        {
+            get { return showClearKey; }
+            set { showClearKey = value; }
+        }
+
+        private bool showSpeakKey = true;
+        public bool ShowSpeakKey
+        {
+            get { return showSpeakKey; }
+            set { showSpeakKey = value; }
+        }
+
         private bool showShiftKey = true;
         public bool ShowShiftKey
         {
@@ -51,11 +72,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             set { showBackspaceKey = value; }
         }
 
-        private bool showPauseKey = true;
-        public bool ShowPauseKey
+        private bool showBackOneWordKey = true;
+        public bool ShowBackOneWordKey
         {
-            get { return showPauseKey; }
-            set { showPauseKey = value; }
+            get { return showBackOneWordKey; }
+            set { showBackOneWordKey = value; }
         }
 
         private bool showQuitKey = true;

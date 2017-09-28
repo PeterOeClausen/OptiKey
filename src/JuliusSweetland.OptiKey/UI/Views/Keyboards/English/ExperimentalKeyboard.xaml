@@ -206,11 +206,12 @@
                       Text="{x:Static resx:Resources.BACK_ONE_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackOneKey}"/>
-        <controls:Key Grid.Row="4" Grid.Column="18" Grid.ColumnSpan="2"/>
-                  <!--SymbolGeometry="{StaticResource BackManyIcon}"
+        <controls:Key Grid.Row="4" Grid.Column="18" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowBackOneWordKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource BackManyIcon}"
                       Text="{x:Static resx:Resources.BACK_WORD_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.BackManyKey}"/>-->
+                      Value="{x:Static models:KeyValues.BackManyKey}"/>
 
         <controls:Key Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" Case="None"
                       Text="+"

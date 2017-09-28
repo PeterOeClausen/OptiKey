@@ -125,12 +125,23 @@
                       SharedSizeGroup="KeyWithSymbol"
                           Value="{x:Static models:KeyValues.NextSuggestionsKey}"/>
 
-        <controls:Key Grid.Row="1" Grid.Column="0"/>
+        <controls:Key Grid.Row="1" Grid.Column="0"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowClearKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource ClearIcon}" 
+                      Text="{x:Static resx:Resources.CLEAR}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.ClearScratchpadKey}"/>
                   <!--SymbolGeometry="{StaticResource AddToDictionaryIcon}" 
                       Text="{x:Static resx:Resources.ADD_TO_DICTIONARY_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.AddToDictionaryKey}"/>-->
-        <controls:Key Grid.Row="1" Grid.Column="1"/>
+        
+        <controls:Key Grid.Row="1" Grid.Column="1"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowSpeakKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource SpeakIcon}"
+                      Text="{x:Static resx:Resources.SPEAK}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.SpeakKey}"/>
                   <!--SymbolGeometry="{StaticResource ClearIcon}" 
                       Text="{x:Static resx:Resources.CLEAR}"
                       SharedSizeGroup="KeyWithSymbol"
