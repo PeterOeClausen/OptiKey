@@ -229,7 +229,8 @@
         <controls:Key Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"/>
         <controls:QuestionText Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowDwelltimeAdjustments, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
-                      Text="{Binding Path=KeySelectionTriggerFixationDefaultCompleteTimeInMs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=-1}"/> <!--Change to value of Gaze duration-->
+                      Text="{Binding Path=KeySelectionTriggerFixationDefaultCompleteTimeInMs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=-1}"
+                               VerticalAlignment="Center"/> <!--Change to value of Gaze duration-->
         
         <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Case="None"
