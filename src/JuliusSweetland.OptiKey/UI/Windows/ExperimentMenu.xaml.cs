@@ -7,6 +7,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.IO;
+using JuliusSweetland.OptiKey.Properties;
 
 namespace JuliusSweetland.OptiKey.UI.Windows
 {
@@ -67,8 +68,13 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
             if (this.viewModel.EnableMultikeySwipeFeature)
             {
-                InstanceGetter.Instance.MainViewModel.KeyStateService.ProgressKeyDownState(new KeyValue(FunctionKeys.MultiKeySelectionIsOn));
-                InstanceGetter.Instance.MainViewModel.KeyStateService.ProgressKeyDownState(new KeyValue(FunctionKeys.MultiKeySelectionIsOn));
+                Settings.Default.MultiKeySelectionEnabled = true;
+                InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.LockedDown);
+            }
+            else
+            {
+                Settings.Default.MultiKeySelectionEnabled = false;
+                InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.Up);
             }
             this.Hide();
         }

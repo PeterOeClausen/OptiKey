@@ -78,5 +78,43 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             get { return phrasesFilePath; }
             set { SetProperty(ref phrasesFilePath, value); }
         }
+
+        #region Choose what to log booleans
+        public bool DoLogGazeData
+        {
+            get { return CSVLogService.Instance.doLogGazeData; }
+            set { CSVLogService.Instance.doLogGazeData = value; }
+        }
+
+        public bool DoLogScratchPadText
+        {
+            get { return CSVLogService.Instance.doLogScratchPadText; }
+            set { CSVLogService.Instance.doLogScratchPadText = value; }
+        }
+
+        public bool DoLogPhraseText
+        {
+            get { return CSVLogService.Instance.doLogPhraseText; }
+            set { CSVLogService.Instance.doLogPhraseText = value; }
+        }
+
+        public bool DoLogKeySelection
+        {
+            get { return CSVLogService.Instance.doLogKeySelection; }
+            set { CSVLogService.Instance.doLogKeySelection = value; }
+        }
+
+        public bool DoLog_userLooksAtKey
+        {
+            get { return CSVLogService.Instance.doLog_userLooksAtKey; }
+            set { CSVLogService.Instance.doLog_userLooksAtKey = value; }
+        }
+
+        public bool DoLog_multiKeySelection
+        {
+            get { return CSVLogService.Instance.doLog_multiKeySelection; }
+            set { CSVLogService.Instance.doLog_multiKeySelection = value; }
+        }
+        #endregion
     }
 }

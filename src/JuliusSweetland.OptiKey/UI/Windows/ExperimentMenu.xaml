@@ -6,10 +6,11 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="380" Width="630"
+        Title="ExperimentMenu" Height="500" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
+            <!--The .txt file from which phrases are used-->
             <TextBlock Text="The .txt file from which phrases are used:"/>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -24,9 +25,11 @@
                         Grid.Column="1"
                         Click="ChangePhraseFileButton_Click"/>
             </Grid>
+            <!--Enter amount of phrases to type-->
             <TextBlock Text="Enter amount of phrases to type: "/>
             <TextBox Text="{Binding AmountOfSentencesToType}" 
                      Width="100" HorizontalAlignment="Left"/>
+            <!--Add or remove buttons from the keyboard-->
             <TextBlock Text="Add or remove buttons from the keyboard:" Margin="0,5,0,0"/>
             <CheckBox Content="Enable Suggestions feature?"
                       IsChecked="{Binding EnableSuggestionsFeature}"/>
@@ -73,6 +76,23 @@
                         Grid.Column="1"
                         Click="ChangeOptiKeyLogsFolder_Click"/>
             </Grid>
+            <!--Choose what to log:-->
+            <TextBlock Text="Choose what to log:"/>
+            <StackPanel>
+                <CheckBox Content="Eye Tribe gaze data"
+                      IsChecked="{Binding DoLogGazeData}"/>
+                <CheckBox Content="What the user types into the scratchpad"
+                      IsChecked="{Binding DoLogScratchPadText}"/>
+                <CheckBox Content="The displayed phrases"
+                      IsChecked="{Binding DoLogPhraseText}"/>
+                <CheckBox Content="Which keys the user activates"
+                      IsChecked="{Binding DoLogKeySelection}"/>
+                <CheckBox Content="Which key the user looks at"
+                      IsChecked="{Binding DoLog_userLooksAtKey}"/>
+                <CheckBox Content="MultiKey word selections"
+                      IsChecked="{Binding DoLog_multiKeySelection}"/>
+            </StackPanel>
+            
             <!--START EXPERIMENT-->
             <Button Content="Start experiment" Margin="0,5,0,0"
                     Click="StartExperimentButton_Click"/>

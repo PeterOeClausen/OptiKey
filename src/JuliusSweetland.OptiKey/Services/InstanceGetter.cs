@@ -15,6 +15,7 @@ namespace JuliusSweetland.OptiKey.Services
         public MainViewModel MainViewModel { get; set; }
         public ExperimentMenu ExperimentMenuWindow { get; set; }
         public IPhraseStateService PhraseStateService { get; set; }
+        public KeyStateService KeyStateService { get; set; }
 
         private static InstanceGetter instance;
 

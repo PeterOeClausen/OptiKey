@@ -13,12 +13,12 @@ namespace JuliusSweetland.OptiKey.Services
     {
         private bool doLog = false;                 //Change to true to log
 
-        private readonly bool doLogGazeData = true;        //Change to true to log GazeData
-        private readonly bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
-        private readonly bool doLogPhraseText = true;  //Change to true to log ScratchPadText
-        private readonly bool doLogKeySelection = true;      //Change to true to log every key selection
-        private readonly bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
-        private readonly bool doLog_multiKeySelection = false;
+        public bool doLogGazeData = true;        //Change to true to log GazeData
+        public bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
+        public bool doLogPhraseText = true;  //Change to true to log ScratchPadText
+        public bool doLogKeySelection = true;      //Change to true to log every key selection
+        public bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
+        public bool doLog_multiKeySelection = false;
 
         private string optiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
         private string logDirectoryForThisRun;
@@ -99,7 +99,7 @@ namespace JuliusSweetland.OptiKey.Services
         #region Constructor
         private CSVLogService()  
         {
-
+            
         }
         #endregion
 
