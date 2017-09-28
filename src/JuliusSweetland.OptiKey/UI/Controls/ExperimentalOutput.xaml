@@ -40,6 +40,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!--Previous suggestions key-->
+        <controls:Key Grid.Row="0" Grid.Column="0"/>
         <controls:Key Grid.Row="0" Grid.Column="0"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SuggestionLeftIcon}"
@@ -49,6 +51,7 @@
         </controls:Key>
         
         <!--Suggestions-->
+        <controls:Key Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"/>
         <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" 
               Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
@@ -118,6 +121,8 @@
                 </controls:Key.Text>
             </controls:Key>
         </Grid>
+        <!--Next page of suggestions-->
+        <controls:Key Grid.Row="0" Grid.Column="4"/>
         <controls:Key Grid.Row="0" Grid.Column="4"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SuggestionRightIcon}"
@@ -125,6 +130,8 @@
                       SharedSizeGroup="KeyWithSymbol"
                           Value="{x:Static models:KeyValues.NextSuggestionsKey}"/>
 
+        <!--Clear key-->
+        <controls:Key Grid.Row="1" Grid.Column="0"/>
         <controls:Key Grid.Row="1" Grid.Column="0"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowClearKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource ClearIcon}" 
@@ -135,7 +142,9 @@
                       Text="{x:Static resx:Resources.ADD_TO_DICTIONARY_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.AddToDictionaryKey}"/>-->
-        
+
+        <!--Speak key-->
+        <controls:Key Grid.Row="1" Grid.Column="1"/>
         <controls:Key Grid.Row="1" Grid.Column="1"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowSpeakKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SpeakIcon}"
@@ -146,12 +155,13 @@
                       Text="{x:Static resx:Resources.CLEAR}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.ClearScratchpadKey}"/>-->
+
+        <!--Phrases grid-->
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <!--Phrases-->
             <Border BorderBrush="Gray" BorderThickness="1">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -197,6 +207,7 @@
                                  Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}" />
         </Grid>
 
+        <!--Next phrase key-->
         <controls:Key Grid.Row="1" Grid.Column="3"
                       SymbolGeometry="{StaticResource RightArrowKeyIcon}" 
                       Text="Next phrase"
@@ -222,6 +233,8 @@
             </controls:Key.Style>
         </controls:Key>-->
 
+        <!--Sleep key-->
+        <controls:Key Grid.Row="1" Grid.Column="4"/>
         <controls:Key Grid.Row="1" Grid.Column="4"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowPauseKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SleepIcon}"

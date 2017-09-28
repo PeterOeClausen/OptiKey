@@ -85,7 +85,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             get { return showQuitKey; }
             set { showQuitKey = value; }
         }
-        
+
+        private bool showDwelltimeAdjustments = true;
+        public bool ShowDwelltimeAdjustments
+        {
+            get { return showDwelltimeAdjustments; }
+            set { showDwelltimeAdjustments = value; }
+        }
+
         private string optiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
         public string OptiKeyLogPath
         {

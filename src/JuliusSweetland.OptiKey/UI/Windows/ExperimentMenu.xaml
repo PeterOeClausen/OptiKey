@@ -6,7 +6,7 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="560" Width="630"
+        Title="ExperimentMenu" Height="580" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
@@ -59,6 +59,7 @@
                     Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"
                     Width="100" HorizontalAlignment="Left"/>
             </Grid>
+            <CheckBox Content="Allow the user to adjust this setting during experiment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
             <!--The OptiKey logs will be saved here-->
             <TextBlock Text="The OptiKey logs will be saved here:" Margin="0,5,0,0"/>
             <Grid>
