@@ -16,6 +16,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding PhrasesFilePath}"
                            Background="#FFF7F7F7" 
@@ -24,6 +25,9 @@
                 <Button Content="Change file" 
                         Grid.Column="1"
                         Click="ChangePhraseFileButton_Click"/>
+                <Button Content="Reset to default"
+                        Grid.Column="2"
+                        Click="ResetPhraseFileButton_Click"/>
             </Grid>
             <!--Enter amount of phrases to type-->
             <TextBlock Text="Enter amount of phrases to type: "/>

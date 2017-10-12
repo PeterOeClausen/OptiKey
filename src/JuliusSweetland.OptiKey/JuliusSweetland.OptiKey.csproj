@@ -719,6 +719,7 @@
     <Content Include="Dictionaries\CzechCzechRepublic.dic">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="app.config" />
     <None Include="nbug.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -808,7 +809,7 @@
     <None Include="Resources\Icons\SVG Source Files\Language.svg" />
     <Resource Include="Resources\Icons\Quit.ico" />
     <Resource Include="Resources\Icons\ManualMode.ico" />
-    <EmbeddedResource Include="phrases2.txt">
+    <EmbeddedResource Include="default_phrases.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Resources\Sounds\Click2.wav">

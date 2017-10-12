@@ -1,4 +1,5 @@
 ﻿using JuliusSweetland.OptiKey.Models;
+using JuliusSweetland.OptiKey.Properties;
 using System;
 using System.IO;
 using System.Windows;
@@ -13,14 +14,35 @@ namespace JuliusSweetland.OptiKey.Services
     {
         private bool doLog = false;                 //Change to true to log
 
-        public bool doLogGazeData = true;        //Change to true to log GazeData
-        public bool doLogScratchPadText = true;  //Change to true to log ScratchPadText
-        public bool doLogPhraseText = true;  //Change to true to log ScratchPadText
-        public bool doLogKeySelection = true;      //Change to true to log every key selection
-        public bool doLog_userLooksAtKey = true;  //Change to true to log when user looks in ScratchPad.
-        public bool doLog_multiKeySelection = false;
+        public bool doLogGazeData = Settings.Default.doLogGazeData;
+        public bool doLogScratchPadText = Settings.Default.doLogScratchPadText;
+        public bool doLogPhraseText = Settings.Default.doLogPhraseText;
+        public bool doLogKeySelection = Settings.Default.doLogKeySelection;
+        public bool doLog_userLooksAtKey = Settings.Default.doLog_userLooksAtKey;
+        public bool doLog_multiKeySelection = Settings.Default.doLog_multiKeySelection;
 
-        private string optiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
+        //private string optiKeyLogPath = 
+        public string OptiKeyLogPath {
+            get {
+                string logPathFromSettings = Settings.Default.ExperimentMenu_OptiKeyLogPath;
+                if(!Directory.Exists(logPathFromSettings))
+                {
+                    //Reset to desktop:
+                    Settings.Default.ExperimentMenu_OptiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
+                    logPathFromSettings = Settings.Default.ExperimentMenu_OptiKeyLogPath;
+                }
+                return logPathFromSettings;
+            }
+            set{
+                string path = value;
+                if(!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                
+                Settings.Default.ExperimentMenu_OptiKeyLogPath = path;
+            }
+        }
         private string logDirectoryForThisRun;
         private string fileFriendlyDate;
 
@@ -46,24 +68,17 @@ namespace JuliusSweetland.OptiKey.Services
             }
         }
 
-        internal void SetOptiKeyLogPath(string path)
-        {
-            optiKeyLogPath = path;
-        }
-
         public void StartLogging()
         {
-            //Checks if Desktop directory exists:
-            if (!Directory.Exists(optiKeyLogPath))
+            if (!Directory.Exists(OptiKeyLogPath))
             {
-                Directory.CreateDirectory(optiKeyLogPath);
-                Console.WriteLine(optiKeyLogPath + " does not exists. Creating folder.");
-                
+                Directory.CreateDirectory(OptiKeyLogPath);
+                Console.WriteLine(OptiKeyLogPath + " does not exists. Creating folder.");
             }
             //Creates a directory for all logs created this run:
             DateTime now = DateTime.Now;
             fileFriendlyDate = now.Year + "-" + now.Month + "-" + now.Day + "-" + now.Hour + "-" + now.Minute + "-" + now.Second;
-            logDirectoryForThisRun = optiKeyLogPath + @"\" + fileFriendlyDate;
+            logDirectoryForThisRun = OptiKeyLogPath + @"\" + fileFriendlyDate;
             Directory.CreateDirectory(logDirectoryForThisRun);
 
             if (doLogGazeData)

@@ -52,16 +52,20 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                 
                 Console.WriteLine("File name chosen: " + filename);
 
-                //Update label:
+                //Update label and settings:
                 viewModel.PhrasesFilePath = filename;
-
-                //Change PhraseStateService
-                InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);
             }
+        }
+
+        private void ResetPhraseFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Update label and settings:
+            viewModel.PhrasesFilePath = "default_phrases.txt";
         }
 
         private void StartExperimentButton_Click(object sender, RoutedEventArgs e)
         {
+            InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);
             CSVLogService.Instance.StartLogging();
 
             mainWindow.Show();
@@ -91,8 +95,6 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                 string folderPath = Path.Combine(fbd.SelectedPath, "OptiKeyLogs");
                 //Update UI:
                 viewModel.OptiKeyLogPath = folderPath;
-                //Opdate CSVLogService:
-                CSVLogService.Instance.SetOptiKeyLogPath(folderPath);
             }
         }
     }
