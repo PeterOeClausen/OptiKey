@@ -6,8 +6,12 @@ It works out of the box once you have your eye-tracking device installed and all
 
 OptiKey was written as an accessible alternative to the outrageously expensive, unreliable and difficult to use AAC (alternative and augmentative communication) products currently on the market. It is, therefore, fully open-source and free. Forever.
 
-# This project
-is heavily based on OptiKey's codebase. It aims to make it easy to conduct experiments with OptiKey. When you start up the program, there is a settings window, in which you can configure which keys should be available on the experimental keyboard, which setences the user is to type, what to log as csv files (such as gaze duration, keys being looked at and much more). A manual on how to get the code, how to run it, and how the program works, is under development, and will be published on this page.
+# About
+This project is heavily based on OptiKey's codebase, and is a modified copy of the OptiKey code repository. 
+
+This project aims to make it easy to conduct experiments with OptiKey. When you start up the program, a settings window will appear, with which you can configure which keys should be available on the experimental keyboard, which setences the user is to type, what to log as csv files (such as gaze duration, keys being looked at and much more). 
+
+A manual on how to get the code, how to run it, and how the program works, is under development, and will be published on this page.
 
 # Getting Started
 
