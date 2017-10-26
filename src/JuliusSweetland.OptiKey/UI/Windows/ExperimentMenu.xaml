@@ -9,96 +9,98 @@
         Title="ExperimentMenu" Height="580" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel>
-            <!--The .txt file from which phrases are used-->
-            <TextBlock Text="The .txt file from which phrases are used:"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding PhrasesFilePath}"
-                           Background="#FFF7F7F7" 
-                           VerticalAlignment="Center" 
-                           Grid.Column="0"/>
-                <Button Content="Change file" 
-                        Grid.Column="1"
-                        Click="ChangePhraseFileButton_Click"/>
-                <Button Content="Reset to default"
-                        Grid.Column="2"
-                        Click="ResetPhraseFileButton_Click"/>
-            </Grid>
-            <!--Enter amount of phrases to type-->
-            <TextBlock Text="Enter amount of phrases to type: "/>
-            <TextBox Text="{Binding AmountOfSentencesToType}" 
-                     Width="100" HorizontalAlignment="Left"/>
-            <!--Add or remove buttons from the keyboard-->
-            <TextBlock Text="Add or remove buttons and features from the keyboard:" Margin="0,5,0,0"/>
-            <CheckBox Content="Enable Suggestions feature?"      IsChecked="{Binding EnableSuggestionsFeature}"/>
-            <CheckBox Content="Show clear ScratchPad key?"       IsChecked="{Binding ShowClearKey}"/>
-            <CheckBox Content="Show speak/pronounce key?"        IsChecked="{Binding ShowSpeakKey}"/>
-            <CheckBox Content="Show pause key?"                  IsChecked="{Binding ShowPauseKey}"/>
-            <CheckBox Content="Show shift key?"                  IsChecked="{Binding ShowShiftKey}"/>
-            <CheckBox Content="Show backspace key?"              IsChecked="{Binding ShowBackspaceKey}"/>
-            <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
-            <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>
-            <CheckBox Content="Enable MultiKey (Swipe) feature?" IsChecked="{Binding EnableMultikeySwipeFeature}"/>
-            
-            <!--Change dwelltime here (in miliseconds)-->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.Resources>
-                    <settings:Settings x:Key="viewModel"/>
-                    <valueConverters:TimeSpanToMilisecondsConverter x:Key="TimeSpanToMilisecondsConverter"/>
-                </Grid.Resources>
-                <Grid.DataContext>
-                    <Binding Source="{StaticResource viewModel}"/>
-                </Grid.DataContext>
-                <TextBlock Grid.Row="0" Text="Change dwelltime here (in miliseconds):" Margin="0,5,0,0"/>
-                <TextBox Grid.Row="1" Text="{Binding Path=Default.KeySelectionTriggerFixationDefaultCompleteTime, 
-                    Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"
-                    Width="100" HorizontalAlignment="Left"/>
-            </Grid>
-            <CheckBox Content="Allow the user to adjust this setting during experiment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
-            <!--The OptiKey logs will be saved here-->
-            <TextBlock Text="The OptiKey logs will be saved here:" Margin="0,5,0,0"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding OptiKeyLogPath}" 
-                           Background="#FFF7F7F7" 
-                           VerticalAlignment="Center" 
-                           Grid.Column="0"/>
-                <Button Content="Change folder" 
-                        Grid.Column="1"
-                        Click="ChangeOptiKeyLogsFolder_Click"/>
-            </Grid>
-            <!--Choose what to log:-->
-            <TextBlock Text="Choose what to log:" Margin="0,5,0,0"/>
+        <ScrollViewer>
             <StackPanel>
-                <CheckBox Content="Eye Tribe gaze data"
-                      IsChecked="{Binding DoLogGazeData}"/>
-                <CheckBox Content="What the user types into the scratchpad"
-                      IsChecked="{Binding DoLogScratchPadText}"/>
-                <CheckBox Content="The displayed phrases"
-                      IsChecked="{Binding DoLogPhraseText}"/>
-                <CheckBox Content="Which keys the user activates"
-                      IsChecked="{Binding DoLogKeySelection}"/>
-                <CheckBox Content="Which key the user looks at"
-                      IsChecked="{Binding DoLog_userLooksAtKey}"/>
-                <CheckBox Content="MultiKey word selections"
-                      IsChecked="{Binding DoLog_multiKeySelection}"/>
-            </StackPanel>
+                <!--The .txt file from which phrases are used-->
+                <TextBlock Text="The .txt file from which phrases are used:"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding PhrasesFilePath}"
+                               Background="#FFF7F7F7" 
+                               VerticalAlignment="Center" 
+                               Grid.Column="0"/>
+                    <Button Content="Change file" 
+                            Grid.Column="1"
+                            Click="ChangePhraseFileButton_Click"/>
+                    <Button Content="Reset to default"
+                            Grid.Column="2"
+                            Click="ResetPhraseFileButton_Click"/>
+                </Grid>
+                <!--Enter amount of phrases to type-->
+                <TextBlock Text="Enter amount of phrases to type: "/>
+                <TextBox Text="{Binding AmountOfSentencesToType}" 
+                         Width="100" HorizontalAlignment="Left"/>
+                <!--Add or remove buttons from the keyboard-->
+                <TextBlock Text="Add or remove buttons and features from the keyboard:" Margin="0,5,0,0"/>
+                <CheckBox Content="Enable Suggestions feature?"      IsChecked="{Binding EnableSuggestionsFeature}"/>
+                <CheckBox Content="Show clear ScratchPad key?"       IsChecked="{Binding ShowClearKey}"/>
+                <CheckBox Content="Show speak/pronounce key?"        IsChecked="{Binding ShowSpeakKey}"/>
+                <CheckBox Content="Show pause key?"                  IsChecked="{Binding ShowPauseKey}"/>
+                <CheckBox Content="Show shift key?"                  IsChecked="{Binding ShowShiftKey}"/>
+                <CheckBox Content="Show backspace key?"              IsChecked="{Binding ShowBackspaceKey}"/>
+                <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
+                <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>
+                <CheckBox Content="Enable MultiKey (Swipe) feature?" IsChecked="{Binding EnableMultikeySwipeFeature}"/>
             
-            <!--START EXPERIMENT-->
-            <Button Content="Start experiment" Margin="0,5,0,0"
-                    Click="StartExperimentButton_Click"/>
-        </StackPanel>
+                <!--Change dwelltime here (in miliseconds)-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <settings:Settings x:Key="viewModel"/>
+                        <valueConverters:TimeSpanToMilisecondsConverter x:Key="TimeSpanToMilisecondsConverter"/>
+                    </Grid.Resources>
+                    <Grid.DataContext>
+                        <Binding Source="{StaticResource viewModel}"/>
+                    </Grid.DataContext>
+                    <TextBlock Grid.Row="0" Text="Change dwelltime here (in miliseconds):" Margin="0,5,0,0"/>
+                    <TextBox Grid.Row="1" Text="{Binding Path=Default.KeySelectionTriggerFixationDefaultCompleteTime, 
+                        Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"
+                        Width="100" HorizontalAlignment="Left"/>
+                </Grid>
+                <CheckBox Content="Allow the user to adjust this setting during experiment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
+                <!--The OptiKey logs will be saved here-->
+                <TextBlock Text="The OptiKey logs will be saved here:" Margin="0,5,0,0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding OptiKeyLogPath}" 
+                               Background="#FFF7F7F7" 
+                               VerticalAlignment="Center" 
+                               Grid.Column="0"/>
+                    <Button Content="Change folder" 
+                            Grid.Column="1"
+                            Click="ChangeOptiKeyLogsFolder_Click"/>
+                </Grid>
+                <!--Choose what to log:-->
+                <TextBlock Text="Choose what to log:" Margin="0,5,0,0"/>
+                <StackPanel>
+                    <CheckBox Content="Eye Tribe gaze data"
+                          IsChecked="{Binding DoLogGazeData}"/>
+                    <CheckBox Content="What the user types into the scratchpad"
+                          IsChecked="{Binding DoLogScratchPadText}"/>
+                    <CheckBox Content="The displayed phrases"
+                          IsChecked="{Binding DoLogPhraseText}"/>
+                    <CheckBox Content="Which keys the user activates"
+                          IsChecked="{Binding DoLogKeySelection}"/>
+                    <CheckBox Content="Which key the user looks at"
+                          IsChecked="{Binding DoLog_userLooksAtKey}"/>
+                    <CheckBox Content="MultiKey word selections"
+                          IsChecked="{Binding DoLog_multiKeySelection}"/>
+                </StackPanel>
+            
+                <!--START EXPERIMENT-->
+                <Button Content="Start experiment" Margin="0,5,0,0"
+                        Click="StartExperimentButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
