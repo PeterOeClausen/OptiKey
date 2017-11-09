@@ -63,6 +63,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue Currencies2KeyboardKey = new KeyValue(FunctionKeys.Currencies2Keyboard);
         public static readonly KeyValue CzechCzechRepublicKey = new KeyValue(FunctionKeys.CzechCzechRepublic);
         public static readonly KeyValue DanishDenmarkKey = new KeyValue(FunctionKeys.DanishDenmark);
+        public static readonly KeyValue DecreaseDwellTimeKey = new KeyValue(FunctionKeys.DecreaseDwellTime);
         public static readonly KeyValue DecreaseOpacityKey = new KeyValue(FunctionKeys.DecreaseOpacity);
         public static readonly KeyValue DeleteKey = new KeyValue(FunctionKeys.Delete);
         public static readonly KeyValue Diacritic1KeyboardKey = new KeyValue(FunctionKeys.Diacritic1Keyboard);
@@ -82,6 +83,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue ExpandToTopKey = new KeyValue(FunctionKeys.ExpandToTop);
         public static readonly KeyValue ExpandToTopAndLeftKey = new KeyValue(FunctionKeys.ExpandToTopAndLeft);
         public static readonly KeyValue ExpandToTopAndRightKey = new KeyValue(FunctionKeys.ExpandToTopAndRight);
+        public static readonly KeyValue ExperimentalKeyboardKey = new KeyValue(FunctionKeys.ExperimentalKeyboard);
         public static readonly KeyValue EscapeKey = new KeyValue(FunctionKeys.Escape);
         public static readonly KeyValue ExpandDockKey = new KeyValue(FunctionKeys.ExpandDock);
         public static readonly KeyValue F1Key = new KeyValue(FunctionKeys.F1);        
@@ -107,6 +109,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue GermanGermanyKey = new KeyValue(FunctionKeys.GermanGermany);
         public static readonly KeyValue GreekGreeceKey = new KeyValue(FunctionKeys.GreekGreece);
         public static readonly KeyValue HomeKey = new KeyValue(FunctionKeys.Home);
+        public static readonly KeyValue IncreaseDwellTimeKey = new KeyValue(FunctionKeys.IncreaseDwellTime);
         public static readonly KeyValue IncreaseOpacityKey = new KeyValue(FunctionKeys.IncreaseOpacity);
         public static readonly KeyValue InsertKey = new KeyValue(FunctionKeys.Insert);
         public static readonly KeyValue ItalianItalyKey = new KeyValue(FunctionKeys.ItalianItaly);
@@ -164,6 +167,7 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue MoveToTopAndRightBoundariesKey = new KeyValue(FunctionKeys.MoveToTopAndRightBoundaries);
         public static readonly KeyValue MoveToTopBoundaryKey = new KeyValue(FunctionKeys.MoveToTopBoundary);
         public static readonly KeyValue MultiKeySelectionIsOnKey = new KeyValue(FunctionKeys.MultiKeySelectionIsOn);
+        public static readonly KeyValue NextPhraseKey = new KeyValue(FunctionKeys.NextPhrase);
         public static readonly KeyValue NextSuggestionsKey = new KeyValue(FunctionKeys.NextSuggestions);
         public static readonly KeyValue NoQuestionResultKey = new KeyValue(FunctionKeys.NoQuestionResult);
         public static readonly KeyValue NumberLockKey = new KeyValue(FunctionKeys.NumberLock);

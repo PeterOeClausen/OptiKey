@@ -26,6 +26,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private readonly ICalibrationService calibrationService;
         private readonly IDictionaryService dictionaryService;
         private readonly IKeyStateService keyStateService;
+        private readonly IPhraseStateService phraseStateService;
         private readonly ISuggestionStateService suggestionService;
         private readonly ICapturingStateManager capturingStateManager;
         private readonly ILastMouseActionStateManager lastMouseActionStateManager;
@@ -33,7 +34,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         private readonly IKeyboardOutputService keyboardOutputService;
         private readonly IMouseOutputService mouseOutputService;
         private readonly IWindowManipulationService mainWindowManipulationService;
-        private readonly List<INotifyErrors> errorNotifyingServices; 
+        private readonly List<INotifyErrors> errorNotifyingServices;
+        private readonly ExperimentMenuViewModel experimentMenuViewModel;
 
         private readonly InteractionRequest<NotificationWithCalibrationResult> calibrateRequest;
 
@@ -61,7 +63,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             IAudioService audioService,
             ICalibrationService calibrationService,
             IDictionaryService dictionaryService,
+            ExperimentMenuViewModel experimentMenuViewModel,
             IKeyStateService keyStateService,
+            IPhraseStateService phraseStateService,
             ISuggestionStateService suggestionService,
             ICapturingStateManager capturingStateManager,
             ILastMouseActionStateManager lastMouseActionStateManager,
@@ -74,7 +78,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             this.audioService = audioService;
             this.calibrationService = calibrationService;
             this.dictionaryService = dictionaryService;
+            this.experimentMenuViewModel = experimentMenuViewModel;
             this.keyStateService = keyStateService;
+            this.phraseStateService = phraseStateService;
             this.suggestionService = suggestionService;
             this.capturingStateManager = capturingStateManager;
             this.lastMouseActionStateManager = lastMouseActionStateManager;
@@ -93,6 +99,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             AttachKeyboardSupportsCollapsedDockListener(mainWindowManipulationService);
             AttachKeyboardSupportsSimulateKeyStrokesListener();
             AttachKeyboardSupportsMultiKeySelectionListener();
+
+            InstanceGetter.Instance.MainViewModel = this;
         }
 
         #endregion
@@ -111,6 +119,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         public ICapturingStateManager CapturingStateManager { get { return capturingStateManager; } }
         public IKeyboardOutputService KeyboardOutputService { get { return keyboardOutputService; } }
         public IKeyStateService KeyStateService { get { return keyStateService; } }
+        public IPhraseStateService PhraseStateService { get { return phraseStateService; } }
+        public ExperimentMenuViewModel ExperimentMenuViewModel { get { return experimentMenuViewModel; } }
         public ISuggestionStateService SuggestionService { get { return suggestionService; } }
         public ICalibrationService CalibrationService { get { return calibrationService; } }
 
@@ -145,6 +155,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 if (pointToKeyValueMap != value)
                 {
                     pointToKeyValueMap = value;
+
+                    //Printing out value of PointToKeyValueMap
+                    if (value != null)
+                    { 
+                        //Console.WriteLine("FDS: PointToKeyValueMap: " + value.ToString());
+                        //foreach(var keyValuePair in value)
+                        //{
+                        //    Console.WriteLine(keyValuePair.Key + ", " + keyValuePair.Value);
+                        //}
+                    }
 
                     inputService.PointToKeyValueMap = value;
                     SelectionResultPoints = null; //The last selection result points cannot be valid if this has changed (window has moved or resized)

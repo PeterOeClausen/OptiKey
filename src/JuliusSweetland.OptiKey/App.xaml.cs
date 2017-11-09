@@ -146,6 +146,16 @@ namespace JuliusSweetland.OptiKey
                 IInputService inputService = CreateInputService(keyStateService, dictionaryService, audioService, calibrationService, capturingStateManager, errorNotifyingServices);
                 IKeyboardOutputService keyboardOutputService = new KeyboardOutputService(keyStateService, suggestionService, publishService, dictionaryService, fireKeySelectionEvent);
                 IMouseOutputService mouseOutputService = new MouseOutputService(publishService);
+                
+                //Create PhraseStateService:
+                var Random = new Random();
+                List<string> phraseList = File.ReadAllLines(@"default_phrases.txt").ToList();
+                IPhraseStateService phraseStateService = new PhraseStateService() { Phrases = phraseList, PhraseNumber = Random.Next(0, phraseList.Count), Random = Random };
+                InstanceGetter.Instance.PhraseStateService = phraseStateService;
+
+                //Create ExperimentMenuViewModel:
+                var experimentMenuViewModel = new ExperimentMenuViewModel();
+
                 errorNotifyingServices.Add(audioService);
                 errorNotifyingServices.Add(dictionaryService);
                 errorNotifyingServices.Add(publishService);
@@ -160,9 +170,9 @@ namespace JuliusSweetland.OptiKey
                 IWindowManipulationService mainWindowManipulationService = CreateMainWindowManipulationService(mainWindow);
                 errorNotifyingServices.Add(mainWindowManipulationService);
                 mainWindow.WindowManipulationService = mainWindowManipulationService;
-
+                
                 mainViewModel = new MainViewModel(
-                    audioService, calibrationService, dictionaryService, keyStateService,
+                    audioService, calibrationService, dictionaryService, experimentMenuViewModel, keyStateService, phraseStateService,
                     suggestionService, capturingStateManager, lastMouseActionStateManager,
                     inputService, keyboardOutputService, mouseOutputService, mainWindowManipulationService, errorNotifyingServices);
 
@@ -190,16 +200,21 @@ namespace JuliusSweetland.OptiKey
                 }
 
                 //Show the main window
-                mainWindow.Show();
+                //mainWindow.Show();
+
+                //Show ExperimentMenu window:
+                ExperimentMenu experimentMenu = new ExperimentMenu(mainWindow, experimentMenuViewModel);
+                InstanceGetter.Instance.ExperimentMenuWindow = experimentMenu;
+                experimentMenu.Show();
 
                 //Display splash screen and check for updates (and display message) after the window has been sized and positioned for the 1st time
                 EventHandler sizeAndPositionInitialised = null;
                 sizeAndPositionInitialised = async (_, __) =>
                 {
                     mainWindowManipulationService.SizeAndPositionInitialised -= sizeAndPositionInitialised; //Ensure this handler only triggers once
-                    await ShowSplashScreen(inputService, audioService, mainViewModel);
+                    //await ShowSplashScreen(inputService, audioService, mainViewModel);
                     inputService.RequestResume(); //Start the input service
-                    await CheckForUpdates(inputService, audioService, mainViewModel);
+                    //await CheckForUpdates(inputService, audioService, mainViewModel);
                 };
                 if (mainWindowManipulationService.SizeAndPositionIsInitialised)
                 {
@@ -576,6 +591,8 @@ namespace JuliusSweetland.OptiKey
                     throw new ArgumentException(
                         "'KeySelectionTriggerSource' setting is missing or not recognised! Please correct and restart OptiKey.");
             }
+
+            InstanceGetter.Instance.triggerSource = (ITriggerSourceWithTimeToCompleteTrigger) keySelectionTriggerSource;
 
             //Instantiate point trigger source
             ITriggerSource pointSelectionTriggerSource;

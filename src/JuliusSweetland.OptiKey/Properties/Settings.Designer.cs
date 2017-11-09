@@ -12,7 +12,7 @@ namespace JuliusSweetland.OptiKey.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -1763,6 +1763,234 @@ namespace JuliusSweetland.OptiKey.Properties {
             }
             set {
                 this["MaryTTSLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ExperimentMenu_NumberOfSentencesToType {
+            get {
+                return ((int)(this["ExperimentMenu_NumberOfSentencesToType"]));
+            }
+            set {
+                this["ExperimentMenu_NumberOfSentencesToType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("default_phrases.txt")]
+        public string ExperimentMenu_PhraseFilePath {
+            get {
+                return ((string)(this["ExperimentMenu_PhraseFilePath"]));
+            }
+            set {
+                this["ExperimentMenu_PhraseFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_EnableSuggestionsFeature {
+            get {
+                return ((bool)(this["ExperimentMenu_EnableSuggestionsFeature"]));
+            }
+            set {
+                this["ExperimentMenu_EnableSuggestionsFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowClearScratchPadKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowClearScratchPadKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowClearScratchPadKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowSpeakPronounceKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowSpeakPronounceKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowSpeakPronounceKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowPauseKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowPauseKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowPauseKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowShiftKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowShiftKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowShiftKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowBackspaceKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowBackspaceKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowBackspaceKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowBackOneWordKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowBackOneWordKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowBackOneWordKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowQuitKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowQuitKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowQuitKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExperimentMenu_EnableMultiKeySwipeFeature {
+            get {
+                return ((bool)(this["ExperimentMenu_EnableMultiKeySwipeFeature"]));
+            }
+            set {
+                this["ExperimentMenu_EnableMultiKeySwipeFeature"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowDwellTimeAdjustment {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowDwellTimeAdjustment"]));
+            }
+            set {
+                this["ExperimentMenu_ShowDwellTimeAdjustment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("qerwqrqgfadfdasz")]
+        public string ExperimentMenu_OptiKeyLogPath {
+            get {
+                return ((string)(this["ExperimentMenu_OptiKeyLogPath"]));
+            }
+            set {
+                this["ExperimentMenu_OptiKeyLogPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool doLogGazeData {
+            get {
+                return ((bool)(this["doLogGazeData"]));
+            }
+            set {
+                this["doLogGazeData"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool doLogScratchPadText {
+            get {
+                return ((bool)(this["doLogScratchPadText"]));
+            }
+            set {
+                this["doLogScratchPadText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool doLogPhraseText {
+            get {
+                return ((bool)(this["doLogPhraseText"]));
+            }
+            set {
+                this["doLogPhraseText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool doLogKeySelection {
+            get {
+                return ((bool)(this["doLogKeySelection"]));
+            }
+            set {
+                this["doLogKeySelection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool doLog_userLooksAtKey {
+            get {
+                return ((bool)(this["doLog_userLooksAtKey"]));
+            }
+            set {
+                this["doLog_userLooksAtKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool doLog_multiKeySelection {
+            get {
+                return ((bool)(this["doLog_multiKeySelection"]));
+            }
+            set {
+                this["doLog_multiKeySelection"] = value;
             }
         }
     }

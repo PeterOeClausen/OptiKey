@@ -1,0 +1,245 @@
+﻿<UserControl x:Class="JuliusSweetland.OptiKey.UI.Controls.ExperimentalOutput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
+             xmlns:controls="clr-namespace:JuliusSweetland.OptiKey.UI.Controls"
+             xmlns:resx="clr-namespace:JuliusSweetland.OptiKey.Properties"
+             xmlns:models="clr-namespace:JuliusSweetland.OptiKey.Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OptiKey;component/Resources/Icons/KeySymbols.xaml" />
+                <ResourceDictionary>
+                    <valueConverters:SuggestionsPaged x:Key="SuggestionsPaged" />
+                    <valueConverters:ConvertToStarGridLength DefaultGridLength="8" x:Key="ConvertToStarGridLength" />
+                    <valueConverters:FontSizeToFitLinesExperimental x:Key="FontSizeToFitLinesExperimental" />
+                    <valueConverters:PhraseIndexed x:Key="PhraseIndexed"/>
+                    <valueConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource KeyDefaultBackgroundBrush}"
+          Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="{Binding ScratchpadWidthInKeysExperimental, RelativeSource={RelativeSource AncestorType=controls:ExperimentalOutput}, Converter={StaticResource ConvertToStarGridLength}}" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Previous suggestions key-->
+        <controls:Key Grid.Row="0" Grid.Column="0"/>
+        <controls:Key Grid.Row="0" Grid.Column="0"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource SuggestionLeftIcon}"
+                      Text="{x:Static resx:Resources.PREV}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.PreviousSuggestionsKey}">
+        </controls:Key>
+        
+        <!--Suggestions-->
+        <controls:Key Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" 
+              Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <controls:Key Grid.Row="0" Grid.Column="0" SharedSizeGroup="KeyWithSuggestion" Case="None"
+                          Value="{x:Static models:KeyValues.Suggestion1Key}">
+                <controls:Key.Text>
+                    <MultiBinding Converter="{StaticResource SuggestionsPaged}" Mode="OneWay">
+                        <Binding Path="DataContext.SuggestionService.Suggestions" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPerPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>0</system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </controls:Key.Text>
+            </controls:Key>
+            <controls:Key Grid.Row="0" Grid.Column="1" SharedSizeGroup="KeyWithSuggestion" Case="None"
+                          Value="{x:Static models:KeyValues.Suggestion2Key}">
+                <controls:Key.Text>
+                    <MultiBinding Converter="{StaticResource SuggestionsPaged}" Mode="OneWay">
+                        <Binding Path="DataContext.SuggestionService.Suggestions" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPerPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>1</system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </controls:Key.Text>
+            </controls:Key>
+            <controls:Key Grid.Row="0" Grid.Column="2" SharedSizeGroup="KeyWithSuggestion" Case="None"
+                          Value="{x:Static models:KeyValues.Suggestion3Key}">
+                <controls:Key.Text>
+                    <MultiBinding Converter="{StaticResource SuggestionsPaged}" Mode="OneWay">
+                        <Binding Path="DataContext.SuggestionService.Suggestions" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPerPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>2</system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </controls:Key.Text>
+            </controls:Key>
+            <controls:Key Grid.Row="0" Grid.Column="3" SharedSizeGroup="KeyWithSuggestion" Case="None"
+                          Value="{x:Static models:KeyValues.Suggestion4Key}">
+                <controls:Key.Text>
+                    <MultiBinding Converter="{StaticResource SuggestionsPaged}" Mode="OneWay">
+                        <Binding Path="DataContext.SuggestionService.Suggestions" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding Path="DataContext.SuggestionService.SuggestionsPerPage" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>3</system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </controls:Key.Text>
+            </controls:Key>
+        </Grid>
+        <!--Next page of suggestions-->
+        <controls:Key Grid.Row="0" Grid.Column="4"/>
+        <controls:Key Grid.Row="0" Grid.Column="4"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableSuggestionsFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource SuggestionRightIcon}"
+                      Text="{x:Static resx:Resources.NEXT}"
+                      SharedSizeGroup="KeyWithSymbol"
+                          Value="{x:Static models:KeyValues.NextSuggestionsKey}"/>
+
+        <!--Clear key-->
+        <controls:Key Grid.Row="1" Grid.Column="0"/>
+        <controls:Key Grid.Row="1" Grid.Column="0"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowClearKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource ClearIcon}" 
+                      Text="{x:Static resx:Resources.CLEAR}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.ClearScratchpadKey}"/>
+                  <!--SymbolGeometry="{StaticResource AddToDictionaryIcon}" 
+                      Text="{x:Static resx:Resources.ADD_TO_DICTIONARY_SPLIT_WITH_NEWLINE}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.AddToDictionaryKey}"/>-->
+
+        <!--Speak key-->
+        <controls:Key Grid.Row="1" Grid.Column="1"/>
+        <controls:Key Grid.Row="1" Grid.Column="1"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowSpeakKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource SpeakIcon}"
+                      Text="{x:Static resx:Resources.SPEAK}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.SpeakKey}"/>
+                  <!--SymbolGeometry="{StaticResource ClearIcon}" 
+                      Text="{x:Static resx:Resources.CLEAR}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.ClearScratchpadKey}"/>-->
+
+        <!--Phrases grid-->
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--Phrases-->
+            <Border BorderBrush="Gray" BorderThickness="1">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <controls:PhraseTextBlock Grid.Row="0" 
+                                   FontFamily="{Binding Source={x:Static resx:Settings.Default}, Path=FontFamily}"
+                                   FontWeight="{Binding Source={x:Static resx:Settings.Default}, Path=FontWeight}"
+                                   FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}"
+                                   Margin="1" 
+                                   Padding="1">
+                            <controls:PhraseTextBlock.FontSize>
+                                <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
+                                    <MultiBinding.Bindings>
+                                        <Binding Path="ScratchpadNumberOfLines" Source="{x:Static resx:Settings.Default}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                                        <Binding Path="FontFamily" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </controls:PhraseTextBlock.FontSize>
+                            <controls:PhraseTextBlock.Text>
+                                <MultiBinding Converter="{StaticResource PhraseIndexed}" Mode="OneWay">
+                                    <Binding Path="DataContext.PhraseStateService.Phrases" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                                    <Binding Path="DataContext.PhraseStateService.PhraseNumber" RelativeSource="{RelativeSource AncestorType=controls:KeyboardHost}" />
+                                </MultiBinding>
+                            </controls:PhraseTextBlock.Text>
+                            <controls:PhraseTextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Cyan"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="THE EXPERIMENT IS NOW DONE">
+                                            <Setter Property="Foreground" Value="Red" />
+                                            <Setter Property="TextDecorations" Value="Underline" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </controls:PhraseTextBlock.Style>
+                        </controls:PhraseTextBlock>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+
+            <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1"
+                                 Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}" />
+        </Grid>
+
+        <!--Next phrase key-->
+        <controls:Key Grid.Row="1" Grid.Column="3"
+                      SymbolGeometry="{StaticResource RightArrowKeyIcon}" 
+                      Text="Next phrase"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.NextPhraseKey}"/>
+
+        <!-- Does not work sadly... icon does not show up and QuitKey is not processed...
+        <controls:Key Grid.Row="1" Grid.Column="3"
+                      SharedSizeGroup="KeyWithSymbol">
+            <controls:Key.Style>
+                <Style TargetType="{x:Type controls:Key}">
+                    <Setter Property="SymbolGeometry" Value="{StaticResource RightArrowKeyIcon}"/>
+                    <Setter Property="Text" Value="Next phrase"/>
+                    <Setter Property="Value" Value="{x:Static models:KeyValues.NextPhraseKey}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PhraseField, Path=Text}" Value="THE EXPERIMENT IS NOW DONE">
+                            <Setter Property="SymbolGeometry" Value="{StaticResource QuitIcon}"/>
+                            <Setter Property="Text" Value="Quit experiment"/>
+                            <Setter Property="Value" Value="{x:Static models:KeyValues.QuitKey}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:Key.Style>
+        </controls:Key>-->
+
+        <!--Sleep key-->
+        <controls:Key Grid.Row="1" Grid.Column="4"/>
+        <controls:Key Grid.Row="1" Grid.Column="4"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowPauseKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource SleepIcon}"
+                      Text="{x:Static resx:Resources.SLEEP}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.SleepKey}"/>
+    </Grid>
+</UserControl>

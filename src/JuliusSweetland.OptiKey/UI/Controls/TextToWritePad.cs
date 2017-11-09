@@ -4,17 +4,15 @@ using System.Windows.Controls;
 
 namespace JuliusSweetland.OptiKey.UI.Controls
 {
-    public class Scratchpad : UserControl
+    public class TextToWritePad : UserControl
     {
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof (string), typeof (Scratchpad), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("TextToWritePadText", typeof (string), typeof (TextToWritePad), new PropertyMetadata(default(string)));
 
-        public string Text
+        public string TextToWritePadText
         {
             get { return (string) GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-        
-        //Trigger event
     }
 }

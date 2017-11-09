@@ -17,6 +17,7 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
         protected Mock<IInputService> InputService { get; private set; }
         protected Mock<IKeyboardOutputService> KeyboardOutputService { get; private set; }
         protected Mock<IKeyStateService> KeyStateService { get; private set; }
+        protected Mock<IPhraseStateService> PhraseStateService { get; private set; }
         protected Mock<ILastMouseActionStateManager> LastMouseActionStateManager { get; private set; }
         protected Mock<IWindowManipulationService> MainWindowManipulationService { get; private set; }
         protected Mock<IMouseOutputService> MouseOutputService { get; private set; }
@@ -24,6 +25,7 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
         protected List<INotifyErrors> ErrorNotifyingServices { get; private set; }
         protected bool IsKeySelectionEventHandlerCalled { get; private set; }
         protected bool IsPointSelectionEventHandlerCalled { get; private set; }
+        protected ExperimentMenuViewModel ExperimentMenuViewModel { get; set; }
 
         protected virtual bool ShouldConstruct { get { return true; } }
 
@@ -40,6 +42,9 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
             KeyStateService.Setup(s => s.KeyDownStates).Returns(new NotifyingConcurrentDictionary<KeyValue, KeyDownStates>());
             KeyStateService.Setup(s => s.KeySelectionProgress).Returns(new NotifyingConcurrentDictionary<KeyValue, double>());
 
+            PhraseStateService = new Mock<IPhraseStateService>();
+            ExperimentMenuViewModel = new ExperimentMenuViewModel();
+
             LastMouseActionStateManager = new Mock<ILastMouseActionStateManager>();
             MainWindowManipulationService = new Mock<IWindowManipulationService>();
             MouseOutputService = new Mock<IMouseOutputService>();
@@ -48,8 +53,8 @@ namespace JuliusSweetland.OptiKey.UnitTests.UI.ViewModels.MainViewModelSpecifica
 
             if(ShouldConstruct)
             {
-                MainViewModel = new MainViewModel(AudioService.Object, CalibrationService.Object, DictionaryService.Object,
-                    KeyStateService.Object, SuggestionService.Object, CapturingStateManager.Object, LastMouseActionStateManager.Object,
+                MainViewModel = new MainViewModel(AudioService.Object, CalibrationService.Object, DictionaryService.Object, ExperimentMenuViewModel,
+                    KeyStateService.Object, PhraseStateService.Object, SuggestionService.Object, CapturingStateManager.Object, LastMouseActionStateManager.Object,
                     InputService.Object, KeyboardOutputService.Object, MouseOutputService.Object, MainWindowManipulationService.Object,
                     ErrorNotifyingServices);
 

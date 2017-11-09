@@ -9,6 +9,10 @@ using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
+using System.Diagnostics;
+using JuliusSweetland.OptiKey.Services;
+using JuliusSweetland.OptiKey.UI.Controls;
+using JuliusSweetland.OptiKey.UI.ViewModels.Management;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -37,6 +41,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 CurrentPositionPoint = tuple.Item1;
                 CurrentPositionKey = tuple.Item2;
 
+                if(CurrentPositionKey != null)
+                {
+                    //We are able to log current position point AND current position key right here.
+                    //Console.WriteLine("CurrentPrositionKey");
+                }
+
                 if (keyStateService.KeyDownStates[KeyValues.MouseMagneticCursorKey].Value.IsDownOrLockedDown()
                     && !keyStateService.KeyDownStates[KeyValues.SleepKey].Value.IsDownOrLockedDown())
                 {
@@ -44,6 +54,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
+            //When progress update happens on a key. progress contains key and progression in percent.
             inputServiceSelectionProgressHandler = (o, progress) =>
             {
                 if (progress.Item1 == null
@@ -53,6 +64,42 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
                 else if (progress.Item1 != null)
                 {
+
+                    //Log easily readable key progression:
+                    string keyString = progress.Item1.Value.String;
+                    if(keyString != null)
+                    { 
+                        switch(keyString)
+                        {
+                            case "\t":
+                                //Console.WriteLine("Key is being looked at: " + "Tab");
+                                CSVLogService.Instance.Log_KeyProgression("Tab", progress.Item2);
+                                break;
+                            case "\n":
+                                //Console.WriteLine("Key is being looked at: " + "Enter");
+                                CSVLogService.Instance.Log_KeyProgression("Enter", progress.Item2);
+                                break;
+                            case " ":
+                                //Console.WriteLine("Key is being looked at: " + "SpaceBar");
+                                CSVLogService.Instance.Log_KeyProgression("SpaceBar", progress.Item2);
+                                break;
+                            case ",":
+                                //Console.WriteLine("Key is being looked at: " + "Comma");
+                                CSVLogService.Instance.Log_KeyProgression("Comma", progress.Item2);
+                                break;
+                            default:
+                                //Console.WriteLine("Key is being looked at: " + keyString);
+                                CSVLogService.Instance.Log_KeyProgression(keyString, progress.Item2);
+                                break;
+                        }
+                    }
+                    else if(progress.Item1?.KeyValue?.FunctionKey != null) //it's a function key:
+                    {
+                        string functionKey = progress.Item1?.KeyValue?.FunctionKey?.ToString();
+                        //Console.WriteLine("Key is being looked at: " + functionKey);
+                        CSVLogService.Instance.Log_KeyProgression(functionKey, progress.Item2);
+                    }
+                    
                     if (SelectionMode == SelectionModes.Key
                         && progress.Item1.Value.KeyValue != null)
                     {
@@ -66,10 +113,46 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
             };
 
+            //When key is selected:
             inputServiceSelectionHandler = (o, value) =>
             {
                 Log.Info("Selection event received from InputService.");
 
+                //Log key selection:
+                string keyString = value.String;
+                //Key is character:
+                if (keyString != null)
+                {
+                    switch (keyString)
+                    {
+                        case "\t":
+                            //Console.WriteLine("Key selected: " + "Tab");
+                            CSVLogService.Instance.Log_KeySelection("Tab");
+                            break;
+                        case "\n":
+                            //Console.WriteLine("Key selected: " + "Enter");
+                            CSVLogService.Instance.Log_KeySelection("Enter");
+                            break;
+                        case " ":
+                            //Console.WriteLine("Key selected: " + "SpaceBar");
+                            CSVLogService.Instance.Log_KeySelection("SpaceBar");
+                            break;
+                        case ",":
+                            //Console.WriteLine("Key selected: " + "Comma");
+                            CSVLogService.Instance.Log_KeySelection("Comma");
+                            break;
+                        default:
+                            //Console.WriteLine("Key selected: " + keyString);
+                            CSVLogService.Instance.Log_KeySelection(keyString);
+                            break;
+                    }
+                }
+                else if(value.KeyValue?.FunctionKey != null) //Key is FunctionKey:
+                {
+                    var functionKey = value.KeyValue?.FunctionKey?.ToString();
+                    CSVLogService.Instance.Log_KeySelection(functionKey);
+                }
+                
                 SelectionResultPoints = null; //Clear captured points from previous SelectionResult event
 
                 if (SelectionMode == SelectionModes.Key
@@ -77,7 +160,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     if (!capturingStateManager.CapturingMultiKeySelection)
                     {
-                        audioService.PlaySound(Settings.Default.KeySelectionSoundFile, Settings.Default.KeySelectionSoundVolume);
+                        if (value.KeyValue.ToString() != "ScratchPad" && value.KeyValue.ToString() != "PhraseTextBlock")
+                        { audioService.PlaySound(Settings.Default.KeySelectionSoundFile, Settings.Default.KeySelectionSoundVolume); }
                     }
 
                     if (KeySelection != null)
@@ -104,6 +188,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             inputServiceSelectionResultHandler = (o, tuple) =>
             {
                 Log.Info("SelectionResult event received from InputService.");
+
+                //Touple.item2 is the name of functionkey.
+                if (tuple.Item2 != null)
+                {
+                    CSVLogService.Instance.Log_MultiKeySelection(tuple.Item2?.ToString());
+                }
 
                 var points = tuple.Item1;
                 var singleKeyValue = tuple.Item2 != null || tuple.Item3 != null
@@ -188,7 +278,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
+        public void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
         {
             var currentKeyboard = Keyboard;
 
@@ -379,6 +469,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
+                case FunctionKeys.DecreaseDwellTime:
+                    Log.Info("Decreasing DwellTime.");
+                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime -= TimeSpan.FromMilliseconds(100); //Decrease Dwelltime //+ an int to Timespan converter?
+                    break;
+
                 case FunctionKeys.DecreaseOpacity:
                     Log.Info("Decreasing opacity.");
                     mainWindowManipulationService.IncrementOrDecrementOpacity(false);
@@ -444,6 +539,13 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;
 
+                case FunctionKeys.EscKeyPressed:
+                    //Console.WriteLine("Chaning to Experiment menu");
+                    //Log.Info("Chaning to Experiment menu");
+                    //InstanceGetter.Instance.ExperimentMenuWindow.Show();
+                    //HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.Minimise));
+                    break;
+
                 case FunctionKeys.ExpandDock:
                     Log.Info("Expanding dock.");
                     mainWindowManipulationService.ResizeDockToFull();
@@ -493,6 +595,29 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     mainWindowManipulationService.Expand(ExpandToDirections.TopRight, Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     break;
 
+                case FunctionKeys.ExperimentalKeyboard:
+                    Log.Info("Changing keyboard to ExperimentalKeyboard.");
+                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
+                    Action experimentalKeyboardBackAction =
+                        currentKeyboard is ConversationConfirm
+                        ? ((ConversationConfirm)currentKeyboard).BackAction
+                        : currentKeyboard is ConversationNumericAndSymbols
+                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                            : () =>
+                            {
+                                Log.Info("Restoring window size.");
+                                mainWindowManipulationService.Restore();
+                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
+                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
+                                Keyboard = currentKeyboard;
+                            };
+                    Keyboard = new Experimental(experimentalKeyboardBackAction);
+                    Log.Info("Maximising window.");
+                    mainWindowManipulationService.Maximise();
+                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
+                    mainWindowManipulationService.SetOpacity(1);
+                    break;
+
                 case FunctionKeys.FrenchFrance:
                     Log.Info("Changing keyboard language to FrenchFrance.");
                     InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
@@ -516,6 +641,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.GreekGreece;
                     Log.Info("Changing keyboard to Menu");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
+                    break;
+
+                case FunctionKeys.IncreaseDwellTime:
+                    Log.Info("Increasing DwellTime.");
+                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime += TimeSpan.FromMilliseconds(100); //Increase Dwelltime
                     break;
 
                 case FunctionKeys.IncreaseOpacity:
@@ -1399,7 +1529,25 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Log.Info("Moving to top boundary.");
                     mainWindowManipulationService.Move(MoveToDirections.Top, null);
                     break;
-                        
+
+                case FunctionKeys.NextPhrase:
+                    Log.Info("Incrementing phrase number.");
+
+                    if(phraseStateService.Phrases != null)
+                    {
+                        if(phraseStateService.PhrasesShown < (experimentMenuViewModel.AmountOfSentencesToType - 1))
+                        {
+                            phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
+                            phraseStateService.PhrasesShown++;
+                        }
+                        else
+                        {
+                            phraseStateService.PhraseNumber = -42; //Ugly way to signal experiment is over.
+                        }
+                    }
+                    HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
+                    break;
+
                 case FunctionKeys.NextSuggestions:
                     Log.Info("Incrementing suggestions page.");
 
@@ -1477,6 +1625,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
+                    break;
+
+                case FunctionKeys.ScratchPad:
+                    //ScratchPad is invoked
                     break;
 
                 case FunctionKeys.ShrinkFromBottom:

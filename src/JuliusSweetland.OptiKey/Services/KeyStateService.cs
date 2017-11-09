@@ -47,6 +47,7 @@ namespace JuliusSweetland.OptiKey.Services
             AddSettingChangeHandlers();
             AddSimulateKeyStrokesChangeHandler();
             AddKeyDownStatesChangeHandlers();
+            InstanceGetter.Instance.KeyStateService = this;
         }
 
         #endregion
@@ -68,6 +69,15 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void ProgressKeyDownState(KeyValue keyValue)
         {
+            if(keyValue != null)
+            {
+                if(keyValue.FunctionKey != null)
+                {
+                    //This was not the place where it fires a lot of events.
+                    //Console.WriteLine(keyValue.FunctionKey.Value);
+                }
+            }
+
             if (KeyValues.KeysWhichCanBePressedDown.Contains(keyValue)
                 && KeyDownStates[keyValue].Value == Enums.KeyDownStates.Up)
             {
@@ -109,7 +119,7 @@ namespace JuliusSweetland.OptiKey.Services
             KeyDownStates[KeyValues.LeftShiftKey].Value =
                 Settings.Default.ForceCapsLock ? Enums.KeyDownStates.LockedDown : Enums.KeyDownStates.Up;
 
-            SetMultiKeySelectionKeyStateFromSetting();
+            //SetMultiKeySelectionKeyStateFromSetting(); //We do not want this to happen based on settings anymore.
         }
 
         private void SetMultiKeySelectionKeyStateFromSetting()
@@ -120,6 +130,11 @@ namespace JuliusSweetland.OptiKey.Services
                 || (!SimulateKeyStrokes && Settings.Default.MultiKeySelectionLockedDownWhenNotSimulatingKeyStrokes))
                     ? Enums.KeyDownStates.LockedDown
                     : Enums.KeyDownStates.Up;
+        }
+
+        public void SetMultiKeyState(Enums.KeyDownStates state)
+        {
+            KeyDownStates[KeyValues.MultiKeySelectionIsOnKey].Value = state;
         }
 
         private void AddSettingChangeHandlers()

@@ -71,7 +71,7 @@ namespace JuliusSweetland.OptiKey.Services
             get {return text;}
             private set {
                 //Log everytime the scratchpad text changes:
-                csvLogService.logScratchPadText(value);
+                csvLogService.Log_ScratchPadText(value);
                 SetProperty(ref text, value); }
         }
 
@@ -173,7 +173,7 @@ namespace JuliusSweetland.OptiKey.Services
                     if (textChangedByBackOne
                         || string.IsNullOrEmpty(Text))
                     {
-                        AutoPressShiftIfAppropriate();
+                        //AutoPressShiftIfAppropriate(); //Not needed in experimentation mode
                     }
 
                     StoreLastTextChange(null);
@@ -187,7 +187,7 @@ namespace JuliusSweetland.OptiKey.Services
                     Text = null;
                     StoreLastTextChange(null);
                     ClearSuggestions();
-                    AutoPressShiftIfAppropriate();
+                    //AutoPressShiftIfAppropriate(); //No need to shift in experiment mode.
                     Log.Debug("Suppressing next auto space.");
                     suppressNextAutoSpace = true;
                     break;
@@ -473,6 +473,35 @@ namespace JuliusSweetland.OptiKey.Services
                         {
                             suggestionService.Suggestions = suggestionService.Suggestions.Where(s => s != modifiedCaptureText).ToList();
                         }
+                    }
+                }
+
+                //Log Multikey result here.
+                string keyString = modifiedCaptureText;
+                if (keyString != null)
+                {
+                    switch (keyString)
+                    {
+                        case "\t":
+                            //Console.WriteLine("Key selected: " + "Tab");
+                            CSVLogService.Instance.Log_MultiKeySelection("Tab");
+                            break;
+                        case "\n":
+                            //Console.WriteLine("Key selected: " + "Enter");
+                            CSVLogService.Instance.Log_MultiKeySelection("Enter");
+                            break;
+                        case " ":
+                            //Console.WriteLine("Key selected: " + "SpaceBar");
+                            CSVLogService.Instance.Log_MultiKeySelection("SpaceBar");
+                            break;
+                        case ",":
+                            //Console.WriteLine("Key selected: " + "Comma");
+                            CSVLogService.Instance.Log_MultiKeySelection("Comma");
+                            break;
+                        default:
+                            //Console.WriteLine("Key selected: " + keyString);
+                            CSVLogService.Instance.Log_MultiKeySelection(keyString);
+                            break;
                     }
                 }
 
