@@ -1,10 +1,20 @@
-# OptiKey
+# Experimental version of OptiKey for conducting gaze typing experiments.
+
+The 'Experimental version of OptiKey' project (this project) is a modified version of OptiKey specifically developed for performing Gaze typing experiments with OptiKey.
 
 OptiKey is an assistive on-screen keyboard which runs on Windows. It is designed to be used with an eye-tracking device to assist with keyboard and mouse control for those living with motor and speech limitations, such as Amyotrophic Lateral Sclerosis (ALS) / Motor Neuron Disease (MND).
 
-It works out of the box once you have your eye-tracking device installed and allows selections to be made using dwell selection, buttons, etc. If you do not have an eye tracking device, OptiKey can be used with a mouse.
+With the experimental version of OptiKey, you are able to specify the parameters of your Gaze typing experiments, perform the experiments with OptiKey, and have the program log important data such as which buttons is being looked at with milliseconds precision, or eye tracking data such as pupil diameter while typing. This information is logged into .CSV format files, which can easily be analysed after conducting experiments.
 
-OptiKey was written as an accessible alternative to the outrageously expensive, unreliable and difficult to use AAC (alternative and augmentative communication) products currently on the market. It is, therefore, fully open-source and free. Forever.
+In the image below, you can see the parameters you are able to specify:
+
+![alt text](https://lh3.googleusercontent.com/5pE6pBUneRlYXBwcg7VZZWK2A3v91HintrxzqfVNlS2DWx9yO1lc_GN3_JEvw9t1oLgP-aNK9Xp4MBW9qHnn=w1919-h948 "ExperimentalMenu")
+
+The settings you specify are saved, so that you can perform multiple experiments with the same saved settings.
+
+Clicking "START EXPERIMENT", in the bottom of the window will start the experiment:
+
+Right now the Experimental version of OptiKey works with a mouse, and the same trackers that works with OptiKey. Gaze tracking data can however only be logged when using a TheEyeTribe Development Kit. However we are working on supporting other trackers as well. 
 
 # About
 This project is heavily based on OptiKey's codebase, and is a modified copy of the OptiKey code repository. 
