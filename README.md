@@ -16,38 +16,13 @@ Clicking "START EXPERIMENT", in the bottom of the window will start the experime
 
 Right now the Experimental version of OptiKey works with a mouse, and the same trackers that works with OptiKey. Gaze tracking data can however only be logged when using a TheEyeTribe Development Kit. However we are working on supporting other trackers as well. 
 
-# About
-This project is heavily based on OptiKey's codebase, and is a modified copy of the OptiKey code repository. 
-
-This project aims to make it easy to conduct experiments with OptiKey. When you start up the program, a settings window will appear, with which you can configure which keys should be available on the experimental keyboard, which setences the user is to type, what to log as csv files (such as gaze duration, keys being looked at and much more). 
-
-A manual on how to get the code, how to run it, and how the program works, is under development, and will be published on this page.
-
 # Getting Started
 
-[**The OptiKey Wiki**](https://github.com/OptiKey/OptiKey/wiki) contains full information on how to get started, system requirements, a user guide, demo videos, a troubleshooting page, and more. Here are some quick links if you're in a hurry:
-
-* If you want to install and use OptiKey on Windows you can download the installer from the [latest release](https://github.com/JuliusSweetland/OptiKey/releases/latest).
-* Watch the [intro video](https://www.youtube.com/watch?v=HLkyORh7vKk).
-* If you wish to get in touch my email is <optikeyfeedback@gmail.com>.
+You can get a manual for the experimental OptiKey project here: [**Manual on the experimental version of OptiKey**](https://github.com/PeterOeClausen/OptiKey/raw/master/Manual/Manual%20on%20the%20experimental%20version%20of%20OptiKey.pdf)
 
 # Supported Platforms
 
 OptiKey targets the .Net 4.6 Framework, which is available for  Windows Vista SP2 onwards. It was designed to run on Windows 8/ 8.1/ 10.
-
-# Problems?
-
-If you find a problem such as a crash, an unexpected behaviour, or something similar please visit the [issue tracker](https://github.com/OptiKey/OptiKey/issues) and report the issue.
-
-Please be kind and search to see if the issue is already logged before creating a new one. If you're pressed for time, log it anyway.
-
-When creating an issue, please clearly explain:
-
-* What you were trying to do.
-* What you expected to happen.
-* What actually happened.
-* Steps to reproduce the problem.
-* Also include any other information you think is relevant to reproduce the problem (such as screenshots).
 
 # License
 
@@ -55,7 +30,9 @@ Licensed under the GNU GENERAL PUBLIC LICENSE (Version 3, 29th June 2007)
 
 # Contact
 
-Want to get in touch, ask a question, or talk to me about anything else which isn't on the [**OptiKey WIKI**](https://github.com/JuliusSweetland/OptiKey/wiki/)? My email address is <optikeyfeedback@gmail.com>.
+If you have any questions about the project, if you want to get in touch, you can write an email to me: <PeterOeClausen@gmail.com>.
 
-Thanks for your interest,
-Julius
+If you want to contact the creator of OptiKey, see the [**OptiKey.org**](https://github.com/OptiKey/OptiKey/wiki)
+
+Best,
+Peter Ø. Clausen - Research assistent and student developer at research project GazeIT.
