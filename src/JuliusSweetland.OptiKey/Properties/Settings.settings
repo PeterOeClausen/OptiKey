@@ -276,7 +276,7 @@
       <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="StartupKeyboard" Roaming="true" Type="JuliusSweetland.OptiKey.Enums.Keyboards" Scope="User">
-      <Value Profile="(Default)">Alpha</Value>
+      <Value Profile="(Default)">ConversationAlpha</Value>
     </Setting>
     <Setting Name="SuppressAutoCapitaliseIntelligently" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
