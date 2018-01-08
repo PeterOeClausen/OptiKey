@@ -8,7 +8,7 @@ With the experimental version of OptiKey, you are able to specify the parameters
 
 In the image below, you can see the parameters you are able to specify:
 
-![alt text](https://lh3.googleusercontent.com/5pE6pBUneRlYXBwcg7VZZWK2A3v91HintrxzqfVNlS2DWx9yO1lc_GN3_JEvw9t1oLgP-aNK9Xp4MBW9qHnn=w1919-h948 "ExperimentalMenu")
+![alt text](https://github.com/PeterOeClausen/OptiKey/blob/master/Manual/ImagesForManual/ExperimentMenu.png "ExperimentalMenu")
 
 The settings you specify are saved, so that you can perform multiple experiments with the same saved settings.
 
