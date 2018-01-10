@@ -5,13 +5,11 @@ The 'Experimental version of OptiKey' project (this project) is a modified versi
 With the experimental version of OptiKey, you are able to specify the parameters of your gaze typing experiments, perform the experiments with OptiKey, and have the program log important data such as which buttons is being looked at with milliseconds precision, or eye tracking data such as pupil diameter while typing. This information is logged into .CSV format files, which can easily be analyzed after conducting experiments.
 
 In the image below, you can see the parameters you are able to specify:
-
 ![Image of the ExperimentalMenu could not be shown](https://github.com/PeterOeClausen/OptiKey/blob/master/Manual/ImagesForManual/ExperimentMenu.png "ExperimentalMenu")
 
 The settings you specify in the ExperimentMenu are saved automatically, so that you can perform multiple experiments with the same saved settings.
 
 Clicking "START EXPERIMENT", in the bottom of the window will start the experiment:
-
 ![Image of the gaze typing keyboard could not be shown](https://github.com/PeterOeClausen/OptiKey/blob/master/manual/ImagesForManual/TheKeyboard.png "The gaze typing keyboard")
 
 During the experiment a user types in phrases shown cyan, e.g. "The quick brown fox jumps over the lazy dog" as shown in the image above. 
