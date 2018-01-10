@@ -29,6 +29,9 @@ And also which screen elements the user looks at:
 
 Right now the experimental version of OptiKey works with a mouse, and the same eye trackers that works with OptiKey. Gaze tracking data can however right now only be logged when using the EyeTribe Development Kit. However we are working on supporting other trackers as well.
 
+An example of logging the gaze tracking data is given here:
+![Image of GazeLog.csv could not be shown](https://github.com/PeterOeClausen/OptiKey/blob/master/manual/ImagesForManual/GazeLog.png "GazeLog.csv")
+
 # Getting Started
 
 You can get a manual for the experimental OptiKey project here: [**Manual on the experimental version of OptiKey**](https://github.com/PeterOeClausen/OptiKey/raw/master/Manual/Manual%20on%20the%20experimental%20version%20of%20OptiKey.pdf).
