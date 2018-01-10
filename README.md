@@ -1,4 +1,4 @@
-# Experimental version of OptiKey for conducting gaze typing experiments.
+# Experimental version of OptiKey for conducting gaze and other forms of typing experiments.
 
 The 'Experimental version of OptiKey' project (this project) is a modified version of [**OptiKey**](https://github.com/OptiKey/OptiKey/wiki) specifically developed for performing gaze typing experiments with OptiKey.
 
