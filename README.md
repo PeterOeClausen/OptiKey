@@ -18,6 +18,7 @@ The program logs which phrases are shown for the user together with a time stamp
 ![Image of PhraseLog.csv could not be shown](https://github.com/PeterOeClausen/OptiKey/blob/master/manual/ImagesForManual/PhraseLog.PNG "PhraseLog.csv")
 
 The program also logs which keys the user activates:
+
 ![Image of KeySelectionLog.csv could not be shown](https://github.com/PeterOeClausen/OptiKey/blob/master/manual/ImagesForManual/KeySelectionLog.PNG "KeySelectionLog.csv")
 
 What is written into the scratchpad in blue, e.g. "The quick brown fox jum":
