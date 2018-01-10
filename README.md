@@ -33,13 +33,15 @@ Right now the experimental version of OptiKey works with a mouse, and the same e
 
 You can get a manual for the experimental OptiKey project here: [**Manual on the experimental version of OptiKey**](https://github.com/PeterOeClausen/OptiKey/raw/master/Manual/Manual%20on%20the%20experimental%20version%20of%20OptiKey.pdf).
 
+You can also download or clone this project by clicking the green button on top of this page.
+
 # Supported Platforms
 
 OptiKey targets the .Net 4.6 Framework, which is available for  Windows Vista SP2 onwards. It was designed to run on Windows 8/ 8.1/ 10.
 
 # License
 
-Licensed under the GNU GENERAL PUBLIC LICENSE (Version 3, 29th June 2007)
+Licensed under the GNU GENERAL PUBLIC LICENSE (Version 3, 29th June 2007).
 
 # Contact
 
