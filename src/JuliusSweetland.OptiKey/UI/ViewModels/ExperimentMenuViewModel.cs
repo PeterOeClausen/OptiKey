@@ -2,7 +2,7 @@
 using JuliusSweetland.OptiKey.Services;
 using Prism.Mvvm;
 using System;
-using System.IO;
+using System.Collections.Generic;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -125,6 +125,30 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 Settings.Default.ExperimentMenu_EnableMultiKeySwipeFeature = value;
             }
         }
+
+        private Enums.PointsSources selectedPointSource = Settings.Default.PointsSource;
+        public Enums.PointsSources SelectedPointSource
+        {
+            get { return selectedPointSource; }
+            set
+            {
+                Console.WriteLine("SelectedPointSource set!");
+                selectedPointSource = value;
+                Settings.Default.PointsSource = value;
+                //Restart application:
+                System.Windows.Forms.Application.Restart();
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
+
+        public IEnumerable<Enums.PointsSources> PointSources
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Enums.PointsSources)) as IEnumerable<Enums.PointsSources>;
+            }
+        }
+
 
         private bool showDwelltimeAdjustments = Settings.Default.ExperimentMenu_ShowDwellTimeAdjustment;
         public bool ShowDwelltimeAdjustments
