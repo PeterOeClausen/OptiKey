@@ -6,7 +6,7 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="580" Width="630"
+        Title="ExperimentMenu" Height="630" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer>
@@ -45,7 +45,19 @@
                 <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
                 <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>
                 <CheckBox Content="Enable MultiKey (Swipe) feature?" IsChecked="{Binding EnableMultikeySwipeFeature}"/>
-            
+                
+                <!--Change input source here:-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Change input source here: (Requires application restart)" Margin="0,5,0,0"/>
+                    <ComboBox Grid.Row="1"
+                              ItemsSource="{Binding PointSources}"
+                              SelectedItem="{Binding SelectedPointSource}"/>
+                </Grid>
+
                 <!--Change dwelltime here (in miliseconds)-->
                 <Grid>
                     <Grid.RowDefinitions>
