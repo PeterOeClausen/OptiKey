@@ -97,11 +97,5 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                 viewModel.OptiKeyLogPath = folderPath;
             }
         }
-
-        private void ChangeToConversationKeyboard_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindow.Show();
-            InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ConversationAlphaKeyboard));
-        }
     }
 }

@@ -2005,5 +2005,17 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["selectedExperimentalKeyboardLanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_EnableDotCommaApostrophe {
+            get {
+                return ((bool)(this["ExperimentMenu_EnableDotCommaApostrophe"]));
+            }
+            set {
+                this["ExperimentMenu_EnableDotCommaApostrophe"] = value;
+            }
+        }
     }
 }

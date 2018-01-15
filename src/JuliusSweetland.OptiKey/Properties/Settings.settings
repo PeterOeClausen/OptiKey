@@ -1043,5 +1043,8 @@
     <Setting Name="selectedExperimentalKeyboardLanguage" Type="JuliusSweetland.OptiKey.Enums.ExperimentalKeybordLanguages" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
+    <Setting Name="ExperimentMenu_EnableDotCommaApostrophe" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

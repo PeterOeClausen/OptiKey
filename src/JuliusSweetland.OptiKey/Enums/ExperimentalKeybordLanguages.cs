@@ -8,7 +8,7 @@ namespace JuliusSweetland.OptiKey.Enums
 {
     public enum ExperimentalKeybordLanguages
     {
-        English,
-        Danish
+        Danish,
+        English
     }
 }

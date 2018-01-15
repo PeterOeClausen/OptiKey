@@ -147,6 +147,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 Settings.Default.ExperimentMenu_ShowQuitKey = value;
             }
         }
+        
+        private bool enableDotCommaApostrophe = Settings.Default.ExperimentMenu_EnableDotCommaApostrophe;
+        public bool EnableDotCommaApostrophe
+        {
+            get { return enableDotCommaApostrophe; }
+            set
+            {
+                enableDotCommaApostrophe = value;
+                Settings.Default.ExperimentMenu_EnableDotCommaApostrophe = value;
+            }
+        }
 
         private bool enableMultikeySwipeFeature = Settings.Default.ExperimentMenu_EnableMultiKeySwipeFeature;
         public bool EnableMultikeySwipeFeature

@@ -50,13 +50,20 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <management:PointingAndSelectingViewModel x:Key="viewModel"/>
+            <valueConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource viewModel}"/>
+        </Grid.DataContext>
 
         <!--<controls:Output Grid.Row="0" Grid.Column="0"
                          Grid.RowSpan="2" Grid.ColumnSpan="22" 
                          ScratchpadWidthInKeys="6"
                          NumberOfSuggestionsDisplayed="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" />-->
         <!--N.B. This MUST be TwoWay to detect changes to the DataContext used in the binding path-->
-        <controls:ExperimentalOutput Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="20" 
+        <controls:ExperimentalOutput Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20" 
                          ScratchpadWidthInKeysExperimental="6"
                          NumberOfSuggestionsDisplayedExperimental="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" />
         <!--N.B. This MUST be TwoWay to detect changes to the DataContext used in the binding path-->
@@ -154,7 +161,15 @@
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="ø"/>
 
+        <!--Shift-->
         <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
+        <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowShiftKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource ShiftIcon}"
+                      Text="{x:Static resx:Resources.SHIFT}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.LeftShiftKey}"/>
+        
         <controls:Key Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"
                       ShiftUpText="z" ShiftDownText="Z"
                       SharedSizeGroup="KeyWithSingleLetter"
@@ -183,65 +198,101 @@
                       ShiftUpText="m" ShiftDownText="M"
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="m"/>
+        <!--Backspace-->
+        <controls:Key Grid.Row="4" Grid.Column="16" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="4" Grid.Column="16" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowBackspaceKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource BackOneIcon}"
                       Text="{x:Static resx:Resources.BACK_ONE_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackOneKey}"/>
+        <!--Back-one-word-->
+        <controls:Key Grid.Row="4" Grid.Column="18" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="4" Grid.Column="18" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowBackOneWordKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource BackManyIcon}"
                       Text="{x:Static resx:Resources.BACK_WORD_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackManyKey}"/>
         <controls:Key Grid.Row="4" Grid.Column="20" Grid.ColumnSpan="2"/>
 
-        <controls:Key Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2"
-                      SymbolGeometry="{StaticResource CalibrateIcon}"
-                      Text="{x:Static resx:Resources.RE_CALIBRATE}"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.CalibrateKey}"/>
-        <controls:Key Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"
-                      SymbolGeometry="{StaticResource ShiftIcon}"
-                      Text="{x:Static resx:Resources.SHIFT}"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.LeftShiftKey}"/>
-        <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2"
-                      SymbolGeometry="{StaticResource NumericAndSymbolsIcon}"
-                      Text="{x:Static resx:Resources.NUM_SYM_SPLIT_WITH_NEWLINE}"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ConversationNumericAndSymbolsKeyboardKey}"/>
+        <!--Dwell time increase-->
+        <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowDwelltimeAdjustments, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      Text="+"
+                      SharedSizeGroup="KeyWithSingleLetter"
+                      Value="{x:Static models:KeyValues.IncreaseDwellTimeKey}"/>
+        
+        <!--Dwell time current value-->
+        <controls:Key Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <controls:QuestionText Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowDwelltimeAdjustments, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      Text="{Binding Path=KeySelectionTriggerFixationDefaultCompleteTimeInMs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=-1}"
+                               VerticalAlignment="Center"
+                               FontSize="100"/>
+        <!--Dwell time decrease-->
+        <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2"/>
+        <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Case="None"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowDwelltimeAdjustments, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      Text="-"
+                      SharedSizeGroup="KeyWithSingleLetter"
+                      Value="{x:Static models:KeyValues.DecreaseDwellTimeKey}"/>
+        
+        <!--Comma-->
+        <controls:Key Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Case="None"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableDotCommaApostrophe, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       Text=","
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value=","/>
+        <!--Space-->
         <controls:Key Grid.Row="5" Grid.Column="8" Grid.ColumnSpan="6"
                       SymbolGeometry="{StaticResource SpaceIcon}"
                       Text="{x:Static resx:Resources.SPACE}"
                       WidthSpan="2" 
                       SharedSizeGroup="KeyWithSymbol"
                       Value=" "/>
+        <!--Dot-->
+        <controls:Key Grid.Row="5" Grid.Column="14" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="14" Grid.ColumnSpan="2" Case="None"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableDotCommaApostrophe, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       Text="."
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="."/>
+        <!--Apostrophe-->
+        <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2" Case="None"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableDotCommaApostrophe, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       Text="'"
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="'"/>
+
+        <!--MultiKeySwipe feature-->
+        <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableMultikeySwipeFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource MultiKeySelectionIcon}"
                       Text="{x:Static resx:Resources.MULTI_KEY_SELECTION_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.MultiKeySelectionIsOnKey}"/>
+
+        <!--Quit key-->
+        <controls:Key Grid.Row="5" Grid.Column="20" Grid.ColumnSpan="2"/>
         <ContentControl Grid.Row="5" Grid.Column="20" Grid.ColumnSpan="2">
             <ContentControl.Style>
                 <Style TargetType="{x:Type ContentControl}">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <controls:Key SymbolGeometry="{StaticResource BackIcon}"
+                            <controls:Key SymbolGeometry="{StaticResource QuitIcon}"
+                                          Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowQuitKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                                          Text="{x:Static resx:Resources.QUIT}"
+                                          SharedSizeGroup="KeyWithSymbol"
+                                          Value="{x:Static models:KeyValues.QuitKey}"/>
+                            <!--<controls:Key SymbolGeometry="{StaticResource BackIcon}"
                                           Text="{x:Static resx:Resources.BACK}"
                                           SharedSizeGroup="KeyWithSymbol"
-                                          Value="{x:Static models:KeyValues.BackFromKeyboardKey}"/>
+                                          Value="{x:Static models:KeyValues.BackFromKeyboardKey}"/>-->
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
