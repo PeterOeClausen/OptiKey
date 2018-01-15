@@ -185,6 +185,7 @@
     <Compile Include="Enums\CursorPointPositions.cs" />
     <Compile Include="Enums\DataStreamProcessingLevels.cs" />
     <Compile Include="Enums\AutoCompleteMethods.cs" />
+    <Compile Include="Enums\ExperimentalKeybordLanguages.cs" />
     <Compile Include="Enums\MinimisedEdges.cs" />
     <Compile Include="Enums\Keyboards.cs" />
     <Compile Include="Enums\SymbolOrientations.cs" />
@@ -449,6 +450,9 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\Danish\Alpha.xaml.cs">
       <DependentUpon>Alpha.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml.cs">
+      <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Danish\ConversationAlpha.xaml.cs">
       <DependentUpon>ConversationAlpha.xaml</DependentUpon>
@@ -1070,6 +1074,10 @@
     <Page Include="UI\Views\Keyboards\Danish\Alpha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Views\Keyboards\Danish\ConversationAlpha.xaml">
       <SubType>Designer</SubType>

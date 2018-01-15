@@ -273,12 +273,12 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                 }
             }
-            else if (Keyboard is ViewModelKeyboards.Experimental)
+            else if (Keyboard is ViewModelKeyboards.Experimental) //Change to experimental keyboard language
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {
                     case Languages.DanishDenmark:
-                        newContent = new EnglishViews.ExperimentalKeyboard { DataContext = Keyboard };
+                        newContent = new DanishViews.ExperimentalKeyboard { DataContext = Keyboard };
                         break;
                     default:
                         newContent = Settings.Default.UseSimplifiedKeyboardLayout

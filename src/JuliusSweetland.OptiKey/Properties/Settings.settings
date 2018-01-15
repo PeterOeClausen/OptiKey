@@ -1040,5 +1040,8 @@
     <Setting Name="doLog_multiKeySelection" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="selectedExperimentalKeyboardLanguage" Type="JuliusSweetland.OptiKey.Enums.ExperimentalKeybordLanguages" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

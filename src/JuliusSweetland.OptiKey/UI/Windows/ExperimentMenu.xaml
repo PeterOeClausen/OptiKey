@@ -6,11 +6,15 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="630" Width="630"
+        Title="ExperimentMenu" Height="700" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer>
             <StackPanel>
+                <!--Language-->
+                <TextBlock Text="Change language here:"/>
+                <ComboBox ItemsSource="{Binding ExperimentalKeyboardLanguages}"
+                          SelectedItem="{Binding SelectedExperimentalKeyboardLanguage}"/>
                 <!--The .txt file from which phrases are used-->
                 <TextBlock Text="The .txt file from which phrases are used:"/>
                 <Grid>
@@ -112,6 +116,10 @@
                 <!--START EXPERIMENT-->
                 <Button Content="Start experiment" Margin="0,5,0,0"
                         Click="StartExperimentButton_Click"/>
+                
+                <!--DO SOMETHING-->
+                <Button Content="Change to conversation keyboard"
+                        Click="ChangeToConversationKeyboard_Click"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

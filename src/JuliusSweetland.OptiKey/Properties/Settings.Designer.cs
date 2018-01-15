@@ -1993,5 +1993,17 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["doLog_multiKeySelection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        public global::JuliusSweetland.OptiKey.Enums.ExperimentalKeybordLanguages selectedExperimentalKeyboardLanguage {
+            get {
+                return ((global::JuliusSweetland.OptiKey.Enums.ExperimentalKeybordLanguages)(this["selectedExperimentalKeyboardLanguage"]));
+            }
+            set {
+                this["selectedExperimentalKeyboardLanguage"] = value;
+            }
+        }
     }
 }
