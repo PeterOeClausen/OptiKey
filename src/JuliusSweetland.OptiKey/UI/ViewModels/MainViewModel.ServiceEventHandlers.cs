@@ -464,7 +464,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.DanishDenmark:
                     Log.Info("Changing keyboard language to DanishDenmark.");
+                    InputService.RequestSuspend(); //Reloading the dictionary locks the UI thread, so suspend input service to prevent accidental selections until complete
                     Settings.Default.KeyboardAndDictionaryLanguage = Languages.DanishDenmark;
+                    InputService.RequestResume();
                     Log.Info("Changing keyboard to Menu.");
                     Keyboard = new Menu(() => Keyboard = currentKeyboard);
                     break;

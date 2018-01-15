@@ -1,4 +1,6 @@
-﻿using JuliusSweetland.OptiKey.Properties;
+﻿using JuliusSweetland.OptiKey.Enums;
+using JuliusSweetland.OptiKey.Models;
+using JuliusSweetland.OptiKey.Properties;
 using JuliusSweetland.OptiKey.Services;
 using Prism.Mvvm;
 using System;
@@ -8,6 +10,37 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
     public class ExperimentMenuViewModel : BindableBase
     {
+        private Enums.ExperimentalKeybordLanguages selectedExperimentalKeyboardLanguage = Settings.Default.selectedExperimentalKeyboardLanguage;
+        public Enums.ExperimentalKeybordLanguages SelectedExperimentalKeyboardLanguage
+        {
+            get { return selectedExperimentalKeyboardLanguage; }
+            set
+            {
+                Console.WriteLine("ExperimentalKeybordLanguages set!");
+                selectedExperimentalKeyboardLanguage = value;
+                Settings.Default.selectedExperimentalKeyboardLanguage = value;
+                Enums.ExperimentalKeybordLanguages switchValue = value;
+                //Hoping this will change experimental keyboard:
+                switch (switchValue)
+                {
+                    case Enums.ExperimentalKeybordLanguages.English:
+                        InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.EnglishUK));
+                        break;
+                    case Enums.ExperimentalKeybordLanguages.Danish:
+                        InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.DanishDenmark));
+                        break;
+                }
+            }
+        }
+
+        public IEnumerable<Enums.ExperimentalKeybordLanguages> ExperimentalKeyboardLanguages
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Enums.ExperimentalKeybordLanguages)) as IEnumerable<Enums.ExperimentalKeybordLanguages>;
+            }
+        }
+
         private string phrasesFilePath = Settings.Default.ExperimentMenu_PhraseFilePath;
         public string PhrasesFilePath
         {
@@ -112,6 +145,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             set {
                 showQuitKey = value;
                 Settings.Default.ExperimentMenu_ShowQuitKey = value;
+            }
+        }
+        
+        private bool enableDotCommaApostrophe = Settings.Default.ExperimentMenu_EnableDotCommaApostrophe;
+        public bool EnableDotCommaApostrophe
+        {
+            get { return enableDotCommaApostrophe; }
+            set
+            {
+                enableDotCommaApostrophe = value;
+                Settings.Default.ExperimentMenu_EnableDotCommaApostrophe = value;
             }
         }
 

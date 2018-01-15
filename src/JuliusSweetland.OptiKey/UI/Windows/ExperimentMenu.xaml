@@ -6,13 +6,17 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
-        Title="ExperimentMenu" Height="630" Width="630"
+        Title="ExperimentMenu" Height="700" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer>
             <StackPanel>
+                <!--Language-->
+                <TextBlock Text="Change language here:"/>
+                <ComboBox ItemsSource="{Binding ExperimentalKeyboardLanguages}"
+                          SelectedItem="{Binding SelectedExperimentalKeyboardLanguage}"/>
                 <!--The .txt file from which phrases are used-->
-                <TextBlock Text="The .txt file from which phrases are used:"/>
+                <TextBlock Text="The .txt file from which phrases are used:" Margin="0,5,0,0"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -43,6 +47,8 @@
                 <CheckBox Content="Show shift key?"                  IsChecked="{Binding ShowShiftKey}"/>
                 <CheckBox Content="Show backspace key?"              IsChecked="{Binding ShowBackspaceKey}"/>
                 <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
+                <CheckBox Content="Show dot, comma and apostrophe?" IsChecked="{Binding EnableDotCommaApostrophe}"/>
+                <CheckBox Content="Show dwelltime adjustment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
                 <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>
                 <CheckBox Content="Enable MultiKey (Swipe) feature?" IsChecked="{Binding EnableMultikeySwipeFeature}"/>
                 
@@ -76,7 +82,6 @@
                         Mode=TwoWay, FallbackValue=-1, Converter={StaticResource TimeSpanToMilisecondsConverter}}"
                         Width="100" HorizontalAlignment="Left"/>
                 </Grid>
-                <CheckBox Content="Allow the user to adjust this setting during experiment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
                 <!--The OptiKey logs will be saved here-->
                 <TextBlock Text="The OptiKey logs will be saved here:" Margin="0,5,0,0"/>
                 <Grid>
