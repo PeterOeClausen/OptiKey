@@ -224,6 +224,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\UiElementExtensions.cs" />
     <Compile Include="Extensions\WindowExtensions.cs" />
+    <Compile Include="Models\DataLog.cs" />
     <Compile Include="Models\ILastMouseActionStateManager.cs" />
     <Compile Include="Models\KeyboardOutputServiceState.cs" />
     <Compile Include="Models\KeyStateServiceState.cs" />
