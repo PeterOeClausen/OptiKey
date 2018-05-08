@@ -148,6 +148,8 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         {
             if (MessageBox.Show(Properties.Resources.QUIT_MESSAGE, Properties.Resources.QUIT, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
+                //TODO: Ensure this is called if the program is closed by other means such as Alt+F4
+                CSVLogService.Instance.StopLogging();
                 Application.Current.Shutdown();
             }
         }

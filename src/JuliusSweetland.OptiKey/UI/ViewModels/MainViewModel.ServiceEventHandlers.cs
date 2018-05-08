@@ -13,6 +13,7 @@ using System.Diagnostics;
 using JuliusSweetland.OptiKey.Services;
 using JuliusSweetland.OptiKey.UI.Controls;
 using JuliusSweetland.OptiKey.UI.ViewModels.Management;
+using System.IO;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -280,6 +281,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
         public void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
         {
+            
             var currentKeyboard = Keyboard;
 
             switch (singleKeyValue.FunctionKey.Value)
