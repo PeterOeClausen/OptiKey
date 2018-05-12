@@ -119,26 +119,32 @@ namespace JuliusSweetland.OptiKey.Services
             doLog = false;
             if (gazeLogWriter != null)
             {
+                gazeLogWriter.Flush();
                 gazeLogWriter.Close();
             }
             if (scratchPadLogWriter != null)
             {
+                scratchPadLogWriter.Flush();
                 scratchPadLogWriter.Close();
             }
             if (phraseLogWriter != null)
             {
+                phraseLogWriter.Flush();
                 phraseLogWriter.Close();
             }
             if (keySelectionLogWriter != null)
             {
+                keySelectionLogWriter.Flush();
                 keySelectionLogWriter.Close();
             }
             if (userLooksAtKeyLogWriter != null)
             {
+                userLooksAtKeyLogWriter.Flush();
                 userLooksAtKeyLogWriter.Close();
             }
             if (multiKeySelectionLogWriter != null)
             {
+                multiKeySelectionLogWriter.Flush();
                 multiKeySelectionLogWriter.Close();
             }
         }
@@ -175,7 +181,7 @@ namespace JuliusSweetland.OptiKey.Services
             scratchPadLogWriter = new StreamWriter(scratchPadLogFilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = String.Format("{0},{1}/n",
+            var firstLine = String.Format("{0},{1}",
                 "systemTimeStamp", "scratchPadText");
             scratchPadLogWriter.WriteLine(firstLine);
         }
@@ -210,7 +216,7 @@ namespace JuliusSweetland.OptiKey.Services
             userLooksAtKeyLogWriter = new StreamWriter(userLooksAtKeyLogFilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1},{2}/n", "systemTimeStamp", "key", "progressInPercent");
+            var firstLine = string.Format("{0},{1},{2}", "systemTimeStamp", "key", "progressInPercent");
             userLooksAtKeyLogWriter.WriteLine(firstLine);
         }
 
@@ -221,7 +227,7 @@ namespace JuliusSweetland.OptiKey.Services
             multiKeySelectionLogWriter = new StreamWriter(multiKeySelectionLogFilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}/n", "systemTimeStamp", "key(s)");
+            var firstLine = string.Format("{0},{1}", "systemTimeStamp", "key(s)");
             multiKeySelectionLogWriter.WriteLine(firstLine);
         }
 
