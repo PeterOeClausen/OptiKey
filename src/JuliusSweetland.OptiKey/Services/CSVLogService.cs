@@ -22,7 +22,6 @@ namespace JuliusSweetland.OptiKey.Services
         public bool doLogKeySelection = Settings.Default.doLogKeySelection;
         public bool doLog_userLooksAtKey = Settings.Default.doLog_userLooksAtKey;
         public bool doLog_multiKeySelection = Settings.Default.doLog_multiKeySelection;
-
         
         //private string optiKeyLogPath = 
         public string OptiKeyLogPath {
@@ -116,6 +115,7 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void StopLogging()
         {
+            Console.WriteLine("Stop logging function is entered");
             doLog = false;
             if (gazeLogWriter != null)
             {
@@ -201,11 +201,11 @@ namespace JuliusSweetland.OptiKey.Services
         private void create_KeySelectionLog()
         {
             //Create log file:
-            string keySelectionLogFilePath = logDirectoryForThisRun + @"\KeySelectionLog-" + fileFriendlyDate + ".csv";
+            string keySelectionLogFilePath = logDirectoryForThisRun + @"\key_selection_log-" + fileFriendlyDate + ".csv";
             keySelectionLogWriter = new StreamWriter(keySelectionLogFilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}","systemTimeStamp", "keySelected");
+            var firstLine = string.Format("{0},{1},{2}", "systemTimeStamp", "key", "progressInPercent");
             keySelectionLogWriter.WriteLine(firstLine);
         }
 

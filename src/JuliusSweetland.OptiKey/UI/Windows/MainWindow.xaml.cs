@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using JuliusSweetland.OptiKey.Enums;
@@ -144,12 +145,13 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             Log.Info("ToggleManualMode complete.");
         }
 
-        private void Quit()
+        public void Quit()
         {
             if (MessageBox.Show(Properties.Resources.QUIT_MESSAGE, Properties.Resources.QUIT, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 //TODO: Ensure this is called if the program is closed by other means such as Alt+F4
                 CSVLogService.Instance.StopLogging();
+                Console.WriteLine("Application is ending");
                 Application.Current.Shutdown();
             }
         }

@@ -11,6 +11,7 @@ using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 using System.Diagnostics;
 using JuliusSweetland.OptiKey.Services;
+using JuliusSweetland.OptiKey.UI.Windows;
 using JuliusSweetland.OptiKey.UI.Controls;
 using JuliusSweetland.OptiKey.UI.ViewModels.Management;
 using System.IO;
@@ -1609,7 +1610,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         () =>
                         {
                             Keyboard = new YesNoQuestion(Resources.QUIT_CONFIRMATION_MESSAGE,
-                                () => Application.Current.Shutdown(),
+                                () => 
+                                {
+                                    CSVLogService.Instance.StopLogging();
+                                    Application.Current.Shutdown();
+                                },
                                 () => { Keyboard = keyboardBeforeQuit; });
                         },
                         () => { Keyboard = keyboardBeforeQuit; });

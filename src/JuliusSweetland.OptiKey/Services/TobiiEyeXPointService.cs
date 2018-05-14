@@ -14,7 +14,6 @@ namespace JuliusSweetland.OptiKey.Services
 {
     public class TobiiEyeXPointService : IPointService
     {
-        string FileName;
         #region Fields
 
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -38,15 +37,11 @@ namespace JuliusSweetland.OptiKey.Services
             {
                 if (EyeXHost != null)
                 {
-                    FileName = "C:\\Users\\taba\\Desktop\\helloDu.csv";
-                    string FileWrite = "";
-                    FileWrite = string.Format("Hello \n how, may, I, help, you \n sir");
-                    File.WriteAllText(FileName, FileWrite);
-
                     Log.Info("Disposing of the EyeXHost.");
                     EyeXHost.Dispose();
                     EyeXHost = null;
                 }
+                
             };
         }
 
