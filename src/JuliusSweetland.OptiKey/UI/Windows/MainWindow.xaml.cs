@@ -31,6 +31,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         private readonly InteractionRequest<NotificationWithServicesAndState> managementWindowRequest;
         private readonly ICommand managementWindowRequestCommand;
         private readonly ICommand toggleManualModeCommand;
+        private readonly ICommand backCommand;
         private readonly ICommand quitCommand;
 
         public MainWindow(
@@ -53,6 +54,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             managementWindowRequestCommand = new DelegateCommand(RequestManagementWindow);
             toggleManualModeCommand = new DelegateCommand(ToggleManualMode, () => !(defaultPointSource is MousePositionSource));
             quitCommand = new DelegateCommand(Quit);
+            backCommand = new DelegateCommand(Back);
 
             //Setup key binding (Alt+M and Shift+Alt+M) to open settings
             InputBindings.Add(new KeyBinding
@@ -83,6 +85,10 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             });
 
             Title = string.Format(Properties.Resources.WINDOW_TITLE, DiagnosticInfo.AssemblyVersion);
+
+            //Set the window size to 0x0 as this prevents a flicker where OptiKey would be displayed in the default position and then repositioned
+            Width = 0;
+            Height = 0;
         }
 
         public IWindowManipulationService WindowManipulationService { get; set; }
@@ -91,6 +97,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         public ICommand ManagementWindowRequestCommand { get { return managementWindowRequestCommand; } }
         public ICommand ToggleManualModeCommand { get { return toggleManualModeCommand; } }
         public ICommand QuitCommand { get { return quitCommand; } }
+        public ICommand BackCommand { get { return backCommand; } }
 
         private void RequestManagementWindow()
         {
@@ -127,18 +134,21 @@ namespace JuliusSweetland.OptiKey.UI.Windows
         {
             Log.Info("ToggleManualMode called.");
 
-            var mainViewModel = MainView.DataContext as MainViewModel;
-            if (mainViewModel != null)
+            if (MessageBox.Show(Properties.Resources.MANUAL_MODE_MESSAGE, Properties.Resources.MANUAL_MODE, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                inputService.RequestSuspend();
-                mainViewModel.DetachInputServiceEventHandlers();
-                var changingToManualMode = inputService.PointSource == defaultPointSource;
-                inputService.PointSource = changingToManualMode ? manualModePointSource : defaultPointSource;
-                mainViewModel.AttachInputServiceEventHandlers();
-                mainViewModel.RaiseToastNotification(Properties.Resources.MANUAL_MODE_CHANGED,
-                    changingToManualMode ? Properties.Resources.MANUAL_MODE_ENABLED : Properties.Resources.MANUAL_MODE_DISABLED, 
-                    NotificationTypes.Normal, () => inputService.RequestResume());
-                mainViewModel.ManualModeEnabled = changingToManualMode;
+                var mainViewModel = MainView.DataContext as MainViewModel;
+                if (mainViewModel != null)
+                {
+                    inputService.RequestSuspend();
+                    mainViewModel.DetachInputServiceEventHandlers();
+                    var changingToManualMode = inputService.PointSource == defaultPointSource;
+                    inputService.PointSource = changingToManualMode ? manualModePointSource : defaultPointSource;
+                    mainViewModel.AttachInputServiceEventHandlers();
+                    mainViewModel.RaiseToastNotification(Properties.Resources.MANUAL_MODE_CHANGED,
+                        changingToManualMode ? Properties.Resources.MANUAL_MODE_ENABLED : Properties.Resources.MANUAL_MODE_DISABLED,
+                        NotificationTypes.Normal, () => inputService.RequestResume());
+                    mainViewModel.ManualModeEnabled = changingToManualMode;
+                }
             }
 
             Log.Info("ToggleManualMode complete.");
@@ -150,6 +160,15 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        private void Back()
+        {
+            var mainViewModel = MainView.DataContext as MainViewModel;
+            if (null != mainViewModel)
+            {
+                mainViewModel.BackFromKeyboard();   
+            }            
         }
     }
 }

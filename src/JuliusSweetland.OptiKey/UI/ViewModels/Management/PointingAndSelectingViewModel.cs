@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using JuliusSweetland.OptiKey.Enums;
 using JuliusSweetland.OptiKey.Extensions;
 using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Properties;
 using log4net;
 using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using JuliusSweetland.OptiKey.Services;
 
@@ -19,7 +19,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         #endregion
-        
+
         #region Ctor
 
         public PointingAndSelectingViewModel()
@@ -30,18 +30,18 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             Settings.Default.PropertyChanged += new PropertyChangedEventHandler(dwellTimeChanged);
 
             //Set up property defaulting logic
-            this.OnPropertyChanges(vm => vm.KeySelectionTriggerSource).Subscribe(ts => 
+            this.OnPropertyChanges(vm => vm.KeySelectionTriggerSource).Subscribe(ts =>
             {
-                switch(ts) 
+                switch (ts)
                 {
                     case Enums.TriggerSources.Fixations:
                         MultiKeySelectionTriggerStopSignal = Enums.TriggerStopSignals.NextHigh;
-                    break;
+                        break;
 
                     case Enums.TriggerSources.KeyboardKeyDownsUps:
                     case Enums.TriggerSources.MouseButtonDownUps:
                         MultiKeySelectionTriggerStopSignal = Enums.TriggerStopSignals.NextLow;
-                    break;
+                        break;
                 }
             });
 
@@ -63,9 +63,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 }
             });
         }
-        
+
         #endregion
-        
+
         #region Properties
 
         public List<KeyValuePair<string, PointsSources>> PointsSources
@@ -82,6 +82,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiEyeTracker4C.ToDescription(), Enums.PointsSources.TobiiEyeTracker4C),
                     new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiEyeX.ToDescription(), Enums.PointsSources.TobiiEyeX),
                     new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiPcEyeGo.ToDescription(), Enums.PointsSources.TobiiPcEyeGo),
+                    new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiPcEyeGoPlus.ToDescription(), Enums.PointsSources.TobiiPcEyeGoPlus),
                     new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiPcEyeMini.ToDescription(), Enums.PointsSources.TobiiPcEyeMini),
                     new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiRex.ToDescription(), Enums.PointsSources.TobiiRex),
                     new KeyValuePair<string, PointsSources>(Enums.PointsSources.TobiiX2_30.ToDescription(), Enums.PointsSources.TobiiX2_30),
@@ -90,7 +91,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 };
             }
         }
-        
+
         public List<KeyValuePair<string, TriggerSources>> TriggerSources
         {
             get
@@ -117,17 +118,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 };
             }
         }
-        
+
         public List<Keys> Keys
         {
             get { return Enum.GetValues(typeof(Enums.Keys)).Cast<Enums.Keys>().OrderBy(k => k.ToString()).ToList(); }
         }
-        
+
         public List<MouseButtons> MouseButtons
         {
             get { return Enum.GetValues(typeof(Enums.MouseButtons)).Cast<Enums.MouseButtons>().OrderBy(mb => mb.ToString()).ToList(); }
         }
-        
+
         public List<KeyValuePair<string, TriggerStopSignals>> TriggerStopSignals
         {
             get
@@ -152,7 +153,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 };
             }
         }
-        
+
         private PointsSources pointSource;
         public PointsSources PointsSource
         {
@@ -163,7 +164,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
         private DataStreamProcessingLevels tobiiEyeXProcessingLevel;
         public DataStreamProcessingLevels TobiiEyeXProcessingLevel
         {
-            get {  return tobiiEyeXProcessingLevel; }
+            get { return tobiiEyeXProcessingLevel; }
             set { SetProperty(ref tobiiEyeXProcessingLevel, value); }
         }
 
@@ -187,14 +188,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             get { return pointsMousePositionHideCursor; }
             set { SetProperty(ref pointsMousePositionHideCursor, value); }
         }
-        
+
         private double pointTtlInMs;
         public double PointTtlInMs
         {
             get { return pointTtlInMs; }
             set { SetProperty(ref pointTtlInMs, value); }
         }
-        
+
         private TriggerSources keySelectionTriggerSource;
         public TriggerSources KeySelectionTriggerSource
         {
@@ -215,7 +216,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             get { return keySelectionTriggerMouseDownUpButton; }
             set { SetProperty(ref keySelectionTriggerMouseDownUpButton, value); }
         }
-        
+
         private double keySelectionTriggerFixationLockOnTimeInMs;
         public double KeySelectionTriggerFixationLockOnTimeInMs
         {
@@ -343,7 +344,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             get { return multiKeySelectionFixationMinDwellTimeInMs; }
             set { SetProperty(ref multiKeySelectionFixationMinDwellTimeInMs, value); }
         }
-        
+
         private double multiKeySelectionMaxDurationInMs;
         public double MultiKeySelectionMaxDurationInMs
         {
@@ -388,9 +389,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     || Settings.Default.MultiKeySelectionMaxDuration != TimeSpan.FromMilliseconds(MultiKeySelectionMaxDurationInMs);
             }
         }
-        
+
         #endregion
-        
+
         #region Methods
 
         private void dwellTimeChanged(object sender, PropertyChangedEventArgs e)
@@ -477,16 +478,18 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
             {
                 new KeyValueAndTimeSpanGroup(Resources.CHANGE_KEYBOARD_KEY_GROUP, new List<KeyValueAndTimeSpan>
                 {
-                    new KeyValueAndTimeSpan(Resources.ALPHA, KeyValues.AlphaKeyboardKey, dictionary.ContainsKey(KeyValues.AlphaKeyboardKey) ? dictionary[KeyValues.AlphaKeyboardKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.ALPHA_1, KeyValues.Alpha1KeyboardKey, dictionary.ContainsKey(KeyValues.Alpha1KeyboardKey) ? dictionary[KeyValues.Alpha1KeyboardKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.ALPHA_2, KeyValues.Alpha2KeyboardKey, dictionary.ContainsKey(KeyValues.Alpha2KeyboardKey) ? dictionary[KeyValues.Alpha2KeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.BACK, KeyValues.BackFromKeyboardKey, dictionary.ContainsKey(KeyValues.BackFromKeyboardKey) ? dictionary[KeyValues.BackFromKeyboardKey] : (TimeSpan?)null),
-                    new KeyValueAndTimeSpan(Resources.CONVERSATION_ALPHA, KeyValues.ConversationAlphaKeyboardKey, dictionary.ContainsKey(KeyValues.ConversationAlphaKeyboardKey) ? dictionary[KeyValues.ConversationAlphaKeyboardKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.CONVERSATION_ALPHA_1, KeyValues.ConversationAlpha1KeyboardKey, dictionary.ContainsKey(KeyValues.ConversationAlpha1KeyboardKey) ? dictionary[KeyValues.ConversationAlpha1KeyboardKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.CONVERSATION_ALPHA_2, KeyValues.ConversationAlpha2KeyboardKey, dictionary.ContainsKey(KeyValues.ConversationAlpha2KeyboardKey) ? dictionary[KeyValues.ConversationAlpha2KeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.CONVERSATION_NUMERIC_AND_SYMBOLS, KeyValues.ConversationNumericAndSymbolsKeyboardKey, dictionary.ContainsKey(KeyValues.ConversationNumericAndSymbolsKeyboardKey) ? dictionary[KeyValues.ConversationNumericAndSymbolsKeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.CURRENCIES_1, KeyValues.Currencies1KeyboardKey, dictionary.ContainsKey(KeyValues.Currencies1KeyboardKey) ? dictionary[KeyValues.Currencies1KeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.CURRENCIES_2, KeyValues.Currencies2KeyboardKey, dictionary.ContainsKey(KeyValues.Currencies2KeyboardKey) ? dictionary[KeyValues.Currencies2KeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.DIACRITICS_1, KeyValues.Diacritic1KeyboardKey, dictionary.ContainsKey(KeyValues.Diacritic1KeyboardKey) ? dictionary[KeyValues.Diacritic1KeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.DIACRITICS_2, KeyValues.Diacritic2KeyboardKey, dictionary.ContainsKey(KeyValues.Diacritic2KeyboardKey) ? dictionary[KeyValues.Diacritic2KeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.DIACRITICS_3, KeyValues.Diacritic3KeyboardKey, dictionary.ContainsKey(KeyValues.Diacritic3KeyboardKey) ? dictionary[KeyValues.Diacritic3KeyboardKey] : (TimeSpan?)null),
-                    new KeyValueAndTimeSpan(Resources.LANGUAGE_UPPER_CASE, KeyValues.LanguageKeyboardKey, dictionary.ContainsKey(KeyValues.LanguageKeyboardKey) ? dictionary[KeyValues.LanguageKeyboardKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.LANGUAGE_AND_VOICE_UPPER_CASE, KeyValues.LanguageKeyboardKey, dictionary.ContainsKey(KeyValues.LanguageKeyboardKey) ? dictionary[KeyValues.LanguageKeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.MENU, KeyValues.MenuKeyboardKey, dictionary.ContainsKey(KeyValues.MenuKeyboardKey) ? dictionary[KeyValues.MenuKeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.MOUSE, KeyValues.MouseKeyboardKey, dictionary.ContainsKey(KeyValues.MouseKeyboardKey) ? dictionary[KeyValues.MouseKeyboardKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.NUMBERS_SYMBOLS_1, KeyValues.NumericAndSymbols1KeyboardKey, dictionary.ContainsKey(KeyValues.NumericAndSymbols1KeyboardKey) ? dictionary[KeyValues.NumericAndSymbols1KeyboardKey] : (TimeSpan?)null),
@@ -511,10 +514,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     new KeyValueAndTimeSpan(Resources.ENGLISH_CANADA, KeyValues.EnglishCanadaKey, dictionary.ContainsKey(KeyValues.EnglishCanadaKey) ? dictionary[KeyValues.EnglishCanadaKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.ENGLISH_UK, KeyValues.EnglishUKKey, dictionary.ContainsKey(KeyValues.EnglishUKKey) ? dictionary[KeyValues.EnglishUKKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.ENGLISH_US, KeyValues.EnglishUSKey, dictionary.ContainsKey(KeyValues.EnglishUSKey) ? dictionary[KeyValues.EnglishUSKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.FRENCH_CANADA, KeyValues.FrenchCanadaKey, dictionary.ContainsKey(KeyValues.FrenchCanadaKey) ? dictionary[KeyValues.FrenchCanadaKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.FRENCH_FRANCE, KeyValues.FrenchFranceKey, dictionary.ContainsKey(KeyValues.FrenchFranceKey) ? dictionary[KeyValues.FrenchFranceKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.GERMAN_GERMANY, KeyValues.GermanGermanyKey, dictionary.ContainsKey(KeyValues.GermanGermanyKey) ? dictionary[KeyValues.GermanGermanyKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.GREEK_GREECE, KeyValues.GreekGreeceKey, dictionary.ContainsKey(KeyValues.GreekGreeceKey) ? dictionary[KeyValues.GreekGreeceKey] : (TimeSpan?) null),
                     new KeyValueAndTimeSpan(Resources.ITALIAN_ITALY, KeyValues.ItalianItalyKey, dictionary.ContainsKey(KeyValues.ItalianItalyKey) ? dictionary[KeyValues.ItalianItalyKey] : (TimeSpan?) null),
+                    new KeyValueAndTimeSpan(Resources.JAPANESE_JAPAN, KeyValues.JapaneseJapanKey, dictionary.ContainsKey(KeyValues.JapaneseJapanKey) ? dictionary[KeyValues.JapaneseJapanKey] : (TimeSpan?) null),
+                    new KeyValueAndTimeSpan(Resources.KOREAN_KOREA, KeyValues.KoreanKoreaKey, dictionary.ContainsKey(KeyValues.KoreanKoreaKey) ? dictionary[KeyValues.KoreanKoreaKey] : (TimeSpan?) null),
+                    new KeyValueAndTimeSpan(Resources.POLISH_POLAND, KeyValues.PolishPolandKey, dictionary.ContainsKey(KeyValues.PolishPolandKey) ? dictionary[KeyValues.PolishPolandKey] : (TimeSpan?) null),
                     new KeyValueAndTimeSpan(Resources.PORTUGUESE_PORTUGAL, KeyValues.PortuguesePortugalKey, dictionary.ContainsKey(KeyValues.PortuguesePortugalKey) ? dictionary[KeyValues.PortuguesePortugalKey] : (TimeSpan?) null),
                     new KeyValueAndTimeSpan(Resources.RUSSIAN_RUSSIA, KeyValues.RussianRussiaKey, dictionary.ContainsKey(KeyValues.RussianRussiaKey) ? dictionary[KeyValues.RussianRussiaKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.SLOVAK_SLOVAKIA, KeyValues.SlovakSlovakiaKey, dictionary.ContainsKey(KeyValues.SlovakSlovakiaKey) ? dictionary[KeyValues.SlovakSlovakiaKey] : (TimeSpan?)null),
@@ -522,9 +529,18 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     new KeyValueAndTimeSpan(Resources.SPANISH_SPAIN, KeyValues.SpanishSpainKey, dictionary.ContainsKey(KeyValues.SpanishSpainKey) ? dictionary[KeyValues.SpanishSpainKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.TURKISH_TURKEY, KeyValues.TurkishTurkeyKey, dictionary.ContainsKey(KeyValues.TurkishTurkeyKey) ? dictionary[KeyValues.TurkishTurkeyKey] : (TimeSpan?)null),
                 }),
+                new KeyValueAndTimeSpanGroup(Resources.LOOK_TO_SCROLL_KEY_GROUP, new List<KeyValueAndTimeSpan>
+                {
+                    new KeyValueAndTimeSpan(Resources.LOOK_TO_SCROLL_ACTIVE_KEY_GROUP_LABEL, KeyValues.LookToScrollActiveKey, dictionary.ContainsKey(KeyValues.LookToScrollActiveKey) ? dictionary[KeyValues.LookToScrollActiveKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.LOOK_TO_SCROLL_BOUNDS_KEY_GROUP_LABEL, KeyValues.LookToScrollBoundsKey, dictionary.ContainsKey(KeyValues.LookToScrollBoundsKey) ? dictionary[KeyValues.LookToScrollBoundsKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.LOOK_TO_SCROLL_INCREMENT_KEY_GROUP_LABEL, KeyValues.LookToScrollIncrementKey, dictionary.ContainsKey(KeyValues.LookToScrollIncrementKey) ? dictionary[KeyValues.LookToScrollIncrementKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.LOOK_TO_SCROLL_MODE_KEY_GROUP_LABEL, KeyValues.LookToScrollModeKey, dictionary.ContainsKey(KeyValues.LookToScrollModeKey) ? dictionary[KeyValues.LookToScrollModeKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.LOOK_TO_SCROLL_SPEED_KEY_GROUP_LABEL, KeyValues.LookToScrollSpeedKey, dictionary.ContainsKey(KeyValues.LookToScrollSpeedKey) ? dictionary[KeyValues.LookToScrollSpeedKey] : (TimeSpan?)null),
+                }),
                 new KeyValueAndTimeSpanGroup(Resources.MISC_ACTIONS_KEY_GROUP, new List<KeyValueAndTimeSpan>
                 {
                     new KeyValueAndTimeSpan(Resources.ADD_TO_DICTIONARY, KeyValues.AddToDictionaryKey, dictionary.ContainsKey(KeyValues.AddToDictionaryKey) ? dictionary[KeyValues.AddToDictionaryKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.ATTENTION, KeyValues.AttentionKey, dictionary.ContainsKey(KeyValues.AttentionKey) ? dictionary[KeyValues.AttentionKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.BACK_WORD, KeyValues.BackManyKey, dictionary.ContainsKey(KeyValues.BackManyKey) ? dictionary[KeyValues.BackManyKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.BACK_ONE, KeyValues.BackOneKey, dictionary.ContainsKey(KeyValues.BackOneKey) ? dictionary[KeyValues.BackOneKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.RE_CALIBRATE, KeyValues.CalibrateKey, dictionary.ContainsKey(KeyValues.CalibrateKey) ? dictionary[KeyValues.CalibrateKey] : (TimeSpan?)null),
@@ -532,9 +548,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                     new KeyValueAndTimeSpan(Resources.DECREASE_OPACITY, KeyValues.DecreaseOpacityKey, dictionary.ContainsKey(KeyValues.DecreaseOpacityKey) ? dictionary[KeyValues.DecreaseOpacityKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.INCREASE_OPACITY, KeyValues.IncreaseOpacityKey, dictionary.ContainsKey(KeyValues.IncreaseOpacityKey) ? dictionary[KeyValues.IncreaseOpacityKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.MINIMISE, KeyValues.MinimiseKey, dictionary.ContainsKey(KeyValues.MinimiseKey) ? dictionary[KeyValues.MinimiseKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.MORE_UPPER_CASE, KeyValues.MoreKey, dictionary.ContainsKey(KeyValues.MoreKey) ? dictionary[KeyValues.MoreKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.MULTI_KEY_SELECTION_UPPER_CASE, KeyValues.MultiKeySelectionIsOnKey, dictionary.ContainsKey(KeyValues.MultiKeySelectionIsOnKey) ? dictionary[KeyValues.MultiKeySelectionIsOnKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.NO, KeyValues.NoQuestionResultKey, dictionary.ContainsKey(KeyValues.NoQuestionResultKey) ? dictionary[KeyValues.NoQuestionResultKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.QUIT, KeyValues.QuitKey, dictionary.ContainsKey(KeyValues.QuitKey) ? dictionary[KeyValues.QuitKey] : (TimeSpan?)null),
+                    new KeyValueAndTimeSpan(Resources.SELECT_VOICE, KeyValues.SelectVoiceKey, dictionary.ContainsKey(KeyValues.SelectVoiceKey) ? dictionary[KeyValues.SelectVoiceKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.SLEEP, KeyValues.SleepKey, dictionary.ContainsKey(KeyValues.SleepKey) ? dictionary[KeyValues.SleepKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.SPEAK, KeyValues.SpeakKey, dictionary.ContainsKey(KeyValues.SpeakKey) ? dictionary[KeyValues.SpeakKey] : (TimeSpan?)null),
                     new KeyValueAndTimeSpan(Resources.YES, KeyValues.YesQuestionResultKey, dictionary.ContainsKey(KeyValues.YesQuestionResultKey) ? dictionary[KeyValues.YesQuestionResultKey] : (TimeSpan?)null),
@@ -661,7 +679,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
                 })
             };
         }
-        
+
         private SerializableDictionaryOfTimeSpanByKeyValues ToSetting(
             IEnumerable<KeyValueAndTimeSpanGroup> groups)
         {
