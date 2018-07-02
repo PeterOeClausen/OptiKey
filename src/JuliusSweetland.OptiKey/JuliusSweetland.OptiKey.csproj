@@ -240,7 +240,7 @@
     <Compile Include="Enums\CursorPointPositions.cs" />
     <Compile Include="Enums\DataStreamProcessingLevels.cs" />
     <Compile Include="Enums\SuggestionMethods.cs" />
-	<Compile Include="Enums\ExperimentalKeybordLanguages.cs" />
+    <Compile Include="Enums\ExperimentalKeybordLanguages.cs" />
     <Compile Include="Enums\MinimisedEdges.cs" />
     <Compile Include="Enums\Keyboards.cs" />
     <Compile Include="Enums\SymbolOrientations.cs" />
@@ -350,11 +350,12 @@
     <Compile Include="Services\Audio\SoundPlayerEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\PhraseStateService.cs" />
     <Compile Include="Services\Suggestions\IManagedSuggestions.cs" />
     <Compile Include="Services\Suggestions\BasicAutoComplete.cs" />
     <Compile Include="Services\Suggestions\ISuggestions.cs" />
     <Compile Include="Services\Suggestions\NGramAutoComplete.cs" />
-	<Compile Include="Services\CSVLogService.cs" />
+    <Compile Include="Services\CSVLogService.cs" />
     <Compile Include="Services\ICalibrationService.cs" />
     <Compile Include="Services\IMouseOutputService.cs" />
     <Compile Include="Services\INotifyErrors.cs" />
@@ -419,9 +420,10 @@
     <Compile Include="UI\Controls\KeyboardView.cs" />
     <Compile Include="UI\Controls\DynamicKeyboard.cs" />
     <Compile Include="UI\Controls\DynamicKeyboardSelector.cs" />
-	<Compile Include="UI\Controls\ExperimentalOutput.xaml.cs">
+    <Compile Include="UI\Controls\ExperimentalOutput.xaml.cs">
       <DependentUpon>ExperimentalOutput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\PhraseTextBlock.cs" />
     <Compile Include="UI\Controls\ToastNotification.cs" />
     <Compile Include="UI\Controls\Cursor.cs" />
     <Compile Include="UI\Controls\ToastNotificationPopup.cs" />
@@ -439,6 +441,7 @@
     <Compile Include="UI\Controls\KeyboardHost.cs" />
     <Compile Include="UI\ValueConverters\CommuniKateTwoColoursToForegroundBrush.cs" />
     <Compile Include="UI\ValueConverters\ColourNameToBrush.cs" />
+    <Compile Include="UI\ValueConverters\ConvertToStarGridLength.cs" />
     <Compile Include="UI\ValueConverters\EnumMapper.cs" />
     <Compile Include="UI\ValueConverters\EnumToVisibilityConverter.cs" />
     <Compile Include="UI\ValueConverters\InsertNewlinesBetweenWords.cs" />
@@ -568,7 +571,7 @@
     <Compile Include="UI\Views\Keyboards\Danish\ConversationAlpha1.xaml.cs">
       <DependentUpon>ConversationAlpha1.xaml</DependentUpon>
     </Compile>
-	<Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml.cs">
+    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml.cs">
       <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\CommuniKate.xaml.cs">
@@ -580,7 +583,7 @@
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalConversationAlpha1.xaml.cs">
       <DependentUpon>AlphabeticalConversationAlpha1.xaml</DependentUpon>
     </Compile>
-	<Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml.cs">
+    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml.cs">
       <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\SimplifiedConversationAlpha1.xaml.cs">
@@ -1350,7 +1353,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-	<Page Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml">
+    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

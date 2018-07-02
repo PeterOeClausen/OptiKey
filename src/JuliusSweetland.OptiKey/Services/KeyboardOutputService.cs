@@ -635,7 +635,7 @@ namespace JuliusSweetland.OptiKey.Services
                 }
 
                 //Log Multikey result here.
-                string keyString = modifiedCaptureText;
+                string keyString = newTextModified;
                 if (keyString != null)
                 {
                     switch (keyString)

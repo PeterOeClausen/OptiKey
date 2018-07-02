@@ -72,7 +72,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
 
                     //Log easily readable key progression:
-                    string keyString = progress.Item1.Value.String;
+                    string keyString = progress.Item1.String;
                     if(keyString != null)
                     { 
                         switch(keyString)

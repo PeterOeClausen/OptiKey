@@ -352,9 +352,9 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                     default:
                         newContent = Settings.Default.UseSimplifiedKeyboardLayout
-                            ? (object)new EnglishViews.SimplifiedConversationAlpha { DataContext = Keyboard }
+                            ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
                             : Settings.Default.UseAlphabeticalKeyboardLayout
-                            ? (object)new EnglishViews.AlphabeticalConversationAlpha { DataContext = Keyboard }
+                            ? (object)new EnglishViews.AlphabeticalConversationAlpha1 { DataContext = Keyboard }
                             : new EnglishViews.ExperimentalKeyboard { DataContext = Keyboard };
                         break;
                 }
@@ -570,7 +570,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                     currentKeyboardKeyValueSubscriptions.Add(keyValueChangedSubscription);
                     }
                 }
-            }
+            
 
             //Adding ScratchPad to the pointToKeyValueMap  if it is visibile in UI.
             if (allScratchPads.Count > 0)
