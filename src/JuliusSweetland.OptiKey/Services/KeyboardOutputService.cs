@@ -132,9 +132,8 @@ namespace JuliusSweetland.OptiKey.Services
                     break;
 
                 case FunctionKeys.BackOne:
-                    var backOneCount = string.IsNullOrEmpty(lastTextChange)
-                        ? 1 //Default to removing one character if no lastTextChange
-                        : lastTextChange.Length;
+
+                    var backOneCount = 1;
 
                     var textChangedByBackOne = false;
 

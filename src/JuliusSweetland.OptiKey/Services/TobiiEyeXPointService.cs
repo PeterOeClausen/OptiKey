@@ -7,6 +7,8 @@ using log4net;
 using Tobii.EyeX.Client;
 using Tobii.EyeX.Framework;
 using JuliusSweetland.OptiKey.Properties;
+using System.IO;
+using System.Diagnostics;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -39,6 +41,7 @@ namespace JuliusSweetland.OptiKey.Services
                     EyeXHost.Dispose();
                     EyeXHost = null;
                 }
+                
             };
         }
 
@@ -116,6 +119,7 @@ namespace JuliusSweetland.OptiKey.Services
 
                         fixationDataStream.Next += (s, data) =>
                         {
+                            Debug.WriteLine("Tobii point event: " + data);
                             if (pointEvent != null
                                 && !double.IsNaN(data.X)
                                 && !double.IsNaN(data.Y))

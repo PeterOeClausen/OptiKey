@@ -37,7 +37,7 @@ namespace JuliusSweetland.OptiKey.Services
             Application.Current.Exit += (sender, args) =>
             {
                 if (GazeManager.Instance.IsActivated)
-                {
+                {   
                     Log.Info("Deactivating TheEyeTribe's GazeManager.");
                     GazeManager.Instance.Deactivate();
                 }
