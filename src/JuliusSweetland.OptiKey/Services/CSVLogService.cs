@@ -332,7 +332,8 @@ namespace JuliusSweetland.OptiKey.Services
                 now.Hour + "-" +
                 now.Minute + "-" +
                 now.Second + "-" +
-                now.Millisecond;
+                //delete ToString part after exhibition : tbafna
+                now.Millisecond.ToString("D3");
         }
 
         #endregion
