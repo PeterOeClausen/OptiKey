@@ -10,6 +10,7 @@
         d:DataContext="{d:DesignInstance {x:Type ViewModels:ExperimentMenuViewModel}}"
         Title="ExperimentMenu" Height="700" Width="630"
         WindowStartupLocation="CenterScreen">
+    <!--A summer change!-->
     <Grid>
         <ScrollViewer>
             <StackPanel>
