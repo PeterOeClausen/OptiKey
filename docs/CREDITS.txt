@@ -30,6 +30,11 @@ Patrons (thank you very much for sponsoring this project)
   Luis Pohoski
   Juniichi Odagiri
   Brian Bourne
+  Alan Dickson
+  Independent Living Centre Tasmania Inc
+  Sam Meier
+  Peter Evans
+  SuJin Lee
   
 Fonts
   Roboto - Under the Apache Licence ("Roboto Font - Apache License.txt")
@@ -37,9 +42,13 @@ Fonts
 
 Icons
   Add To Dictionary icon modified from: Book by Danilo Gusmão Silveira from the Noun Project (thenounproject.com)
+  Alarm icon from: Bell by Adiyogi from the Noun Project (thenounproject.com)
   Back icon: Arrow by Jamison Wieser from the Noun Project (thenounproject.com)
   Backspace (Single) icon: appbar.clear.reflect.horizontal from Modern UI Icons - modernuiicons.com
   Backspace (Multiple) icon modified from: appbar.clear.reflect.horizontal from Modern UI Icons - modernuiicons.com
+  Browser Home Icon made by Freepik from www.flaticon.com
+  Browser other icons made by the user who asked for a web browsing keyboard
+  Browser Web Icon made by Freepik from www.flaticon.com
   Calibrate icon: Location by Klara Zalokar from the Noun Project (thenounproject.com)
   Clear icon: Trash by Garrett Knoll from the Noun Project (thenounproject.com)
   Collapse Dock, Dock, Expand Dock, Float, Minimise icons modified from: Rotate by Austin Andrews from the Noun Project (thenounproject.com)
@@ -55,6 +64,8 @@ Icons
   Left, Right, Up, Down arrow key icons modified from: Arrow by Milo Miloezger from the Noun Project (thenounproject.com)
   Lock icon: Lock by Ugur Akdemir from the Noun Project (thenounproject.com)
   Lock Bar icon modified from: Minus by Icomatic from the Noun Project (thenounproject.com)
+  Look to Scroll Active & Speed icons modified from: Arrow by Milo Miloezger from the Noun Project (thenounproject.com)
+  Look to Scroll Mode icons modified from: Move by TukTuk Design from the Noun Project (thenounproject.com)
   Main application icon: Eye by Adame Dahmani from the Noun Project (thenounproject.com)
   Management Console icon: Settings by Mundo from the Noun Project (thenounproject.com)
   Menu icon: Menu by Jamison Wieser from the Noun Project (thenounproject.com)
@@ -101,6 +112,8 @@ Scott Logic for his excellent work on the circular progress bar (http://www.scot
 d.moncada for their custom caret tutorial which inspired the CaretElement text box behaviour (http://www.codeproject.com/Articles/633935/Customizing-the-Caret-of-a-WPF-TextBox)
 
 michaelnoonan (and any other contributors) for the Windows Input Simulator (http://inputsimulator.codeplex.com/)
+
+Korean dictionary "Frequency of modern Korean usage" in 2005, by "National Institute of Korean Language"
 
 My wife Kate for keeping a convincing "tell me more" face on every time I talk about this too much.
 

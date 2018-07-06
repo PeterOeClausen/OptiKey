@@ -21,7 +21,7 @@ namespace JuliusSweetland.OptiKey.Observables.PointSources
         private readonly KalmanFilter kalmanFilterX;
         private readonly KalmanFilter kalmanFilterY;
 
-        private IObservable<Timestamped<PointAndKeyValue?>> sequence;
+        private IObservable<Timestamped<PointAndKeyValue>> sequence;
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace JuliusSweetland.OptiKey.Observables.PointSources
 
         public Dictionary<Rect, KeyValue> PointToKeyValueMap { private get; set; }
 
-        public IObservable<Timestamped<PointAndKeyValue?>> Sequence
+        public IObservable<Timestamped<PointAndKeyValue>> Sequence
         {
             get
             {
@@ -60,10 +60,10 @@ namespace JuliusSweetland.OptiKey.Observables.PointSources
                         .Select(ep => Settings.Default.KalmanFilterEnabled && pointGeneratingService.KalmanFilterSupported
                             ? new Timestamped<Point>(new Point((int)kalmanFilterX.Update(ep.EventArgs.Value.X), (int)kalmanFilterY.Update(ep.EventArgs.Value.Y)), ep.EventArgs.Timestamp)
                             : ep.EventArgs
-                        ) //Projects each element of an observable sequence into a new form with the specified source and selector.
+                        )  //Projects each element of an observable sequence into a new form with the specified source and selector.
                         .PublishLivePointsOnly(pointTtl) //	Returns a connectable observable sequence that shares a single subscription to the underlying sequence.
-                        .Select(tp => new Timestamped<PointAndKeyValue?>(tp.Value.ToPointAndKeyValue(PointToKeyValueMap), tp.Timestamp)) //Projects each element of an observable sequence into a new form with the specified source and selector.
-                        .Replay(1) //Buffer one value for every subscriber so there is always a 'most recent' point available // Returns a connectable observable sequence that shares a single subscription to the underlying sequence replaying all notifications.
+                        .Select(tp => new Timestamped<PointAndKeyValue>(tp.Value.ToPointAndKeyValue(PointToKeyValueMap), tp.Timestamp)) //Projects each element of an observable sequence into a new form with the specified source and selector.
+                        .Replay(1) //Buffer one value for every subscriber so there is always a 'most recent' point available
                         .RefCount(); //	Returns an observable sequence that stays connected to the source as long as there is at least one subscription to the observable sequence.
                 }
                 return sequence;
