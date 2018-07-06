@@ -218,13 +218,13 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackManyKey}"/>
 
-        <!--Dwell time increase-->
+        <!--Dwell time decrease-->
         <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowDwelltimeAdjustments, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
-                      Text="+"
+                      Text="-"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="{x:Static models:KeyValues.IncreaseDwellTimeKey}"/>
+                      Value="{x:Static models:KeyValues.DecreaseDwellTimeKey}"/>
 
         <!--Dwell time current value-->
         <controls:Key Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"/>
@@ -234,13 +234,13 @@
                                VerticalAlignment="Center"
                                FontSize="100"/>
 
-        <!--Dwell time decrease-->
+        <!--Dwell time increase-->
         <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Case="None"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowDwelltimeAdjustments, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
-                      Text="-"
+                      Text="+"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="{x:Static models:KeyValues.DecreaseDwellTimeKey}"/>
+                      Value="{x:Static models:KeyValues.IncreaseDwellTimeKey}"/>
 
         <!--Comma-->
         <controls:Key Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2"/>
