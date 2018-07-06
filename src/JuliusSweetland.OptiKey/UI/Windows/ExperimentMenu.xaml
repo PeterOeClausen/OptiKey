@@ -6,6 +6,8 @@
         xmlns:valueConverters="clr-namespace:JuliusSweetland.OptiKey.UI.ValueConverters"
         xmlns:settings="clr-namespace:JuliusSweetland.OptiKey.Properties"
         mc:Ignorable="d"
+        xmlns:ViewModels="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels"
+        d:DataContext="{d:DesignInstance {x:Type ViewModels:ExperimentMenuViewModel}}"
         Title="ExperimentMenu" Height="700" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
