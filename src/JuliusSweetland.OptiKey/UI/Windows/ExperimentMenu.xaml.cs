@@ -68,6 +68,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);
             CSVLogService.Instance.StartLogging();
 
+            //Changing main window to ExperimentalKeyboard:
             mainWindow.Show();
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
             if (this.viewModel.EnableMultikeySwipeFeature)
