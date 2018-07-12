@@ -2,8 +2,10 @@
 using JuliusSweetland.OptiKey.Properties;
 using System;
 using System.IO;
+using System.Text;
 using System.Windows;
 using TETCSharpClient.Data;
+using Tobii.Research;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -12,20 +14,36 @@ namespace JuliusSweetland.OptiKey.Services
     /// </summary>
     public class CSVLogService
     {
+        #region Fields
         private bool doLog = false;                 //Change to true to log
 
-        public bool doLogGazeData = Settings.Default.doLogGazeData;
-        public bool doLogScratchPadText = Settings.Default.doLogScratchPadText;
-        public bool doLogPhraseText = Settings.Default.doLogPhraseText;
-        public bool doLogKeySelection = Settings.Default.doLogKeySelection;
-        public bool doLog_userLooksAtKey = Settings.Default.doLog_userLooksAtKey;
-        public bool doLog_multiKeySelection = Settings.Default.doLog_multiKeySelection;
+        public bool doLog_EyeTribeGazeData = Settings.Default.doLog_EyeTribeGazeData;
+        public bool doLog_ScratchPadText = Settings.Default.doLog_ScratchPadText;
+        public bool doLog_PhraseText = Settings.Default.doLog_PhraseText;
+        public bool doLog_KeySelection = Settings.Default.doLog_KeySelection;
+        public bool doLog_UserLooksAtKey = Settings.Default.doLog_UserLooksAtKey;
+        public bool doLog_MultiKeySelection = Settings.Default.doLog_MultiKeySelection;
+        public bool doLog_TobiiGazeData = Settings.Default.doLog_TobiiGazeData;
 
-        //private string optiKeyLogPath = 
-        public string OptiKeyLogPath {
-            get {
+        private string logDirectoryForThisRun;
+        private string fileFriendlyDate;
+        
+        StreamWriter gazeLogWriter;
+        StreamWriter scratchPadLogWriter;
+        StreamWriter phraseLogWriter;
+        StreamWriter keySelectionLogWriter;
+        StreamWriter userLooksAtKeyLogWriter;
+        StreamWriter multiKeySelectionLogWriter;
+        StreamWriter tobiiGazeLogWriter;
+        #endregion
+
+        #region Properties
+        public string OptiKeyLogPath
+        {
+            get
+            {
                 string logPathFromSettings = Settings.Default.ExperimentMenu_OptiKeyLogPath;
-                if(!Directory.Exists(logPathFromSettings))
+                if (!Directory.Exists(logPathFromSettings))
                 {
                     //Reset to desktop:
                     Settings.Default.ExperimentMenu_OptiKeyLogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "OptiKeyLogs");
@@ -33,25 +51,19 @@ namespace JuliusSweetland.OptiKey.Services
                 }
                 return logPathFromSettings;
             }
-            set{
+            set
+            {
                 string path = value;
-                if(!Directory.Exists(path))
+                if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
-                
+
                 Settings.Default.ExperimentMenu_OptiKeyLogPath = path;
             }
         }
-        private string logDirectoryForThisRun;
-        private string fileFriendlyDate;
 
-        private string gazeLogFilePath;             //File path for GazeLog-YYMMDDHHMMSS.csv
-        private string scratchPadLogFilePath;       //File path for ScratchPadLog-YYMMDDHHMMSS.csv
-        private string phraseLogFilePath;           //File path for PhraseLog-YYMMDDHHMMSS.csv
-        private string keySelectionLog_FilePath;    //File path for KeyStrokesLog-YYMMDDHHMMSS.csv
-        private string userLooksAtKey_LogFilePath;  //File path for UserLooksInScratchpadLog-YYMMDDHHMMSS.csv
-        private string multiKeySelection_LogFilePath;
+        #endregion
 
         #region Singleton pattern
         private static CSVLogService instance;
@@ -81,40 +93,86 @@ namespace JuliusSweetland.OptiKey.Services
             logDirectoryForThisRun = OptiKeyLogPath + @"\" + fileFriendlyDate;
             Directory.CreateDirectory(logDirectoryForThisRun);
 
-            if (doLogGazeData)
+            //Creates logs if they are needed:
+            if (doLog_EyeTribeGazeData)
             {
                 create_GazeLog();
             }
-            if (doLogScratchPadText)
+            if (doLog_ScratchPadText)
             {
                 create_ScratchPadLog();
             }
-            if (doLogPhraseText)
+            if (doLog_PhraseText)
             {
                 create_PhraseLog();
             }
-            if (doLogKeySelection)
+            if (doLog_KeySelection)
             {
                 create_KeySelectionLog();
             }
-            if (doLog_userLooksAtKey)
+            if (doLog_UserLooksAtKey)
             {
                 create_userLooksAtKey_Log();
             }
-            if (doLog_multiKeySelection)
+            if (doLog_MultiKeySelection)
             {
                 create_multiKeySelection_Log();
+            }
+            if (doLog_TobiiGazeData)
+            {
+                create_TobiiGazeLog();
             }
 
             //Start logging:
             doLog = true;
+        }
+
+        public void StopLogging()
+        {
+            Console.WriteLine("Stop logging function is entered");
+            doLog = false;
+            if (gazeLogWriter != null)
+            {
+                gazeLogWriter.Flush();
+                gazeLogWriter.Close();
+            }
+            if (scratchPadLogWriter != null)
+            {
+                scratchPadLogWriter.Flush();
+                scratchPadLogWriter.Close();
+            }
+            if (phraseLogWriter != null)
+            {
+                phraseLogWriter.Flush();
+                phraseLogWriter.Close();
+            }
+            if (keySelectionLogWriter != null)
+            {
+                keySelectionLogWriter.Flush();
+                keySelectionLogWriter.Close();
+            }
+            if (userLooksAtKeyLogWriter != null)
+            {
+                userLooksAtKeyLogWriter.Flush();
+                userLooksAtKeyLogWriter.Close();
+            }
+            if (multiKeySelectionLogWriter != null)
+            {
+                multiKeySelectionLogWriter.Flush();
+                multiKeySelectionLogWriter.Close();
+            }
+            if (tobiiGazeLogWriter != null)
+            {
+                tobiiGazeLogWriter.Flush();
+                tobiiGazeLogWriter.Close();
+            }
         }
         #endregion
 
         #region Constructor
         private CSVLogService()  
         {
-            
+            Application.Current.Exit += (sender, args) => { StopLogging(); };
         }
         #endregion
 
@@ -122,79 +180,90 @@ namespace JuliusSweetland.OptiKey.Services
         private void create_GazeLog()
         {
             //Create log file:
-            gazeLogFilePath = logDirectoryForThisRun + @"\GazeLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(gazeLogFilePath);
-            file.Close();
+            string eyeTribeGazeLog_FilePath = logDirectoryForThisRun + @"\GazeLog-" + fileFriendlyDate + ".csv";
+            gazeLogWriter = new StreamWriter(eyeTribeGazeLog_FilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}\n",
+            var firstLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}",
                 "systemTimeStamp", "dataTimeStamp", "dataIsFixated", "dataState", "dataSmoothedCoordinateX", "dataSmoothedCoordinateY", "dataRawCoordiateX", "dataRawCoordiateY",
                 "leftPupilCenterCoordinateX", "leftPupilCenterCoordinateY", "leftPupilSize", "leftRawCoordinateX", "leftRawCoordinateY", "leftSmoothedCoordinateX", 
                 "leftSmoothedCoordinateY", "rightPupilCenterCoordinateX", "rightPupilCenterCoordinateY", "rightPupilSize", "rightRawCoordinateX", "rightRawCoordinateY", 
                 "rightSmoothedCoordinateX", "rightSmoothedCoordinateY");
-            File.AppendAllText(gazeLogFilePath, firstLine);
+            gazeLogWriter.WriteLine(firstLine);
         }
 
         private void create_ScratchPadLog()
         {
             //Create log file:
-            scratchPadLogFilePath = logDirectoryForThisRun + @"\ScratchPadLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(scratchPadLogFilePath);
-            file.Close();
+            string scratchPadLog_FilePath = logDirectoryForThisRun + @"\ScratchPadLog-" + fileFriendlyDate + ".csv";
+            scratchPadLogWriter = new StreamWriter(scratchPadLog_FilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}\n",
+            var firstLine = string.Format("{0},{1}",
                 "systemTimeStamp", "scratchPadText");
-            File.AppendAllText(scratchPadLogFilePath, firstLine);
+            scratchPadLogWriter.WriteLine(firstLine);
         }
 
         private void create_PhraseLog()
         {
             //Create log file:
-            phraseLogFilePath = logDirectoryForThisRun + @"\PhraseLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(phraseLogFilePath);
-            file.Close();
+            string phraseLog_FilePath = logDirectoryForThisRun + @"\PhraseLog-" + fileFriendlyDate + ".csv";
+            phraseLogWriter = new StreamWriter(phraseLog_FilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}\n",
+            var firstLine = string.Format("{0},{1}",
                 "systemTimeStamp", "phraseText");
-            File.AppendAllText(phraseLogFilePath, firstLine);
+            phraseLogWriter.WriteLine(firstLine);
         }
 
         private void create_KeySelectionLog()
         {
             //Create log file:
-            keySelectionLog_FilePath = logDirectoryForThisRun + @"\KeySelectionLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(keySelectionLog_FilePath);
-            file.Close();
+            string keySelectionLog_FilePath = logDirectoryForThisRun + @"\KeySelectionLog-" + fileFriendlyDate + ".csv";
+            keySelectionLogWriter = new StreamWriter(keySelectionLog_FilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}\n","systemTimeStamp", "keySelected");
-            File.AppendAllText(keySelectionLog_FilePath, firstLine);
+            var firstLine = string.Format("{0},{1}","systemTimeStamp", "keySelected");
+            keySelectionLogWriter.WriteLine(firstLine);
         }
 
         private void create_userLooksAtKey_Log()
         {
             //Create log file:
-            userLooksAtKey_LogFilePath = logDirectoryForThisRun + @"\user_looks_at_key_log-" + fileFriendlyDate + ".csv";
-            var file = File.Create(userLooksAtKey_LogFilePath);
-            file.Close();
+            string userLooksAtKeyLog_FilePath = logDirectoryForThisRun + @"\user_looks_at_key_log-" + fileFriendlyDate + ".csv";
+            userLooksAtKeyLogWriter = new StreamWriter(userLooksAtKeyLog_FilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1},{2}\n", "systemTimeStamp", "key", "progressInPercent");
-            File.AppendAllText(userLooksAtKey_LogFilePath, firstLine);
+            var firstLine = string.Format("{0},{1},{2}", "systemTimeStamp", "key", "progressInPercent");
+            userLooksAtKeyLogWriter.WriteLine(firstLine);
         }
 
         private void create_multiKeySelection_Log()
         {
             //Create log file:
-            multiKeySelection_LogFilePath = logDirectoryForThisRun + @"\multiKeySelectionLog-" + fileFriendlyDate + ".csv";
-            var file = File.Create(multiKeySelection_LogFilePath);
-            file.Close();
+            string multiKeySelectionLog_FilePath = logDirectoryForThisRun + @"\multiKeySelectionLog-" + fileFriendlyDate + ".csv";
+            multiKeySelectionLogWriter = new StreamWriter(multiKeySelectionLog_FilePath, false, Encoding.UTF8);
 
             //Writing first line:
-            var firstLine = string.Format("{0},{1}\n", "systemTimeStamp", "key(s)");
-            File.AppendAllText(multiKeySelection_LogFilePath, firstLine);
+            var firstLine = string.Format("{0},{1}", "systemTimeStamp", "key(s)");
+            multiKeySelectionLogWriter.WriteLine(firstLine);
+        }
+
+        private void create_TobiiGazeLog()
+        {
+            //Create log file:
+            string tobiiGazeLog_FilePath = logDirectoryForThisRun + @"\tobiiGazeLog-" + fileFriendlyDate + ".csv";
+            tobiiGazeLogWriter = new StreamWriter(tobiiGazeLog_FilePath, false, Encoding.UTF8);
+
+            //Writing first line:
+
+            var firstLine = String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31}",
+                "SystemTimeStamp", "DeviceTimeStamp", "LeftGazeOriginValidity", "LeftGazeOriginUCSx", "LeftGazeOriginUCSy", "LeftGazeOriginUCSz", "LeftGazeOriginTBCSx", "LeftGazeOriginTBCSy", "LeftGazeOriginTBCSz",
+                "RightGazeOriginValidity", "RightGazeOriginUCSx", "RightGazeOriginUCSy", "RightGazeOriginUCSz", "RightGazeOriginTBCSx", "RightGazeOriginTBCSy", "RightGazeOriginTBCSz",
+                "LeftGazePointValidity", "LeftGazePointUCSx", "LeftGazePointUCSy", "LeftGazePointUCSz", "LeftGazePointADCSx", "LeftGazePointADCSy",
+                "RightGazePointValidity", "RightGazePointUCSx", "RightGazePointUCSy", "RightGazePointUCSz", "RightGazePointADCSx", "RightGazePointADCSy",
+                "LeftPupilValidity", "LeftPupilDiameter", "RightPupilValidity", "RightPupilDiameter");
+            tobiiGazeLogWriter.WriteLine(firstLine);
         }
 
         #endregion
@@ -204,9 +273,9 @@ namespace JuliusSweetland.OptiKey.Services
         /// Logs GazeData from Services/TheEyeTribePointService.cs
         /// </summary>
         /// <param name="data"></param>
-        public void Log_Gazedata(GazeData data)
+        public void Log_EyeTribeGazedata(GazeData data)
         {
-            if (doLog && doLogGazeData)
+            if (doLog && doLog_EyeTribeGazeData)
             {
                 //Getting system datetime:
                 string systemTimeStamp = getNowAsString();
@@ -239,13 +308,13 @@ namespace JuliusSweetland.OptiKey.Services
                 double rightSmoothedCoordinateY = data.RightEye.SmoothedCoordinates.Y;
 
                 //Creating new line:
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}\n",
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}",
                     systemTimeStamp, dataTimeStamp, dataIsFixated, dataState, dataSmoothedCoordinateX, dataSmoothedCoordinateY, dataRawCoordiateX, dataRawCoordiateY,
                     leftPupilCenterCoordinateX, leftPupilCenterCoordinateY, leftPupilSize, leftRawCoordinateX, leftRawCoordinateY, leftSmoothedCoordinateX, leftSmoothedCoordinateY,
                     rightPupilCenterCoordinateX, rightPupilCenterCoordinateY, rightPupilSize, rightRawCoordinateX, rightRawCoordinateY, rightSmoothedCoordinateX, rightSmoothedCoordinateY);
 
                 //Log data:
-                File.AppendAllText(gazeLogFilePath, newLine);
+                gazeLogWriter.WriteLine(newLine);
             }
         }
 
@@ -255,10 +324,10 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="value"></param>
         public void Log_ScratchPadText(string value)
         {
-            if (doLog && doLogScratchPadText)
+            if (doLog && doLog_ScratchPadText)
             {
-                var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
-                File.AppendAllText(scratchPadLogFilePath, newLine);
+                var newLine = string.Format("{0},{1}", getNowAsString(), value);
+                scratchPadLogWriter.WriteLine(newLine);
             }
         }
 
@@ -268,10 +337,10 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="value"></param>
         public void Log_PhraseText(string value)
         {   
-            if (doLog && doLogPhraseText)
+            if (doLog && doLog_PhraseText)
             {
-                var newLine = string.Format("{0},{1}\n", getNowAsString(), value);
-                File.AppendAllText(phraseLogFilePath, newLine);
+                var newLine = string.Format("{0},{1}", getNowAsString(), value);
+                phraseLogWriter.WriteLine(newLine);
             }  
         }
 
@@ -281,10 +350,10 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="keySelection"></param>
         public void Log_KeySelection(string keySelection)
         {
-            if (doLog && doLogKeySelection)
+            if (doLog && doLog_KeySelection)
             {
-                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
-                File.AppendAllText(keySelectionLog_FilePath, newLine);
+                var newLine = string.Format("{0},{1}", getNowAsString(), keySelection);
+                keySelectionLogWriter.WriteLine(newLine);
             }   
         }
 
@@ -296,11 +365,11 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="progress"></param>
         public void Log_KeyProgression(string key, double progress)
         {
-            if(doLog && doLog_userLooksAtKey)
+            if(doLog && doLog_UserLooksAtKey)
             {
-                var newLine = string.Format("{0},{1},{2}\n", getNowAsString(), key, progress);
+                var newLine = string.Format("{0},{1},{2}", getNowAsString(), key, progress);
                 //Log data:
-                File.AppendAllText(userLooksAtKey_LogFilePath, newLine);
+                userLooksAtKeyLogWriter.WriteLine(newLine);
             }
         }
 
@@ -311,11 +380,53 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="keySelection"></param>
         public void Log_MultiKeySelection(string keySelection)
         {
-            if(doLog && doLog_multiKeySelection)
+            if(doLog && doLog_MultiKeySelection)
             {
                 //Log data:
-                var newLine = string.Format("{0},{1}\n", getNowAsString(), keySelection);
-                File.AppendAllText(multiKeySelection_LogFilePath, newLine);
+                var newLine = string.Format("{0},{1}", getNowAsString(), keySelection);
+                multiKeySelectionLogWriter.WriteLine(newLine);
+            }
+        }
+
+        public void Log_TobiiGazeData(GazeDataEventArgs data)
+        {
+            if (doLog && doLog_TobiiGazeData)
+            {
+                var newline = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31}",
+                    DateTime.Now.ToString("o"),
+                    data.DeviceTimeStamp,
+                    data.LeftEye.GazeOrigin.Validity,
+                    data.LeftEye.GazeOrigin.PositionInUserCoordinates.X,
+                    data.LeftEye.GazeOrigin.PositionInUserCoordinates.Y,
+                    data.LeftEye.GazeOrigin.PositionInUserCoordinates.Z,
+                    data.LeftEye.GazeOrigin.PositionInTrackBoxCoordinates.X,
+                    data.LeftEye.GazeOrigin.PositionInTrackBoxCoordinates.Y,
+                    data.LeftEye.GazeOrigin.PositionInTrackBoxCoordinates.Z,
+                    data.RightEye.GazeOrigin.Validity,
+                    data.RightEye.GazeOrigin.PositionInUserCoordinates.X,
+                    data.RightEye.GazeOrigin.PositionInUserCoordinates.Y,
+                    data.RightEye.GazeOrigin.PositionInUserCoordinates.Z,
+                    data.RightEye.GazeOrigin.PositionInTrackBoxCoordinates.X,
+                    data.RightEye.GazeOrigin.PositionInTrackBoxCoordinates.Y,
+                    data.RightEye.GazeOrigin.PositionInTrackBoxCoordinates.Z,
+                    data.LeftEye.GazePoint.Validity,
+                    data.LeftEye.GazePoint.PositionInUserCoordinates.X,
+                    data.LeftEye.GazePoint.PositionInUserCoordinates.Y,
+                    data.LeftEye.GazePoint.PositionInUserCoordinates.Z,
+                    data.LeftEye.GazePoint.PositionOnDisplayArea.X,
+                    data.LeftEye.GazePoint.PositionOnDisplayArea.Y,
+                    data.RightEye.GazePoint.Validity,
+                    data.RightEye.GazePoint.PositionInUserCoordinates.X,
+                    data.RightEye.GazePoint.PositionInUserCoordinates.Y,
+                    data.RightEye.GazePoint.PositionInUserCoordinates.Z,
+                    data.RightEye.GazePoint.PositionOnDisplayArea.X,
+                    data.RightEye.GazePoint.PositionOnDisplayArea.Y,
+                    data.LeftEye.Pupil.Validity,
+                    data.LeftEye.Pupil.PupilDiameter,
+                    data.RightEye.Pupil.Validity,
+                    data.RightEye.Pupil.PupilDiameter);
+
+                tobiiGazeLogWriter.WriteLine(newline);
             }
         }
         #endregion
@@ -324,16 +435,7 @@ namespace JuliusSweetland.OptiKey.Services
 
         private string getNowAsString()
         {
-            DateTime now = DateTime.Now;
-            return "" +
-                now.Year + "-" +
-                now.Month + "-" +
-                now.Day + "-" +
-                now.Hour + "-" +
-                now.Minute + "-" +
-                now.Second + "-" +
-                //delete ToString part after exhibition : tbafna
-                now.Millisecond.ToString("D3");
+            return DateTime.Now.ToString("o");
         }
 
         #endregion
