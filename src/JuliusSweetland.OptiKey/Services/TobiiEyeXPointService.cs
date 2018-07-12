@@ -23,7 +23,8 @@ namespace JuliusSweetland.OptiKey.Services
 
         private event EventHandler<Timestamped<Point>> pointEvent;
 
-        static readonly string TobiiLicense = @"C:\DTU\Github\TobiiLicense.txt";
+        static readonly string TobiiLicense = Settings.Default.TobiiLicenseFilePath;
+        //static readonly string TobiiLicense = @"C:\DTU\Github\TobiiLicense.txt";
 
         #endregion
 
@@ -47,30 +48,32 @@ namespace JuliusSweetland.OptiKey.Services
 
             //Initializing Tobii research framework in order to log gaze data:
             ResearchEyeTracker = EyeTrackingOperations.FindAllEyeTrackers().FirstOrDefault();
-
-            // If the license is successfully applied:
-            ResearchLicenseWasSucessfullyApplied = ApplyLicense(ResearchEyeTracker, TobiiLicense);
-            if (ResearchLicenseWasSucessfullyApplied)
+            if(ResearchEyeTracker != null)
             {
-                Console.WriteLine("Applied research license sucessfully.");
-                ResearchEyeTracker.GazeDataReceived += OnGazeUpdate;
-                ResearchEyeTracker.ConnectionLost += (s, e) => Console.WriteLine("Connection to the Tobii tracker was lost!");
-                ResearchEyeTracker.ConnectionRestored += (s, e) => Console.WriteLine("Connection to the Tobii tracker restored!");
-                ResearchEyeTracker.DeviceFaults += (s, e) => Console.WriteLine("There was a device fault with the Tobii tracker:\n" + e.Faults);
-                ResearchEyeTracker.DeviceWarnings += (s, e) => Console.WriteLine("There was a device warning from the Tobii tracker:\n" + e.Warnings);
-                Application.Current.Exit += (sender, args) =>
+                // If the license is successfully applied:
+                ResearchLicenseWasSucessfullyApplied = ApplyLicense(ResearchEyeTracker, TobiiLicense);
+                if (ResearchLicenseWasSucessfullyApplied)
                 {
-                    if (ResearchEyeTracker != null)
+                    Console.WriteLine("Applied research license sucessfully.");
+                    ResearchEyeTracker.GazeDataReceived += OnGazeUpdate;
+                    ResearchEyeTracker.ConnectionLost += (s, e) => Console.WriteLine("Connection to the Tobii tracker was lost!");
+                    ResearchEyeTracker.ConnectionRestored += (s, e) => Console.WriteLine("Connection to the Tobii tracker restored!");
+                    ResearchEyeTracker.DeviceFaults += (s, e) => Console.WriteLine("There was a device fault with the Tobii tracker:\n" + e.Faults);
+                    ResearchEyeTracker.DeviceWarnings += (s, e) => Console.WriteLine("There was a device warning from the Tobii tracker:\n" + e.Warnings);
+                    Application.Current.Exit += (sender, args) =>
                     {
-                        Log.Info("Disposing of the ResearchEyeTracker.");
-                        ResearchEyeTracker.Dispose();
-                        ResearchEyeTracker = null;
-                    }
-                };
-            }
-            else
-            {
-                Console.WriteLine("Could not apply research license.");
+                        if (ResearchEyeTracker != null)
+                        {
+                            Log.Info("Disposing of the ResearchEyeTracker.");
+                            ResearchEyeTracker.Dispose();
+                            ResearchEyeTracker = null;
+                        }
+                    };
+                }
+                else
+                {
+                    Console.WriteLine("Could not apply research license.");
+                }
             }
         }
 

@@ -99,6 +99,25 @@
                             Grid.Column="1"
                             Click="ChangeOptiKeyLogsFolder_Click"/>
                 </Grid>
+                <!--Tobii lisence file path-->
+                <TextBlock Text="Tobii lisence file path:" Margin="0,5,0,0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding TobiiLicenseFilePath}"
+                               Background="#FFF7F7F7" 
+                               VerticalAlignment="Center" 
+                               Grid.Column="0"/>
+                    <Button Content="Change file" 
+                            Grid.Column="1"
+                            Click="ChangeTobiiLicenseFilePathButton_Click"/>
+                    <Button Content="Reset to default"
+                            Grid.Column="2"
+                            Click="ResetTobiiLicenseFilePathButton_Click"/>
+                </Grid>
                 <!--Choose what to log:-->
                 <TextBlock Text="Choose what to log:" Margin="0,5,0,0"/>
                 <StackPanel>

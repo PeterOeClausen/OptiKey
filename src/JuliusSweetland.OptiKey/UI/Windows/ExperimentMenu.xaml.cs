@@ -63,6 +63,37 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             viewModel.PhrasesFilePath = "default_phrases.txt";
         }
 
+        private void ChangeTobiiLicenseFilePathButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".txt";
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+
+                Console.WriteLine("File name chosen: " + filename);
+
+                //Update label and settings:
+                viewModel.TobiiLicenseFilePath = filename;
+            }
+        }
+
+        private void ResetTobiiLicenseFilePathButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Update label and settings:
+            //Console.WriteLine(Path.GetFullPath(Path.Combine(currentPath, @"..\..\..\TobiiLicense.txt")));
+            viewModel.TobiiLicenseFilePath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\TobiiLicense.txt"));
+        }
+
         private void StartExperimentButton_Click(object sender, RoutedEventArgs e)
         {
             InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);

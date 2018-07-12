@@ -214,6 +214,21 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        private string tobiiLicenseFilePath = Settings.Default.TobiiLicenseFilePath;
+        public string TobiiLicenseFilePath
+        {
+            get { return tobiiLicenseFilePath; }
+            set
+            {
+                SetProperty(ref tobiiLicenseFilePath, value);
+                Settings.Default.TobiiLicenseFilePath = value;
+
+                // Restart application if the tobii lisense file path is changed
+                System.Windows.Forms.Application.Restart();
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
+
         #region Choose what to log booleans
         public bool DoLog_TobiiGazeData
         {

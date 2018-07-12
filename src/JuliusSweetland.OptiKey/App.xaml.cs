@@ -654,6 +654,7 @@ namespace JuliusSweetland.OptiKey
                 case PointsSources.TobiiPcEyeMini:
                 case PointsSources.TobiiX2_30:
                 case PointsSources.TobiiX2_60:
+                    //Settings.Default.TobiiLicenseFilePath = @"C:\DTU\Github\TobiiLicense.txt";
                     var tobiiEyeXPointService = new TobiiEyeXPointService();
                     var tobiiEyeXCalibrationService = calibrationService as TobiiEyeXCalibrationService;
                     if (tobiiEyeXCalibrationService != null)
