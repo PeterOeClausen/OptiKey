@@ -7,6 +7,8 @@ using log4net;
 using Tobii.EyeX.Client;
 using Tobii.EyeX.Framework;
 using JuliusSweetland.OptiKey.Properties;
+using Tobii.Research;
+using System.Linq;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -20,6 +22,8 @@ namespace JuliusSweetland.OptiKey.Services
         private FixationDataStream fixationDataStream;
 
         private event EventHandler<Timestamped<Point>> pointEvent;
+
+        static readonly string TobiiLicense = @"C:\DTU\Github\TobiiLicense.txt";
 
         #endregion
 
@@ -40,6 +44,34 @@ namespace JuliusSweetland.OptiKey.Services
                     EyeXHost = null;
                 }
             };
+
+            //Initializing Tobii research framework in order to log gaze data:
+            ResearchEyeTracker = EyeTrackingOperations.FindAllEyeTrackers().FirstOrDefault();
+
+            // If the license is successfully applied:
+            ResearchLicenseWasSucessfullyApplied = ApplyLicense(ResearchEyeTracker, TobiiLicense);
+            if (ResearchLicenseWasSucessfullyApplied)
+            {
+                Console.WriteLine("Applied research license sucessfully.");
+                ResearchEyeTracker.GazeDataReceived += OnGazeUpdate;
+                ResearchEyeTracker.ConnectionLost += (s, e) => Console.WriteLine("Connection to the Tobii tracker was lost!");
+                ResearchEyeTracker.ConnectionRestored += (s, e) => Console.WriteLine("Connection to the Tobii tracker restored!");
+                ResearchEyeTracker.DeviceFaults += (s, e) => Console.WriteLine("There was a device fault with the Tobii tracker:\n" + e.Faults);
+                ResearchEyeTracker.DeviceWarnings += (s, e) => Console.WriteLine("There was a device warning from the Tobii tracker:\n" + e.Warnings);
+                Application.Current.Exit += (sender, args) =>
+                {
+                    if (ResearchEyeTracker != null)
+                    {
+                        Log.Info("Disposing of the ResearchEyeTracker.");
+                        ResearchEyeTracker.Dispose();
+                        ResearchEyeTracker = null;
+                    }
+                };
+            }
+            else
+            {
+                Console.WriteLine("Could not apply research license.");
+            }
         }
 
         #endregion
@@ -48,6 +80,8 @@ namespace JuliusSweetland.OptiKey.Services
 
         public bool KalmanFilterSupported {get; private set; }
         public EyeXHost EyeXHost { get; private set; }
+        public IEyeTracker ResearchEyeTracker { get; private set; }
+        public bool ResearchLicenseWasSucessfullyApplied { get; private set; }
 
         #endregion
 
@@ -165,6 +199,50 @@ namespace JuliusSweetland.OptiKey.Services
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Event handler for the GazeDataReceived event. Called for every new gaze point received from the tracker.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnGazeUpdate(object sender, GazeDataEventArgs e)
+        {
+            CSVLogService.Instance.Log_TobiiGazeData(e);
+            //Console.WriteLine(line);
+            //gazeDataWriter.WriteLine(line);
+        }
+
+        /// <summary>
+        /// Applies license to the EyeTracker.
+        /// Will return true if application of license was sucessfull, and false if not.
+        /// </summary>
+        /// <param name="eyeTracker"></param>
+        /// <param name="licensePath"></param>
+        private bool ApplyLicense(IEyeTracker eyeTracker, string licensePath)
+        {
+            // Create a collection with the license.
+            var licenseCollection = new LicenseCollection(
+                new System.Collections.Generic.List<LicenseKey>
+                {
+                   new LicenseKey(System.IO.File.ReadAllBytes(licensePath))
+                });
+
+            // See if we can apply the license. Write to console if it fails.
+            FailedLicenseCollection failedLicenses;
+            if (!eyeTracker.TryApplyLicenses(licenseCollection, out failedLicenses))
+            {
+                string errorMessage = String.Format("Failed to apply license from {0} on eye tracker with serial number {1}.\n" +
+                        "The validation result is {2}.",
+                        licensePath, eyeTracker.SerialNumber, failedLicenses[0].ValidationResult);
+
+                Console.WriteLine(errorMessage);
+                return false;
+            }
+            return true;
+        }
         #endregion
     }
 }

@@ -16,6 +16,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -211,6 +213,9 @@
     </Reference>
     <Reference Include="Tobii.EyeX.Client.Net20">
       <HintPath>..\..\ext\TobiiEyeXSdk\Tobii.EyeX.Client.Net20.dll</HintPath>
+    </Reference>
+    <Reference Include="Tobii.Research, Version=1.5.0.942, Culture=neutral, PublicKeyToken=70326046dcdce6cb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Tobii.Research.x86.1.5.0.942\lib\net45\Tobii.Research.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -1595,12 +1600,12 @@
   <ItemGroup>
     <PublishFile Include="External Libraries\Newtonsoft.Json.xml">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
@@ -1617,5 +1622,12 @@
     <Message Text="### Post Cleanup Task: Deleting Temporary files used by OptiKey ###" Importance="high" />
     <RemoveDir Directories="$(AppData)\JuliusSweetland" />
     <Message Text="### Post Cleanup Task: Done ###" Importance="high" />
+  </Target>
+  <Import Project="..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets" Condition="Exists('..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets'))" />
   </Target>
 </Project>
