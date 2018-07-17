@@ -1,4 +1,6 @@
 ﻿using JuliusSweetland.OptiKey.Observables.TriggerSources;
+using JuliusSweetland.OptiKey.UI.Controls;
+using JuliusSweetland.OptiKey.UI.Utilities;
 using JuliusSweetland.OptiKey.UI.ViewModels;
 using JuliusSweetland.OptiKey.UI.Windows;
 using System;
@@ -16,6 +18,7 @@ namespace JuliusSweetland.OptiKey.Services
         public ExperimentMenu ExperimentMenuWindow { get; set; }
         public IPhraseStateService PhraseStateService { get; set; }
         public KeyStateService KeyStateService { get; set; }
+        public List<Key> allKeys { get; set; }
 
         private static InstanceGetter instance;
 

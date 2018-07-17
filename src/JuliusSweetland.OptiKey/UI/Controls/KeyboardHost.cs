@@ -2,6 +2,7 @@
 using JuliusSweetland.OptiKey.Extensions;
 using JuliusSweetland.OptiKey.Models;
 using JuliusSweetland.OptiKey.Properties;
+using JuliusSweetland.OptiKey.Services;
 using JuliusSweetland.OptiKey.UI.Utilities;
 using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 using log4net;
@@ -519,6 +520,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
         {
             //Get all keys view elements:
             var allKeys = VisualAndLogicalTreeHelper.FindVisualChildren<Key>(this).ToList();
+            InstanceGetter.Instance.allKeys = allKeys;
             //Getting scratchpad view:
             var allScratchPads = VisualAndLogicalTreeHelper.FindVisualChildren<Scratchpad>(this).ToList();
             //Getting phraseTextBlock view:
