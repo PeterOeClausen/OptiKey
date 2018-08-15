@@ -211,7 +211,7 @@ namespace JuliusSweetland.OptiKey.Services
         private void OnGazeUpdate(object sender, GazeDataEventArgs e)
         {
             CSVLogService.Instance.Log_TobiiGazeData(e);
-            //Console.WriteLine(line);
+            
             //gazeDataWriter.WriteLine(line);
         }
 
@@ -223,25 +223,32 @@ namespace JuliusSweetland.OptiKey.Services
         /// <param name="licensePath"></param>
         private bool ApplyLicense(IEyeTracker eyeTracker, string licensePath)
         {
-            // Create a collection with the license.
-            var licenseCollection = new LicenseCollection(
-                new System.Collections.Generic.List<LicenseKey>
-                {
-                   new LicenseKey(System.IO.File.ReadAllBytes(licensePath))
-                });
-
-            // See if we can apply the license. Write to console if it fails.
-            FailedLicenseCollection failedLicenses;
-            if (!eyeTracker.TryApplyLicenses(licenseCollection, out failedLicenses))
+            try
             {
-                string errorMessage = String.Format("Failed to apply license from {0} on eye tracker with serial number {1}.\n" +
-                        "The validation result is {2}.",
-                        licensePath, eyeTracker.SerialNumber, failedLicenses[0].ValidationResult);
+                // Create a collection with the license.
+                var licenseCollection = new LicenseCollection(
+                    new System.Collections.Generic.List<LicenseKey>
+                    {
+                   new LicenseKey(System.IO.File.ReadAllBytes(licensePath))
+                    });
 
-                Console.WriteLine(errorMessage);
+                // See if we can apply the license. Write to console if it fails.
+                FailedLicenseCollection failedLicenses;
+                if (!eyeTracker.TryApplyLicenses(licenseCollection, out failedLicenses))
+                {
+                    string errorMessage = String.Format("Failed to apply license from {0} on eye tracker with serial number {1}.\n" +
+                            "The validation result is {2}.",
+                            licensePath, eyeTracker.SerialNumber, failedLicenses[0].ValidationResult);
+
+                    Console.WriteLine(errorMessage);
+                    return false;
+                }
+                return true;
+            }catch(Exception e)
+            {
+                Console.WriteLine("Warning, could not apply license!");
                 return false;
             }
-            return true;
         }
         #endregion
     }
