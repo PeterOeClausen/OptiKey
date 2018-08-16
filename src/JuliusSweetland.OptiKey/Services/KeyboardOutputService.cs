@@ -506,9 +506,13 @@ namespace JuliusSweetland.OptiKey.Services
                     : null));
 
             ProcessText(captureAndSuggestions.First(), false);
-
             lastProcessedTextWasSuggestion = false;
             lastProcessedTextWasMultiKey = true;
+
+            if (Settings.Default.AutoAddSpace)
+            {
+                ProcessText(" ", true);
+            }
         }
 
         #endregion
@@ -527,6 +531,7 @@ namespace JuliusSweetland.OptiKey.Services
                 //We have no text change history, or the last capture was whitespace.
                 Log.Debug("Suppressing auto space before this capture as the last text change was null or white space.");
                 suppressNextAutoSpace = true;
+                Console.WriteLine("Just entered a whitespace");
             }
 			else if(!Settings.Default.KeyboardAndDictionaryLanguage.SupportsAutoSpace()) //Language does not support auto space
 			{
