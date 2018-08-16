@@ -1211,6 +1211,11 @@ namespace JuliusSweetland.OptiKey.Services
                 }
                 suppressNextAutoSpace = false;
             }
+
+            if (Settings.Default.AutoAddSpace)
+            {
+                ProcessText(" ", true);
+            }
         }
 
         private void SwapText(string textToSwapOut, string textToSwapIn)
