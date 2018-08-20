@@ -178,15 +178,10 @@ namespace JuliusSweetland.OptiKey.Services
                                 CapturingMultiKeySelection = true;
 
                                 PublishSelection(triggerSignal.PointAndKeyValue);
-                                
-                                //Identifying the Controls.Key that is pressed, and setting the IsFirstMultiKey property to true in order to show the green border:
-                                UI.Controls.Key firstKeyInMultiKeySelection = InstanceGetter.Instance.allKeys.Find(k => k.ShiftUpText == triggerSignal.PointAndKeyValue.KeyValue.String);
-                                if (firstKeyInMultiKeySelection != null)
-                                {
-                                    firstKeyInMultiKeySelection.IsFirstMultiKey = true;
-                                    firstMultiKeyTyped = firstKeyInMultiKeySelection;
-                                }
 
+                                //Set the key's IsHighlighted property in order to show the green border
+                                keyStateService.KeyHighlightStates[triggerSignal.PointAndKeyValue.KeyValue].Value = true;
+                                
                                 multiKeySelectionSubscription =
                                     CreateMultiKeySelectionSubscription()
                                         .ObserveOnDispatcher()
@@ -207,9 +202,9 @@ namespace JuliusSweetland.OptiKey.Services
 
                                                 stopMultiKeySelectionTriggerSignal = null;
                                                 CapturingMultiKeySelection = false;
-                                                //Set IsFirstMultiKey to false in order to remove the green border:
-                                                firstMultiKeyTyped.IsFirstMultiKey = false;
-                                                firstMultiKeyTyped = null;
+
+                                                //Set the key's IsHighlighted to false in order to remove the green border
+                                                keyStateService.KeyHighlightStates[triggerSignal.PointAndKeyValue.KeyValue].Value = false;
                                             });
                             }
                             else

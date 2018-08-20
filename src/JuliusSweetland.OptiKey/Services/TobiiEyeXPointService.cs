@@ -247,6 +247,7 @@ namespace JuliusSweetland.OptiKey.Services
             }catch(Exception e)
             {
                 Console.WriteLine("Warning, could not apply license!");
+                Console.WriteLine("Exception message:\n" + e.Message);
                 return false;
             }
         }

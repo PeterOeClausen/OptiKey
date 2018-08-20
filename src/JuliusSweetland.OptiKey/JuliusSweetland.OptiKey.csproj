@@ -444,6 +444,7 @@
     <Compile Include="UI\TriggerActions\ConfirmationWindowAction.cs" />
     <Compile Include="UI\TriggerActions\OpenManagementWindowAction.cs" />
     <Compile Include="UI\Controls\KeyboardHost.cs" />
+    <Compile Include="UI\ValueConverters\CommuniKateCalculateBoarderWidth.cs" />
     <Compile Include="UI\ValueConverters\CommuniKateTwoColoursToForegroundBrush.cs" />
     <Compile Include="UI\ValueConverters\ColourNameToBrush.cs" />
     <Compile Include="UI\ValueConverters\ConvertToStarGridLength.cs" />
@@ -579,7 +580,7 @@
     <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml.cs">
       <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\English\CommuniKate.xaml.cs">
+    <Compile Include="UI\Views\Keyboards\Common\CommuniKate.xaml.cs">
       <DependentUpon>CommuniKate.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalAlpha1.xaml.cs">
@@ -599,6 +600,18 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\French\CanadaAlpha1.xaml.cs">
       <DependentUpon>CanadaAlpha1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\German\AlphabeticalConversationAlpha1.xaml.cs">
+      <DependentUpon>AlphabeticalConversationAlpha1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\German\SimplifiedAlpha1.xaml.cs">
+      <DependentUpon>SimplifiedAlpha1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\German\AlphabeticalAlpha1.xaml.cs">
+      <DependentUpon>AlphabeticalAlpha1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\German\SimplifiedConversationAlpha1.xaml.cs">
+      <DependentUpon>SimplifiedConversationAlpha1.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Japanese\Alpha1.xaml.cs">
       <DependentUpon>Alpha1.xaml</DependentUpon>
@@ -989,6 +1002,12 @@
     <Resource Include="Resources\Icons\Quit.ico" />
     <Resource Include="Resources\Icons\ManualMode.ico" />
     <None Include="Resources\Icons\SVG Source Files\CommuniKateTopPage.svg" />
+    <Content Include="Resources\DynamicKeyboards\BigHackerKeyboard.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\DynamicKeyboards\screenshots\BigHackerKeyboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Icons\SVG Source Files\LookToScrollActive.svg" />
     <Content Include="Resources\Icons\SVG Source Files\LookToScrollBoundsCustom.svg" />
     <Content Include="Resources\Icons\SVG Source Files\LookToScrollBoundsScreenCentred.svg" />
@@ -1291,7 +1310,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\Keyboards\English\CommuniKate.xaml">
+    <Page Include="UI\Views\Keyboards\Common\CommuniKate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1312,6 +1331,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Views\Keyboards\French\CanadaAlpha1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\German\AlphabeticalConversationAlpha1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\German\SimplifiedAlpha1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\German\AlphabeticalAlpha1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\German\SimplifiedConversationAlpha1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
