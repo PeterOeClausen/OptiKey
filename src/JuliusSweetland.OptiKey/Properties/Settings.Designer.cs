@@ -12,7 +12,7 @@ namespace JuliusSweetland.OptiKey.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2676,73 +2676,73 @@ namespace JuliusSweetland.OptiKey.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool doLogGazeData {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool doLog_EyeTribeGazeData {
             get {
-                return ((bool)(this["doLogGazeData"]));
+                return ((bool)(this["doLog_EyeTribeGazeData"]));
             }
             set {
-                this["doLogGazeData"] = value;
+                this["doLog_EyeTribeGazeData"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool doLogScratchPadText {
+        public bool doLog_ScratchPadText {
             get {
-                return ((bool)(this["doLogScratchPadText"]));
+                return ((bool)(this["doLog_ScratchPadText"]));
             }
             set {
-                this["doLogScratchPadText"] = value;
+                this["doLog_ScratchPadText"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool doLogPhraseText {
+        public bool doLog_PhraseText {
             get {
-                return ((bool)(this["doLogPhraseText"]));
+                return ((bool)(this["doLog_PhraseText"]));
             }
             set {
-                this["doLogPhraseText"] = value;
+                this["doLog_PhraseText"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool doLogKeySelection {
+        public bool doLog_KeySelection {
             get {
-                return ((bool)(this["doLogKeySelection"]));
+                return ((bool)(this["doLog_KeySelection"]));
             }
             set {
-                this["doLogKeySelection"] = value;
+                this["doLog_KeySelection"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool doLog_userLooksAtKey {
+        public bool doLog_UserLooksAtKey {
             get {
-                return ((bool)(this["doLog_userLooksAtKey"]));
+                return ((bool)(this["doLog_UserLooksAtKey"]));
             }
             set {
-                this["doLog_userLooksAtKey"] = value;
+                this["doLog_UserLooksAtKey"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool doLog_multiKeySelection {
+        public bool doLog_MultiKeySelection {
             get {
-                return ((bool)(this["doLog_multiKeySelection"]));
+                return ((bool)(this["doLog_MultiKeySelection"]));
             }
             set {
-                this["doLog_multiKeySelection"] = value;
+                this["doLog_MultiKeySelection"] = value;
             }
         }
         
@@ -2793,6 +2793,21 @@ namespace JuliusSweetland.OptiKey.Properties {
             }
             set {
                 this["PresageNumberOfSuggestions"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool doLog_TobiiGazeData
+        {
+            get
+            {
+                return ((bool)(this["doLog_TobiiGazeData"]));
+            }
+            set
+            {
+                this["doLog_TobiiGazeData"] = value;
             }
         }
     }

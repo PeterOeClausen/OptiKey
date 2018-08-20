@@ -31,6 +31,8 @@ namespace JuliusSweetland.OptiKey.Services
         private TriggerSignal? startMultiKeySelectionTriggerSignal;
         private TriggerSignal? stopMultiKeySelectionTriggerSignal;
 
+        private UI.Controls.Key firstMultiKeyTyped;
+
         #endregion
 
         #region Create Points Per Second Subscription
@@ -184,7 +186,9 @@ namespace JuliusSweetland.OptiKey.Services
                                     CreateMultiKeySelectionSubscription()
                                         .ObserveOnDispatcher()
                                         .Subscribe(
-                                            async pointsAndKeyValues => await ProcessMultiKeySelectionResult(pointsAndKeyValues, triggerSignal),
+                                            async pointsAndKeyValues => {
+                                                await ProcessMultiKeySelectionResult(pointsAndKeyValues, triggerSignal);
+                                            },
                                             (exception =>
                                             {
                                                 PublishError(this, exception);

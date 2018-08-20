@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.IO;
 using JuliusSweetland.OptiKey.Properties;
+using System.Threading.Tasks;
 
 namespace JuliusSweetland.OptiKey.UI.Windows
 {
@@ -63,13 +64,24 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             viewModel.PhrasesFilePath = "default_phrases.txt";
         }
 
-        private void StartExperimentButton_Click(object sender, RoutedEventArgs e)
+        private async void StartExperimentButton_Click(object sender, RoutedEventArgs e)
         {
             InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);
             CSVLogService.Instance.StartLogging();
 
-            mainWindow.Show();
+            //Changing main window to ExperimentalKeyboard:
             InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
+
+            //Pausing writing for 2 seconds, to avoid typing before user interface is ready:
+            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+            //Showing main window:
+            mainWindow.Show();
+            //Delay for 2 seconds:
+            await Task.Delay(2000);
+            //Unpausing:
+            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+
+            //Activates multiKey button based on the setting in the menu:
             if (this.viewModel.EnableMultikeySwipeFeature)
             {
                 Settings.Default.MultiKeySelectionEnabled = true;
@@ -80,6 +92,8 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                 Settings.Default.MultiKeySelectionEnabled = false;
                 InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.Up);
             }
+            
+            //Hiding the experiment Menu.
             this.Hide();
         }
 

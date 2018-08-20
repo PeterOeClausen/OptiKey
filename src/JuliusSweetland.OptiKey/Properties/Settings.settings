@@ -1296,28 +1296,37 @@
     <Setting Name="ExperimentMenu_OptiKeyLogPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">qerwqrqgfadfdasz</Value>
     </Setting>
-    <Setting Name="doLogGazeData" Type="System.Boolean" Scope="User">
+    <Setting Name="doLog_EyeTribeGazeData" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="doLog_ScratchPadText" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="doLogScratchPadText" Type="System.Boolean" Scope="User">
+    <Setting Name="doLog_PhraseText" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="doLogPhraseText" Type="System.Boolean" Scope="User">
+    <Setting Name="doLog_KeySelection" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="doLogKeySelection" Type="System.Boolean" Scope="User">
+    <Setting Name="doLog_UserLooksAtKey" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="doLog_userLooksAtKey" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="doLog_multiKeySelection" Type="System.Boolean" Scope="User">
+    <Setting Name="doLog_MultiKeySelection" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="selectedExperimentalKeyboardLanguage" Type="JuliusSweetland.OptiKey.Enums.ExperimentalKeybordLanguages" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="ExperimentMenu_EnableDotCommaApostrophe" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoCompleteMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NGram</Value>
+    </Setting>
+    <Setting Name="SimplifiedKeyboardCurrentContext" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="doLog_TobiiGazeData" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

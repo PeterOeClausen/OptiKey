@@ -215,40 +215,46 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         }
 
         #region Choose what to log booleans
-        public bool DoLogGazeData
+        public bool DoLog_TobiiGazeData
         {
-            get { return CSVLogService.Instance.doLogGazeData; }
-            set { CSVLogService.Instance.doLogGazeData = value; }
+            get { return CSVLogService.Instance.doLog_TobiiGazeData; }
+            set { CSVLogService.Instance.doLog_TobiiGazeData = value; }
         }
 
-        public bool DoLogScratchPadText
+        public bool DoLog_EyeTribeGazeData
         {
-            get { return CSVLogService.Instance.doLogScratchPadText; }
-            set { CSVLogService.Instance.doLogScratchPadText = value; }
+            get { return CSVLogService.Instance.doLog_EyeTribeGazeData; }
+            set { CSVLogService.Instance.doLog_EyeTribeGazeData = value; }
         }
 
-        public bool DoLogPhraseText
+        public bool DoLog_ScratchPadText
         {
-            get { return CSVLogService.Instance.doLogPhraseText; }
-            set { CSVLogService.Instance.doLogPhraseText = value; }
+            get { return CSVLogService.Instance.doLog_ScratchPadText; }
+            set { CSVLogService.Instance.doLog_ScratchPadText = value; }
         }
 
-        public bool DoLogKeySelection
+        public bool DoLog_PhraseText
         {
-            get { return CSVLogService.Instance.doLogKeySelection; }
-            set { CSVLogService.Instance.doLogKeySelection = value; }
+            get { return CSVLogService.Instance.doLog_PhraseText; }
+            set { CSVLogService.Instance.doLog_PhraseText = value; }
         }
 
-        public bool DoLog_userLooksAtKey
+        public bool DoLog_KeySelection
         {
-            get { return CSVLogService.Instance.doLog_userLooksAtKey; }
-            set { CSVLogService.Instance.doLog_userLooksAtKey = value; }
+            get { return CSVLogService.Instance.doLog_KeySelection; }
+            set { CSVLogService.Instance.doLog_KeySelection = value; }
         }
 
-        public bool DoLog_multiKeySelection
+        public bool DoLog_UserLooksAtKey
         {
-            get { return CSVLogService.Instance.doLog_multiKeySelection; }
-            set { CSVLogService.Instance.doLog_multiKeySelection = value; }
+            get { return CSVLogService.Instance.doLog_UserLooksAtKey; }
+            set { CSVLogService.Instance.doLog_UserLooksAtKey = value; }
+        }
+
+        public bool DoLog_MultiKeySelection
+        {
+            get { return CSVLogService.Instance.doLog_MultiKeySelection; }
+            set { CSVLogService.Instance.doLog_MultiKeySelection = value; }
         }
         #endregion
     }

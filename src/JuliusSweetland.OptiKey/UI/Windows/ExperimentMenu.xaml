@@ -102,18 +102,20 @@
                 <!--Choose what to log:-->
                 <TextBlock Text="Choose what to log:" Margin="0,5,0,0"/>
                 <StackPanel>
+                    <CheckBox Content="Tobii gaze data"
+                          IsChecked="{Binding DoLog_TobiiGazeData}"/>
                     <CheckBox Content="Eye Tribe gaze data"
-                          IsChecked="{Binding DoLogGazeData}"/>
+                          IsChecked="{Binding DoLog_EyeTribeGazeData}"/>
                     <CheckBox Content="What the user types into the scratchpad"
-                          IsChecked="{Binding DoLogScratchPadText}"/>
+                          IsChecked="{Binding DoLog_ScratchPadText}"/>
                     <CheckBox Content="The displayed phrases"
-                          IsChecked="{Binding DoLogPhraseText}"/>
+                          IsChecked="{Binding DoLog_PhraseText}"/>
                     <CheckBox Content="Which keys the user activates"
-                          IsChecked="{Binding DoLogKeySelection}"/>
+                          IsChecked="{Binding DoLog_KeySelection}"/>
                     <CheckBox Content="Which key the user looks at"
-                          IsChecked="{Binding DoLog_userLooksAtKey}"/>
+                          IsChecked="{Binding DoLog_UserLooksAtKey}"/>
                     <CheckBox Content="MultiKey word selections"
-                          IsChecked="{Binding DoLog_multiKeySelection}"/>
+                          IsChecked="{Binding DoLog_MultiKeySelection}"/>
                 </StackPanel>
             
                 <!--START EXPERIMENT-->

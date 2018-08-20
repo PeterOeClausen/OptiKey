@@ -147,7 +147,7 @@ namespace JuliusSweetland.OptiKey.Services
                     new DateTimeOffset(DateTime.Parse(data.TimeStampString)).ToUniversalTime()));
 
                 //Logging GazeData:
-                csvLogService.Log_Gazedata(data);
+                csvLogService.Log_EyeTribeGazedata(data);
             }
         }
 
