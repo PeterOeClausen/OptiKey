@@ -1,0 +1,40 @@
+﻿<Window x:Class="PresageDBFileCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PresageDBFileCreator"
+        xmlns:ViewModels="clr-namespace:PresageDBFileCreator.ViewModels"
+        d:DataContext="{d:DesignInstance {x:Type ViewModels:MainWindowViewModel}}"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="450" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Locate the file you want to edit:"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding InputFilePath, TargetNullValue='No file currently picked...'}" Background="GhostWhite"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="Press to locate txt file" Click="FileLocateButton_Click"/>
+        <Grid Grid.Row="2" Grid.Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Content="Press to format file" Click="FormatFileButton_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
+            <Button Grid.Row="1" Content="Press to save file" Click="SaveFileButton_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
+            <Button Grid.Row="2" Content="Press to generate DB file" Click="GenerateDBFile_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
+        </Grid>
+        
+        <ScrollViewer Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="{Binding FileContent}" TextWrapping="Wrap"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
