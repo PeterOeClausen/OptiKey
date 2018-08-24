@@ -533,8 +533,12 @@
     <Compile Include="UI\Views\Keyboards\Common\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboard.xaml.cs" />
-    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboardSelector.xaml.cs" />
+    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboard.xaml.cs" >
+    	<DependentUpon>DynamicKeyboard.xaml</DependentUpon>
+	</Compile>
+    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboardSelector.xaml.cs" >
+    	<DependentUpon>DynamicKeyboardSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\Keyboards\Common\Minimised.xaml.cs">
       <DependentUpon>Minimised.xaml</DependentUpon>
     </Compile>
