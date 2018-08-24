@@ -34,6 +34,7 @@ namespace JuliusSweetland.OptiKey.Services
         private bool suppressNextAutoSpace = true;
         private bool keyboardIsShiftAware;
         private bool shiftStateSetAutomatically;
+        private bool scratchpadAreaIsEmpty = true;
 
         private CSVLogService csvLogService;
         #endregion
@@ -74,7 +75,23 @@ namespace JuliusSweetland.OptiKey.Services
             private set {
                 //Log everytime the scratchpad text changes:
                 csvLogService.Log_ScratchPadText(value);
-                SetProperty(ref text, value); }
+                SetProperty(ref text, value);
+                if (text == null || text.Equals(""))
+                {
+                    ScratchpadAreaIsEmpty = true;
+                }
+                else ScratchpadAreaIsEmpty = false;
+            }
+        }
+
+        public bool ScratchpadAreaIsEmpty
+        {
+            get { return scratchpadAreaIsEmpty; }
+            private set
+            {
+                SetProperty(ref scratchpadAreaIsEmpty, value);
+                Console.WriteLine("Scratchpad is empty: " + scratchpadAreaIsEmpty);
+            }
         }
 
         public bool KeyboardIsShiftAware //Not on interface as only accessed via databinding
