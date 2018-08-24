@@ -1179,6 +1179,12 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     mainWindowManipulationService.SetOpacity(1);
                     break;
 
+                case FunctionKeys.ExperimentalKeyboard2:
+                    Log.Info("Changing keyboard to ExperimentalKeyboard2.");
+                    mainWindowManipulationService.Restore(); //Resizes to half the screen.
+                    Keyboard = new ExperimentalKeyboard2();
+                    break;
+
                 case FunctionKeys.FrenchCanada:
                     SelectLanguage(Languages.FrenchCanada);
                     break;

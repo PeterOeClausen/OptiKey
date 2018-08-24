@@ -478,6 +478,7 @@
     <Compile Include="UI\ViewModels\ILookToScrollOverlayViewModel.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Alpha2.cs" />
     <Compile Include="UI\ViewModels\Keyboards\CommuniKate.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboard2.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Voice.cs" />
     <Compile Include="UI\ViewModels\ExperimentMenuViewModel.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Experimental.cs" />
@@ -587,6 +588,9 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\CommuniKate.xaml.cs">
       <DependentUpon>CommuniKate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboard2.xaml.cs">
+      <DependentUpon>ExperimentalKeyboard2.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalAlpha1.xaml.cs">
       <DependentUpon>AlphabeticalAlpha1.xaml</DependentUpon>
@@ -820,25 +824,61 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Static\DiagnosticInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.ca-ES.resx" />
-    <EmbeddedResource Include="Properties\Resources.cs-CZ.resx" />
+    <EmbeddedResource Include="Properties\Resources.ca-ES.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.cs-CZ.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-US.resx" />
-    <EmbeddedResource Include="Properties\Resources.es-ES.resx" />
-    <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
-    <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
-    <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
-    <EmbeddedResource Include="Properties\Resources.pl-PL.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt-PT.resx" />
-    <EmbeddedResource Include="Properties\Resources.ru-RU.resx" />
-    <EmbeddedResource Include="Properties\Resources.de-DE.resx" />
-    <EmbeddedResource Include="Properties\Resources.fr.resx" />
-    <EmbeddedResource Include="Properties\Resources.el-GR.resx" />
-    <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
-    <EmbeddedResource Include="Properties\Resources.sl-SI.resx" />
-    <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
-    <EmbeddedResource Include="Properties\Resources.hr-HR.resx" />
-    <EmbeddedResource Include="Properties\Resources.da-DK.resx" />
-    <EmbeddedResource Include="Resources.ja-JP.resx" />
+    <EmbeddedResource Include="Properties\Resources.es-ES.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.it-IT.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pl-PL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pt-PT.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.el-GR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sk-SK.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sl-SI.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.tr-TR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.hr-HR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.da-DK.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.ja-JP.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Resource Include="Resources\Icons\Management.ico" />
     <Resource Include="Resources\Icons\Main.ico" />
     <None Include="..\..\LICENSE.txt">
@@ -1316,6 +1356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\Keyboards\Common\CommuniKate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboard2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

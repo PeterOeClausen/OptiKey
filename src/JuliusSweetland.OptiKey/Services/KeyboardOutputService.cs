@@ -90,7 +90,6 @@ namespace JuliusSweetland.OptiKey.Services
             private set
             {
                 SetProperty(ref scratchpadAreaIsEmpty, value);
-                Console.WriteLine("Scratchpad is empty: " + scratchpadAreaIsEmpty);
             }
         }
 

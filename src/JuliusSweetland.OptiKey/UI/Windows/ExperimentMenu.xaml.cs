@@ -70,7 +70,15 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             CSVLogService.Instance.StartLogging();
 
             //Changing main window to ExperimentalKeyboard:
-            InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
+            switch (viewModel.SelectedExperimentType)
+            {
+                case ExperimentTypes.FullScreenExperiment:
+                    InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
+                    break;
+                case ExperimentTypes.HalfScreenExperiment:
+                    InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard2));
+                    break;
+            }
 
             //Pausing writing for 2 seconds, to avoid typing before user interface is ready:
             InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;

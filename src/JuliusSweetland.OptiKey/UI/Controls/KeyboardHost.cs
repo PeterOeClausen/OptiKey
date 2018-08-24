@@ -368,6 +368,22 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                 }
             }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboard2) //Change to experimentalKeyboard2
+            {
+                switch (Settings.Default.KeyboardAndDictionaryLanguage)
+                {
+                    /*case Languages.DanishDenmark:
+                        newContent = new DanishViews.ExperimentalKeyboard { DataContext = Keyboard };
+                        break;*/
+                    default:
+                        newContent = Settings.Default.UseSimplifiedKeyboardLayout
+                            ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
+                            : Settings.Default.UseAlphabeticalKeyboardLayout
+                            ? (object)new EnglishViews.AlphabeticalConversationAlpha1 { DataContext = Keyboard }
+                            : new EnglishViews.ExperimentalKeyboard2 { DataContext = Keyboard };
+                        break;
+                }
+            }
             else if (Keyboard is ViewModelKeyboards.ConversationConfirm)
             {
                 newContent = new CommonViews.ConversationConfirm { DataContext = Keyboard };
