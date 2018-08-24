@@ -234,6 +234,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ExperimentType.cs" />
     <Compile Include="Enums\KeyboardLayouts.cs" />
     <Compile Include="Enums\LookToScrollBounds.cs" />
     <Compile Include="Enums\LookToScrollModes.cs" />
@@ -533,11 +534,11 @@
     <Compile Include="UI\Views\Keyboards\Common\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboard.xaml.cs" >
-    	<DependentUpon>DynamicKeyboard.xaml</DependentUpon>
-	</Compile>
-    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboardSelector.xaml.cs" >
-    	<DependentUpon>DynamicKeyboardSelector.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboard.xaml.cs">
+      <DependentUpon>DynamicKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\DynamicKeyboardSelector.xaml.cs">
+      <DependentUpon>DynamicKeyboardSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\Minimised.xaml.cs">
       <DependentUpon>Minimised.xaml</DependentUpon>
@@ -1639,12 +1640,12 @@
   <ItemGroup>
     <PublishFile Include="External Libraries\Newtonsoft.Json.xml">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

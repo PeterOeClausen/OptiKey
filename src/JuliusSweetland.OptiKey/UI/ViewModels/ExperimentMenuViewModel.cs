@@ -16,7 +16,6 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             get { return selectedExperimentalKeyboardLanguage; }
             set
             {
-                Console.WriteLine("ExperimentalKeybordLanguages set!");
                 selectedExperimentalKeyboardLanguage = value;
                 Settings.Default.selectedExperimentalKeyboardLanguage = value;
                 Enums.ExperimentalKeybordLanguages switchValue = value;
@@ -38,6 +37,38 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             get
             {
                 return Enum.GetValues(typeof(Enums.ExperimentalKeybordLanguages)) as IEnumerable<Enums.ExperimentalKeybordLanguages>;
+            }
+        }
+
+        private Enums.ExperimentTypes selectedExperimentType = Settings.Default.SelectedExperimentType;
+        public Enums.ExperimentTypes SelectedExperimentType
+        {
+            get { return selectedExperimentType; }
+            set
+            {
+                selectedExperimentType = value;
+                Settings.Default.SelectedExperimentType = value;
+                /*
+                Enums.ExperimentalKeybordLanguages switchValue = value;
+                //Hoping this will change experimental keyboard:
+                switch (switchValue)
+                {
+                    case Enums.ExperimentalKeybordLanguages.English:
+                        InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.EnglishUK));
+                        break;
+                    case Enums.ExperimentalKeybordLanguages.Danish:
+                        InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.DanishDenmark));
+                        break;
+                }
+                */
+            }
+        }
+
+        public IEnumerable<Enums.ExperimentTypes> ExperimentTypes
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Enums.ExperimentTypes)) as IEnumerable<Enums.ExperimentTypes>;
             }
         }
 
