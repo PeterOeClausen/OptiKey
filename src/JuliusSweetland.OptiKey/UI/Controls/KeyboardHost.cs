@@ -372,9 +372,9 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {
-                    /*case Languages.DanishDenmark:
-                        newContent = new DanishViews.ExperimentalKeyboard { DataContext = Keyboard };
-                        break;*/
+                    case Languages.DanishDenmark:
+                        newContent = new DanishViews.ExperimentalKeyboard2 { DataContext = Keyboard };
+                        break;
                     default:
                         newContent = Settings.Default.UseSimplifiedKeyboardLayout
                             ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
