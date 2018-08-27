@@ -1,19 +1,9 @@
 ﻿using PresageDBFileCreator.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 
 namespace PresageDBFileCreator
 {
@@ -86,11 +76,39 @@ namespace PresageDBFileCreator
             {
                 Console.WriteLine(dlg.FileName);
                 System.IO.File.WriteAllText(dlg.FileName, ViewModel.FileContent);
-                MessageBox.Show("The file:\n" + dlg.FileName + "\n" + "was sucessfully saved", "Sucess!");
+                System.Windows.MessageBox.Show("The file:\n" + dlg.FileName + "\n" + "was sucessfully saved", "Sucess!");
             }
         }
 
         private void GenerateDBFile_Click(object sender, RoutedEventArgs e)
+        {
+            string command = @"cd C:\Program Files (x86)\presage\bin" + " && " +
+                @"text2ngram -n5 -f sqlite -o C:\Users\Peter\Desktop\DanishDB\database_dk.db " + ViewModel.InputFilePath + " && " +
+                @"text2ngram -n4 -f sqlite -o C:\Users\Peter\Desktop\DanishDB\database_dk.db " + ViewModel.InputFilePath + " && " +
+                @"text2ngram -n3 -f sqlite -o C:\Users\Peter\Desktop\DanishDB\database_dk.db " + ViewModel.InputFilePath + " && " +
+                @"text2ngram -n2 -f sqlite -o C:\Users\Peter\Desktop\DanishDB\database_dk.db " + ViewModel.InputFilePath + " && " +
+                @"text2ngram -n1 -f sqlite -o C:\Users\Peter\Desktop\DanishDB\database_dk.db " + ViewModel.InputFilePath;
+            Process.Start("cmd", "/k " + command);
+            //Process.Start("chrome.exe");
+            //Process generateDBProcess = new Process();
+            
+        }
+
+        private void ChooseDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            using (var fbd = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = fbd.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    ViewModel.DirectoryPathForSavingFileAndGeneratingDBTo = fbd.SelectedPath;
+                    //TODO: Delete db file in directory!
+                }
+            }
+        }
+
+        private void SaveFormattedFileAndGenerateDBFileButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -47,6 +47,16 @@ namespace PresageDBFileCreator.ViewModels
             }
         }
 
+        private string directoryPathForSavingFileAndGeneratingDBTo;
+        public string DirectoryPathForSavingFileAndGeneratingDBTo
+        {
+            get { return directoryPathForSavingFileAndGeneratingDBTo; }
+            set
+            {
+                SetProperty(ref directoryPathForSavingFileAndGeneratingDBTo, value);
+            }
+        }
+
         public MainWindowViewModel()
         {
 

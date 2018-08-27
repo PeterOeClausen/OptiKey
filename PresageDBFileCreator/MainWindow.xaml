@@ -3,38 +3,71 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PresageDBFileCreator"
         xmlns:ViewModels="clr-namespace:PresageDBFileCreator.ViewModels"
         d:DataContext="{d:DesignInstance {x:Type ViewModels:MainWindowViewModel}}"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="400">
+        Title="MainWindow" Height="685" Width="450" MinHeight="685" MinWidth="450">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Locate the file you want to edit:"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding InputFilePath, TargetNullValue='No file currently picked...'}" Background="GhostWhite"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="Press to locate txt file" Click="FileLocateButton_Click"/>
-        <Grid Grid.Row="2" Grid.Column="0" >
+        <!--Step 1:-->
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Step 1: Locate the file you want to edit:" FontWeight="Bold" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding InputFilePath, TargetNullValue='No file currently picked...'}" Background="GhostWhite"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="Press to locate txt file" Click="FileLocateButton_Click"/>
+        </Grid>
+
+        <!--Step 2:-->
+        <Grid Grid.Row="1" Margin="10" MaxHeight="500">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Step 2: Format the file:" FontWeight="Bold"/>
+            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+                <ScrollViewer>
+                    <TextBox IsReadOnly="True" Text="{Binding FileContent, TargetNullValue='Do step 1 first, and then view the file here.'}" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Border>
+            <Button Grid.Row="2" Content="Press to format file" Click="FormatFileButton_Click" IsEnabled="{Binding IsAbleToConvertFile}" FontWeight="Bold"/>
+        </Grid>
+
+        <!--Step 3:-->
+        <Grid Grid.Row="2" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Press to format file" Click="FormatFileButton_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Step 3: Save the formatted file and DB file:" FontWeight="Bold"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding DirectoryPathForSavingFileAndGeneratingDBTo, TargetNullValue='Pick a directory for saving formatted file and DB file...'}"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="Choose directory..." Click="ChooseDirectory_Click"/>
+            <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Save formatted file and generate DB file" Click="SaveFormattedFileAndGenerateDBFileButton_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
+            <!--
+            TODO: Enter a name for db:
+            C:\Users\Peter\Desktop\DanishDB\database_dk.db
+            Also enter a name for formatted file:
+            Eg. InputFilePath.formatted.
+            
             <Button Grid.Row="1" Content="Press to save file" Click="SaveFileButton_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
-            <Button Grid.Row="2" Content="Press to generate DB file" Click="GenerateDBFile_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>
+            <Button Grid.Row="2" Content="Press to generate DB file" Click="GenerateDBFile_Click" IsEnabled="{Binding IsAbleToConvertFile}"/>-->
         </Grid>
-        
-        <ScrollViewer Grid.Row="2" Grid.Column="1">
-            <TextBlock Text="{Binding FileContent}" TextWrapping="Wrap"/>
-        </ScrollViewer>
     </Grid>
 </Window>
