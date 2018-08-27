@@ -814,7 +814,8 @@ namespace JuliusSweetland.OptiKey.Models
 
         private void NotifyStateChanged()
         {
-            OnPropertyChanged(Binding.IndexerName);
+            //OnPropertyChanged(Binding.IndexerName); Obsolete
+            RaisePropertyChanged(Binding.IndexerName);
         }
 
         #endregion

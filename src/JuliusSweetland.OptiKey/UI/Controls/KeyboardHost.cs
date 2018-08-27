@@ -368,7 +368,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                 }
             }
-            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboard2) //Change to experimentalKeyboard2
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboard2)
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {

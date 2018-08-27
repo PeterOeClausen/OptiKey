@@ -423,6 +423,9 @@
     <Compile Include="UI\Controls\CK20Page.xaml.cs">
       <DependentUpon>CK20Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ExperimentalOutput2.xaml.cs">
+      <DependentUpon>ExperimentalOutput2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\KeyboardView.cs" />
     <Compile Include="UI\Controls\DynamicKeyboard.cs" />
     <Compile Include="UI\Controls\DynamicKeyboardSelector.cs" />
@@ -1263,6 +1266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\CK20Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\ExperimentalOutput2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
