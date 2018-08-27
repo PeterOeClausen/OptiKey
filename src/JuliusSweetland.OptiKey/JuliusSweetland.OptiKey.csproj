@@ -583,6 +583,9 @@
     <Compile Include="UI\Views\Keyboards\Danish\ConversationAlpha1.xaml.cs">
       <DependentUpon>ConversationAlpha1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard2.xaml.cs">
+      <DependentUpon>ExperimentalKeyboard2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml.cs">
       <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
     </Compile>
@@ -1356,6 +1359,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\Keyboards\Common\CommuniKate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

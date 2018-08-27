@@ -3,9 +3,9 @@ using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels.Keyboards
 {
-    public class ExperimentalKeyboard2 : BackActionKeyboard, IConversationKeyboard
+    public class ExperimentalKeyboard2 : Keyboard
     {
-        public ExperimentalKeyboard2(Action backAction) : base(backAction, simulateKeyStrokes: false, multiKeySelectionSupported:true)
+        public ExperimentalKeyboard2() : base(multiKeySelectionSupported:true)
         {
         }
     }

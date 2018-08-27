@@ -1181,22 +1181,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.ExperimentalKeyboard2:
                     Log.Info("Changing keyboard to ExperimentalKeyboard2.");
-                    
-                    var opacityBeforeExperimentalKeyboard2 = mainWindowManipulationService.GetOpacity();
-                    Action experimentalKeyboardBackAction2 =
-                        currentKeyboard is ConversationConfirm
-                        ? ((ConversationConfirm)currentKeyboard).BackAction
-                        : currentKeyboard is ConversationNumericAndSymbols
-                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
-                            : () =>
-                            {
-                                Log.Info("Restoring window size.");
-                                mainWindowManipulationService.Restore();
-                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard2);
-                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard2);
-                                Keyboard = currentKeyboard;
-                            };
-                    Keyboard = new ExperimentalKeyboard2(experimentalKeyboardBackAction2);
+                    Keyboard = new ExperimentalKeyboard2();
                     mainWindowManipulationService.Restore(); //Resizes to half the screen.
                     break;
 
