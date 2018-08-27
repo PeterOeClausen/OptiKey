@@ -1,4 +1,5 @@
-﻿using JuliusSweetland.OptiKey.UI.Controls;
+﻿using System.Windows.Input;
+using JuliusSweetland.OptiKey.UI.Controls;
 
 namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.English
 {
@@ -10,6 +11,17 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.English
         public ExperimentalKeyboard2() : base(shiftAware: true)
         {
             InitializeComponent();
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            /*
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.EscKeyPressed));
+            }
+            */
         }
     }
 }

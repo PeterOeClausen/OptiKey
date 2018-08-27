@@ -146,8 +146,8 @@ namespace JuliusSweetland.OptiKey.UI.Controls
 
             //Shrink to fit
             while (fontSize > 0
-                   && IsTextTrimmedAtThisFontSize(fontSize)
-                   && (MinFontSize == null || fontSize > MinFontSize.Value))
+                    && IsTextTrimmedAtThisFontSize(fontSize)
+                    && (MinFontSize == null || fontSize > MinFontSize.Value))
             {
                 fontSize--;
             }
@@ -164,7 +164,10 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             {
                 fontSize = MinFontSize.Value;
             }
-
+            if(fontSize == 0)
+            {
+                fontSize = 50; //We set a minimum value of 50, cause else it will cause an error.
+            }
             textBlock.FontSize = fontSize;
         }
 
