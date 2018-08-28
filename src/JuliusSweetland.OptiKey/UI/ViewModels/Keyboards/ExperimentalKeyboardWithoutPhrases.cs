@@ -3,9 +3,9 @@ using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards.Base;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels.Keyboards
 {
-    public class ExperimentalKeyboard2 : Keyboard
+    public class ExperimentalKeyboardWithoutPhrases : Keyboard
     {
-        public ExperimentalKeyboard2() : base(multiKeySelectionSupported:true)
+        public ExperimentalKeyboardWithoutPhrases() : base(multiKeySelectionSupported:true)
         {
         }
     }

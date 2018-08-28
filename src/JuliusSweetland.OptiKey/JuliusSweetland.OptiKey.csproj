@@ -234,11 +234,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Enums\ExperimentType.cs" />
+    <Compile Include="Enums\ExperimentKeyboardTypes.cs" />
     <Compile Include="Enums\KeyboardLayouts.cs" />
     <Compile Include="Enums\LookToScrollBounds.cs" />
     <Compile Include="Enums\LookToScrollModes.cs" />
     <Compile Include="Enums\LookToScrollSpeeds.cs" />
+    <Compile Include="Enums\ScreenStates.cs" />
     <Compile Include="Enums\SimplifiedKeyboardContexts.cs" />
     <Compile Include="Enums\UnicodeCodePointRanges.cs" />
     <Compile Include="DataFilters\KalmanFilter.cs" />
@@ -423,14 +424,14 @@
     <Compile Include="UI\Controls\CK20Page.xaml.cs">
       <DependentUpon>CK20Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\ExperimentalOutput2.xaml.cs">
-      <DependentUpon>ExperimentalOutput2.xaml</DependentUpon>
+    <Compile Include="UI\Controls\ExperimentalOutputWithoutPhrases.xaml.cs">
+      <DependentUpon>ExperimentalOutputWithoutPhrases.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\KeyboardView.cs" />
     <Compile Include="UI\Controls\DynamicKeyboard.cs" />
     <Compile Include="UI\Controls\DynamicKeyboardSelector.cs" />
-    <Compile Include="UI\Controls\ExperimentalOutput.xaml.cs">
-      <DependentUpon>ExperimentalOutput.xaml</DependentUpon>
+    <Compile Include="UI\Controls\ExperimentalOutputWithPhrases.xaml.cs">
+      <DependentUpon>ExperimentalOutputWithPhrases.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\PhraseTextBlock.cs" />
     <Compile Include="UI\Controls\ToastNotification.cs" />
@@ -474,6 +475,7 @@
     <Compile Include="UI\ValueConverters\MinimiseAndDockPositionToSymbolOrientation.cs" />
     <Compile Include="UI\ValueConverters\ResourceStringLookup.cs" />
     <Compile Include="UI\ValueConverters\PhraseIndexed.cs" />
+    <Compile Include="UI\ValueConverters\ScreenStateToFontSizeConverter.cs" />
     <Compile Include="UI\ValueConverters\TimeSpanToMilisecondsConverter.cs" />
     <Compile Include="UI\ValueConverters\WidthGreaterThanHeight.cs" />
     <Compile Include="UI\ValueConverters\LengthDividedBySpan.cs" />
@@ -481,10 +483,10 @@
     <Compile Include="UI\ViewModels\ILookToScrollOverlayViewModel.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Alpha2.cs" />
     <Compile Include="UI\ViewModels\Keyboards\CommuniKate.cs" />
-    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboard2.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithoutPhrases.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Voice.cs" />
     <Compile Include="UI\ViewModels\ExperimentMenuViewModel.cs" />
-    <Compile Include="UI\ViewModels\Keyboards\Experimental.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithPhrases.cs" />
     <Compile Include="UI\ViewModels\Keyboards\WebBrowsing.cs" />
     <Compile Include="UI\ViewModels\Keyboards\SimplifiedConversationAlpha.cs" />
     <Compile Include="UI\ViewModels\Keyboards\SimplifiedAlpha.cs" />
@@ -586,17 +588,17 @@
     <Compile Include="UI\Views\Keyboards\Danish\ConversationAlpha1.xaml.cs">
       <DependentUpon>ConversationAlpha1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard2.xaml.cs">
-      <DependentUpon>ExperimentalKeyboard2.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboardWithoutPhrases.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithoutPhrases.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml.cs">
-      <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\Danish\ExperimentalKeyboardWithPhrases.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithPhrases.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\CommuniKate.xaml.cs">
       <DependentUpon>CommuniKate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboard2.xaml.cs">
-      <DependentUpon>ExperimentalKeyboard2.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboardWithoutPhrases.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithoutPhrases.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalAlpha1.xaml.cs">
       <DependentUpon>AlphabeticalAlpha1.xaml</DependentUpon>
@@ -604,8 +606,8 @@
     <Compile Include="UI\Views\Keyboards\English\AlphabeticalConversationAlpha1.xaml.cs">
       <DependentUpon>AlphabeticalConversationAlpha1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml.cs">
-      <DependentUpon>ExperimentalKeyboard.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\English\ExperimentalKeyboardWithPhrases.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithPhrases.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\English\SimplifiedConversationAlpha1.xaml.cs">
       <DependentUpon>SimplifiedConversationAlpha1.xaml</DependentUpon>
@@ -1269,11 +1271,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\ExperimentalOutput2.xaml">
+    <Page Include="UI\Controls\ExperimentalOutputWithoutPhrases.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Controls\ExperimentalOutput.xaml">
+    <Page Include="UI\Controls\ExperimentalOutputWithPhrases.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1369,11 +1371,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard2.xaml">
+    <Page Include="UI\Views\Keyboards\Danish\ExperimentalKeyboardWithoutPhrases.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboard2.xaml">
+    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboardWithoutPhrases.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1437,7 +1439,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\Keyboards\Danish\ExperimentalKeyboard.xaml">
+    <Page Include="UI\Views\Keyboards\Danish\ExperimentalKeyboardWithPhrases.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1457,7 +1459,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboard.xaml">
+    <Page Include="UI\Views\Keyboards\English\ExperimentalKeyboardWithPhrases.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

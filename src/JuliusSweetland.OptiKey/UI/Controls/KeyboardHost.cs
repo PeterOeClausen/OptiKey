@@ -352,35 +352,35 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                 }
             }
-            else if (Keyboard is ViewModelKeyboards.Experimental) //Change to experimental keyboard language
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrases) //Change to experimental keyboard language
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {
                     case Languages.DanishDenmark:
-                        newContent = new DanishViews.ExperimentalKeyboard { DataContext = Keyboard };
+                        newContent = new DanishViews.ExperimentalKeyboardWithPhrases { DataContext = Keyboard };
                         break;
                     default:
                         newContent = Settings.Default.UseSimplifiedKeyboardLayout
                             ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
                             : Settings.Default.UseAlphabeticalKeyboardLayout
                             ? (object)new EnglishViews.AlphabeticalConversationAlpha1 { DataContext = Keyboard }
-                            : new EnglishViews.ExperimentalKeyboard { DataContext = Keyboard };
+                            : new EnglishViews.ExperimentalKeyboardWithPhrases { DataContext = Keyboard };
                         break;
                 }
             }
-            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboard2)
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithoutPhrases)
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {
                     case Languages.DanishDenmark:
-                        newContent = new DanishViews.ExperimentalKeyboard2 { DataContext = Keyboard };
+                        newContent = new DanishViews.ExperimentalKeyboardWithoutPhrases { DataContext = Keyboard };
                         break;
                     default:
                         newContent = Settings.Default.UseSimplifiedKeyboardLayout
                             ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
                             : Settings.Default.UseAlphabeticalKeyboardLayout
                             ? (object)new EnglishViews.AlphabeticalConversationAlpha1 { DataContext = Keyboard }
-                            : new EnglishViews.ExperimentalKeyboard2 { DataContext = Keyboard };
+                            : new EnglishViews.ExperimentalKeyboardWithoutPhrases { DataContext = Keyboard };
                         break;
                 }
             }
@@ -575,8 +575,10 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                             // In Release, just log error
                             KeyValue existingKeyValue = pointToKeyValueMap[rect];
                             Log.ErrorFormat("Overlapping keys {0} and {1}, cannot add {1} to map", existingKeyValue, key.Value);
-
-                            Debug.Assert(!pointToKeyValueMap.ContainsKey(rect));
+                            if (!pointToKeyValueMap.ContainsKey(rect))
+                            {
+                                Debug.Assert(!pointToKeyValueMap.ContainsKey(rect));
+                            }
                         }
                         else
                         {

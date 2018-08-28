@@ -5,9 +5,9 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Danish
     /// <summary>
     /// Interaction logic for ConversationAlpha.xaml
     /// </summary>
-    public partial class ExperimentalKeyboard2 : KeyboardView
+    public partial class ExperimentalKeyboardWithoutPhrases : KeyboardView
     {
-        public ExperimentalKeyboard2() : base(shiftAware: true)
+        public ExperimentalKeyboardWithoutPhrases() : base(shiftAware: true)
         {
             InitializeComponent();
         }

@@ -4,18 +4,18 @@ using System.Windows.Controls;
 namespace JuliusSweetland.OptiKey.UI.Controls
 {
     /// <summary>
-    /// Interaction logic for ExperimentalOutput.xaml
+    /// Interaction logic for ExperimentalOutputWithPhrases.xaml
     /// </summary>
-    public partial class ExperimentalOutput2 : UserControl
+    public partial class ExperimentalOutputWithPhrases : UserControl
     {
-        public ExperimentalOutput2()
+        public ExperimentalOutputWithPhrases()
         {
             InitializeComponent();
             Loaded += (sender, args) => NumberOfSuggestionsDisplayedExperimental = 4;
         }
 
         public static readonly DependencyProperty NumberOfSuggestionsDisplayedProperty =
-            DependencyProperty.Register("NumberOfSuggestionsDisplayedExperimental", typeof (int), typeof (ExperimentalOutput2), new PropertyMetadata(default(int)));
+            DependencyProperty.Register("NumberOfSuggestionsDisplayedExperimental", typeof (int), typeof (ExperimentalOutputWithPhrases), new PropertyMetadata(default(int)));
 
         public int NumberOfSuggestionsDisplayedExperimental
         {
@@ -24,7 +24,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
         }
 
         public static readonly DependencyProperty ScratchpadWidthInKeysProperty = DependencyProperty.Register(
-            "ScratchpadWidthInKeysExperimental", typeof (int), typeof (ExperimentalOutput2), new PropertyMetadata(default(int)));
+            "ScratchpadWidthInKeysExperimental", typeof (int), typeof (ExperimentalOutputWithPhrases), new PropertyMetadata(default(int)));
 
         public int ScratchpadWidthInKeysExperimental
         {

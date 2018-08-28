@@ -2832,13 +2832,25 @@ namespace JuliusSweetland.OptiKey.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("FullScreenExperiment")]
-        public global::JuliusSweetland.OptiKey.Enums.ExperimentTypes SelectedExperimentType {
+        [global::System.Configuration.DefaultSettingValueAttribute("FullScreen")]
+        public global::JuliusSweetland.OptiKey.Enums.ScreenStates SelectedScreenState {
             get {
-                return ((global::JuliusSweetland.OptiKey.Enums.ExperimentTypes)(this["SelectedExperimentType"]));
+                return ((global::JuliusSweetland.OptiKey.Enums.ScreenStates)(this["SelectedScreenState"]));
             }
             set {
-                this["SelectedExperimentType"] = value;
+                this["SelectedScreenState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WithPhrases")]
+        public global::JuliusSweetland.OptiKey.Enums.ExperimentalKeyboardTypes SelectedExperimentKeyboardType {
+            get {
+                return ((global::JuliusSweetland.OptiKey.Enums.ExperimentalKeyboardTypes)(this["SelectedExperimentKeyboardType"]));
+            }
+            set {
+                this["SelectedExperimentKeyboardType"] = value;
             }
         }
     }

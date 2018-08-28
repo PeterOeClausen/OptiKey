@@ -1319,8 +1319,11 @@
   &lt;/item&gt;
 &lt;/dictionary&gt;</Value>
     </Setting>
-    <Setting Name="SelectedExperimentType" Type="JuliusSweetland.OptiKey.Enums.ExperimentTypes" Scope="User">
-      <Value Profile="(Default)">FullScreenExperiment</Value>
+    <Setting Name="SelectedScreenState" Type="JuliusSweetland.OptiKey.Enums.ScreenStates" Scope="User">
+      <Value Profile="(Default)">FullScreen</Value>
+    </Setting>
+    <Setting Name="SelectedExperimentKeyboardType" Type="JuliusSweetland.OptiKey.Enums.ExperimentalKeyboardTypes" Scope="User">
+      <Value Profile="(Default)">WithPhrases</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace JuliusSweetland.OptiKey.Enums
 {
-    public enum ExperimentTypes
+    public enum ExperimentalKeyboardTypes
     {
-        FullScreenExperiment,
-        HalfScreenExperiment
+        WithPhrases,
+        WithoutPhrases
     }
 }

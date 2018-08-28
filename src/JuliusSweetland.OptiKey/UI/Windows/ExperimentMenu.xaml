@@ -13,10 +13,14 @@
     <Grid>
         <ScrollViewer>
             <StackPanel>
-                <!--Type of experiment-->
-                <TextBlock Text="Change type of experiment here:"/>
-                <ComboBox ItemsSource="{Binding ExperimentTypes}"
-                          SelectedItem="{Binding SelectedExperimentType}"/>
+                <!--Experiment type-->
+                <TextBlock Text="Choose between keyboards:"/>
+                <ComboBox ItemsSource="{Binding ExperimentKeyboardTypes}"
+                          SelectedItem="{Binding SelectedExperimentKeyboardType}"/>
+                <!--FullScreen / Halfscreen-->
+                <TextBlock Text="Choose between fullscreen or halfscreen here:"/>
+                <ComboBox ItemsSource="{Binding ScreenStates}"
+                          SelectedItem="{Binding SelectedScreenState}"/>
                 <!--Language-->
                 <TextBlock Text="Change language here:"/>
                 <ComboBox ItemsSource="{Binding ExperimentalKeyboardLanguages}"

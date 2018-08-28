@@ -1155,36 +1155,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Log.InfoFormat("Expanding to top and right by {0}px.", Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     mainWindowManipulationService.Expand(ExpandToDirections.TopRight, Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     break;
-
-                case FunctionKeys.ExperimentalKeyboard:
-                    Log.Info("Changing keyboard to ExperimentalKeyboard.");
-                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
-                    Action experimentalKeyboardBackAction =
-                        currentKeyboard is ConversationConfirm
-                        ? ((ConversationConfirm)currentKeyboard).BackAction
-                        : currentKeyboard is ConversationNumericAndSymbols
-                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
-                            : () =>
-                            {
-                                Log.Info("Restoring window size.");
-                                mainWindowManipulationService.Restore();
-                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
-                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
-                                Keyboard = currentKeyboard;
-                            };
-                    Keyboard = new Experimental(experimentalKeyboardBackAction);
-                    Log.Info("Maximising window.");
-                    mainWindowManipulationService.Maximise();
-                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
-                    mainWindowManipulationService.SetOpacity(1);
-                    break;
-
-                case FunctionKeys.ExperimentalKeyboard2:
-                    Log.Info("Changing keyboard to ExperimentalKeyboard2.");
-                    Keyboard = new ExperimentalKeyboard2();
-                    mainWindowManipulationService.Restore(); //Resizes to half the screen.
-                    break;
-
+                    
                 case FunctionKeys.FrenchCanada:
                     SelectLanguage(Languages.FrenchCanada);
                     break;
@@ -1193,12 +1164,20 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     SelectLanguage(Languages.FrenchFrance);
                     break;
 
+                case FunctionKeys.FullScreen:
+                    mainWindowManipulationService.Maximise();
+                    break;
+
                 case FunctionKeys.GermanGermany:
                     SelectLanguage(Languages.GermanGermany);
                     break;
 
                 case FunctionKeys.GreekGreece:
                     SelectLanguage(Languages.GreekGreece);
+                    break;
+
+                case FunctionKeys.HalfScreen:
+                    mainWindowManipulationService.Restore();
                     break;
 
                 case FunctionKeys.IncreaseDwellTime:
@@ -1217,6 +1196,32 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.JapaneseJapan:
                     SelectLanguage(Languages.JapaneseJapan);
+                    break;
+
+                case FunctionKeys.KeyboardWithPhrases:
+                    Log.Info("Changing keyboard to keyboard with phrases.");
+                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
+                    Action experimentalKeyboardBackAction =
+                        currentKeyboard is ConversationConfirm
+                        ? ((ConversationConfirm)currentKeyboard).BackAction
+                        : currentKeyboard is ConversationNumericAndSymbols
+                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                            : () =>
+                            {
+                                Log.Info("Restoring window size.");
+                                mainWindowManipulationService.Restore();
+                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
+                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
+                                Keyboard = currentKeyboard;
+                            };
+                    Keyboard = new ExperimentalKeyboardWithPhrases(experimentalKeyboardBackAction);
+                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
+                    mainWindowManipulationService.SetOpacity(1);
+                    break;
+
+                case FunctionKeys.KeyboardWithoutPhrases:
+                    Log.Info("Changing keyboard to ExperimentalKeyboardWithoutPhrases.");
+                    Keyboard = new ExperimentalKeyboardWithoutPhrases();
                     break;
 
                 case FunctionKeys.KoreanKorea:

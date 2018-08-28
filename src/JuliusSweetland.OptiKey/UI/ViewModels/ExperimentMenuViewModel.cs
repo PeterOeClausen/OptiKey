@@ -40,35 +40,41 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-        private Enums.ExperimentTypes selectedExperimentType = Settings.Default.SelectedExperimentType;
-        public Enums.ExperimentTypes SelectedExperimentType
-        {
-            get { return selectedExperimentType; }
-            set
-            {
-                selectedExperimentType = value;
-                Settings.Default.SelectedExperimentType = value;
-                /*
-                Enums.ExperimentalKeybordLanguages switchValue = value;
-                //Hoping this will change experimental keyboard:
-                switch (switchValue)
-                {
-                    case Enums.ExperimentalKeybordLanguages.English:
-                        InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.EnglishUK));
-                        break;
-                    case Enums.ExperimentalKeybordLanguages.Danish:
-                        InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.DanishDenmark));
-                        break;
-                }
-                */
-            }
-        }
-
-        public IEnumerable<Enums.ExperimentTypes> ExperimentTypes
+        public IEnumerable<Enums.ExperimentalKeyboardTypes> ExperimentKeyboardTypes
         {
             get
             {
-                return Enum.GetValues(typeof(Enums.ExperimentTypes)) as IEnumerable<Enums.ExperimentTypes>;
+                return Enum.GetValues(typeof(Enums.ExperimentalKeyboardTypes)) as IEnumerable<Enums.ExperimentalKeyboardTypes>;
+            }
+        }
+
+        private ExperimentalKeyboardTypes selectedExperimentKeyboardType = Settings.Default.SelectedExperimentKeyboardType;
+        public ExperimentalKeyboardTypes SelectedExperimentKeyboardType
+        {
+            get { return selectedExperimentKeyboardType; }
+            set
+            {
+                selectedExperimentKeyboardType = value;
+                Settings.Default.SelectedExperimentKeyboardType = value;
+            }
+        }
+        
+        public IEnumerable<Enums.ScreenStates> ScreenStates
+        {
+            get
+            {
+                return Enum.GetValues(typeof(ScreenStates)) as IEnumerable<ScreenStates>;
+            }
+        }
+
+        private ScreenStates selectedScreenState = Settings.Default.SelectedScreenState;
+        public ScreenStates SelectedScreenState
+        {
+            get { return selectedScreenState; }
+            set
+            {
+                selectedScreenState = value;
+                Settings.Default.SelectedScreenState = value;
             }
         }
 
