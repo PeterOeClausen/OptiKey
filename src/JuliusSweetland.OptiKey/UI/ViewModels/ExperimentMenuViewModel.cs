@@ -175,6 +175,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        private bool showNumSymKey = Settings.Default.ExperimentMenu_ShowNumSymKey;
+        public bool ShowNumSymKey
+        {
+            get { return showNumSymKey; }
+            set
+            {
+                showNumSymKey = value;
+                Settings.Default.ExperimentMenu_ShowNumSymKey = value;
+            }
+        }
+
         private bool showQuitKey = Settings.Default.ExperimentMenu_ShowQuitKey;
         public bool ShowQuitKey
         {

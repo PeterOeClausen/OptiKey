@@ -1155,6 +1155,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Log.InfoFormat("Expanding to top and right by {0}px.", Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     mainWindowManipulationService.Expand(ExpandToDirections.TopRight, Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     break;
+
+                case FunctionKeys.ExperimentalNumSymKeyboard1:
+                    Log.Info("Changing to Experimental Num/Sym keyboard");
+                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard1();
+                    break;
                     
                 case FunctionKeys.FrenchCanada:
                     SelectLanguage(Languages.FrenchCanada);

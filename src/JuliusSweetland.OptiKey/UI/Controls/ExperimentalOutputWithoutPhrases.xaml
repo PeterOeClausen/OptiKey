@@ -130,62 +130,36 @@
                       SharedSizeGroup="KeyWithSymbol"
                           Value="{x:Static models:KeyValues.NextSuggestionsKey}"/>
 
-        <!--Clear key-->
+        <!--Add to dictionary key-->
         <controls:Key Grid.Row="1" Grid.Column="0"/>
         <controls:Key Grid.Row="1" Grid.Column="0"
+                      SymbolGeometry="{StaticResource AddToDictionaryIcon}" 
+                      Text="{x:Static resx:Resources.ADD_TO_DICTIONARY_SPLIT_WITH_NEWLINE}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.AddToDictionaryKey}"/>
+
+        <!--Clear key-->
+        <controls:Key Grid.Row="1" Grid.Column="1"/>
+        <controls:Key Grid.Row="1" Grid.Column="1"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowClearKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource ClearIcon}" 
                       Text="{x:Static resx:Resources.CLEAR}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.ClearScratchpadKey}"/>
-                  <!--SymbolGeometry="{StaticResource AddToDictionaryIcon}" 
-                      Text="{x:Static resx:Resources.ADD_TO_DICTIONARY_SPLIT_WITH_NEWLINE}"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.AddToDictionaryKey}"/>-->
+                  
+        <!--Scratchpad-->
+        <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1" Grid.Column="2"
+                                Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"/>
 
         <!--Speak key-->
-        <controls:Key Grid.Row="1" Grid.Column="1"/>
-        <controls:Key Grid.Row="1" Grid.Column="1"
+        <controls:Key Grid.Row="1" Grid.Column="3"/>
+        <controls:Key Grid.Row="1" Grid.Column="3"
                       Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowSpeakKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
                       SymbolGeometry="{StaticResource SpeakIcon}"
                       Text="{x:Static resx:Resources.SPEAK}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.SpeakKey}"/>
-                  <!--SymbolGeometry="{StaticResource ClearIcon}" 
-                      Text="{x:Static resx:Resources.CLEAR}"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ClearScratchpadKey}"/>-->
-
-        <!--Scratchpad-->
-        <controls:Scratchpad x:Name="ScratchPad" Grid.Row="1" Grid.Column="2"
-                                Text="{Binding DataContext.KeyboardOutputService.Text, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"/>
         
-        <!--Next phrase key-->
-        <controls:Key Grid.Row="1" Grid.Column="3"
-                      SymbolGeometry="{StaticResource RightArrowKeyIcon}" 
-                      Text="Next phrase"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.NextPhraseKey}"/>
-
-        <!-- Does not work sadly... icon does not show up and QuitKey is not processed...
-        <controls:Key Grid.Row="1" Grid.Column="3"
-                      SharedSizeGroup="KeyWithSymbol">
-            <controls:Key.Style>
-                <Style TargetType="{x:Type controls:Key}">
-                    <Setter Property="SymbolGeometry" Value="{StaticResource RightArrowKeyIcon}"/>
-                    <Setter Property="Text" Value="Next phrase"/>
-                    <Setter Property="Value" Value="{x:Static models:KeyValues.NextPhraseKey}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=PhraseField, Path=Text}" Value="THE EXPERIMENT IS NOW DONE">
-                            <Setter Property="SymbolGeometry" Value="{StaticResource QuitIcon}"/>
-                            <Setter Property="Text" Value="Quit experiment"/>
-                            <Setter Property="Value" Value="{x:Static models:KeyValues.QuitKey}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </controls:Key.Style>
-        </controls:Key>-->
-
         <!--Sleep key-->
         <controls:Key Grid.Row="1" Grid.Column="4"/>
         <controls:Key Grid.Row="1" Grid.Column="4"

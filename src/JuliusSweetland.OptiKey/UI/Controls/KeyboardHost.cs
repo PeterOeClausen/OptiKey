@@ -352,7 +352,7 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                 }
             }
-            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrases) //Change to experimental keyboard language
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrases)
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {
@@ -449,6 +449,10 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             else if (Keyboard is ViewModelKeyboards.NumericAndSymbols1)
             {
                 newContent = new CommonViews.NumericAndSymbols1 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard1)
+            {
+                newContent = new CommonViews.ExperimentalNumericAndSymbols1 { DataContext = Keyboard };
             }
             else if (Keyboard is ViewModelKeyboards.PhysicalKeys)
             {

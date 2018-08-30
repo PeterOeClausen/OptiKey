@@ -1325,5 +1325,8 @@
     <Setting Name="SelectedExperimentKeyboardType" Type="JuliusSweetland.OptiKey.Enums.ExperimentalKeyboardTypes" Scope="User">
       <Value Profile="(Default)">WithPhrases</Value>
     </Setting>
+    <Setting Name="ExperimentMenu_ShowNumSymKey" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

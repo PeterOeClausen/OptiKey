@@ -2853,5 +2853,17 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SelectedExperimentKeyboardType"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExperimentMenu_ShowNumSymKey {
+            get {
+                return ((bool)(this["ExperimentMenu_ShowNumSymKey"]));
+            }
+            set {
+                this["ExperimentMenu_ShowNumSymKey"] = value;
+            }
+        }
     }
 }

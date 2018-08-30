@@ -147,6 +147,6 @@
                       SymbolGeometry="{StaticResource BrowserIcon}"
                       Text="Experimental Keyboard"
                       SharedSizeGroup="KeyWithSymbolAndText"
-                      Value="{x:Static models:KeyValues.ExperimentalKeyboardKey}"/>
+                      Value="{x:Static models:KeyValues.ExperimentalKeyboardWithPhrasesKey}"/>
     </Grid>
 </controls:KeyboardView>

@@ -60,6 +60,7 @@
         ExpandToTop,
         ExpandToTopAndLeft,
         ExpandToTopAndRight,
+        ExperimentalNumSymKeyboard1,
         Escape,
         ExpandDock,
         F1,

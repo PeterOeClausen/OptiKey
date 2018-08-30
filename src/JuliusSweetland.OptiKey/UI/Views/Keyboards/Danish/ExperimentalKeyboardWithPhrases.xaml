@@ -216,8 +216,10 @@
                       Text="{x:Static resx:Resources.BACK_WORD_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackManyKey}"/>
-        <controls:Key Grid.Row="4" Grid.Column="20" Grid.ColumnSpan="2"/>
 
+        <!--'With phrases' doesn't have an enter key key.-->
+        <controls:Key Grid.Row="4" Grid.Column="20" Grid.ColumnSpan="2"/>
+        
         <!--Dwell time decrease-->
         <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
@@ -263,14 +265,10 @@
                       Text="."
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="."/>
-        <!--Apostrophe-->
+        
+        <!--WithPhrases has no Num/Sym key-->
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>
-        <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2" Case="None"
-                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableDotCommaApostrophe, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
-                      Text="'"
-                      SharedSizeGroup="KeyWithSingleLetter"
-                      Value="'"/>
-
+        
         <!--MultiKeySwipe feature-->
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"
