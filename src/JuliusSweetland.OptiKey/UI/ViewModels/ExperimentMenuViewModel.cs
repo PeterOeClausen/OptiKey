@@ -262,6 +262,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        //Used to hide phrases when user starts typing
+        private bool userIsNotTypingYet = true;
+        public bool UserIsNotTypingYet
+        {
+            get { return userIsNotTypingYet; }
+            set
+            {
+                SetProperty(ref userIsNotTypingYet, value);
+            }
+        }
+
         #region Choose what to log booleans
         public bool DoLog_TobiiGazeData
         {

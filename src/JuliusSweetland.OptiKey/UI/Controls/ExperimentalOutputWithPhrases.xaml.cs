@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using JuliusSweetland.OptiKey.Services;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace JuliusSweetland.OptiKey.UI.Controls

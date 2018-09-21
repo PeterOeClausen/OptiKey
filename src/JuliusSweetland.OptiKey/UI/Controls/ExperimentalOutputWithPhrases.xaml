@@ -172,7 +172,7 @@
                                    FontStretch="{Binding Source={x:Static resx:Settings.Default}, Path=FontStretch}"
                                    Margin="1" 
                                    Padding="1"
-                                   Visibility="{Binding DataContext.KeyboardOutputService.ScratchpadAreaIsEmpty, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                                   Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.UserIsNotTypingYet, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}">
                             <controls:PhraseTextBlock.FontSize>
                                 <MultiBinding Converter="{StaticResource FontSizeToFitLinesExperimental}">
                                     <MultiBinding.Bindings>

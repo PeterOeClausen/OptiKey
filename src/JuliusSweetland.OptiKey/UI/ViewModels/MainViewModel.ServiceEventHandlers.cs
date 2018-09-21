@@ -132,24 +132,29 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     switch (keyString)
                     {
                         case "\t":
-                            //Console.WriteLine("Key selected: " + "Tab");
                             CSVLogService.Instance.Log_KeySelection("Tab");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         case "\n":
-                            //Console.WriteLine("Key selected: " + "Enter");
                             CSVLogService.Instance.Log_KeySelection("Enter");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         case " ":
-                            //Console.WriteLine("Key selected: " + "SpaceBar");
                             CSVLogService.Instance.Log_KeySelection("SpaceBar");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         case ",":
-                            //Console.WriteLine("Key selected: " + "Comma");
                             CSVLogService.Instance.Log_KeySelection("Comma");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         default:
-                            //Console.WriteLine("Key selected: " + keyString);
                             CSVLogService.Instance.Log_KeySelection(keyString);
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                     }
                 }
@@ -390,6 +395,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             {
                 Log.InfoFormat("KeySelectionResult received with '{0}' multiKeySelection results", multiKeySelection.Count);
                 keyboardOutputService.ProcessMultiKeyTextAndSuggestions(multiKeySelection);
+                //Show that user has started typing:
+                experimentMenuViewModel.UserIsNotTypingYet = false;
             }
         }
 
@@ -2191,6 +2198,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         }
                     }
                     HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
+                    //Tell ExperimentMenuViewModel that user has not typed yet:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = true;
                     break;
 
                 case FunctionKeys.NextSuggestions:

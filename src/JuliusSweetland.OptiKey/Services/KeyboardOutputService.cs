@@ -374,31 +374,43 @@ namespace JuliusSweetland.OptiKey.Services
                 case FunctionKeys.Suggestion1:
                     SwapLastTextChangeForSuggestion(0);
                     lastProcessedTextWasSuggestion = true;
+                    //Picking a suggestion is the same as beginning to type:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = false;
                     break;
 
                 case FunctionKeys.Suggestion2:
                     SwapLastTextChangeForSuggestion(1);
                     lastProcessedTextWasSuggestion = true;
+                    //Picking a suggestion is the same as beginning to type:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = false;
                     break;
 
                 case FunctionKeys.Suggestion3:
                     SwapLastTextChangeForSuggestion(2);
                     lastProcessedTextWasSuggestion = true;
+                    //Picking a suggestion is the same as beginning to type:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = false;
                     break;
 
                 case FunctionKeys.Suggestion4:
                     SwapLastTextChangeForSuggestion(3);
                     lastProcessedTextWasSuggestion = true;
+                    //Picking a suggestion is the same as beginning to type:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = false;
                     break;
 
                 case FunctionKeys.Suggestion5:
                     SwapLastTextChangeForSuggestion(4);
                     lastProcessedTextWasSuggestion = true;
+                    //Picking a suggestion is the same as beginning to type:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = false;
                     break;
 
                 case FunctionKeys.Suggestion6:
                     SwapLastTextChangeForSuggestion(5);
                     lastProcessedTextWasSuggestion = true;
+                    //Picking a suggestion is the same as beginning to type:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = false;
                     break;
 
                 case FunctionKeys.ToggleCaseOfPreviousCharacter:
