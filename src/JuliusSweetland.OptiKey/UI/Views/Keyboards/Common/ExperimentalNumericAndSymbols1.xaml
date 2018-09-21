@@ -7,6 +7,7 @@
                        xmlns:resx="clr-namespace:JuliusSweetland.OptiKey.Properties"
                        xmlns:models="clr-namespace:JuliusSweetland.OptiKey.Models"
                        xmlns:properties="clr-namespace:JuliusSweetland.OptiKey.Properties"
+                       xmlns:management="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels.Management"
                        mc:Ignorable="d" 
                        d:DesignHeight="300" d:DesignWidth="300">
 
@@ -48,6 +49,13 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <Grid.Resources>
+            <management:PointingAndSelectingViewModel x:Key="viewModel"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource viewModel}"/>
+        </Grid.DataContext>
 
         <controls:ExperimentalOutputWithoutPhrases Grid.Row="0" Grid.Column="0" 
                                                    Grid.RowSpan="2" Grid.ColumnSpan="24" 
