@@ -94,7 +94,8 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue ExpandToTopAndRightKey = new KeyValue(FunctionKeys.ExpandToTopAndRight);
         public static readonly KeyValue ExperimentalKeyboardWithPhrasesKey = new KeyValue(FunctionKeys.KeyboardWithPhrases);
         public static readonly KeyValue ExperimentalKeyboardWithoutPhrasesKey = new KeyValue(FunctionKeys.KeyboardWithoutPhrases);
-        public static readonly KeyValue ExperimentNumSymKeyboardKey = new KeyValue(FunctionKeys.ExperimentalNumSymKeyboard1);
+        public static readonly KeyValue ExperimentNumSymKeyboardKey1 = new KeyValue(FunctionKeys.ExperimentalNumSymKeyboard1);
+        public static readonly KeyValue ExperimentNumSymKeyboardKey2 = new KeyValue(FunctionKeys.ExperimentalNumSymKeyboard2);
         public static readonly KeyValue EscapeKey = new KeyValue(FunctionKeys.Escape);
         public static readonly KeyValue ExpandDockKey = new KeyValue(FunctionKeys.ExpandDock);
         public static readonly KeyValue F1Key = new KeyValue(FunctionKeys.F1);

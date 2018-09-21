@@ -272,7 +272,7 @@
                       SymbolGeometry="{StaticResource NumericAndSymbolsIcon}"
                       Text="{x:Static resx:Resources.NUM_SYM_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey}"/>
+                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey1}"/>
 
         <!--MultiKeySwipe feature-->
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"/>

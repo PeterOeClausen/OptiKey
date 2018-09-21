@@ -4,7 +4,7 @@ using JuliusSweetland.OptiKey.Services;
 namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
 {
     /// <summary>
-    /// Interaction logic for NumericAndSymbols1.xaml
+    /// Interaction logic for ExperimentalNumericAndSymbols1.xaml
     /// </summary>
     public partial class ExperimentalNumericAndSymbols1 : KeyboardView
     {
