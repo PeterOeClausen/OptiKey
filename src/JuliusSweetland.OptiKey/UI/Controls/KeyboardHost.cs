@@ -458,6 +458,10 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             {
                 newContent = new CommonViews.ExperimentalNumericAndSymbols2 { DataContext = Keyboard };
             }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard3)
+            {
+                newContent = new CommonViews.ExperimentalNumericAndSymbols3 { DataContext = Keyboard };
+            }
             else if (Keyboard is ViewModelKeyboards.PhysicalKeys)
             {
                 newContent = new CommonViews.PhysicalKeys { DataContext = Keyboard };

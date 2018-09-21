@@ -1,4 +1,4 @@
-<controls:KeyboardView x:Class="JuliusSweetland.OptiKey.UI.Views.Keyboards.Common.ExperimentalNumericAndSymbols2"
+<controls:KeyboardView x:Class="JuliusSweetland.OptiKey.UI.Views.Keyboards.Common.ExperimentalNumericAndSymbols3"
                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="/OptiKey;component/Resources/Icons/KeySymbols.xaml" />
     </UserControl.Resources>
-
+    
     <Grid Background="{DynamicResource KeyDefaultBackgroundBrush}"
           Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
@@ -63,91 +63,91 @@
                          NumberOfSuggestionsDisplayedExperimental="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" />
         
         <controls:Key Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
-                      Text="·"
+                      Text="†"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="·"/>
+                      Value="†"/>
         <controls:Key Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Case="None"
-                      Text="•"
+                      Text="‡"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="•"/>
+                      Value="‡"/>
         <controls:Key Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Case="None"
-                      Text="°"
+                      Text="№"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="°"/>
+                      Value="№"/>
         <controls:Key Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" Case="None"
-                      Text="~"
+                      Text="÷"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="~"/>
+                      Value="÷"/>
         <controls:Key Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="2" Case="None"
-                      Text="^"
+                      Text="‰"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="^"/>
+                      Value="‰"/>
         <controls:Key Grid.Row="2" Grid.Column="10" Grid.ColumnSpan="2" Case="None"
-                      Text="±"
+                      Text="‱"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="±"/>
+                      Value="‱"/>
         <controls:Key Grid.Row="2" Grid.Column="12" Grid.ColumnSpan="2" Case="None"
-                      Text="«"
+                      Text="¶"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="«"/>
+                      Value="¶"/>
         <controls:Key Grid.Row="2" Grid.Column="14" Grid.ColumnSpan="2" Case="None"
-                      Text="»"
+                      Text="§"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="»"/>
+                      Value="§"/>
         <controls:Key Grid.Row="2" Grid.Column="16" Grid.ColumnSpan="2" Case="None"
-                      Text="{}{"
+                      Text="⇒"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="{}{"/>
+                      Value="⇒"/>
         <controls:Key Grid.Row="2" Grid.Column="18" Grid.ColumnSpan="2" Case="None"
-                      Text="{}}"
+                      Text="→"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="{}}"/>
+                      Value="→"/>
         <controls:Key Grid.Row="2" Grid.Column="20" Grid.ColumnSpan="2"
-                      SymbolGeometry="{StaticResource 2of3Icon}"
+                      SymbolGeometry="{StaticResource 3of3Icon}"
                       Text="{x:Static resx:Resources.NEXT}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey3}"/>
-
+                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey1}"/>
+       
         <controls:Key Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
-                      Text="µ" 
+                      Text="⊃"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="µ"/>
+                      Value="⊃"/>
         <controls:Key Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Case="None"
-                      Text="©"
+                      Text="⇔"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="©"/>
+                      Value="⇔"/>
         <controls:Key Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Case="None"
-                      Text="®"
+                      Text="↔"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="®"/>
+                      Value="↔"/>
         <controls:Key Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" Case="None"
-                      Text="\"
+                      Text="¬"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="\"/>
+                      Value="¬"/>
         <controls:Key Grid.Row="3" Grid.Column="8" Grid.ColumnSpan="2" Case="None"
-                      Text="|"
+                      Text="∧"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="|"/>
+                      Value="∧"/>
         <controls:Key Grid.Row="3" Grid.Column="10" Grid.ColumnSpan="2" Case="None"
-                      Text="¦"
+                      Text="∨"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="¦"/>
+                      Value="∨"/>
         <controls:Key Grid.Row="3" Grid.Column="12" Grid.ColumnSpan="2" Case="None"
-                      Text="["
+                      Text="⊕"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="["/>
+                      Value="⊕"/>
         <controls:Key Grid.Row="3" Grid.Column="14" Grid.ColumnSpan="2" Case="None"
-                      Text="]"
+                      Text="⊻"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="]"/>
+                      Value="⊻"/>
         <controls:Key Grid.Row="3" Grid.Column="16" Grid.ColumnSpan="2" Case="None"
-                      Text="&lt;"
+                      Text="⊤"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="&lt;"/>
+                      Value="⊤"/>
         <controls:Key Grid.Row="3" Grid.Column="18" Grid.ColumnSpan="2" Case="None"
-                      Text="&gt;"
+                      Text="⊥"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="&gt;"/>
+                      Value="⊥"/>
         <controls:Key Grid.Row="3" Grid.Column="20" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource AlphaIcon}"
                       Text="QWERTY Keyboard"
@@ -160,33 +160,33 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.LeftShiftKey}"/>
         <controls:Key Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Case="None"
-                      Text="℗"
+                      Text="∑"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="℗"/>
+                      Value="∑"/>
         <controls:Key Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Case="None"
-                      Text="™"
+                      Text="∀"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="™"/>
+                      Value="∀"/>
         <controls:Key Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" Case="None"
-                      Text="℠"
+                      Text="∃"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="℠"/>
+                      Value="∃"/>
         <controls:Key Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Case="None"
-                      Text="℡"
+                      Text="∄"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="℡"/>
+                      Value="∄"/>
         <controls:Key Grid.Row="4" Grid.Column="10" Grid.ColumnSpan="2" Case="None"
-                      Text="`"
+                      Text="≡"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="`"/>
+                      Value="≡"/>
         <controls:Key Grid.Row="4" Grid.Column="12" Grid.ColumnSpan="2" Case="None"
-                      Text="π"
+                      Text="⊢"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="π"/>
+                      Value="⊢"/>
         <controls:Key Grid.Row="4" Grid.Column="14" Grid.ColumnSpan="2" Case="None"
-                      Text="¡"
+                      Text="⊨"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="¡"/>
+                      Value="⊨"/>
         <controls:Key Grid.Row="4" Grid.Column="16" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource BackOneIcon}"
                       Text="{x:Static resx:Resources.BACK_ONE_SPLIT_WITH_NEWLINE}"
@@ -226,9 +226,9 @@
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="{x:Static models:KeyValues.IncreaseDwellTimeKey}"/>
         <controls:Key Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" Case="None"
-                      Text="∴"
+                      Text="⋆"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="∴"/>
+                      Value="⋆"/>
         <controls:Key Grid.Row="5" Grid.Column="8" Grid.ColumnSpan="4"
                       SymbolGeometry="{StaticResource SpaceIcon}"
                       Text="{x:Static resx:Resources.SPACE}"
@@ -236,15 +236,16 @@
                       SharedSizeGroup="KeyWithSymbol"
                       Value=" "/>
         <controls:Key Grid.Row="5" Grid.Column="12" Grid.ColumnSpan="2" Case="None"
-                      Text="∵"
+                      Text="⊬"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="∵"/>
+                      Value="⊬"/>
         <controls:Key Grid.Row="5" Grid.Column="14" Grid.ColumnSpan="2" Case="None"
-                      Text="¿"
+                      Text="⊭"
                       SharedSizeGroup="KeyWithSingleLetter"
-                      Value="¿"/>
+                      Value="⊭"/>
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"/>
+        
         <!--Quit key-->
         <controls:Key Grid.Row="5" Grid.Column="20" Grid.ColumnSpan="2"/>
         <ContentControl Grid.Row="5" Grid.Column="20" Grid.ColumnSpan="2">

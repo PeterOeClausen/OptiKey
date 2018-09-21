@@ -484,6 +484,7 @@
     <Compile Include="UI\ViewModels\Keyboards\Alpha2.cs" />
     <Compile Include="UI\ViewModels\Keyboards\CommuniKate.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithoutPhrases.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalNumbersAndSymbolsKeyboard3.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ExperimentalNumbersAndSymbolsKeyboard2.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ExperimentalNumbersAndSymbolsKeyboard1.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Voice.cs" />
@@ -541,6 +542,9 @@
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols2.xaml.cs">
       <DependentUpon>ExperimentalNumericAndSymbols2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols3.xaml.cs">
+      <DependentUpon>ExperimentalNumericAndSymbols3.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\Voice.xaml.cs">
       <DependentUpon>Voice.xaml</DependentUpon>
@@ -1316,6 +1320,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

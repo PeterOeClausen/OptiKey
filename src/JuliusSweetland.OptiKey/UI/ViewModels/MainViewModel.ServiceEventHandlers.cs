@@ -1166,6 +1166,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     Keyboard = new ExperimentalNumbersAndSymbolsKeyboard2();
                     break;
 
+                case FunctionKeys.ExperimentalNumSymKeyboard3:
+                    Log.Info("Changing to ExperimentalNumSymKeyboard3");
+                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard3();
+                    break;
+
                 case FunctionKeys.FrenchCanada:
                     SelectLanguage(Languages.FrenchCanada);
                     break;
