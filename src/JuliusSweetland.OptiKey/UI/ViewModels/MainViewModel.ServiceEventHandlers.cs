@@ -2191,6 +2191,9 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         {
                             phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
                             phraseStateService.PhrasesShown++;
+
+                            // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
+                            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
                         }
                         else
                         {

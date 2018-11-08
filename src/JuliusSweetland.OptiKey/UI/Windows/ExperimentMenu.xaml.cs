@@ -93,14 +93,18 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                     break;
             }
 
-            //Pausing writing for 2 seconds, to avoid typing before user interface is ready:
+            // Instead of 2 seconds of sleep, keyboard is set to sleep till the user activates it by looking at sleep again
+            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+            //Showing main window:
+            mainWindow.Show();
+            /*//Pausing writing for 2 seconds, to avoid typing before user interface is ready:
             InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
             //Showing main window:
             mainWindow.Show();
             //Delay for 2 seconds:
             await Task.Delay(2000);
             //Unpausing:
-            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;*/
 
             //Activates multiKey button based on the setting in the menu:
             if (this.viewModel.EnableMultikeySwipeFeature)
