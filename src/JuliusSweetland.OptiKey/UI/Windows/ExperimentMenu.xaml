@@ -8,11 +8,19 @@
         mc:Ignorable="d"
         xmlns:ViewModels="clr-namespace:JuliusSweetland.OptiKey.UI.ViewModels"
         d:DataContext="{d:DesignInstance {x:Type ViewModels:ExperimentMenuViewModel}}"
-        Title="ExperimentMenu" Height="700" Width="630"
+        Title="ExperimentMenu" Height="800" Width="630"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer>
             <StackPanel>
+                <!--Experiment type-->
+                <TextBlock Text="Choose between keyboards:"/>
+                <ComboBox ItemsSource="{Binding ExperimentKeyboardTypes}"
+                          SelectedItem="{Binding SelectedExperimentKeyboardType}"/>
+                <!--FullScreen / Halfscreen-->
+                <TextBlock Text="Choose between fullscreen or halfscreen here:"/>
+                <ComboBox ItemsSource="{Binding ScreenStates}"
+                          SelectedItem="{Binding SelectedScreenState}"/>
                 <!--Language-->
                 <TextBlock Text="Change language here:"/>
                 <ComboBox ItemsSource="{Binding ExperimentalKeyboardLanguages}"
@@ -49,7 +57,8 @@
                 <CheckBox Content="Show shift key?"                  IsChecked="{Binding ShowShiftKey}"/>
                 <CheckBox Content="Show backspace key?"              IsChecked="{Binding ShowBackspaceKey}"/>
                 <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
-                <CheckBox Content="Show dot, comma and apostrophe?" IsChecked="{Binding EnableDotCommaApostrophe}"/>
+               <!--Only showing Num/Sym key in keyboard without phrases, hence no need for choice <CheckBox Content="Show numbers and symbols key?"    IsChecked="{Binding ShowNumSymKey}"/>-->
+                <CheckBox Content="Show dot and comma?" IsChecked="{Binding EnableDotCommaApostrophe}"/>
                 <CheckBox Content="Show dwelltime adjustment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
                 <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>
                 <CheckBox Content="Enable MultiKey (Swipe) feature?" IsChecked="{Binding EnableMultikeySwipeFeature}"/>

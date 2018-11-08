@@ -16,7 +16,6 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             get { return selectedExperimentalKeyboardLanguage; }
             set
             {
-                Console.WriteLine("ExperimentalKeybordLanguages set!");
                 selectedExperimentalKeyboardLanguage = value;
                 Settings.Default.selectedExperimentalKeyboardLanguage = value;
                 Enums.ExperimentalKeybordLanguages switchValue = value;
@@ -38,6 +37,44 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             get
             {
                 return Enum.GetValues(typeof(Enums.ExperimentalKeybordLanguages)) as IEnumerable<Enums.ExperimentalKeybordLanguages>;
+            }
+        }
+
+        public IEnumerable<Enums.ExperimentalKeyboardTypes> ExperimentKeyboardTypes
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Enums.ExperimentalKeyboardTypes)) as IEnumerable<Enums.ExperimentalKeyboardTypes>;
+            }
+        }
+
+        private ExperimentalKeyboardTypes selectedExperimentKeyboardType = Settings.Default.SelectedExperimentKeyboardType;
+        public ExperimentalKeyboardTypes SelectedExperimentKeyboardType
+        {
+            get { return selectedExperimentKeyboardType; }
+            set
+            {
+                selectedExperimentKeyboardType = value;
+                Settings.Default.SelectedExperimentKeyboardType = value;
+            }
+        }
+        
+        public IEnumerable<Enums.ScreenStates> ScreenStates
+        {
+            get
+            {
+                return Enum.GetValues(typeof(ScreenStates)) as IEnumerable<ScreenStates>;
+            }
+        }
+
+        private ScreenStates selectedScreenState = Settings.Default.SelectedScreenState;
+        public ScreenStates SelectedScreenState
+        {
+            get { return selectedScreenState; }
+            set
+            {
+                selectedScreenState = value;
+                Settings.Default.SelectedScreenState = value;
             }
         }
 
@@ -138,6 +175,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        private bool showNumSymKey = Settings.Default.ExperimentMenu_ShowNumSymKey;
+        public bool ShowNumSymKey
+        {
+            get { return showNumSymKey; }
+            set
+            {
+                showNumSymKey = value;
+                Settings.Default.ExperimentMenu_ShowNumSymKey = value;
+            }
+        }
+
         private bool showQuitKey = Settings.Default.ExperimentMenu_ShowQuitKey;
         public bool ShowQuitKey
         {
@@ -211,6 +259,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             set {    
                 SetProperty(ref optiKeyLogPath, value);
                 CSVLogService.Instance.OptiKeyLogPath = value;
+            }
+        }
+
+        //Used to hide phrases when user starts typing
+        private bool userIsNotTypingYet = true;
+        public bool UserIsNotTypingYet
+        {
+            get { return userIsNotTypingYet; }
+            set
+            {
+                SetProperty(ref userIsNotTypingYet, value);
             }
         }
 

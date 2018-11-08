@@ -165,7 +165,7 @@ namespace JuliusSweetland.OptiKey
 
                 //Create ExperimentMenuViewModel:
                 var experimentMenuViewModel = new ExperimentMenuViewModel();
-
+                
                 errorNotifyingServices.Add(audioService);
                 errorNotifyingServices.Add(dictionaryService);
                 errorNotifyingServices.Add(publishService);

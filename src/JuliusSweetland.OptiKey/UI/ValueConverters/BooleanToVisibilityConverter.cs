@@ -9,6 +9,10 @@ using System.Windows.Data;
 
 namespace JuliusSweetland.OptiKey.UI.ValueConverters
 {
+    /// <summary>
+    /// Converter used in views.
+    /// If given boolean is true, then this converter will return Visibility.Visible otherwise it returns Visibility.Hidden.
+    /// </summary>
     public class BooleanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

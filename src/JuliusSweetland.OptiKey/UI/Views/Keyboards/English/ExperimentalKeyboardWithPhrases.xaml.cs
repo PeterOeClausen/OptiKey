@@ -9,9 +9,9 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.English
     /// <summary>
     /// Interaction logic for ExperimentalKeyboard.xaml
     /// </summary>
-    public partial class ExperimentalKeyboard : KeyboardView
+    public partial class ExperimentalKeyboardWithPhrases : KeyboardView
     {
-        public ExperimentalKeyboard() : base(shiftAware: true)
+        public ExperimentalKeyboardWithPhrases() : base(shiftAware: true)
         {
             InitializeComponent();
         }

@@ -69,8 +69,29 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             InstanceGetter.Instance.PhraseStateService.SetPhraseFile(viewModel.PhrasesFilePath);
             CSVLogService.Instance.StartLogging();
 
-            //Changing main window to ExperimentalKeyboard:
-            InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboard));
+            //Changing keyboards to one with or without phrases:
+            switch (viewModel.SelectedExperimentKeyboardType)
+            {
+                case ExperimentalKeyboardTypes.WithPhrases:
+                    InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.KeyboardWithPhrases));
+                    break;
+                case ExperimentalKeyboardTypes.WithoutPhrases:
+                    InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.KeyboardWithoutPhrases));
+                    break;
+            }
+
+            //Changing to fullscreen or halfscreen based on what user picked.
+            switch (viewModel.SelectedScreenState)
+            {
+                case ScreenStates.FullScreen:
+                    InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.FullScreen));
+                    break;
+
+                case ScreenStates.HalfScreen:
+                    InstanceGetter.Instance.MainViewModel.HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.HalfScreen));
+                    //TODO: Check that it restores fullscreen after.
+                    break;
+            }
 
             //Pausing writing for 2 seconds, to avoid typing before user interface is ready:
             InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;

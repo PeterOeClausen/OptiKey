@@ -132,24 +132,29 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     switch (keyString)
                     {
                         case "\t":
-                            //Console.WriteLine("Key selected: " + "Tab");
                             CSVLogService.Instance.Log_KeySelection("Tab");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         case "\n":
-                            //Console.WriteLine("Key selected: " + "Enter");
                             CSVLogService.Instance.Log_KeySelection("Enter");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         case " ":
-                            //Console.WriteLine("Key selected: " + "SpaceBar");
                             CSVLogService.Instance.Log_KeySelection("SpaceBar");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         case ",":
-                            //Console.WriteLine("Key selected: " + "Comma");
                             CSVLogService.Instance.Log_KeySelection("Comma");
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                         default:
-                            //Console.WriteLine("Key selected: " + keyString);
                             CSVLogService.Instance.Log_KeySelection(keyString);
+                            //Show that user has started typing:
+                            experimentMenuViewModel.UserIsNotTypingYet = false;
                             break;
                     }
                 }
@@ -390,6 +395,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             {
                 Log.InfoFormat("KeySelectionResult received with '{0}' multiKeySelection results", multiKeySelection.Count);
                 keyboardOutputService.ProcessMultiKeyTextAndSuggestions(multiKeySelection);
+                //Show that user has started typing:
+                experimentMenuViewModel.UserIsNotTypingYet = false;
             }
         }
 
@@ -1156,27 +1163,19 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     mainWindowManipulationService.Expand(ExpandToDirections.TopRight, Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     break;
 
-                case FunctionKeys.ExperimentalKeyboard:
-                    Log.Info("Changing keyboard to ExperimentalKeyboard.");
-                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
-                    Action experimentalKeyboardBackAction =
-                        currentKeyboard is ConversationConfirm
-                        ? ((ConversationConfirm)currentKeyboard).BackAction
-                        : currentKeyboard is ConversationNumericAndSymbols
-                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
-                            : () =>
-                            {
-                                Log.Info("Restoring window size.");
-                                mainWindowManipulationService.Restore();
-                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
-                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
-                                Keyboard = currentKeyboard;
-                            };
-                    Keyboard = new Experimental(experimentalKeyboardBackAction);
-                    Log.Info("Maximising window.");
-                    mainWindowManipulationService.Maximise();
-                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
-                    mainWindowManipulationService.SetOpacity(1);
+                case FunctionKeys.ExperimentalNumSymKeyboard1:
+                    Log.Info("Changing to ExperimentalNumSymKeyboard1");
+                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard1();
+                    break;
+
+                case FunctionKeys.ExperimentalNumSymKeyboard2:
+                    Log.Info("Changing to ExperimentalNumSymKeyboard2");
+                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard2();
+                    break;
+
+                case FunctionKeys.ExperimentalNumSymKeyboard3:
+                    Log.Info("Changing to ExperimentalNumSymKeyboard3");
+                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard3();
                     break;
 
                 case FunctionKeys.FrenchCanada:
@@ -1187,12 +1186,20 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     SelectLanguage(Languages.FrenchFrance);
                     break;
 
+                case FunctionKeys.FullScreen:
+                    mainWindowManipulationService.Maximise();
+                    break;
+
                 case FunctionKeys.GermanGermany:
                     SelectLanguage(Languages.GermanGermany);
                     break;
 
                 case FunctionKeys.GreekGreece:
                     SelectLanguage(Languages.GreekGreece);
+                    break;
+
+                case FunctionKeys.HalfScreen:
+                    mainWindowManipulationService.Restore();
                     break;
 
                 case FunctionKeys.IncreaseDwellTime:
@@ -1211,6 +1218,32 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.JapaneseJapan:
                     SelectLanguage(Languages.JapaneseJapan);
+                    break;
+
+                case FunctionKeys.KeyboardWithPhrases:
+                    Log.Info("Changing keyboard to keyboard with phrases.");
+                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
+                    Action experimentalKeyboardBackAction =
+                        currentKeyboard is ConversationConfirm
+                        ? ((ConversationConfirm)currentKeyboard).BackAction
+                        : currentKeyboard is ConversationNumericAndSymbols
+                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                            : () =>
+                            {
+                                Log.Info("Restoring window size.");
+                                mainWindowManipulationService.Restore();
+                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
+                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
+                                Keyboard = currentKeyboard;
+                            };
+                    Keyboard = new ExperimentalKeyboardWithPhrases(experimentalKeyboardBackAction);
+                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
+                    mainWindowManipulationService.SetOpacity(1);
+                    break;
+
+                case FunctionKeys.KeyboardWithoutPhrases:
+                    Log.Info("Changing keyboard to ExperimentalKeyboardWithoutPhrases.");
+                    Keyboard = new ExperimentalKeyboardWithoutPhrases();
                     break;
 
                 case FunctionKeys.KoreanKorea:
@@ -2165,6 +2198,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         }
                     }
                     HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
+                    //Tell ExperimentMenuViewModel that user has not typed yet:
+                    InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = true;
                     break;
 
                 case FunctionKeys.NextSuggestions:

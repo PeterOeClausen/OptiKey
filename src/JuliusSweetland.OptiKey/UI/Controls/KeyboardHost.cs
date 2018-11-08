@@ -352,19 +352,35 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                         break;
                 }
             }
-            else if (Keyboard is ViewModelKeyboards.Experimental) //Change to experimental keyboard language
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrases)
             {
                 switch (Settings.Default.KeyboardAndDictionaryLanguage)
                 {
                     case Languages.DanishDenmark:
-                        newContent = new DanishViews.ExperimentalKeyboard { DataContext = Keyboard };
+                        newContent = new DanishViews.ExperimentalKeyboardWithPhrases { DataContext = Keyboard };
                         break;
                     default:
                         newContent = Settings.Default.UseSimplifiedKeyboardLayout
                             ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
                             : Settings.Default.UseAlphabeticalKeyboardLayout
                             ? (object)new EnglishViews.AlphabeticalConversationAlpha1 { DataContext = Keyboard }
-                            : new EnglishViews.ExperimentalKeyboard { DataContext = Keyboard };
+                            : new EnglishViews.ExperimentalKeyboardWithPhrases { DataContext = Keyboard };
+                        break;
+                }
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithoutPhrases)
+            {
+                switch (Settings.Default.KeyboardAndDictionaryLanguage)
+                {
+                    case Languages.DanishDenmark:
+                        newContent = new DanishViews.ExperimentalKeyboardWithoutPhrases { DataContext = Keyboard };
+                        break;
+                    default:
+                        newContent = Settings.Default.UseSimplifiedKeyboardLayout
+                            ? (object)new EnglishViews.SimplifiedConversationAlpha1 { DataContext = Keyboard }
+                            : Settings.Default.UseAlphabeticalKeyboardLayout
+                            ? (object)new EnglishViews.AlphabeticalConversationAlpha1 { DataContext = Keyboard }
+                            : new EnglishViews.ExperimentalKeyboardWithoutPhrases { DataContext = Keyboard };
                         break;
                 }
             }
@@ -433,6 +449,18 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             else if (Keyboard is ViewModelKeyboards.NumericAndSymbols1)
             {
                 newContent = new CommonViews.NumericAndSymbols1 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard1)
+            {
+                newContent = new CommonViews.ExperimentalNumericAndSymbols1 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard2)
+            {
+                newContent = new CommonViews.ExperimentalNumericAndSymbols2 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard3)
+            {
+                newContent = new CommonViews.ExperimentalNumericAndSymbols3 { DataContext = Keyboard };
             }
             else if (Keyboard is ViewModelKeyboards.PhysicalKeys)
             {
@@ -559,8 +587,10 @@ namespace JuliusSweetland.OptiKey.UI.Controls
                             // In Release, just log error
                             KeyValue existingKeyValue = pointToKeyValueMap[rect];
                             Log.ErrorFormat("Overlapping keys {0} and {1}, cannot add {1} to map", existingKeyValue, key.Value);
-
-                            Debug.Assert(!pointToKeyValueMap.ContainsKey(rect));
+                            if (!pointToKeyValueMap.ContainsKey(rect))
+                            {
+                                Debug.Assert(!pointToKeyValueMap.ContainsKey(rect));
+                            }
                         }
                         else
                         {
