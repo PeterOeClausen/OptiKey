@@ -396,7 +396,6 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels.Management
 
         private void dwellTimeChanged(object sender, PropertyChangedEventArgs e)
         {
-            Console.WriteLine("dwellTimeChanged!");
             KeySelectionTriggerFixationDefaultCompleteTimeInMs = Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime.TotalMilliseconds;
             InstanceGetter.Instance.triggerSource.defaultTimeToCompleteTrigger = Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime;
             
