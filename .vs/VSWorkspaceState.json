@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\JuliusSweetland.OptiKey",
+    "\\src\\JuliusSweetland.OptiKey.UnitTests",
+    "\\src\\JuliusSweetland.OptiKey.UnitTests\\Extensions",
+    "\\src\\JuliusSweetland.OptiKey\\Extensions",
+    "\\src\\JuliusSweetland.OptiKey\\Models",
+    "\\src\\JuliusSweetland.OptiKey\\UI",
+    "\\src\\JuliusSweetland.OptiKey\\UI\\ValueConverters"
   ],
   "PreviewInSolutionExplorer": false
 }

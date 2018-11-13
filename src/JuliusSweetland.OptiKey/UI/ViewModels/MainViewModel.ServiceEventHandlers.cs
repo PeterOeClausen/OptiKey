@@ -2189,7 +2189,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     {
                         if(phraseStateService.PhrasesShown < (experimentMenuViewModel.AmountOfSentencesToType - 1))
                         {
-                            phraseStateService.PhraseNumber = phraseStateService.Random.Next(0, phraseStateService.Phrases.Count);
+                            // Instead of randomly choosing the index of the next phrase, choose the next index from an already randomised list of phrases
+                            phraseStateService.PhraseNumber++;
                             phraseStateService.PhrasesShown++;
 
                             // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
