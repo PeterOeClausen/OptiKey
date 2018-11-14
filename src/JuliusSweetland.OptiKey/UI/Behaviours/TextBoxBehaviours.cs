@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,16 +52,23 @@ namespace JuliusSweetland.OptiKey.UI.Behaviours
 
         private static void PositionCaret(TextBox textBox, UIElement caretElement)
         {
-            var caretLocation = textBox.GetRectFromCharacterIndex(textBox.Text.Length).Location;
-
-            if (!double.IsInfinity(caretLocation.X))
+            try
             {
-                Canvas.SetLeft(caretElement, caretLocation.X);
+                var caretLocation = textBox.GetRectFromCharacterIndex(textBox.Text.Length).Location;
+
+                if (!double.IsInfinity(caretLocation.X))
+                {
+                    Canvas.SetLeft(caretElement, caretLocation.X);
+                }
+
+                if (!double.IsInfinity(caretLocation.Y))
+                {
+                    Canvas.SetTop(caretElement, caretLocation.Y);
+                }
             }
-
-            if (!double.IsInfinity(caretLocation.Y))
+            catch (Exception ex)
             {
-                Canvas.SetTop(caretElement, caretLocation.Y);
+                Debug.WriteLine("PositionCaret error: " + ex.Message);
             }
         }
     }
