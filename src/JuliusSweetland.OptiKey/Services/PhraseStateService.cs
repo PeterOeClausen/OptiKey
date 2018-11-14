@@ -19,13 +19,6 @@ namespace JuliusSweetland.OptiKey.Services
             set { SetProperty(ref phrasesShown, value); }
         }
 
-        private List<string> rawPhrases;
-        public List<string> RawPhrases
-        {
-            get { return rawPhrases; }
-            set { SetProperty(ref rawPhrases, value); }
-        }
-
         private List<string> phrases;
         public List<string> Phrases {
             get { return phrases; }
@@ -38,38 +31,16 @@ namespace JuliusSweetland.OptiKey.Services
             set { SetProperty(ref phraseNumber, value); }
         }
 
-        public Random Random { get; set; }
-
         public void SetPhraseFile(string path)
         {
             // Initialisation of the phrases by setting the path and initialising the list of phrases 
             Console.WriteLine("SetPhraseFile called in PhraseStateService with: " + path);
-            rawPhrases = File.ReadAllLines(path).ToList();
-            phrases = RandomPhrases(amountOfSentencesToType, rawPhrases);
+            var random = new Random();
+            phrases = File.ReadAllLines(path).OrderBy(s => random.Next()).ToList();
+            phrases.Insert(0, "");
             phraseNumber = 0; // initialise phraseNumber to 0
             OnPropertyChanged("phrases");
             OnPropertyChanged("phraseNumber");
-        }
-
-        // list of phrases created, that are to be typed, in a random order without duplicates
-        public List<string> RandomPhrases(int count, List<string> rawPhrases)
-        {
-            int MyNumber = 0;
-            List<int> randomIndexList = new List<int>();
-            phrases.Clear(); // Somehow the list contains the phrases from the default_phrase.txt file. Need to clear 
-
-            while (randomIndexList.Count() < count)
-            {
-                MyNumber = Random.Next(0, count);
-                if (randomIndexList != null && !randomIndexList.Contains(MyNumber))
-                {
-                    randomIndexList.Add(MyNumber);
-                    phrases.Add(rawPhrases[MyNumber]);
-                }
-
-            }
-            return phrases;
-
         }
     }
 }

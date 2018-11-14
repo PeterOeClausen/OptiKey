@@ -158,9 +158,8 @@ namespace JuliusSweetland.OptiKey
                 IMouseOutputService mouseOutputService = new MouseOutputService(publishService);
                 
                 //Create PhraseStateService:
-                var Random = new Random();
-                List<string> phraseList = File.ReadAllLines(@"default_phrases.txt").ToList();
-                IPhraseStateService phraseStateService = new PhraseStateService() { RawPhrases = phraseList, PhraseNumber = 0, Phrases = phraseList, Random = Random};
+                IPhraseStateService phraseStateService = new PhraseStateService() { PhraseNumber = 0 };
+                phraseStateService.SetPhraseFile("default_phrases.txt");
                 InstanceGetter.Instance.PhraseStateService = phraseStateService;
 
                 //Create ExperimentMenuViewModel:
