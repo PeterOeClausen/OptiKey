@@ -117,7 +117,9 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                 Settings.Default.MultiKeySelectionEnabled = false;
                 InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.Up);
             }
-            
+
+            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.LeftShiftKey].Value = KeyDownStates.Up;
+
             //Hiding the experiment Menu.
             this.Hide();
         }
