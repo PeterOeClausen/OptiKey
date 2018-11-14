@@ -2193,6 +2193,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             phraseStateService.PhrasesShown++;
 
                             // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
+                            keyStateService.KeyDownStates[KeyValues.LeftShiftKey].Value = KeyDownStates.Up;
                             InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
                         }
                         else

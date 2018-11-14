@@ -17,6 +17,8 @@ namespace JuliusSweetland.OptiKey.UI.Windows
     /// </summary>
     public partial class ExperimentMenu : Window
     {
+        private MainViewModel mainViewModel;
+
         private MainWindow mainWindow;
         private ExperimentMenuViewModel viewModel;
 
@@ -93,6 +95,7 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                     break;
             }
 
+            //mainViewModel.KeyStateService.KeyDownStates[KeyValues.LeftShiftKey].Value = KeyDownStates.Up;
             // Instead of 2 seconds of sleep, keyboard is set to sleep till the user activates it by looking at sleep again
             InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
             //Showing main window:
