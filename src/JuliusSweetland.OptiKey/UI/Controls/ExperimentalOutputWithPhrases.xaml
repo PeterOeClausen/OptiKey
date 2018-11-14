@@ -167,7 +167,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <controls:PhraseTextBlock Grid.Row="0"
-                                   FontSize="20"
+                                   FontSize="32"
                                    Margin="1" 
                                    Padding="1"
                                    TextWrapping="WrapWithOverflow"
