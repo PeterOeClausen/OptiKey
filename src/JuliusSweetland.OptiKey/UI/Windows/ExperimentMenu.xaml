@@ -57,7 +57,7 @@
                 <CheckBox Content="Show shift key?"                  IsChecked="{Binding ShowShiftKey}"/>
                 <CheckBox Content="Show backspace key?"              IsChecked="{Binding ShowBackspaceKey}"/>
                 <CheckBox Content="Show back-one-word key?"          IsChecked="{Binding ShowBackOneWordKey}"/>
-               <!--Only showing Num/Sym key in keyboard without phrases, hence no need for choice <CheckBox Content="Show numbers and symbols key?"    IsChecked="{Binding ShowNumSymKey}"/>-->
+                <CheckBox Content="Show numbers and symbols key?"    IsChecked="{Binding ShowNumSymKey}"/>
                 <CheckBox Content="Show dot and comma?" IsChecked="{Binding EnableDotCommaApostrophe}"/>
                 <CheckBox Content="Show dwelltime adjustment?" IsChecked="{Binding ShowDwelltimeAdjustments}"/>
                 <CheckBox Content="Show quit key?"                   IsChecked="{Binding ShowQuitKey}"/>

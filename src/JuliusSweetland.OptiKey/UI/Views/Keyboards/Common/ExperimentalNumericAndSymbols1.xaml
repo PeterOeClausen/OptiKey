@@ -148,12 +148,17 @@
                       Text=";"
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value=";"/>
-        <controls:Key Grid.Row="3" Grid.Column="20" Grid.ColumnSpan="2"
+        <!--<controls:Key Grid.Row="3" Grid.Column="20" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource AlphaIcon}"
                       Text="QWERTY Keyboard"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ExperimentalKeyboardWithoutPhrasesKey}"/>
-
+                      Value="{x:Static models:KeyValues.ExperimentalKeyboardWithoutPhrasesKey}"/>-->
+        <controls:Key Grid.Row="3" Grid.Column="20" Grid.ColumnSpan="2"
+                      SymbolGeometry="{StaticResource MenuIcon}"
+                      Text="QWERTY Keyboard"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.MenuKeyboardKey}"/>
+        
         <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource ShiftIcon}"
                       Text="{x:Static resx:Resources.SHIFT}"
