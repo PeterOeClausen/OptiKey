@@ -219,15 +219,6 @@
 
         <!--'With phrases' doesn't have an enter key key.--><!--
         <controls:Key Grid.Row="4" Grid.Column="20" Grid.ColumnSpan="2"/>-->
-
-        <!--NUM/SYM key-->
-        <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>
-        <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"
-                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowNumSymKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
-                      SymbolGeometry="{StaticResource NumericAndSymbolsIcon}"
-                      Text="{x:Static resx:Resources.NUM_SYM_SPLIT_WITH_NEWLINE}"
-                      SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey1}"/>
         
         <!--Dwell time decrease-->
         <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
@@ -276,7 +267,15 @@
                       Value="."/>
         
         <!--WithPhrases has no Num/Sym key-->
+        <!--<controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>-->
+        <!--NUM/SYM key-->
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>
+        <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.ShowNumSymKey, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource NumericAndSymbolsIcon}"
+                      Text="{x:Static resx:Resources.NUM_SYM_SPLIT_WITH_NEWLINE}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey1}"/>
         
         <!--MultiKeySwipe feature-->
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"/>
