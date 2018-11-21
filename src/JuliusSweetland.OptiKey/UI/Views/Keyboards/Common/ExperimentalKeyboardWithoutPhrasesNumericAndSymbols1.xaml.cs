@@ -6,9 +6,9 @@ namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
     /// <summary>
     /// Interaction logic for ExperimentalNumericAndSymbols1.xaml
     /// </summary>
-    public partial class ExperimentalNumericAndSymbols1 : KeyboardView
+    public partial class ExperimentalKeyboardWithoutPhrasesNumericAndSymbols1 : KeyboardView
     {
-        public ExperimentalNumericAndSymbols1()
+        public ExperimentalKeyboardWithoutPhrasesNumericAndSymbols1()
         {
             this.DataContext = InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel;
             InitializeComponent();

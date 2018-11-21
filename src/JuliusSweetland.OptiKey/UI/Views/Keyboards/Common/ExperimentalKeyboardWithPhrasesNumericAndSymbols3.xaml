@@ -1,4 +1,4 @@
-<controls:KeyboardView x:Class="JuliusSweetland.OptiKey.UI.Views.Keyboards.Common.ExperimentalNumericAndSymbols3"
+<controls:KeyboardView x:Class="JuliusSweetland.OptiKey.UI.Views.Keyboards.Common.ExperimentalKeyboardWithPhrasesNumericAndSymbols3"
                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -106,7 +106,7 @@
                       SymbolGeometry="{StaticResource 3of3Icon}"
                       Text="{x:Static resx:Resources.NEXT}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ExperimentNumSymKeyboardKey1}"/>
+                      Value="{x:Static models:KeyValues.ExperimentWithPhrasesNumSymKeyboardKey1}"/>
        
         <controls:Key Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
                       Text="⊃"
@@ -152,7 +152,7 @@
                       SymbolGeometry="{StaticResource AlphaIcon}"
                       Text="QWERTY Keyboard"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="{x:Static models:KeyValues.ExperimentalKeyboardWithoutPhrasesKey}"/>
+                      Value="{x:Static models:KeyValues.ExperimentalKeyboardWithPhrasesKey}"/>
         
         <controls:Key Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource ShiftIcon}"
@@ -197,12 +197,12 @@
                       Text="{x:Static resx:Resources.BACK_WORD_SPLIT_WITH_NEWLINE}"
                       SharedSizeGroup="KeyWithSymbol"
                       Value="{x:Static models:KeyValues.BackManyKey}"/>
-        <!--Enter-->
+        <!--'With phrases' doesn't have an enter key key.
         <controls:Key Grid.Row="4" Grid.Column="20" Grid.ColumnSpan="2"
                       SymbolGeometry="{StaticResource EnterIcon}"
                       Text="{x:Static resx:Resources.ENTER}"
                       SharedSizeGroup="KeyWithSymbol"
-                      Value="&#x0a;" /><!--Hex for "\n"-->
+                      Value="&#x0a;" />--><!--Hex for "\n"-->
 
         <!--Dwell time decrease-->
         <controls:Key Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>

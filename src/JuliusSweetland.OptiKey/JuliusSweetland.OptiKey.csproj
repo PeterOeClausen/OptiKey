@@ -484,9 +484,12 @@
     <Compile Include="UI\ViewModels\Keyboards\Alpha2.cs" />
     <Compile Include="UI\ViewModels\Keyboards\CommuniKate.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithoutPhrases.cs" />
-    <Compile Include="UI\ViewModels\Keyboards\ExperimentalNumbersAndSymbolsKeyboard3.cs" />
-    <Compile Include="UI\ViewModels\Keyboards\ExperimentalNumbersAndSymbolsKeyboard2.cs" />
-    <Compile Include="UI\ViewModels\Keyboards\ExperimentalNumbersAndSymbolsKeyboard1.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard1.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard2.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard3.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard3.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard2.cs" />
+    <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard1.cs" />
     <Compile Include="UI\ViewModels\Keyboards\Voice.cs" />
     <Compile Include="UI\ViewModels\ExperimentMenuViewModel.cs" />
     <Compile Include="UI\ViewModels\Keyboards\ExperimentalKeyboardWithPhrases.cs" />
@@ -537,14 +540,23 @@
     <Compile Include="UI\Views\Keyboards\Common\ConversationConfirm.xaml.cs">
       <DependentUpon>ConversationConfirm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols1.xaml.cs">
-      <DependentUpon>ExperimentalNumericAndSymbols1.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithPhrasesNumericAndSymbols1.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithPhrasesNumericAndSymbols1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols2.xaml.cs">
-      <DependentUpon>ExperimentalNumericAndSymbols2.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithoutPhrasesNumericAndSymbols1.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithoutPhrasesNumericAndSymbols1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols3.xaml.cs">
-      <DependentUpon>ExperimentalNumericAndSymbols3.xaml</DependentUpon>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithPhrasesNumericAndSymbols2.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithPhrasesNumericAndSymbols2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithoutPhrasesNumericAndSymbols2.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithoutPhrasesNumericAndSymbols2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithPhrasesNumericAndSymbols3.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithPhrasesNumericAndSymbols3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithoutPhrasesNumericAndSymbols3.xaml.cs">
+      <DependentUpon>ExperimentalKeyboardWithoutPhrasesNumericAndSymbols3.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Keyboards\Common\Voice.xaml.cs">
       <DependentUpon>Voice.xaml</DependentUpon>
@@ -1311,19 +1323,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithPhrasesNumericAndSymbols1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithPhrasesNumericAndSymbols2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithPhrasesNumericAndSymbols3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Views\Keyboards\Common\LookToScrollResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols1.xaml">
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithoutPhrasesNumericAndSymbols1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols2.xaml">
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithoutPhrasesNumericAndSymbols2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\Keyboards\Common\ExperimentalNumericAndSymbols3.xaml">
+    <Page Include="UI\Views\Keyboards\Common\ExperimentalKeyboardWithoutPhrasesNumericAndSymbols3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

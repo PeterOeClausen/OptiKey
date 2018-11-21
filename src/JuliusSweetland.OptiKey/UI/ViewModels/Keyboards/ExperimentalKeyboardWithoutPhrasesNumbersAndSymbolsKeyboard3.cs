@@ -2,7 +2,7 @@
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels.Keyboards
 {
-    class ExperimentalNumbersAndSymbolsKeyboard2 : Keyboard
+    class ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard3 : Keyboard
     {
     }
 }

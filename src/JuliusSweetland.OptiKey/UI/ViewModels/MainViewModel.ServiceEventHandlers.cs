@@ -1163,19 +1163,34 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     mainWindowManipulationService.Expand(ExpandToDirections.TopRight, Settings.Default.MoveAndResizeAdjustmentAmountInPixels);
                     break;
 
-                case FunctionKeys.ExperimentalNumSymKeyboard1:
-                    Log.Info("Changing to ExperimentalNumSymKeyboard1");
-                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard1();
+                case FunctionKeys.ExperimentalKeyboardWithoutPhrasesNumSymKeyboard1:
+                    Log.Info("Changing to ExperimentalKeyboardWithoutPhrasesNumSymKeyboard1");
+                    Keyboard = new ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard1();
                     break;
 
-                case FunctionKeys.ExperimentalNumSymKeyboard2:
-                    Log.Info("Changing to ExperimentalNumSymKeyboard2");
-                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard2();
+                case FunctionKeys.ExperimentalKeyboardWithoutPhrasesNumSymKeyboard2:
+                    Log.Info("Changing to ExperimentalKeyboardWithoutPhrasesNumSymKeyboard2");
+                    Keyboard = new ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard2();
                     break;
 
-                case FunctionKeys.ExperimentalNumSymKeyboard3:
-                    Log.Info("Changing to ExperimentalNumSymKeyboard3");
-                    Keyboard = new ExperimentalNumbersAndSymbolsKeyboard3();
+                case FunctionKeys.ExperimentalKeyboardWithoutPhrasesNumSymKeyboard3:
+                    Log.Info("Changing to ExperimentalKeyboardWithoutPhrasesNumSymKeyboard3");
+                    Keyboard = new ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard3();
+                    break;
+
+                case FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard1:
+                    Log.Info("Changing to ExperimentalKeyboardWithPhrasesNumSymKeyboard1");
+                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard1();
+                    break;
+
+                case FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard2:
+                    Log.Info("Changing to ExperimentalKeyboardWithPhrasesNumSymKeyboard2");
+                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard2();
+                    break;
+
+                case FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard3:
+                    Log.Info("Changing to ExperimentalKeyboardWithPhrasesNumSymKeyboard3");
+                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard3();
                     break;
 
                 case FunctionKeys.FrenchCanada:

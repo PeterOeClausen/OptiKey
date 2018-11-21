@@ -94,9 +94,12 @@ namespace JuliusSweetland.OptiKey.Models
         public static readonly KeyValue ExpandToTopAndRightKey = new KeyValue(FunctionKeys.ExpandToTopAndRight);
         public static readonly KeyValue ExperimentalKeyboardWithPhrasesKey = new KeyValue(FunctionKeys.KeyboardWithPhrases);
         public static readonly KeyValue ExperimentalKeyboardWithoutPhrasesKey = new KeyValue(FunctionKeys.KeyboardWithoutPhrases);
-        public static readonly KeyValue ExperimentNumSymKeyboardKey1 = new KeyValue(FunctionKeys.ExperimentalNumSymKeyboard1);
-        public static readonly KeyValue ExperimentNumSymKeyboardKey2 = new KeyValue(FunctionKeys.ExperimentalNumSymKeyboard2);
-        public static readonly KeyValue ExperimentNumSymKeyboardKey3 = new KeyValue(FunctionKeys.ExperimentalNumSymKeyboard3);
+        public static readonly KeyValue ExperimentWithPhrasesNumSymKeyboardKey1 = new KeyValue(FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard1);
+        public static readonly KeyValue ExperimentWithPhrasesNumSymKeyboardKey2 = new KeyValue(FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard2);
+        public static readonly KeyValue ExperimentWithPhrasesNumSymKeyboardKey3 = new KeyValue(FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard3);
+        public static readonly KeyValue ExperimentWithoutPhrasesNumSymKeyboardKey1 = new KeyValue(FunctionKeys.ExperimentalKeyboardWithoutPhrasesNumSymKeyboard1);
+        public static readonly KeyValue ExperimentWithoutPhrasesNumSymKeyboardKey2 = new KeyValue(FunctionKeys.ExperimentalKeyboardWithoutPhrasesNumSymKeyboard2);
+        public static readonly KeyValue ExperimentWithoutPhrasesNumSymKeyboardKey3 = new KeyValue(FunctionKeys.ExperimentalKeyboardWithoutPhrasesNumSymKeyboard3);
         public static readonly KeyValue EscapeKey = new KeyValue(FunctionKeys.Escape);
         public static readonly KeyValue ExpandDockKey = new KeyValue(FunctionKeys.ExpandDock);
         public static readonly KeyValue F1Key = new KeyValue(FunctionKeys.F1);

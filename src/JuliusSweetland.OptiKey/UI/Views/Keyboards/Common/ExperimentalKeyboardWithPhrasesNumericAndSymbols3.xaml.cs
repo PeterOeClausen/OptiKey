@@ -4,11 +4,11 @@ using JuliusSweetland.OptiKey.UI.Controls;
 namespace JuliusSweetland.OptiKey.UI.Views.Keyboards.Common
 {
     /// <summary>
-    /// Interaction logic for ExperimentalNumericAndSymbols2.xaml
+    /// Interaction logic for ExperimentalNumericAndSymbols3.xaml
     /// </summary>
-    public partial class ExperimentalNumericAndSymbols2 : KeyboardView
+    public partial class ExperimentalKeyboardWithPhrasesNumericAndSymbols3 : KeyboardView
     {
-        public ExperimentalNumericAndSymbols2()
+        public ExperimentalKeyboardWithPhrasesNumericAndSymbols3()
         {
             this.DataContext = InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel;
             InitializeComponent();

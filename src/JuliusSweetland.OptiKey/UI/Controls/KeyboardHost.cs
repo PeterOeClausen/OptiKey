@@ -450,17 +450,29 @@ namespace JuliusSweetland.OptiKey.UI.Controls
             {
                 newContent = new CommonViews.NumericAndSymbols1 { DataContext = Keyboard };
             }
-            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard1)
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard1)
             {
-                newContent = new CommonViews.ExperimentalNumericAndSymbols1 { DataContext = Keyboard };
+                newContent = new CommonViews.ExperimentalKeyboardWithoutPhrasesNumericAndSymbols1 { DataContext = Keyboard };
             }
-            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard2)
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard2)
             {
-                newContent = new CommonViews.ExperimentalNumericAndSymbols2 { DataContext = Keyboard };
+                newContent = new CommonViews.ExperimentalKeyboardWithoutPhrasesNumericAndSymbols2 { DataContext = Keyboard };
             }
-            else if (Keyboard is ViewModelKeyboards.ExperimentalNumbersAndSymbolsKeyboard3)
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithoutPhrasesNumbersAndSymbolsKeyboard3)
             {
-                newContent = new CommonViews.ExperimentalNumericAndSymbols3 { DataContext = Keyboard };
+                newContent = new CommonViews.ExperimentalKeyboardWithoutPhrasesNumericAndSymbols3 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard1)
+            {
+                newContent = new CommonViews.ExperimentalKeyboardWithPhrasesNumericAndSymbols1 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard2)
+            {
+                newContent = new CommonViews.ExperimentalKeyboardWithPhrasesNumericAndSymbols2 { DataContext = Keyboard };
+            }
+            else if (Keyboard is ViewModelKeyboards.ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard3)
+            {
+                newContent = new CommonViews.ExperimentalKeyboardWithPhrasesNumericAndSymbols3 { DataContext = Keyboard };
             }
             else if (Keyboard is ViewModelKeyboards.PhysicalKeys)
             {
