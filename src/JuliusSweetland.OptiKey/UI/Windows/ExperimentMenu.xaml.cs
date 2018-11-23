@@ -118,7 +118,8 @@ namespace JuliusSweetland.OptiKey.UI.Windows
                 InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.Up);
             }
 
-            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.LeftShiftKey].Value = KeyDownStates.Up;
+            // First sentence may start with a capital
+            // InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.LeftShiftKey].Value = KeyDownStates.Up;
 
             //Hiding the experiment Menu.
             this.Hide();
