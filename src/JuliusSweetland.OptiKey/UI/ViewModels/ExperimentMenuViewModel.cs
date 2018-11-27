@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -292,7 +293,26 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         #region Choose what to log booleans
         public bool DoLog_TobiiGazeData
         {
-            get { return CSVLogService.Instance.doLog_TobiiGazeData; }
+            get {
+                var doLogTobiiGazeData = CSVLogService.Instance.doLog_TobiiGazeData;
+                if (doLogTobiiGazeData)
+                {
+                    if (!TobiiEyeXPointService.CanApplyLicenseAndTrackerConnected())
+                    {
+                        CSVLogService.Instance.doLog_TobiiGazeData = false;
+                        Settings.Default.doLog_TobiiGazeData = false;
+                        doLogTobiiGazeData = false;
+                        MessageBoxResult result =
+                            MessageBox.Show("Problem with Tobii EyeTracker:\n" +
+                            "Either the tracker is not connected or the program failed to apply the research license. " +
+                            "Please check the output in Visual Studio for more info.",
+                            "Problem with Tobii EyeTracker.",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
+                }
+                return doLogTobiiGazeData;
+            }
             set {
                 CSVLogService.Instance.doLog_TobiiGazeData = value;
                 Settings.Default.doLog_TobiiGazeData = value;

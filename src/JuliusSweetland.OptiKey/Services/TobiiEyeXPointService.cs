@@ -73,7 +73,6 @@ namespace JuliusSweetland.OptiKey.Services
                 Console.WriteLine("Could not apply research license.");
             }
         }
-
         #endregion
 
         #region Properties
@@ -221,16 +220,16 @@ namespace JuliusSweetland.OptiKey.Services
         /// </summary>
         /// <param name="eyeTracker"></param>
         /// <param name="licensePath"></param>
-        private bool ApplyLicense(IEyeTracker eyeTracker, string licensePath)
+        private static bool ApplyLicense(IEyeTracker eyeTracker, string licensePath)
         {
             try
             {
                 // Create a collection with the license.
                 var licenseCollection = new LicenseCollection(
-                    new System.Collections.Generic.List<LicenseKey>
-                    {
-                   new LicenseKey(System.IO.File.ReadAllBytes(licensePath))
-                    });
+                    new System.Collections.Generic.List<LicenseKey>{
+                        new LicenseKey(System.IO.File.ReadAllBytes(licensePath))
+                    }
+                );
 
                 // See if we can apply the license. Write to console if it fails.
                 FailedLicenseCollection failedLicenses;
@@ -248,6 +247,26 @@ namespace JuliusSweetland.OptiKey.Services
             {
                 Console.WriteLine("Warning, could not apply license!");
                 Console.WriteLine("Exception message:\n" + e.Message);
+                return false;
+            }
+        }
+
+        public static bool CanApplyLicenseAndTrackerConnected()
+        {
+            //Check if tracker can be found:
+            IEyeTracker tobiiEyeTracker = EyeTrackingOperations.FindAllEyeTrackers().FirstOrDefault();
+            if(tobiiEyeTracker == null)
+            {
+                Console.WriteLine("Warning: Tobii Eyetracker is not connected!");
+                return false;
+            }
+            if (ApplyLicense(tobiiEyeTracker, TobiiLicense))
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Warning: Could not apply research license!");
                 return false;
             }
         }
