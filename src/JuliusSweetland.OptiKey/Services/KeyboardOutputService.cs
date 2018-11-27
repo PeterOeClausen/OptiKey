@@ -60,7 +60,11 @@ namespace JuliusSweetland.OptiKey.Services
             ReactToPublishableKeyDownStateChanges();
             ReactToKeyboardIsShiftAwareChanges();
             ReactToSuppressAutoCapitaliseIntelligentlyChanges();
-            AutoPressShiftIfAppropriate();
+            //Only autoPressShift if showing shift key:
+            if (Settings.Default.ExperimentMenu_ShowShiftKey)
+            {
+                AutoPressShiftIfAppropriate();
+            }
             GenerateSuggestions(true);
         }
 
@@ -116,7 +120,10 @@ namespace JuliusSweetland.OptiKey.Services
                         if (textChangedByBackMany
                             || string.IsNullOrEmpty(Text))
                         {
-                            AutoPressShiftIfAppropriate();
+                            if (Settings.Default.ExperimentMenu_ShowShiftKey)
+                            {
+                                AutoPressShiftIfAppropriate();
+                            }
                         }
 
                         StoreLastProcessedText(null);
@@ -206,7 +213,10 @@ namespace JuliusSweetland.OptiKey.Services
                     if (textChangedByBackOne
                         || string.IsNullOrEmpty(Text))
                     {
-                        //AutoPressShiftIfAppropriate(); //Not needed in experimentation mode
+                        if (Settings.Default.ExperimentMenu_ShowShiftKey)
+                        {
+                            AutoPressShiftIfAppropriate();
+                        }
                     }
 
                     StoreLastProcessedText(null);
@@ -221,11 +231,15 @@ namespace JuliusSweetland.OptiKey.Services
                     Text = null;
                     StoreLastProcessedText(null);
                     ClearSuggestions();
-                    //AutoPressShiftIfAppropriate(); //No need to shift in experiment mode.
+                    if (Settings.Default.ExperimentMenu_ShowShiftKey)
+                    {
+                        AutoPressShiftIfAppropriate();
+                    }
                     Log.Debug("Suppressing next auto space.");
                     suppressNextAutoSpace = true;
                     lastProcessedTextWasSuggestion = false;
                     GenerateSuggestions(false);
+
                     break;
 
                 case FunctionKeys.ConversationConfirmYes:
@@ -875,7 +889,10 @@ namespace JuliusSweetland.OptiKey.Services
                 StoreLastProcessedText(null);
                 ClearSuggestions();
                 ReleaseUnlockedKeys();
-                AutoPressShiftIfAppropriate();
+                if (Settings.Default.ExperimentMenu_ShowShiftKey)
+                {
+                    AutoPressShiftIfAppropriate();
+                }
                 Log.Debug("Suppressing next auto space.");
                 suppressNextAutoSpace = true;
             }
