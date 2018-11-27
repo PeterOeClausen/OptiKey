@@ -18,13 +18,13 @@ namespace JuliusSweetland.OptiKey.Services
         private bool doLog = false;                 //Change to true to log
 
         public bool doLog_EyeTribeGazeData = Settings.Default.doLog_EyeTribeGazeData;
+        public bool doLog_TobiiGazeData = Settings.Default.doLog_TobiiGazeData;
         public bool doLog_ScratchPadText = Settings.Default.doLog_ScratchPadText;
         public bool doLog_PhraseText = Settings.Default.doLog_PhraseText;
         public bool doLog_KeySelection = Settings.Default.doLog_KeySelection;
         public bool doLog_UserLooksAtKey = Settings.Default.doLog_UserLooksAtKey;
         public bool doLog_MultiKeySelection = Settings.Default.doLog_MultiKeySelection;
-        public bool doLog_TobiiGazeData = Settings.Default.doLog_TobiiGazeData;
-
+        
         private string logDirectoryForThisRun;
         private string fileFriendlyDate;
         

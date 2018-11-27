@@ -5,6 +5,7 @@ using JuliusSweetland.OptiKey.Services;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
@@ -218,6 +219,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
+        private bool showDwelltimeAdjustments = Settings.Default.ExperimentMenu_ShowDwellTimeAdjustment;
+        public bool ShowDwelltimeAdjustments
+        {
+            get { return showDwelltimeAdjustments; }
+            set
+            {
+                showDwelltimeAdjustments = value;
+                Settings.Default.ExperimentMenu_ShowDwellTimeAdjustment = value;
+            }
+        }
+
         private Enums.PointsSources selectedPointSource = Settings.Default.PointsSource;
         public Enums.PointsSources SelectedPointSource
         {
@@ -225,8 +237,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             set
             {
                 Console.WriteLine("SelectedPointSource set!");
-                selectedPointSource = value;
                 Settings.Default.PointsSource = value;
+                selectedPointSource = value;
                 //Restart application:
                 System.Windows.Forms.Application.Restart();
                 System.Windows.Application.Current.Shutdown();
@@ -241,14 +253,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
         }
 
-
-        private bool showDwelltimeAdjustments = Settings.Default.ExperimentMenu_ShowDwellTimeAdjustment;
-        public bool ShowDwelltimeAdjustments
+        private double dwellTimeInMiliseconds = (Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime).TotalMilliseconds;
+        public double DwellTimeInMiliseconds
         {
-            get { return showDwelltimeAdjustments; }
-            set {
-                showDwelltimeAdjustments = value;
-                Settings.Default.ExperimentMenu_ShowDwellTimeAdjustment = value;
+            get { return dwellTimeInMiliseconds; }
+            set
+            {
+                SetProperty(ref dwellTimeInMiliseconds, value);
+                Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime = TimeSpan.FromMilliseconds(value);
             }
         }
 
@@ -256,9 +268,13 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         public string OptiKeyLogPath
         {
             get { return optiKeyLogPath; }
-            set {    
-                SetProperty(ref optiKeyLogPath, value);
-                CSVLogService.Instance.OptiKeyLogPath = value;
+            set {
+                if (Directory.Exists(value))
+                {
+                    SetProperty(ref optiKeyLogPath, value);
+                    CSVLogService.Instance.OptiKeyLogPath = value;
+                    //Saved in settings inside CSVLogService
+                }
             }
         }
 
@@ -277,43 +293,64 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
         public bool DoLog_TobiiGazeData
         {
             get { return CSVLogService.Instance.doLog_TobiiGazeData; }
-            set { CSVLogService.Instance.doLog_TobiiGazeData = value; }
+            set {
+                CSVLogService.Instance.doLog_TobiiGazeData = value;
+                Settings.Default.doLog_TobiiGazeData = value;
+            }
         }
 
         public bool DoLog_EyeTribeGazeData
         {
             get { return CSVLogService.Instance.doLog_EyeTribeGazeData; }
-            set { CSVLogService.Instance.doLog_EyeTribeGazeData = value; }
+            set {
+                CSVLogService.Instance.doLog_EyeTribeGazeData = value;
+                Settings.Default.doLog_EyeTribeGazeData = value;
+            }
         }
 
         public bool DoLog_ScratchPadText
         {
             get { return CSVLogService.Instance.doLog_ScratchPadText; }
-            set { CSVLogService.Instance.doLog_ScratchPadText = value; }
+            set {
+                CSVLogService.Instance.doLog_ScratchPadText = value;
+                Settings.Default.doLog_ScratchPadText = value;
+            }
         }
 
         public bool DoLog_PhraseText
         {
             get { return CSVLogService.Instance.doLog_PhraseText; }
-            set { CSVLogService.Instance.doLog_PhraseText = value; }
+            set {
+                CSVLogService.Instance.doLog_PhraseText = value;
+                Settings.Default.doLog_PhraseText = value;
+            }
         }
 
         public bool DoLog_KeySelection
         {
             get { return CSVLogService.Instance.doLog_KeySelection; }
-            set { CSVLogService.Instance.doLog_KeySelection = value; }
+            set {
+                CSVLogService.Instance.doLog_KeySelection = value;
+                Settings.Default.doLog_KeySelection = value;
+            }
         }
 
         public bool DoLog_UserLooksAtKey
         {
             get { return CSVLogService.Instance.doLog_UserLooksAtKey; }
-            set { CSVLogService.Instance.doLog_UserLooksAtKey = value; }
+            set {
+                CSVLogService.Instance.doLog_UserLooksAtKey = value;
+                Settings.Default.doLog_UserLooksAtKey = value;
+            }
         }
 
         public bool DoLog_MultiKeySelection
         {
             get { return CSVLogService.Instance.doLog_MultiKeySelection; }
-            set { CSVLogService.Instance.doLog_MultiKeySelection = value; }
+            set {
+                CSVLogService.Instance.doLog_MultiKeySelection = value;
+                Settings.Default.doLog_MultiKeySelection = value;
+            }
         }
         #endregion
     }

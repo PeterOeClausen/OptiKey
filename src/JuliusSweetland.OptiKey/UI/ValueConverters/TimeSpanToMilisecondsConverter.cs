@@ -8,6 +8,7 @@ using System.Windows.Data;
 
 namespace JuliusSweetland.OptiKey.UI.ValueConverters
 {
+    //Not currently in use...
     public class TimeSpanToMilisecondsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
