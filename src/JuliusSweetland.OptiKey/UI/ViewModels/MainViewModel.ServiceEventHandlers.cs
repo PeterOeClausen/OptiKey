@@ -1180,17 +1180,17 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard1:
                     Log.Info("Changing to ExperimentalKeyboardWithPhrasesNumSymKeyboard1");
-                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard1();
+                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard1(GetBackActionForConversationKeyboard());
                     break;
 
                 case FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard2:
                     Log.Info("Changing to ExperimentalKeyboardWithPhrasesNumSymKeyboard2");
-                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard2();
+                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard2(GetBackActionForConversationKeyboard());
                     break;
 
                 case FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard3:
                     Log.Info("Changing to ExperimentalKeyboardWithPhrasesNumSymKeyboard3");
-                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard3();
+                    Keyboard = new ExperimentalKeyboardWithPhrasesNumbersAndSymbolsKeyboard3(GetBackActionForConversationKeyboard());
                     break;
 
                 case FunctionKeys.FrenchCanada:
@@ -1237,21 +1237,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.KeyboardWithPhrases:
                     Log.Info("Changing keyboard to keyboard with phrases.");
-                    var opacityBeforeExperimentalKeyboard = mainWindowManipulationService.GetOpacity();
-                    Action experimentalKeyboardBackAction =
-                        currentKeyboard is ConversationConfirm
-                        ? ((ConversationConfirm)currentKeyboard).BackAction
-                        : currentKeyboard is ConversationNumericAndSymbols
-                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
-                            : () =>
-                            {
-                                Log.Info("Restoring window size.");
-                                mainWindowManipulationService.Restore();
-                                Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeExperimentalKeyboard);
-                                mainWindowManipulationService.SetOpacity(opacityBeforeExperimentalKeyboard);
-                                Keyboard = currentKeyboard;
-                            };
-                    Keyboard = new ExperimentalKeyboardWithPhrases(experimentalKeyboardBackAction);
+                    Keyboard = new ExperimentalKeyboardWithPhrases(GetBackActionForConversationKeyboard());
                     Log.InfoFormat("Setting opacity to 1 (fully opaque)");
                     mainWindowManipulationService.SetOpacity(1);
                     break;
@@ -2402,6 +2388,35 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
             }
 
             keyboardOutputService.ProcessFunctionKey(singleKeyValue.FunctionKey.Value);
+        }
+
+        /// <summary>
+        /// Private helper method to avoid code duplication.
+        /// We don't need to create a new specific back action for each keyboard,
+        /// hence this method was made.
+        /// It is used every time we create a new conversation keyboard, before
+        /// we switch to it.
+        /// </summary>
+        /// <returns>A back action used in conversation keyboards.</returns>
+        private Action GetBackActionForConversationKeyboard()
+        {
+            //Making a backaction needed for conversation keyboards:
+            var currentKeyboard = Keyboard;
+            var opacityBeforeKeyboard = mainWindowManipulationService.GetOpacity();
+            Action backAction =
+                currentKeyboard is ConversationConfirm
+                ? ((ConversationConfirm)currentKeyboard).BackAction
+                : currentKeyboard is ConversationNumericAndSymbols
+                    ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                    : () =>
+                    {
+                        Log.Info("Restoring window size.");
+                        mainWindowManipulationService.Restore();
+                        Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeKeyboard);
+                        mainWindowManipulationService.SetOpacity(opacityBeforeKeyboard);
+                        Keyboard = currentKeyboard;
+                    };
+            return backAction;
         }
 
         private void SetupFinalClickAction(Action<Point?> finalClickAction, bool finalClickInSeries = true, bool suppressMagnification = false)

@@ -61,8 +61,8 @@
                                                    Grid.RowSpan="2" Grid.ColumnSpan="24" 
                          ScratchpadWidthInKeysExperimental="7"
                          NumberOfSuggestionsDisplayedExperimental="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" />-->
-        <controls:ExperimentalOutputWithPhrases Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="20" 
-                         ScratchpadWidthInKeysExperimental="6"
+        <controls:ExperimentalOutputWithPhrases Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="24" 
+                         ScratchpadWidthInKeysExperimental="7"
                          NumberOfSuggestionsDisplayedExperimental="{Binding Path=DataContext.SuggestionService.SuggestionsPerPage, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=TwoWay}" />
 
         <controls:Key Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Case="None"
