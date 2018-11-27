@@ -18,7 +18,7 @@ namespace JuliusSweetland.OptiKey.UI.ValueConverters
                 var phrases = values[0] as List<string>;
                 var phraseIndex = (int)values[1];
                 Console.WriteLine(phraseIndex.ToString());
-                if(phraseIndex == -42)
+                if(phraseIndex == -42) //-42 is a number I use to indicate that the experiment is now done.
                 {
                     csvLogService.Log_PhraseText("THE EXPERIMENT IS NOW DONE");
                     return "THE EXPERIMENT IS NOW DONE";
@@ -27,7 +27,9 @@ namespace JuliusSweetland.OptiKey.UI.ValueConverters
                 {
                     if (phrases.Count > phraseIndex)
                     {
-                        return phrases[phraseIndex];
+                        string phraseToDisplay = phrases[phraseIndex];
+                        csvLogService.Log_PhraseText(phraseToDisplay);
+                        return phraseToDisplay;
                     }
                 }
             }
