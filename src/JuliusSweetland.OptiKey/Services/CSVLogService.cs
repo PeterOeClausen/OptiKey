@@ -173,6 +173,7 @@ namespace JuliusSweetland.OptiKey.Services
         private CSVLogService()  
         {
             Application.Current.Exit += (sender, args) => { StopLogging(); };
+            Application.Current.DispatcherUnhandledException += (sender, args) => { StopLogging(); };            
         }
         #endregion
 
