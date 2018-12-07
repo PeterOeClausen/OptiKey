@@ -183,7 +183,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             string eyeTribeGazeLog_FilePath = logDirectoryForThisRun + @"\GazeLog-" + fileFriendlyDate + ".csv";
             gazeLogWriter = new StreamWriter(eyeTribeGazeLog_FilePath, false, Encoding.UTF8);
-
+            
             //Writing first line:
             var firstLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21}",
                 "systemTimeStamp", "dataTimeStamp", "dataIsFixated", "dataState", "dataSmoothedCoordinateX", "dataSmoothedCoordinateY", "dataRawCoordiateX", "dataRawCoordiateY",
@@ -198,6 +198,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             string scratchPadLog_FilePath = logDirectoryForThisRun + @"\ScratchPadLog-" + fileFriendlyDate + ".csv";
             scratchPadLogWriter = new StreamWriter(scratchPadLog_FilePath, false, Encoding.UTF8);
+            scratchPadLogWriter.AutoFlush = true;
 
             //Writing first line:
             var firstLine = string.Format("{0},{1}",
@@ -210,6 +211,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             string phraseLog_FilePath = logDirectoryForThisRun + @"\PhraseLog-" + fileFriendlyDate + ".csv";
             phraseLogWriter = new StreamWriter(phraseLog_FilePath, false, Encoding.UTF8);
+            phraseLogWriter.AutoFlush = true;
 
             //Writing first line:
             var firstLine = string.Format("{0},{1}",
@@ -222,6 +224,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             string keySelectionLog_FilePath = logDirectoryForThisRun + @"\KeySelectionLog-" + fileFriendlyDate + ".csv";
             keySelectionLogWriter = new StreamWriter(keySelectionLog_FilePath, false, Encoding.UTF8);
+            keySelectionLogWriter.AutoFlush = true;
 
             //Writing first line:
             var firstLine = string.Format("{0},{1}","systemTimeStamp", "keySelected");
@@ -233,6 +236,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             string userLooksAtKeyLog_FilePath = logDirectoryForThisRun + @"\user_looks_at_key_log-" + fileFriendlyDate + ".csv";
             userLooksAtKeyLogWriter = new StreamWriter(userLooksAtKeyLog_FilePath, false, Encoding.UTF8);
+            userLooksAtKeyLogWriter.AutoFlush = true;
 
             //Writing first line:
             var firstLine = string.Format("{0},{1},{2}", "systemTimeStamp", "key", "progressInPercent");
@@ -244,6 +248,7 @@ namespace JuliusSweetland.OptiKey.Services
             //Create log file:
             string multiKeySelectionLog_FilePath = logDirectoryForThisRun + @"\multiKeySelectionLog-" + fileFriendlyDate + ".csv";
             multiKeySelectionLogWriter = new StreamWriter(multiKeySelectionLog_FilePath, false, Encoding.UTF8);
+            multiKeySelectionLogWriter.AutoFlush = true;
 
             //Writing first line:
             var firstLine = string.Format("{0},{1}", "systemTimeStamp", "key(s)");
