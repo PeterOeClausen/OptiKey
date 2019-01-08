@@ -2225,6 +2225,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     {
                         //Pausing writing for 100ms seconds, to allow time between sleep key inactivated and activated again
                         System.Threading.Tasks.Task.Delay(100).Wait();
+                        HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard1));
                         // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
                         InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
                     }
