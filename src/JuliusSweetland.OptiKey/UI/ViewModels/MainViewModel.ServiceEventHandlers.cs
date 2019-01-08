@@ -2194,16 +2194,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             phraseStateService.PhraseNumber++;
                             phraseStateService.PhrasesShown++;
 
-                            //Make keyboard inactive for next 5s:
-                            //Pausing writing for 2 seconds, to avoid typing before user interface is ready:
-                            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
-                            //Delay for 2 seconds:
-                            Thread.Sleep(5000);
-                            //Unpausing:
-                            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
-                            Thread.Sleep(100);
-                            // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
-                            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+                            ////Make keyboard inactive for next 5s:
+                            ////Pausing writing for 2 seconds, to avoid typing before user interface is ready:
+                            //InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+                            ////Delay for 2 seconds:
+                            //Thread.Sleep(5000);
+                            ////Unpausing:
+                            //InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+                            //Thread.Sleep(100);
+                            //// Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
+                            //InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
                         }
                         else
                         {
@@ -2211,6 +2211,25 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         }
                     }
                     HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
+                                                                                                  
+                    //Make keyboard inactive for next 5s:
+                    
+                    InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+                    //Delay for 5 seconds:
+                    System.Threading.Tasks.Task.Delay(5000).Wait();
+                    //Thread.Sleep(5000);
+                    //Unpausing:
+                    InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+
+                    if (phraseStateService.PhraseNumber > -1)
+                    {
+                        //Pausing writing for 100ms seconds, to allow time between sleep key inactivated and activated again
+                        System.Threading.Tasks.Task.Delay(100).Wait();
+                        // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
+                        InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+                    }
+                        
+
                     //Tell ExperimentMenuViewModel that user has not typed yet:
                     InstanceGetter.Instance.MainViewModel.ExperimentMenuViewModel.UserIsNotTypingYet = true;
                     break;
