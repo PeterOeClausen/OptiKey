@@ -2194,6 +2194,14 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             phraseStateService.PhraseNumber++;
                             phraseStateService.PhrasesShown++;
 
+                            //Make keyboard inactive for next 5s:
+                            //Pausing writing for 2 seconds, to avoid typing before user interface is ready:
+                            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+                            //Delay for 2 seconds:
+                            Thread.Sleep(5000);
+                            //Unpausing:
+                            InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+                            Thread.Sleep(100);
                             // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
                             InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
                         }
