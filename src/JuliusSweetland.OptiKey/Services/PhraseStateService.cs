@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using JuliusSweetland.OptiKey.UI.ViewModels;
 using JuliusSweetland.OptiKey.Properties;
+using JuliusSweetland.OptiKey.Models;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -38,7 +39,18 @@ namespace JuliusSweetland.OptiKey.Services
             var random = new Random();
             phrases = File.ReadAllLines(path).OrderBy(s => random.Next()).ToList();
             phrases.Insert(0, "");
-            phrases.Insert(0, "What is the complete name of your university? (Answer in English/Danish)");
+            if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
+            {
+                phrases.Insert(0, "Hvad er det komplette navn på dit nuværende universitet?");
+            }
+            else
+            {
+                phrases.Insert(0, "What is the complete name of your university?");
+            }
+            for (int i = 2; i<11; i=i+2)
+            {
+                phrases.Insert(i, "How hard did you have to work to accomplish your level of performance?");
+            }
             phraseNumber = 0; // initialise phraseNumber to 0
             OnPropertyChanged("phrases");
             OnPropertyChanged("phraseNumber");
