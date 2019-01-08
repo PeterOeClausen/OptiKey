@@ -38,6 +38,7 @@ namespace JuliusSweetland.OptiKey.Services
             var random = new Random();
             phrases = File.ReadAllLines(path).OrderBy(s => random.Next()).ToList();
             phrases.Insert(0, "");
+            phrases.Insert(0, "What is the complete name of your university? (Answer in English/Danish)");
             phraseNumber = 0; // initialise phraseNumber to 0
             OnPropertyChanged("phrases");
             OnPropertyChanged("phraseNumber");
