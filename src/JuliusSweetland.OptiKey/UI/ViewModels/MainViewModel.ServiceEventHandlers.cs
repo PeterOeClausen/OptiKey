@@ -14,11 +14,56 @@ using System.Diagnostics;
 using JuliusSweetland.OptiKey.Services;
 using JuliusSweetland.OptiKey.UI.Controls;
 using JuliusSweetland.OptiKey.UI.ViewModels.Management;
+using System.Windows.Threading;
+using System.Timers;
 
 namespace JuliusSweetland.OptiKey.UI.ViewModels
 {
     public partial class MainViewModel
     {
+        //public static System.Timers.Timer aTimer { get; private set; }
+
+        //private static void SetTimer()
+        //{
+        //    // Create a timer with a two second interval.
+        //    aTimer = new System.Timers.Timer(5000);
+        //    // Hook up the Elapsed event for the timer. 
+        //    aTimer.Elapsed += OnTimedEvent;
+        //    aTimer.AutoReset = true;
+        //    aTimer.Enabled = true;
+        //}
+        //private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        //{
+        //    Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",
+        //                      e.SignalTime);
+        //}
+        //private static System.Timers.Timer delayTimer;
+
+        //private static void delay(int Time_delay)
+        //{
+        //    int i = 0;
+        //    delayTimer = new System.Timers.Timer();
+        //    delayTimer.Interval = Time_delay;
+        //    delayTimer.AutoReset = false; //so that it only calls the method once
+        //    delayTimer.Elapsed += (s, args) => i = 1;
+        //    delayTimer.Start();
+        //    while (i == 0) { };
+        //}
+
+        //public DispatcherTimer dispatcherTimer { get; private set; }
+        //private void dispatcherTimer_Tick(object sender, EventArgs e)
+        //{
+        //    Console.WriteLine("Finished timer");
+        //    dispatcherTimer.Stop();
+        //    InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+
+        //    /*// Updating the Label which displays the current second
+        //    lblSeconds.Content = DateTime.Now.Second;
+
+        //    // Forcing the CommandManager to raise the RequerySuggested event
+        //    CommandManager.InvalidateRequerySuggested();*/
+        //}
+
         public void AttachErrorNotifyingServiceHandlers()
         {
             Log.Info("AttachErrorNotifyingServiceHandlers called.");
@@ -2198,7 +2243,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                             ////Pausing writing for 2 seconds, to avoid typing before user interface is ready:
                             //InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
                             ////Delay for 2 seconds:
-                            //Thread.Sleep(5000);
+                            //System.Threading.Tasks.Task.Delay(5000).Wait();
+                            ////Thread.Sleep(5000);
                             ////Unpausing:
                             //InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
                             //Thread.Sleep(100);
@@ -2211,23 +2257,42 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         }
                     }
                     HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ClearScratchpad)); //Clear ScratchPadField
-                                                                                                  
+
                     //Make keyboard inactive for next 5s:
-                    
+
                     InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
-                    //Delay for 5 seconds:
+                    ////5s timer
+                    ////  DispatcherTimer setup
+                    //dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                    //dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                    //dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+                    //dispatcherTimer.Start();
+
+                    ////Delay for 5 seconds:
+                    //delay(5000);
                     System.Threading.Tasks.Task.Delay(5000).Wait();
-                    //Thread.Sleep(5000);
-                    //Unpausing:
+                    ////Thread.Sleep(5000);
+                    ////Unpausing:
+                    /*SetTimer();
+
+                    Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
+                    Console.ReadLine();
+                    aTimer.Stop();
+                    aTimer.Dispose();
+
+                    Console.WriteLine("Terminating the application at {0:HH:mm:ss.fff}", DateTime.Now);*/
                     InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.Up;
+
+                    //Console.WriteLine("next", phraseStateService.PhraseNumber);
 
                     if (phraseStateService.PhraseNumber > -1)
                     {
                         //Pausing writing for 100ms seconds, to allow time between sleep key inactivated and activated again
-                        System.Threading.Tasks.Task.Delay(100).Wait();
+                        //System.Threading.Tasks.Task.Delay(100).Wait();
                         HandleFunctionKeySelectionResult(new KeyValue(FunctionKeys.ExperimentalKeyboardWithPhrasesNumSymKeyboard1));
                         // Activate sleep key after the nextPhrase key is selected, for all trials except when expt is over
                         InstanceGetter.Instance.KeyStateService.KeyDownStates[KeyValues.SleepKey].Value = KeyDownStates.LockedDown;
+                        
                     }
                         
 
