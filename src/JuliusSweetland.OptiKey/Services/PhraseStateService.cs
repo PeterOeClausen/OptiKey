@@ -41,7 +41,7 @@ namespace JuliusSweetland.OptiKey.Services
             phrases.Insert(0, "");
             if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
             {
-                phrases.Insert(0, "Hvad er det komplette navn på dit nuværende universitet?");
+                phrases.Insert(0, "Hvad er det fulde navn på dit universitet?");
             }
             else
             {
@@ -49,7 +49,15 @@ namespace JuliusSweetland.OptiKey.Services
             }
             for (int i = 2; i<11; i=i+2)
             {
-                phrases.Insert(i, "How hard did you have to work to accomplish your level of performance?");
+                if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
+                {
+                    phrases.Insert(i, "Hvor hårdt skulle du arbejde for at opnå dit præsentations niveau i den foregående runde (giv en score mellem 1 og 7)?");
+                }
+                else
+                {
+                    phrases.Insert(i, "How hard did you have to work to accomplish your level of performance in the previous trial (give a score between 1 and 7)?");
+                }
+                
             }
             phraseNumber = 0; // initialise phraseNumber to 0
             OnPropertyChanged("phrases");
