@@ -214,8 +214,8 @@
     <Reference Include="Tobii.EyeX.Client.Net20">
       <HintPath>..\..\ext\TobiiEyeXSdk\Tobii.EyeX.Client.Net20.dll</HintPath>
     </Reference>
-    <Reference Include="Tobii.Research, Version=1.5.0.942, Culture=neutral, PublicKeyToken=70326046dcdce6cb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Tobii.Research.x86.1.5.0.942\lib\net45\Tobii.Research.dll</HintPath>
+    <Reference Include="Tobii.Research, Version=1.6.1.987, Culture=neutral, PublicKeyToken=70326046dcdce6cb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Tobii.Research.x86.1.6.1.987\lib\net45\Tobii.Research.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -1771,11 +1771,11 @@
     <RemoveDir Directories="$(AppData)\JuliusSweetland" />
     <Message Text="### Post Cleanup Task: Done ###" Importance="high" />
   </Target>
-  <Import Project="..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets" Condition="Exists('..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets')" />
+  <Import Project="..\..\packages\Tobii.Research.x86.1.6.1.987\build\Tobii.Research.x86.targets" Condition="Exists('..\..\packages\Tobii.Research.x86.1.6.1.987\build\Tobii.Research.x86.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Tobii.Research.x86.1.5.0.942\build\Tobii.Research.x86.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Tobii.Research.x86.1.6.1.987\build\Tobii.Research.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Tobii.Research.x86.1.6.1.987\build\Tobii.Research.x86.targets'))" />
   </Target>
 </Project>

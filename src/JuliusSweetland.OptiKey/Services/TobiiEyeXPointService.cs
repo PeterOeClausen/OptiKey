@@ -23,7 +23,7 @@ namespace JuliusSweetland.OptiKey.Services
 
         private event EventHandler<Timestamped<Point>> pointEvent;
 
-        static readonly string TobiiLicense = @"C:\DTU\Github\TobiiLicense.txt";
+        static readonly string TobiiLicense = @"C:\Users\taba\Documents\Tobii Licenses\license_key_00395217_-_DTU_Compute_IS404-100106440114.txt";
 
         #endregion
 
@@ -255,8 +255,10 @@ namespace JuliusSweetland.OptiKey.Services
         {
             //Check if tracker can be found:
             IEyeTracker tobiiEyeTracker = EyeTrackingOperations.FindAllEyeTrackers().FirstOrDefault();
-            if(tobiiEyeTracker == null)
+            //Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}", tobiiEyeTracker.Address, tobiiEyeTracker.DeviceName, tobiiEyeTracker.Model, tobiiEyeTracker.SerialNumber, tobiiEyeTracker.FirmwareVersion);
+            if (tobiiEyeTracker == null)
             {
+
                 Console.WriteLine("Warning: Tobii Eyetracker is not connected!");
                 return false;
             }
