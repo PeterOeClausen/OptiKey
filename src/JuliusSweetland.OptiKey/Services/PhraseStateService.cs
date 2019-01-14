@@ -41,21 +41,21 @@ namespace JuliusSweetland.OptiKey.Services
             phrases.Insert(0, "");
             if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
             {
-                phrases.Insert(0, "Hvad er det fulde navn på dit universitet?");
+                phrases.Insert(0, "Svar på følgende spørgsmål: Hvad er det fulde navn på dit universitet?");
             }
             else
             {
-                phrases.Insert(0, "What is the complete name of your university?");
+                phrases.Insert(0, "Answer the question: What is the complete name of your university?");
             }
-            for (int i = 2; i<11; i=i+2)
+            for (int i = 2; i< amountOfSentencesToType; i=i+2)
             {
                 if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
                 {
-                    phrases.Insert(i, "Hvor hårdt skulle du arbejde for at opnå dit præsentations niveau i den foregående runde (giv en score mellem 1 og 7)?");
+                    phrases.Insert(i, "Svar på følgende spørgsmål: Hvor hårdt skulle du arbejde for at opnå dit præsentations niveau i den foregående runde (giv en score mellem 1 og 7)?");
                 }
                 else
                 {
-                    phrases.Insert(i, "How hard did you have to work to accomplish your level of performance in the previous trial (give a score between 1 and 7)?");
+                    phrases.Insert(i, "Answer the question: How hard did you have to work to accomplish your level of performance in the previous trial (give a score between 1 and 7)?");
                 }
                 
             }
