@@ -249,7 +249,14 @@
                       SharedSizeGroup="KeyWithSingleLetter"
                       Value="?"/>
         <controls:Key Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="2"/>
+        <!--Multi-key selection key-->
         <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"/>
+        <controls:Key Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="2"
+                      Visibility="{Binding Path=DataContext.ExperimentMenuViewModel.EnableMultikeySwipeFeature, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=controls:KeyboardHost}, Mode=OneWay}"
+                      SymbolGeometry="{StaticResource MultiKeySelectionIcon}"
+                      Text="{x:Static resx:Resources.MULTI_KEY_SELECTION_SPLIT_WITH_NEWLINE}"
+                      SharedSizeGroup="KeyWithSymbol"
+                      Value="{x:Static models:KeyValues.MultiKeySelectionIsOnKey}"/>
         
         <!--Quit key-->
         <controls:Key Grid.Row="5" Grid.Column="20" Grid.ColumnSpan="2"/>
