@@ -1109,7 +1109,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.DecreaseDwellTime:
                     Log.Info("Decreasing DwellTime.");
-                    Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime -= TimeSpan.FromMilliseconds(100); //Decrease Dwelltime //+ an int to Timespan converter?
+                    if (Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime.Milliseconds > 0)
+                        Settings.Default.KeySelectionTriggerFixationDefaultCompleteTime -= TimeSpan.FromMilliseconds(100); //Decrease Dwelltime //+ an int to Timespan converter?
                     break;
 
                 case FunctionKeys.DecreaseOpacity:
