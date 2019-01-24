@@ -109,10 +109,12 @@ namespace JuliusSweetland.OptiKey.UI.Windows
             //Activates multiKey button based on the setting in the menu:
             if (this.viewModel.EnableMultikeySwipeFeature)
             {
+                Settings.Default.MultiKeySelectionEnabled = true;
                 InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.LockedDown);
             }
             else
             {
+                Settings.Default.MultiKeySelectionEnabled = false;
                 InstanceGetter.Instance.KeyStateService.SetMultiKeyState(Enums.KeyDownStates.Up);
             }
 
