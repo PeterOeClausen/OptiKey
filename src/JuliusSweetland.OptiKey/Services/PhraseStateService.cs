@@ -38,7 +38,14 @@ namespace JuliusSweetland.OptiKey.Services
             Console.WriteLine("SetPhraseFile called in PhraseStateService with: " + path);
             var random = new Random();
             phrases = File.ReadAllLines(path).OrderBy(s => random.Next()).ToList();
-            phrases.Insert(0, "");
+            if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
+            {
+                phrases.Insert(0, "Svar på følgende spørgsmål: Beskriv billedet på papiret foran dig");
+            }
+            else
+            {
+                phrases.Insert(0, "Answer the question: Describe the picture on the paper in front of you");
+            }
             if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
             {
                 phrases.Insert(0, "Svar på følgende spørgsmål: Hvad er det fulde navn på dit universitet?");
