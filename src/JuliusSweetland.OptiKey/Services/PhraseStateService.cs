@@ -54,7 +54,7 @@ namespace JuliusSweetland.OptiKey.Services
             {
                 phrases.Insert(0, "Answer the question: What is the complete name of your university?");
             }
-            for (int i = 2; i< amountOfSentencesToType; i=i+2)
+            for (int i = 2; i< Settings.Default.ExperimentMenu_NumberOfSentencesToType; i=i+2)
             {
                 if (Settings.Default.KeyboardAndDictionaryLanguage.ToString() == "DanishDenmark")
                 {
