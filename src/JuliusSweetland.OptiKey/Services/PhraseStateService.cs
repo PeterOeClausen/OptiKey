@@ -69,6 +69,8 @@ namespace JuliusSweetland.OptiKey.Services
             phraseNumber = 0; // initialise phraseNumber to 0
             OnPropertyChanged("phrases");
             OnPropertyChanged("phraseNumber");
+
+            phrases.ForEach(Console.WriteLine);
         }
     }
 }
